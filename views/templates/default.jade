@@ -1,0 +1,27 @@
+doctype html
+html
+  head
+    title e-Borges
+    include dependencies
+  body
+    include nav
+    //include nav2 
+    .container
+      .row
+        .col-sm-1
+          //include nav2
+        .col-sm-10
+          block content
+  div(style='border-top: solid 1px #eee; padding-top: 1em;')
+    .container
+      .row
+        .col-sm-12.text-center
+          p.text-muted
+            | e-borges | © Copyright 2018;
+            | Todos los derechos reservados
+          p.text-center
+          
+              i.fa.fa-twitter-square.fa-2x.text-primary
+              i.fa.fa-facebook-square.fa-2x.text-primary
+script(src='//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js')
+//script(type='text/javascript', src='/public/js/sitescript.js')

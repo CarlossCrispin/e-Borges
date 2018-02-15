@@ -1,0 +1,47 @@
+#exampleModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
+  .modal-dialog
+      // Modal content
+      .modal-content
+          .modal-header(style='padding:35px 50px;')
+              button.close(type='button', data-dismiss='modal') ×
+              h4
+              span.glyphicon.glyphicon-pencil
+              |  Registrar Tesis
+          .modal-body(style='padding:40px 50px;')
+              form(action='/auth/signin' method='post' autocomplete='off')
+
+                .form-group
+                    label(for='nombre')
+                        p= 'Nombre : ' + user.nombre
+                        hr
+
+                    label(for='email')
+                        p= 'Email : ' + user.email
+                        hr
+                .form-group
+                    label(for='email')
+                        span.glyphicon.glyphicon-envelope
+                        |  Email
+                    input#psw.form-control(formnovalidate="formnovalidate" type='email' name='username' placeholder='Email' autofocus )
+                .form-group
+                    label(for='password')
+                    span.glyphicon.glyphicon-eye-open
+                    |  Password
+                    input#psw.form-control(required type='password' name='password' placeholder='Password' )
+                //.checkbox
+                    label
+                    input(type='checkbox', value='', checked='')
+                    | Remember me
+                button.btn.btn-success.btn-block(type='submit')
+                    span.glyphicon.glyphicon-off
+                    |  Iniciar Sesión
+          .modal-footer
+            button.btn.btn-danger.btn-default.pull-left(type='submit', data-dismiss='modal')
+                span.glyphicon.glyphicon-remove
+                |  Cancelar
+script.
+    $(document).ready(function(){
+    $("#myBtn1").click(function(){
+    $("#myModal1").modal();
+    });
+    });

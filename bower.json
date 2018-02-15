@@ -1,0 +1,22 @@
+{
+  "name": "eBorges",
+  "description": "Estadísticas,consultas de tesis y actas de toma de grado del CINVESTAV-IPN",
+  "main": "server.js",
+  "authors": [
+    "Emmas <emmas1900@hotmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "mvc"
+  ],
+  "homepage": "#",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/vendor",
+    "test",
+    "tests"
+  ]
+}
