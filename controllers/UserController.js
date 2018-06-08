@@ -1,7 +1,7 @@
 //var mysql = require('mysql');
 //const {Pool}  = require("pg")
 var bcrypt = require('bcryptjs');
-
+const connection = require('.././database/config');
 module.exports = {
 
 	getSignUp : function(req, res, next){
@@ -59,12 +59,40 @@ module.exports = {
 	},
 
 	getUserPanel : function(req, res, next){
-		res.render('users/panel', {
-			isAuthenticated : req.isAuthenticated(),
-			user : req.user
+
+
+		connection.query('SELECT nombre FROM public.alumno',(err,results) => {
+			console.log(err,results)
+			
+			//connection.end()
+
+			res.render('users/panel', {
+				isAuthenticated : req.isAuthenticated(),
+				user : req.user,
+				items: results.rows,
+				
+			});
 		});
+	},
+	getRegistrarTesis: function(req, res, next){
+		return res.render('users/status');
+	},
+	postRegistrarTesis : function(req,res, next){
+		var titulo =req.body.titulo;
+		var resumen = req.body.description;
+		console.log(req.body.titulo);
+		console.log(resumen)
+		
+		// const connection = require('.././database/config');
+		// connection.query('INSERT INTO tesis(id,titulodetesis,resumen) values($1,$2,$3)',
+		// [51,titulo,resumen],(err, results) => {
+		// 	console.log(err,results)
+		// 	console.log("-------------------------------------------");
+		// 	var resp =JSON.stringify(results.rows);
+		// 	console.log(resp);
+		// 	//console.log(results.rows);
+		// 	console.log("-------------------------------------------");
+			return res.redirect('/users/status');
+   		// });
 	}
-
-
-
 };

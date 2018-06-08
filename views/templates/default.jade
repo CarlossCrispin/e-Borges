@@ -1,27 +1,43 @@
 doctype html
 html
   head
-    title e-Borges
+    title Borges
+    link(rel='shortcut icon', href='/images/favicon.ico')
+
     include dependencies
   body
     include nav
-    //include nav2 
+    //include nav2
+    #particles-js
+    br
+    br
     .container
       .row
         .col-sm-1
           //include nav2
         .col-sm-10
-          block content
+          #main2
+            block content
   div(style='border-top: solid 1px #eee; padding-top: 1em;')
-    .container
-      .row
-        .col-sm-12.text-center
-          p.text-muted
-            | e-borges | © Copyright 2018;
-            | Todos los derechos reservados
-          p.text-center
-          
-              i.fa.fa-twitter-square.fa-2x.text-primary
-              i.fa.fa-facebook-square.fa-2x.text-primary
+    #main3
+      include footer
+    //- .container
+    //-   .row
+    //-     .col-sm-12.text-center
+    //-       p.text-muted
+    //-         | borges | © Copyright 2018;
+    //-         | Todos los derechos reservados
+    //-       h3(style="color:white ")
+    //-         ul(class="nav navbar-nav navbar-center")
+    //-           li.pull-left
+    //-             a.i.fa.fa-twitter-square.fa-2x(href="/")
+    //-           li.pull-center
+    //-             a.i.fa.fa-facebook-square.fa-2x(href="/")
+            
 script(src='//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js')
 //script(type='text/javascript', src='/public/js/sitescript.js')
+      
+script(src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js')
+script(src='https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js')
+
+script(type='text/javascript', src='/javascripts/index.js')

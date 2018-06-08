@@ -20,7 +20,8 @@ app.use(session({
 }));
 app.use(flash());
 
-
+// app.engine('html', require('ejs').renderFile);
+// app.set('view engine', 'html');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');

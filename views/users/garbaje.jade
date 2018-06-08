@@ -1,0 +1,51 @@
+//- pruebas de angular
+ div(ng-app="myApp" )
+  div(ng-controller="myCtrl")
+    p
+        | Name : 
+        input(type='text', ng-model='name')
+      h1 Hello {{name}}
+
+    p Select a car:
+    select(ng-model='selectedCar', ng-options='x for (x, y) in cars')
+    h1 You selected: {{selectedCar.brand}}
+    h2 Model: {{selectedCar.model}}
+    h3 Color: {{selectedCar.color}}
+   
+  div(ng-controller='customersCtrl')
+    table
+      th N° 
+      th Nombre
+      th Puesto
+      tr(ng-repeat='x in names')
+        td {{ $index + 1 }}
+        p="   "
+        td {{ x.Name }}
+        td {{ x.Country }}
+    
+   //- div(ng-app='myApp2', ng-controller='myCtrl2')
+          //-     p Select a car:
+          //-     select(ng-model='selected', ng-options='x for (x, y) in cars')
+          //-     h1 You selected: {{selectedCar}}
+            
+          //-   script.
+          //-     var app = angular.module('myApp2', []);
+          //-     app.controller('myCtrl2', function($scope) {
+          //-     $scope.cars = for item in items
+          //-     });
+          //- for item in items
+              
+          //-   p #{item.nombre}
+          //- for item in items
+          //-   - var key = Object.keys( item )[1]
+          //-   - var val = item
+          //-   p #{key} #{item.nombre}
+        //- div(class='col-md-12 col-md-offset-0')
+        //-   div(class='table-responsive' )  
+        //-     table#datatable.table.table-striped.table-bordered 
+        //-       thead
+        //-         th Nombres
+        //-       tbody
+        //-         each item, i in items
+        //-           tr
+        //-             td= item.nombre

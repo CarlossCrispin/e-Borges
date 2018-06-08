@@ -1,6 +1,69 @@
 extends templates/default
 
+
+script(type='text/javascript').
+    $(document).ready(function()
+    {
+    $("#myModal").modal("show");
+    });
+
 block content
   h1= 'Pagina de inicio'
   if isAuthenticated
-    p= 'Bienvenido' + user.nombre
+    p= 'Bienvenido    ' + user.nombre
+  
+ 
+  #myModal.modal.fade(role='dialog')
+    .modal-dialog.modal-xl
+      .modal-content
+        .modal-header
+          button.close(type='button', data-dismiss='modal') ×
+          h4.modal-title Bienvenido al Módulo de Registro de Tesis
+        .modal-body
+          hr
+          h3.text-justify
+            | Este módulo tiene como objetivo el registro de tesis,
+            | asignación de director, codirectores y la generación de
+            | actas de toma de grado de los diferentes departamentos de CINVESTAV.
+        .modal-footer
+          button.btn.btn-default(type='button', data-dismiss='modal') Cerrar
+ 
+  //hexagono
+  ul#hexGrid
+    li.hex
+      a.hexIn(href='#')
+        img(src='https://historia-biografia.com/wp-content/uploads/2017/10/Sin-t%C3%ADtulo-159.jpg', alt='')
+        h1 Borges
+        p sitio inspirado en la biblioteca de babel
+    li.hex
+      a.hexIn(href='#')
+        img(src='https://gdb.martinoticias.org/3FE451C6-3CE1-45B4-BB21-7268A8948D20_w1023_r1_s.jpg', alt='')
+        h1 Borges
+        p sitio inspirado en la biblioteca de babel
+    li.hex
+      a.hexIn(href='#')
+        img(src='https://exitosanoticias.pe/wp-content/uploads/2017/06/Borges-en-Sicilia-Palermo-1984-%C2%A9-Ferdinando-Scianna-Magnum-Photos-SCF6179.jpg', alt='')
+        h1 Borges
+        p sitio inspirado en la biblioteca de babel
+    li.hex
+      a.hexIn(href='#')
+        img(src='https://3.bp.blogspot.com/-rnvv8gCsw0k/UveXZony7LI/AAAAAAAAAmk/g1srQa1Xclo/s530-p-k/biblioteca+st.+cugat+fouquet+libros.jpg', alt='')
+        h1 Borges
+        p sitio inspirado en la biblioteca de babel
+    li.hex
+      a.hexIn(href='#')
+        img(src='http://cedarspringslibrary.org/wp-content/uploads/2014/04/OldBooks2_BW.jpg', alt='')
+        h1 Borges
+        p sitio inspirado en la biblioteca de babel
+    li.hex
+      a.hexIn(href='#')
+        img(src='https://www.canonistas.com/galerias/data/504/BIBLIOTECA_11.JPG', alt='')
+        h1 Borges
+        p sitio inspirado en la biblioteca de babel
+    li.hex
+      a.hexIn(href='#')
+        img(src='http://www.diarioz.com.ar/wp-content/uploads/2017/08/borges-650x475.jpg', alt='')
+        h1 Borges
+        p sitio inspirado en la biblioteca de babel
+  
+    

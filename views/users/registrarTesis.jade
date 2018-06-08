@@ -1,30 +1,7 @@
-//- div(ng-app="myApp" )
-  div(ng-controller="myCtrl")
-    p
-        | Name : 
-        input(type='text', ng-model='name')
-      h1 Hello {{name}}
-
-    p Select a car:
-    select(ng-model='selectedCar', ng-options='x for (x, y) in cars')
-    h1 You selected: {{selectedCar.brand}}
-    h2 Model: {{selectedCar.model}}
-    h3 Color: {{selectedCar.color}}
-   
-  div(ng-controller='customersCtrl')
-    table
-      th N° 
-      th Nombre
-      th Puesto
-      tr(ng-repeat='x in names')
-        td {{ $index + 1 }}
-        p="   "
-        td {{ x.Name }}
-        td {{ x.Country }}
-.panel.panel-primary
+.panel.panel-default
   .panel-heading
     h3.panel-tilte Registrar Tesis 
-  form(action='/images/create', method='post', enctype='multipart/form-data')
+  form(action='/users/status', method='post', enctype='multipart/form-data')
     .panel-body.form-horizontal  
       .form-group.col-md-12
         label.col-md-4.control-label(for='file')
@@ -46,31 +23,10 @@
         label.col-md-2.control-label(for='description')
           | Director:
         .col-md-4
-          div(ng-app='myApp', ng-controller='myCtrl')
-            select(ng-model='selectedName', ng-options='x for x in names')
-          script.
-            var app = angular.module('myApp', []);
-            app.controller('myCtrl', function($scope) {
-            $scope.names = ["Emil", "Tobias", "Linus"];
-            });
-
-          .dropdown
-            button.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown')
-              | Seleccionar Director 
-              b.caret
-            ul.dropdown-menu
-              li
-                p Director 
-              li
-                p Director 
-              li
-                p Director 
-              li.divider
-              li
-                p Director 
-              li.divider
-              li
-                b Director 
+          select.classic
+            option Seleciona
+            for item in items
+                option #{item.nombre}         
         .col-md-2
           //- .form-check.form-check-inline
           //-   label.form-check-label
@@ -95,10 +51,22 @@
         div(class='table-responsive' )  
           table#datatable.table.table-striped.table-bordered 
             thead
-            th N°
-            th nombre
-            th Puesto
-            th ¿es externo?
+              th N°
+              th nombre
+              th Puesto
+              th ¿es externo?
+            tbody
+              td 1
+              td 
+                label.col-md-2.control-label(for='description')
+                  | Director:
+                .col-md-4
+                  select.classic
+                    option Seleciona
+                    for item in items
+                        option #{item.nombre}
+                 
+                      
         
 
       .from-group.col-md-12

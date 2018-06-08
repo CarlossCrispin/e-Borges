@@ -15,6 +15,7 @@ var config = pgp("postgres://emmas:emmas@localhost:3000/tesis");
     user: 'emmas',
     password: 'emmas'
 };*/
+// ocultar la conexion 
 const {Pool}= require('pg')
 
 const config = new Pool({

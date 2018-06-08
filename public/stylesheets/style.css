@@ -1,0 +1,11 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:300);
+html {
+    font-family: sans-serif;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%; }
+    #mySidebar{
+        background-color: #009383; 
+        opacity: 0.5;
+        color: #ffffff;
+      
+      }

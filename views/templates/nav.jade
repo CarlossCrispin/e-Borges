@@ -1,54 +1,54 @@
 
 //nav(class="navbar navbar-inverse bg-inverse")
 //<nav class="navbar navbar-inverse bg-primary">
-nav(class="navbar navbar-inverse bg-primary")
-  div(class="container-fluid")
-    div(class="navbar-header")
-      button(type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false")
-        span(class="sr-only")= 'Toggle navigation'
-        span(class="icon-bar")
-        span(class="icon-bar")
-        span(class="icon-bar")
-      a(class="navbar-brand" href="/")= 'Inicio'
+//- nav(class="navbar navbar-inverse bg-primary")
+//-   div(class="container-fluid")
+//-     div(class="navbar-header")
+//-       button(type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false")
+//-         span(class="sr-only")= 'Toggle navigation'
+//-         span(class="icon-bar")
+//-         span(class="icon-bar")
+//-         span(class="icon-bar")
+//-       a(class="navbar-brand" href="/")= 'Inicio'
     
-    div(class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")     
-      ul(class="nav navbar-nav navbar-right")
-        if !isAuthenticated
-          li
-            a(href="/auth/signup")= 'Registrarse'
-          li
-            a(href="/auth/signin")= 'Iniciar Sesion'
-        if isAuthenticated
-          li.dropdown
-            a.dropdown-toggle(href='#', data-toggle='dropdown')
-              | Dropdown 
-              b.caret
-            ul.dropdown-menu
-              li
-                a(href='#') Action
-              li
-                a(href='#') Another action
-              li
-                a(href='#') Something else here
-              li.divider
-              li
-                a(href='#') Separated link
-              li.divider
-              li
-                a(href='#') One more separated link    
-          li(class="dropdown")
-            a(href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false")= user.nombre
-              span(class="caret")
-            ul(class="dropdown-menu")
-              li
-                a(href="/users/panel")= 'Perfil'
-              li
-                a(href="/auth/logout")= 'Cerrar Sesion'  
-.page-header
-  .container
-    .col-md-6
-      h1
-        a(href='/') e-Borges
+//-     div(class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")     
+//-       ul(class="nav navbar-nav navbar-right")
+//-         if !isAuthenticated
+//-           li
+//-             a(href="/auth/signup")= 'Registrarse'
+//-           li
+//-             a(href="/auth/signin")= 'Iniciar Sesion'
+//-         if isAuthenticated
+//-           li.dropdown
+//-             a.dropdown-toggle(href='#', data-toggle='dropdown')
+//-               | Dropdown 
+//-               b.caret
+//-             ul.dropdown-menu
+//-               li
+//-                 a(href='#') Action
+//-               li
+//-                 a(href='#') Another action
+//-               li
+//-                 a(href='#') Something else here
+//-               li.divider
+//-               li
+//-                 a(href='#') Separated link
+//-               li.divider
+//-               li
+//-                 a(href='#') One more separated link    
+//-           li(class="dropdown")
+//-             a(href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false")= user.nombre
+//-               span(class="caret")
+//-             ul(class="dropdown-menu")
+//-               li
+//-                 a(href="/users/panel")= 'Perfil'
+//-               li
+//-                 a(href="/auth/logout")= 'Cerrar Sesion'  
+//- .page-header
+//-   .container
+//-     .col-md-6
+//-       h1
+//-         a(href='/') Borges
   
 
 
@@ -112,4 +112,48 @@ nav(class="navbar navbar-inverse bg-primary")
 //-               span.nav-text
 //-                 | Logout
 
+
+link(rel='stylesheet', href='https://www.w3schools.com/w3css/4/w3.css')
+ 
+#mySidebar.w3-sidebar.w3-bar-block.w3-card.w3-animate-left(style='display:none')
+  button.w3-bar-item.w3-button.w3-large(onclick='w3_close()') Cerrar ×
+  a.w3-bar-item.w3-button(href='#') Link 1
+  a.w3-bar-item.w3-button(href='#') Link 2
+  a.w3-bar-item.w3-button(href='#') Link 3
+#main
+  .w3-teal
+    if !isAuthenticated
+      button#openNav.w3-button.w3-teal.w3-xlarge(onclick='w3_open()') ☰
+    .w3-container
+      div(class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")   
+        li(style="list-style:none;").pull-left
+          h2(text-select style="color:white;") Borges
+        ul(class="nav navbar-nav navbar-right")
+          if !isAuthenticated
+               
+            li
+              a.i.fa.fa-home.fa-2x(href="/")
+            li
+              a(href="/")= 'Inicio'
+            li
+              a(href="/auth/signup")= 'Registrarse'
+            li
+              a(href="/auth/signin")= 'Iniciar Sesion'
+ 
+script.
+  function w3_open() {
+  document.getElementById("main").style.marginLeft = "25%";
+  document.getElementById("main2").style.marginLeft = "25%";
+  document.getElementById("main3").style.marginLeft = "25%";
+  document.getElementById("mySidebar").style.width = "25%";
+  document.getElementById("mySidebar").style.display = "block";
+  document.getElementById("openNav").style.display = 'none';
+  }
+  function w3_close() {
+  document.getElementById("main").style.marginLeft = "0%";
+  document.getElementById("main2").style.marginLeft = "0%";
+  document.getElementById("main3").style.marginLeft = "0%";
+  document.getElementById("mySidebar").style.display = "none";
+  document.getElementById("openNav").style.display = "inline-block";
+  }
 

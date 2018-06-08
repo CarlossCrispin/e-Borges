@@ -25,23 +25,27 @@ module.exports = function(passport){
 		db.query('SELECT * FROM users WHERE email = ?'*/
 		const connection = require('.././database/config');
 		
-		connection.query('SELECT * FROM public.users where  email = $1',[email],(err,results) => {
+		connection.query('SELECT * FROM public.alumno where  nombre = $1',[email],(err,results) => {
 			console.log(err,results)
 			
 			console.log("-------------------------------------------");
 			var resp =JSON.stringify(results.rows);
 			console.log(resp);
-			//console.log(results.rows);
+			console.log(results.rows);
 			console.log("-------------------------------------------");
             //console.log(`----> ${password}`);
 			if(results.rows.length > 0){
 				
 				var user = results.rows[0];
-				if(bcrypt.compareSync(password, user.password)){
+				//if(bcrypt.compareSync(password, user.password)){
+				console.log(resp);
+				if(password == user.matricula){
 					return done(null, {
-						id: user.idusers, 
+						
 						nombre : user.nombre,
-						email : user.email
+						apellido_1: user.apellido_1,
+						departamento_id: user.departamento_id
+						
 					});
 				}
 			}
