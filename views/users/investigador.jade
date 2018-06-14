@@ -1,0 +1,54 @@
+
+extends ../templates/default
+
+block content
+    .container
+        div.col-md-10
+            h1.title.text-center Investigadores
+            hr
+    .panel.panel-default
+        .panel-heading
+        
+        h1.inverse.title.text-center Investigadores
+        hr
+        div.col-md-10
+    .panel.panel-default
+        .panel-heading
+            br
+            table#example.table.table-striped.table-bordered
+                thead
+                    tr
+                        th Nombre
+                        th Apellido P
+                        th Apellido M
+                        th ¿Es externo?
+                        th Genero
+                        th Grado
+                        th Departamento
+                tfoot
+                    tr
+                        th Nombre
+                        th Apellido P
+                        th Apellido M
+                        th ¿Es externo?
+                        th Genero
+                        th Grado
+                        th Departamento
+                tbody
+                    each item, i in items
+                        tr
+                            td= item.nombre
+                            td= item.apellido_1
+                            td= item.apellido_2
+                            -if (item.esexterno === false)
+                                td No
+                            -if(item.esexterno === true)
+                                td Si
+                            td= item.genero_id
+                            td= item.grado_id
+                            td= item.departamento_id
+
+
+
+    script(src='../javascripts/table.js') 
+

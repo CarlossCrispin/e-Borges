@@ -14,7 +14,16 @@
     clear: both;
   }
   p{
-    color: #000;
+    color: rgb(255, 255, 255);
+}
+h1{
+  color: rgb(255, 255, 255);
+}
+h1.inverse{
+  color: rgb(12, 12, 12);
+}
+hr{
+  color: aqua
 }
   .hex {
     position: relative;

@@ -1,76 +1,82 @@
-.panel.panel-default
-  .panel-heading
-    h3.panel-tilte Registrar Tesis 
-  form(action='/users/status', method='post', enctype='multipart/form-data')
-    .panel-body.form-horizontal  
-      .form-group.col-md-12
-        label.col-md-4.control-label(for='file')
-          h3=" Nombre : "+ user.nombre
-            hr
-        label.col-md-4.control-label(for='file')
-          h3=" Email : "+ user.email
-      .form-group.col-md-12
-        label.col-md-2.control-label(for='title')
-          | Título:
-        .col-md-10
-          input#title.form-control(type='text', name='title')
-      .form-group.col-md-12
-        label.col-md-2.control-label(for='description')
-          | Descripción:
-        .col-md-10
-          textarea#description.form-control(name='description', cols='30', rows='2')
-          .form-group.col-md-12
-        label.col-md-2.control-label(for='description')
-          | Director:
-        .col-md-4
-          select.classic
-            option Seleciona
-            for item in items
-                option #{item.nombre}         
-        .col-md-2
-          //- .form-check.form-check-inline
-          //-   label.form-check-label
-          //-     input.form-check-input(type='checkbox', value='')
-          //-     | ¿es externo?
-          input#check(type='checkbox', name='check', value='1', onchange='javascript:showContent()')
-          b ¿es externo?
-      div(id="content",style='display: none;')
-        .form-group.col-md-12
-          label.col-md-2.control-label(for='NombreExt')
-            | Nombre:
-          .col-md-10
-            input#title.form-control(type='text', name='NombreExt')
-        .form-group.col-md-12
-          label.col-md-2.control-label(for='InstExt')
-            | Institución:
-          .col-md-10
-            input#title.form-control(type='text', name='InstExt')
-      .form-group.col-md-12
-        label.col-md-12.text-left
-          | Directores elegidos
-        div(class='table-responsive' )  
-          table#datatable.table.table-striped.table-bordered 
-            thead
-              th N°
-              th nombre
-              th Puesto
-              th ¿es externo?
-            tbody
-              td 1
-              td 
-                label.col-md-2.control-label(for='description')
-                  | Director:
-                .col-md-4
-                  select.classic
-                    option Seleciona
-                    for item in items
-                        option #{item.nombre}
-                 
-                      
-        
+extends ../templates/default
+block content
+  .panel.panel-default
+    .panel-heading
+      h3.panel-tilte Registrar Tesis 
+    form(action='/users/status', method='post', enctype='multipart/form-data')
+      .panel-body.form-horizontal  
+        .form-group
+          .alert.alert-success.col-md-12
+            div
+              //- span(style='float:right') Matricula : {{vm.account.lastName}} 
+              //- | Nombre  : {{vm.account.firstName}}
 
-      .from-group.col-md-12
-        .col-md-12.text-right
-            button#login-btn.btn.btn-success(type='submit')
-                i.fa.fa-cloud-upload
-                    |  Registrar 
+            label.col-md-8.control-label(for='file')
+              h3=" Nombre : "+ user.nombre + " "+user.apellido_1+" "+ user.apellido_2
+            label.col-md-4.control-label(for='file')
+              h3=" Matricula : "+ user.matricula
+        .form-group.col-md-12
+          label.col-md-2.control-label(for='title')
+            | Título:
+          .col-md-10
+            input#title.form-control(type='text', name='title')
+        .form-group.col-md-12
+          label.col-md-2.control-label(for='description')
+            | Descripción:
+          .col-md-10
+            textarea#description.form-control(name='description', cols='30', rows='2')
+        .form-group.col-md-12
+          label.col-md-2.control-label(for='director')
+            | Director:
+          .col-md-8
+            select.classic
+              option 
+              for item in items
+                  option #{item.nombre+" "+item.apellido_1+" " + item.apellido_2}         
+          .col-md-2
+            //- .form-check.form-check-inline
+            //-   label.form-check-label
+            //-     input.form-check-input(type='checkbox', value='')
+            //-     | ¿es externo?
+            input#check(type='checkbox', name='check', value='1', onchange='javascript:showContent()')
+            b ¿es externo?
+        div(id="content",style='display: none;')
+          .form-group.col-md-12
+            label.col-md-2.control-label(for='NombreExt')
+              | Nombre:
+            .col-md-10
+              input#title.form-control(type='text', name='NombreExt')
+          .form-group.col-md-12
+            label.col-md-2.control-label(for='InstExt')
+              | Institución:
+            .col-md-10
+              input#title.form-control(type='text', name='InstExt')
+        .form-group.col-md-12
+          label.col-md-12.text-left
+            | Directores elegidos
+          div(class='table-responsive' )  
+            table#datatable.table.table-striped.table-bordered 
+              thead
+                th N°
+                th nombre
+                th Puesto
+                th ¿es externo?
+              tbody
+                td 1
+                td 
+                  label.col-md-2.control-label(for='description')
+                    | Director:
+                  .col-md-4
+                    select.classic
+                      option Seleciona
+                      for item in items
+                          option #{item.nombre}
+                  
+                        
+          
+
+        .from-group.col-md-12
+          .col-md-12.text-right
+              button#login-btn.btn.btn-success(type='submit')
+                  i.fa.fa-cloud-upload
+                      |  Registrar 

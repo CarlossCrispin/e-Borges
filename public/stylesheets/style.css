@@ -3,9 +3,25 @@ html {
     font-family: sans-serif;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%; }
-    #mySidebar{
-        background-color: #009383; 
-        opacity: 0.5;
-        color: #ffffff;
-      
-      }
+#mySidebar{
+    background-color: #009383; 
+    opacity: 0.5;
+    color: #ffffff;
+    
+    }
+    /* #fondotabla{
+    background-color: #ffffff; 
+    opacity: 0.5;
+    color: #ffffff;
+    } */
+    #fondotabla{
+        background-color: #ffffff
+    }
+    hr{ 
+ 
+        background-color:#61ebcf; 
+        max-width: auto;
+        border-top: 2px ;
+        text-align: center;
+        padding-top: 4px;
+      } 

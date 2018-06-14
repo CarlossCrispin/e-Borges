@@ -117,28 +117,39 @@ link(rel='stylesheet', href='https://www.w3schools.com/w3css/4/w3.css')
  
 #mySidebar.w3-sidebar.w3-bar-block.w3-card.w3-animate-left(style='display:none')
   button.w3-bar-item.w3-button.w3-large(onclick='w3_close()') Cerrar ×
-  a.w3-bar-item.w3-button(href='#') Link 1
-  a.w3-bar-item.w3-button(href='#') Link 2
+  hr
+  a.w3-bar-item.w3-button(href='/users/registrarTesis') Tesis
+  a.w3-bar-item.w3-button(href='/users/investigador') Investigadores
+  a.w3-bar-item.w3-button(href='/users/status') Status
   a.w3-bar-item.w3-button(href='#') Link 3
 #main
   .w3-teal
-    if !isAuthenticated
+    if isAuthenticated
       button#openNav.w3-button.w3-teal.w3-xlarge(onclick='w3_open()') ☰
     .w3-container
       div(class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")   
         li(style="list-style:none;").pull-left
           h2(text-select style="color:white;") Borges
         ul(class="nav navbar-nav navbar-right")
-          if !isAuthenticated
-               
-            li
+           li
               a.i.fa.fa-home.fa-2x(href="/")
             li
               a(href="/")= 'Inicio'
-            li
-              a(href="/auth/signup")= 'Registrarse'
-            li
-              a(href="/auth/signin")= 'Iniciar Sesion'
+            if !isAuthenticated
+                
+              li
+                a(href="/auth/signup")= 'Registrarse'
+              li
+                a(href="/auth/signin")= 'Iniciar Sesion'
+            if isAuthenticated
+              //- li
+              //-   a.page-scroll(href='')='Bienvenido..' +user.nombre  
+              li
+                a.page-scroll(href='/users/panel') Perfil
+              li
+                a.page-scroll(href='/auth/logout') salir
+              //- li
+              //-   a.page-scroll(href='/users/investigador') investigador
  
 script.
   function w3_open() {

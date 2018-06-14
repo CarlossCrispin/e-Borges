@@ -61,7 +61,7 @@ module.exports = {
 	getUserPanel : function(req, res, next){
 
 
-		connection.query('SELECT nombre FROM public.alumno',(err,results) => {
+		connection.query('SELECT * FROM public.investigador',(err,results) => {
 			console.log(err,results)
 			
 			//connection.end()
@@ -74,8 +74,35 @@ module.exports = {
 			});
 		});
 	},
+	getInvestigador:function(req,res,next){
+		connection.query('SELECT * FROM public.investigador',(err,results) => {
+			console.log(err,results)
+			
+			//connection.end()
+
+			res.render('users/investigador', {
+				isAuthenticated : req.isAuthenticated(),
+				user : req.user,
+				items: results.rows,
+				
+			});
+		});
+	},
 	getRegistrarTesis: function(req, res, next){
-		return res.render('users/status');
+
+		connection.query('SELECT * FROM public.investigador',(err,results) => {
+			console.log(err,results)
+			
+			//connection.end()
+
+			return res.render('users/registrarTesis', {
+				isAuthenticated : req.isAuthenticated(),
+				user : req.user,
+				items: results.rows,
+				
+			});
+		});
+		
 	},
 	postRegistrarTesis : function(req,res, next){
 		var titulo =req.body.titulo;
@@ -94,5 +121,21 @@ module.exports = {
 		// 	console.log("-------------------------------------------");
 			return res.redirect('/users/status');
    		// });
-	}
+	},
+	getStatus: function(req, res, next){
+
+		connection.query('SELECT * FROM public.tesis',(err,results) => {
+			console.log(err,results)
+			
+			//connection.end()
+
+			return res.render('users/status', {
+				isAuthenticated : req.isAuthenticated(),
+				user : req.user,
+				items: results.rows,
+				
+			});
+		});
+		
+	},
 };

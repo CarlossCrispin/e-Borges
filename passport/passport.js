@@ -41,10 +41,13 @@ module.exports = function(passport){
 				console.log(resp);
 				if(password == user.matricula){
 					return done(null, {
-						
+						id:user.id,
 						nombre : user.nombre,
 						apellido_1: user.apellido_1,
-						departamento_id: user.departamento_id
+						apellido_2: user.apellido_2,
+						matricula :user.matricula,
+						departamento_id: user.departamento_id,
+						rol:'alumno'
 						
 					});
 				}
@@ -54,7 +57,38 @@ module.exports = function(passport){
 			return done(null, false, req.flash('authmessage', 'Email o Password incorrecto.'));
 
 		});
+		//investigador
+		connection.query('SELECT * FROM public.investigador where  nombre = $1',[email],(err,results) => {
+			console.log(err,results)
+			
+			console.log("-------------------------------------------");
+			var resp =JSON.stringify(results.rows);
+			console.log(resp);
+			console.log(results.rows);
+			console.log("-------------------------------------------");
+            //console.log(`----> ${password}`);
+			if(results.rows.length > 0){
+				
+				var user = results.rows[0];
+				//if(bcrypt.compareSync(password, user.password)){
+				console.log(resp);
+				if(password == user.matricula){
+					return done(null, {
+						id:user.id,
+						nombre : user.nombre,
+						apellido_1: user.apellido_1,
+						apellido_2: user.apellido_2,
+						rol:'Investigador'
+						
+					});
+				}
+			}
+			//connection.end()
 
+			return done(null, false, req.flash('authmessage', 'Email o Password incorrecto.'));
+
+		});
+//asta
 	}
 	));
 

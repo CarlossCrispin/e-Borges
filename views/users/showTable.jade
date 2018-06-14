@@ -1,0 +1,130 @@
+extends ../templates/default
+include ../templates/nav
+block content
+  script.
+    $(document).ready( function() {
+      $('#datatable').dynatable({
+        table: {
+          defaultColumnIdStyle: 'lowercase'
+        },
+        features: {
+          paginate: true,
+          search: true,
+          recordCount: false,
+          perPageSelect: true
+        },
+          
+      });    	
+  });
+  link(rel='stylesheet', href='/stylesheets/tab.css')
+  section#about
+    .container
+      .row
+        .col-md-8.col-md-offset-2
+           h2.title.text-center Las 1000 Empresas más Importantes de México
+           br
+           hr.light
+  .container
+    p 
+    p
+    br
+    div(class='col-md-12 col-md-offset-3')
+      div(class='col-md-2')
+        #bot(onclick="location.href='/users/panel'", ) Regresar
+      div(class='col-md-2')
+        if !isAuthenticated
+          #bot(onclick="swal('Oops...','No esta Suscrito!','warning')") Imprimir
+      div(class='col-md-2')
+        #bot(onclick="tableToExcel('datatable', 'Mundo Ejecutivo')") Exportar   
+    br          
+  .container
+    p
+    p
+  #container       
+  div(class='col-md-12 col-md-offset-0')
+    div(class='table-responsive' )  
+      table#datatable.table.table-striped.table-bordered 
+        thead
+          //th(COLSPAN=7) Información de los Ranking
+          //th(ROWSPAN=1) Empresa
+          //th(COLSPAN=10 ) Información Financiera (en millones de dólares)
+          //th(COLSPAN=4 ) Razones Financieras 2015
+          //th(COLSPAN=2 ) Datos Adicionales
+          tr
+
+            th Rank 2014
+            th Rank 2015
+            th Var.Pos 2014/2015
+            th Rank Sector 2015
+            th Rank Empleo 2015
+            th Rank Rentabilidad 2015
+            th Nombre Empresa
+            th 2015 (mdd)
+            th Var. % Ingresos 2014/2015
+            th Utilidad Neta 2014
+            th Utilidad Neta 2015
+            th Utilidad Operación 2015
+            th Var. % 2014/2015 
+            th Activo Total 2015
+            th Var. % 2014/2015 
+            th Pasivo Total 2015
+            th Var. % 2014/2015 
+            th Margen Operativo de Ventas
+            th ROA
+            th ROE
+            th Liquidez
+            th País
+            th Sector
+          //each item, i in items2
+            th=item.Field
+        tbody
+          
+          each item, i in items
+            tr
+              td= item.Rank_1000_2015_id
+              td= item.Rank_1000_2014
+              -if (item.Var_Pos_2014_2015 > 0)
+                td=item.Var_Pos_2014_2015+"   "
+                  i.fa.fa-arrow-up.fa-2x(aria-hidden='true',style="color:#18bd9b")
+              -if (item.Var_Pos_2014_2015 == 0)
+                td=item.Var_Pos_2014_2015+"   "
+                  i.fa.fa-arrow-right.fa-2x(aria-hidden='true',style="color:#F7DC6F")
+              -if (item.Var_Pos_2014_2015 < 0)
+                td=item.Var_Pos_2014_2015+"   "
+                  i.fa.fa-arrow-down.fa-2x(aria-hidden='true',style="color:#E74C3C")
+              td= item.Rank_Sector_2015
+              td= item.Rank_Empleo_2015
+              td= item.Rank_Rentabilidad
+              td= item.Empresa
+              td= item.Información_Financiera_2015_mdd
+              td= item.Var_Porcentaje_Ingresos_2014_2015
+              td= item.Utilidad_Neta_2015
+              td= item.Utilidad_Neta_2014
+              td= item.Utilidad_Operación_2015
+              td= item.Var_Porcentaje_2014_2015
+              td= item.Activo_Total_2015
+              td= item.Var1_Porcentaje_2014_2015
+              td= item.Pasivo_Total_2015
+              td= item.Var3_Porcentaje_2014_2015
+              td= item.Margen_Operativo_de_Ventas
+              td= item.ROA
+              td= item.ROE
+              td= item.Liquidez
+              td= item.País
+              td= item.Sector
+  
+            //link(rel='stylesheet', href='/stylesheets/buttons.css')
+              .buttons
+                h1
+                  | ejemplos
+                  code botones
+                button.fill Fill In
+                button.pulse Pulse
+                button.close Close
+                button.raise Raise
+                button.up Fill Up
+                button.slide Slide
+                button.offset Offset
+
+  script(src='../javascripts/table.js') 
+  script(src='../javascripts/excel.js')

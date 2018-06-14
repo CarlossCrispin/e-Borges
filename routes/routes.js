@@ -17,6 +17,7 @@ router.post('/auth/signin',  passport.authenticate('local', {
 }));
 router.get('/auth/logout', controllers.UserController.logout);
 router.get('/users/panel', AuthMiddleware.isLogged ,controllers.UserController.getUserPanel);
-router.post('/users/status', AuthMiddleware.isLogged , controllers.UserController.postRegistrarTesis);
-router.get('/users/status', AuthMiddleware.isLogged , controllers.UserController.getRegistrarTesis);
+router.get('/users/status', AuthMiddleware.isLogged , controllers.UserController.getStatus);
+router.get('/users/registrarTesis', AuthMiddleware.isLogged , controllers.UserController.getRegistrarTesis);
+router.get('/users/investigador', AuthMiddleware.isLogged , controllers.UserController.getInvestigador);
 module.exports = router;
