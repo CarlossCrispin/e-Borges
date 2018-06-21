@@ -1,114 +1,76 @@
 extends templates/default
 
 block content
-  //- .container
-  //-       div#fondotabla.col-md-10
-  //-           hr
-  //-           table#example.table.table-striped.table-bordered
-  //-               thead
-  //-                   tr
-  //-                       th Name
-  //-                       th Position
-  //-                       th Office
-  //-                       th Age
-  //-                       th Start date
-  //-                       th Salary
-  //-               tfoot
-  //-                   tr
-  //-                       th Name
-  //-                       th Position
-  //-                       th Office
-  //-                       th Age
-  //-                       th Start date
-  //-                       th Salary
-  //-               tbody
-  //-                   tr
-  //-                       td Tiger Nixon
-  //-                       td System Architect
-  //-                       td Edinburgh
-  //-                       td 61
-  //-                       td 2011/04/25
-  //-                       td $320,800
-  //-                   tr
-  //-                       td Garrett Winters
-  //-                       td Accountant
-  //-                       td Tokyo
-  //-                       td 63
-  //-                       td 2011/07/25
-  //-                       td $170,750
-  //-                   tr
-  //-                       td Ashton Cox
-  //-                       td Junior Technical Author
-  //-                       td San Francisco
-  //-                       td 66
-  //-                       td 2009/01/12
-  //-                       td $86,000
-  //-                   tr
-  //-                       td Cedric Kelly
-  //-                       td Senior Javascript Developer
-  //-                       td Edinburgh
-  //-                       td 22
-  //-                       td 2012/03/29
-  //-                       td $433,060
-  //-                   tr
-  //-                       td Airi Satou
-  //-                       td Accountant
-  //-                       td Tokyo
-  //-                       td 33
-  //-                       td 2008/11/28
-  //-                       td $162,700
-  //-                   tr
-  //-                       td Brielle Williamson
-  //-                       td Integration Specialist
-  //-                       td New York
-  //-                       td 61
-  //-                       td 2012/12/02
-  //-                       td $372,000
-  //-                   tr
-  //-                       td Herrod Chandler
-  //-                       td Sales Assistant
-  //-                       td San Francisco
-  //-                       td 59
-  //-                       td 2012/08/06
-  //-                       td $137,500
-                
+  header#mainHeading
+    #banner
+      .row
+        .col-md-8.col-md-offset-2
+          .headings
+            .header-content-inner
+              h1 Bienvenido al Módulo de Registro de Tesis
+              hr
+              h3
+                | Este módulo tiene como objetivo el registro de tesis,
+                | asignación de director, codirectores y la generación de
+                | actas de toma de grado de los diferentes departamentos de CINVESTAV.
+              br
+              a(href='#about',style='color:#fff') desplazarse hacia abajo! ▼
+              br
+              br
+  //- hr
+  hr.light
+  
+  div(class='col-md-6 col-md-offset-3')
+  
+    if message.length > 0
+      script(src='../javascripts/correcto.js')
+      //div(class='alert sweetalert-success' role='alert')= message
+      
+    if authmessage.length > 0
+      script(src='../javascripts/error.js')
+      //div(class='alert alert-danger' role='alert')= authmessage 
+
+  section#about
+  //hexagono
+  ul#hexGrid
+    li.hex
+      a.hexIn(href='/users/investigador')
+        img(src='https://historia-biografia.com/wp-content/uploads/2017/10/Sin-t%C3%ADtulo-159.jpg', alt='')
+        h1(style="color:white") Investigadores
+        p sitio inspirado en la biblioteca de babel
+    li.hex
+      a.hexIn(href='#')
+        img(src='https://gdb.martinoticias.org/3FE451C6-3CE1-45B4-BB21-7268A8948D20_w1023_r1_s.jpg', alt='')
+        h1 Borges
+        p sitio inspirado en la biblioteca de babel
+    li.hex
+      a.hexIn(href='#')
+        img(src='https://exitosanoticias.pe/wp-content/uploads/2017/06/Borges-en-Sicilia-Palermo-1984-%C2%A9-Ferdinando-Scianna-Magnum-Photos-SCF6179.jpg', alt='')
+        h1 Borges
+        p sitio inspirado en la biblioteca de babel
+    li.hex
+      a.hexIn(href='#')
+        img(src='https://3.bp.blogspot.com/-rnvv8gCsw0k/UveXZony7LI/AAAAAAAAAmk/g1srQa1Xclo/s530-p-k/biblioteca+st.+cugat+fouquet+libros.jpg', alt='')
+        h1 Borges
+        p sitio inspirado en la biblioteca de babel
+    li.hex
+      a.hexIn(href='#')
+        img(src='http://cedarspringslibrary.org/wp-content/uploads/2014/04/OldBooks2_BW.jpg', alt='')
+        h1 Borges
+        p sitio inspirado en la biblioteca de babel
+    li.hex
+      a.hexIn(href='#')
+        img(src='https://www.canonistas.com/galerias/data/504/BIBLIOTECA_11.JPG', alt='')
+        h1 Borges
+        p sitio inspirado en la biblioteca de babel
+    li.hex
+      a.hexIn(href='#')
+        img(src='http://www.diarioz.com.ar/wp-content/uploads/2017/08/borges-650x475.jpg', alt='')
+        h1 Borges
+        p sitio inspirado en la biblioteca de babel
     
+       
 
+     
 
-  //-   script(src='../javascripts/table.js') 
-  .col-md-12
-    .jumbotron
-      h1.text-center Bienvenido al Módulo de Registro de Tesis
-      br
-      br
-      hr
-      h3.text-justify
-        | Este módulo tiene como objetivo el registro de tesis
-        | , asignación de director , codirectores y la generación de
-        actas de toma de grado de los diferentes departamentos de CINVESTAV.
-
-  //- h1= 'Pagina de inicio'
-  //- if isAuthenticated
-  //-   p= 'Bienvenido    ' + user.nombre
-  
  
-  #myModal.modal.fade(role='dialog')
-    .modal-dialog.modal-xl
-      .modal-content
-        .modal-header
-          button.close(type='button', data-dismiss='modal') ×
-          h4.modal-title Bienvenido al Módulo de Registro de Tesis
-        .modal-body
-          hr
-          h3.text-justify
-            | Este módulo tiene como objetivo el registro de tesis,
-            | asignación de director, codirectores y la generación de
-            | actas de toma de grado de los diferentes departamentos de CINVESTAV.
-        .modal-footer
-          button.btn.btn-default(type='button', data-dismiss='modal') Cerrar
- 
-  
-  
-  script(src='../javascripts/modal.js') 
- 
-    

@@ -1,82 +1,220 @@
-extends ../templates/default
-block content
-  .panel.panel-default
-    .panel-heading
-      h3.panel-tilte Registrar Tesis 
-    form(action='/users/status', method='post', enctype='multipart/form-data')
-      .panel-body.form-horizontal  
-        .form-group
-          .alert.alert-success.col-md-12
-            div
-              //- span(style='float:right') Matricula : {{vm.account.lastName}} 
-              //- | Nombre  : {{vm.account.firstName}}
+//- extends ../templates/default
+//- block content
+//-   .panel.panel-default
+//-     .panel-heading
+//-       h3.panel-tilte Registrar Tesis 
+//-     form(action='/users/status', method='post', enctype='multipart/form-data')
+//-       .panel-body.form-horizontal  
+//-         .form-group
+//-           .alert.alert-success.col-md-12
+//-             div
+//-               //- span(style='float:right') Matricula : {{vm.account.lastName}} 
+//-               //- | Nombre  : {{vm.account.firstName}}
 
-            label.col-md-8.control-label(for='file')
-              h3=" Nombre : "+ user.nombre + " "+user.apellido_1+" "+ user.apellido_2
-            label.col-md-4.control-label(for='file')
-              h3=" Matricula : "+ user.matricula
-        .form-group.col-md-12
-          label.col-md-2.control-label(for='title')
-            | Título:
-          .col-md-10
-            input#title.form-control(type='text', name='title')
-        .form-group.col-md-12
-          label.col-md-2.control-label(for='description')
-            | Descripción:
-          .col-md-10
-            textarea#description.form-control(name='description', cols='30', rows='2')
-        .form-group.col-md-12
-          label.col-md-2.control-label(for='director')
-            | Director:
-          .col-md-8
-            select.classic
-              option 
-              for item in items
-                  option #{item.nombre+" "+item.apellido_1+" " + item.apellido_2}         
-          .col-md-2
-            //- .form-check.form-check-inline
-            //-   label.form-check-label
-            //-     input.form-check-input(type='checkbox', value='')
-            //-     | ¿es externo?
-            input#check(type='checkbox', name='check', value='1', onchange='javascript:showContent()')
-            b ¿es externo?
-        div(id="content",style='display: none;')
-          .form-group.col-md-12
-            label.col-md-2.control-label(for='NombreExt')
-              | Nombre:
-            .col-md-10
-              input#title.form-control(type='text', name='NombreExt')
-          .form-group.col-md-12
-            label.col-md-2.control-label(for='InstExt')
-              | Institución:
-            .col-md-10
-              input#title.form-control(type='text', name='InstExt')
-        .form-group.col-md-12
-          label.col-md-12.text-left
-            | Directores elegidos
-          div(class='table-responsive' )  
-            table#datatable.table.table-striped.table-bordered 
-              thead
-                th N°
-                th nombre
-                th Puesto
-                th ¿es externo?
-              tbody
-                td 1
-                td 
-                  label.col-md-2.control-label(for='description')
-                    | Director:
-                  .col-md-4
-                    select.classic
-                      option Seleciona
-                      for item in items
-                          option #{item.nombre}
+//-             label.col-md-8.control-label(for='file')
+//-               h3=" Nombre : "+ user.nombre + " "+user.apellido_1+" "+ user.apellido_2
+//-             label.col-md-4.control-label(for='file')
+//-               h3=" Matricula : "+ user.matricula
+//-         .form-group.col-md-12
+//-           label.col-md-2.control-label(for='title')
+//-             | Título:
+//-           .col-md-10
+//-             input#title.form-control(type='text', name='title')
+//-         .form-group.col-md-12
+//-           label.col-md-2.control-label(for='description')
+//-             | Descripción:
+//-           .col-md-10
+//-             textarea#description.form-control(name='description', cols='30', rows='2')
+//-         .form-group.col-md-12
+//-           label.col-md-2.control-label(for='director')
+//-             | Director:
+//-           .col-md-8
+//-             select.classic
+//-               option 
+//-               for item in items
+//-                   option #{item.nombre+" "+item.apellido_1+" " + item.apellido_2}         
+//-           .col-md-2
+//-             //- .form-check.form-check-inline
+//-             //-   label.form-check-label
+//-             //-     input.form-check-input(type='checkbox', value='')
+//-             //-     | ¿es externo?
+//-             input#check(type='checkbox', name='check', value='1', onchange='javascript:showContent()')
+//-             b ¿es externo?
+//-         div(id="content",style='display: none;')
+//-           .form-group.col-md-12
+//-             label.col-md-2.control-label(for='NombreExt')
+//-               | Nombre:
+//-             .col-md-10
+//-               input#title.form-control(type='text', name='NombreExt')
+//-           .form-group.col-md-12
+//-             label.col-md-2.control-label(for='InstExt')
+//-               | Institución:
+//-             .col-md-10
+//-               input#title.form-control(type='text', name='InstExt')
+//-         .form-group.col-md-12
+//-           label.col-md-12.text-left
+//-             | Directores elegidos
+//-           div(class='table-responsive' )  
+//-             table#datatable.table.table-striped.table-bordered 
+//-               thead
+//-                 th N°
+//-                 th nombre
+//-                 th Puesto
+//-                 th ¿es externo?
+//-               tbody
+//-                 td 1
+//-                 td 
+//-                   label.col-md-2.control-label(for='description')
+//-                     | Director:
+//-                   .col-md-4
+//-                     select.classic
+//-                       option Seleciona
+//-                       for item in items
+//-                           option #{item.nombre}
                   
                         
           
 
-        .from-group.col-md-12
-          .col-md-12.text-right
-              button#login-btn.btn.btn-success(type='submit')
-                  i.fa.fa-cloud-upload
-                      |  Registrar 
+//-         .from-group.col-md-12
+//-           .col-md-12.text-right
+//-               button#login-btn.btn.btn-success(type='submit')
+//-                   i.fa.fa-cloud-upload
+//-                       |  Registrar 
+
+
+script.
+ 
+      
+   
+
+.col-md-8
+  #myModal.modal.fade(role='dialog')
+    .modal-dialog
+        // Modal content
+        .modal-content
+            .modal-header(style='padding:40px 50px;')
+                button.close(type='button', data-dismiss='modal') ×
+                h4
+                span.glyphicon.glyphicon-pencil
+                |  Registrar Tesis
+            .modal-body(style='padding:40px 50px;')
+                form(action='/users/panel' method='post' autocomplete='off')
+                    .form-group
+                        label(for='alumno')
+                        span.glyphicon.glyphicon-user
+                        |  Alumno
+                        //- input#usrname.form-control(required type='email' name='email' placeholder='Email')
+                        input#alumno.form-control(required type='text' name='alumno' placeholder='alumno' value=user.id )
+                        //readonly
+                      .alert.alert-success.col-md-12
+                        
+                          //- span(style='float:right') Matricula : {{vm.account.lastName}} 
+                          //- | Nombre  : {{vm.account.firstName}}
+                          -var alumno1 =user.id; 
+                          label.col-md-6.control-label(for='file')
+                            h3#alumno(name='alumno')= "Nombre : "+ user.nombre+ " "+user.apellido_1+" "+ user.apellido_2
+                          label.col-md-6.control-label(for='file')
+                            h3=" Matricula : "+ user.matricula    
+                    .form-group
+                        label(for='Título')
+                        span.glyphicon.glyphicon-envelope
+                        |  Título
+                        input#titulo.form-control(required type='text' name='titulo' placeholder='Título')
+                    .form-group
+                        label(for='description')
+                        span.glyphicon.glyphicon-user
+                       
+                        | Descripción:
+                        .col-md-12
+                        textarea#description.form-control(required name='description', cols='30', rows='2')
+                    .form-group
+                        label(for="grado")
+                        span.glyphicon.glyphicon-user
+                        |Grado
+                      
+                        select(name="grado"  class="form-control" data-style="btn-info")
+                          each item, i in items1
+                            option(value=i+1) #{item.ngrado}
+                    .form-group
+                        label(for="unidad")
+                        span.glyphicon.glyphicon-user
+                        |Unidad
+                      
+                        select(name="unidad"  class="form-control")
+                          option(value=i) 
+                          each item, i in items2
+                            
+                            option(value=i+1) #{item.nunidad}
+                    .form-group
+                        label(for="departamento")
+                        span.glyphicon.glyphicon-user
+                        |Departamento
+                      
+                        select#departamento(name="departamento" , class="form-control")
+                          option(value='0', disabled='', selected='') Elija una opcion
+                          each item, i in items3
+                            option(value=i+1) #{item.ndepartamento}
+                        Desk2
+                        br
+                        br
+                        input#servicioSelecionado
+                       
+
+                    .form-group
+                        label(for="investigador1")
+                        span.glyphicon.glyphicon-user
+                        |Director
+                        p #{valor} 
+                        select#Investigador1(name="Investigador1",  class="form-control" disabled)
+                          option
+                          each item, i in items4
+                            //- -if (item.departamento_id === 'valor'  )
+                            -if (item.departamento_id === '2'  )
+                              option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.departamento_id}
+                    //- .form-group.col-md-12
+                    //-   label.col-md-2.control-label(for='description')
+                    //-     | Descripción:
+                    //-   .col-md-10
+                    //-     textarea#description.form-control(name='description', cols='30', rows='2')
+
+
+
+
+                    button.btn.btn-success.btn-block(type='submit')
+                        span.glyphicon.glyphicon-off
+                        |  Registrarme
+            .modal-footer
+                button.btn.btn-danger.btn-default.pull-left(type='submit', data-dismiss='modal')
+                    span.glyphicon.glyphicon-remove
+                    |  Cerrar
+                //- button.btn.btn-success.btn-default.pull-right(type='submit', data-dismiss='modal')
+                //-     span.glyphicon.glyphicon-ok
+                //-     |  Registrar
+script(src='https://code.jquery.com/jquery-3.1.0.js')
+script.
+    $(document).ready(function(){
+    $("#myBtn").click(function(){
+    $("#myModal").modal();
+    });
+    $("#departamento").change(function() {
+          if($("#departamento").val() !== "0"){
+            $('#Investigador1').prop('disabled', false);
+          }else{
+            $('#Investigador1').prop('disabled', 'disabled');
+        
+        }
+      });
+
+        $(document).on('change', '#departamento', function(event) {
+            $('#servicioSelecionado').val($("#departamento option:selected").text());
+            var valor = $("#departamento option:selected").val()
+            alert(valor);
+        });
+        $('#departamento').change(function(){
+ 
+            var ciudad = $(this).val()
+            
+            alert('Has seleccionado ' + ciudad);
+            
+            });
+    });

@@ -1,0 +1,241 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:300);
+
+/**COLORES
+VERDE: #18bd9b; rgb:24,189,155;
+AZUL: #2d3e50;
+**/
+
+
+
+
+/*****************************************
+*********** ESTILOS GENERALES ************
+*******************************************/
+
+html, body{
+	height: 100%;
+	margin: 0;
+}
+
+body{
+	/* font-family: 'Open Sans', sans-serif, arial; */
+	font-size: 16px;
+	position: relative;
+	overflow-x: hidden;
+	/* background-image:url("http://www.belardiarredamenti.it/wp-content/uploads/2015/06/scrivanie-deck-estel-vetrina-1024x768.jpg"); 
+	background-image:url("http://img.edilportale.com/products/prodotti-145459-rel12071ab82bac45a7a55d7ab740c143b9.jpg");*/
+	/* background-image:url("https://i.pinimg.com/originals/3e/f2/a1/3ef2a16941be69fcbbc20c409abbe629.jpg"); */
+	background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+	
+}
+
+a{
+	color: #2d3e50;
+	-webkit-transition: all .2s;
+	transition: all .2s;
+	
+}
+
+a:hover{
+	color: #18bd9b;
+	text-decoration: none;
+}
+
+h1,h2,h3,h4,h5,h6{
+	padding: 0;
+	margin: 0;
+	font-family: 'Open Sans', sans-serif, arial;
+}
+
+hr{
+
+	border-top: 4px solid #18bd9b;
+}
+
+hr.light{
+	border-top: 4px solid #fff;
+	
+}
+#h1{
+	color: #fff;
+	text-align: center;
+	}
+section{
+	padding: 1.5em 0;
+}
+
+
+
+#banner h2, #services h2, #portfolio h2, #contact h2{
+	text-transform: uppercase;
+}
+
+/*****************************************
+*********** MAIN HEADER ******************
+*******************************************/
+
+#mainHeading{
+	background-image:
+ -webkit-linear-gradient(
+      rgba(0, 0, 0, 0.3), 
+      rgba(0, 0, 0, 0.3)
+    ),url('https://www.roastbrief.com.mx/wp-content/uploads/2017/05/jorge-luis-borges.jpg');
+	background-image:
+ linear-gradient(
+      rgba(0, 0, 0, 0.3), 
+      rgba(0, 0, 0, 0.3)
+    ),url('https://www.roastbrief.com.mx/wp-content/uploads/2017/05/jorge-luis-borges.jpg');
+	background-size: cover;
+	background-position: center;
+  	width: 100%;
+  	height: 100%;
+}
+
+.navbar{
+	background-color: #18bd9b;
+	/* background: transparent; */
+	padding: 20px 0;
+    -webkit-transition: background .5s ease-in-out,padding .5s ease-in-out;
+    transition: background .5s ease-in-out,padding .5s ease-in-out;
+}
+
+.top-nav-collapse {
+        padding: .3em;
+        background: rgba(0,0,0,.5);
+    }
+
+.navbar-inverse{
+	border-bottom: 1px solid #fff;
+}
+
+.navbar-inverse .navbar-nav>li>a{
+	color: #fff;
+	text-transform: uppercase;
+	/* font-weight: bold; */
+	text-shadow: 0 0 5px #000;
+}
+
+.navbar-inverse .navbar-nav>li>a:hover{
+	color: #18bd9b;
+}
+
+.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover {
+	color: #18bd9b;
+	background: none;
+}
+
+#banner{
+	padding-top: 120px;
+}
+
+#banner .headings{
+	color: #fff;
+	text-align: center;
+	padding-top: 100px;
+}
+
+#banner .headings h2{
+	font-size: 50px;
+	text-transform: uppercase;
+}
+
+#banner .headings h3{
+	font-weight: 300;
+}
+
+.header-content-inner{
+	max-width: 100%;
+	margin: 0 auto;
+}
+
+.scroll{
+	text-transform: uppercase;
+	position: relative;
+	bottom: -150px;
+}
+
+.text-primary{
+	color:  #18bd9b;
+}
+li{
+	text-align: right;
+	list-style:none;
+}
+/*****************************************
+*********** SECTION ABOUT ****************
+*******************************************/
+
+
+/* #about{
+     background: #18bd9b; 
+     background-color: #009383; 
+    opacity: 0.5;
+    color: #ffffff;
+	padding: 5em 0;
+} */
+#about h2{
+	text-transform: uppercase;
+}
+
+#about p{
+	font-size: 16px;
+	line-height: 1.5;
+}
+
+/*****************************************
+*********** SECTION BUTTON ****************
+*******************************************/
+  
+#bot {
+position: relative;
+top: 10%;
+margin-left: 10px;
+margin-top: 0px;
+display: block;
+width: 100px;
+height: 100px;
+font-size: 1.3em;
+font-weight: light;
+/* font-family: 'Trebuchet MS', sans-serif; */
+text-transform: uppercase;
+text-align: center;
+line-height: 100px;
+letter-spacing: -1px;
+color: white;
+border: none;
+border-radius: 50%;
+background: #18bd9b;
+cursor: pointer;
+box-shadow: 0 0 0 0 rgba(90, 153, 212, 0.5);
+-webkit-animation: pulse 1.5s infinite;
+}
+
+
+#bot:hover {
+-webkit-animation: none;
+}
+
+@-webkit-keyframes pulse {
+0% {
+	-moz-transform: scale(0.9);
+	-ms-transform: scale(0.9);
+	-webkit-transform: scale(0.9);
+	transform: scale(0.9);
+}
+70% {
+	-moz-transform: scale(1);
+	-ms-transform: scale(1);
+	-webkit-transform: scale(1);
+	transform: scale(1);
+	box-shadow: 0 0 0 50px rgba(90, 153, 212, 0);
+}
+100% {
+	-moz-transform: scale(0.9);
+	-ms-transform: scale(0.9);
+	-webkit-transform: scale(0.9);
+	transform: scale(0.9);
+	box-shadow: 0 0 0 0 rgba(90, 153, 212, 0);
+}
+}

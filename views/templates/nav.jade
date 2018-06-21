@@ -1,170 +1,134 @@
 
-//nav(class="navbar navbar-inverse bg-inverse")
-//<nav class="navbar navbar-inverse bg-primary">
-//- nav(class="navbar navbar-inverse bg-primary")
-//-   div(class="container-fluid")
-//-     div(class="navbar-header")
-//-       button(type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false")
-//-         span(class="sr-only")= 'Toggle navigation'
-//-         span(class="icon-bar")
-//-         span(class="icon-bar")
-//-         span(class="icon-bar")
-//-       a(class="navbar-brand" href="/")= 'Inicio'
-    
-//-     div(class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")     
-//-       ul(class="nav navbar-nav navbar-right")
-//-         if !isAuthenticated
-//-           li
-//-             a(href="/auth/signup")= 'Registrarse'
-//-           li
-//-             a(href="/auth/signin")= 'Iniciar Sesion'
-//-         if isAuthenticated
-//-           li.dropdown
-//-             a.dropdown-toggle(href='#', data-toggle='dropdown')
-//-               | Dropdown 
-//-               b.caret
-//-             ul.dropdown-menu
-//-               li
-//-                 a(href='#') Action
-//-               li
-//-                 a(href='#') Another action
-//-               li
-//-                 a(href='#') Something else here
-//-               li.divider
-//-               li
-//-                 a(href='#') Separated link
-//-               li.divider
-//-               li
-//-                 a(href='#') One more separated link    
-//-           li(class="dropdown")
-//-             a(href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false")= user.nombre
-//-               span(class="caret")
-//-             ul(class="dropdown-menu")
-//-               li
-//-                 a(href="/users/panel")= 'Perfil'
-//-               li
-//-                 a(href="/auth/logout")= 'Cerrar Sesion'  
-//- .page-header
-//-   .container
-//-     .col-md-6
-//-       h1
-//-         a(href='/') Borges
-  
+//- link(rel='stylesheet', href='https://www.w3schools.com/w3css/4/w3.css')
 
-
-    
-//- br
-//- section#about
-//-   .container
-//-     .row
-//-     .div
-//-       nav.main-menu
-//-         ul
+//- #mySidebar.w3-sidebar.w3-bar-block.w3-card.w3-animate-left(style='display:none')
+//-   button.w3-bar-item.w3-button.w3-large(onclick='w3_close()') Cerrar ×
+//-   hr
+//-   a.w3-bar-item.w3-button(href='/users/registrarTesis') Tesis
+//-   a.w3-bar-item.w3-button(href='/users/investigador') Investigadores
+//-   a.w3-bar-item.w3-button(href='/users/status') Status
+//-   a.w3-bar-item.w3-button(href='#') Link 3
+//- #main
+//-   .w3-teal
+//-     if isAuthenticated
+//-       button#openNav.w3-button.w3-teal.w3-xlarge(onclick='w3_open()') ☰
+//-     .w3-container
+//-       div(class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")   
+//-         li(style="list-style:none;").pull-left
+//-           h2(text-select style="color:white;") Borges
+//-         ul(class="nav navbar-nav navbar-right")
 //-           li
-//-             a(href='http://justinfarrow.com')
-//-               i.fa.fa-home.fa-2x
-//-               span.nav-text
-//-                 | Dashboard
-//-           li.has-subnav
-//-             a(href='#')
-//-               i.fa.fa-laptop.fa-2x
-//-               span.nav-text
-//-                 | UI Components
-//-           li.has-subnav
-//-             a(href='#')
-//-               i.fa.fa-list.fa-2x
-//-               span.nav-text
-//-                 | Forms
-//-           li.has-subnav
-//-             a(href='#')
-//-               i.fa.fa-folder-open.fa-2x
-//-               span.nav-text
-//-                 | Pages
-//-           li
-//-             a(href='#')
-//-               i.fa.fa-bar-chart-o.fa-2x
-//-               span.nav-text
-//-                 | Graphs and Statistics
-//-           li
-//-             a(href='#')
-//-               i.fa.fa-font.fa-2x
-//-               span.nav-text
-//-                 | Typography and Icons
-//-           li
-//-             a(href='#')
-//-               i.fa.fa-table.fa-2x
-//-               span.nav-text
-//-                 | Tables
-//-           li
-//-             a(href='#')
-//-               i.fa.fa-map-marker.fa-2x
-//-               span.nav-text
-//-                 | Maps
-//-           li
-//-             a(href='#')
-//-               i.fa.fa-info.fa-2x
-//-               span.nav-text
-//-                 | Documentation
-//-         ul.logout
-//-           li
-//-             a(href='#')
-//-               i.fa.fa-power-off.fa-2x
-//-               span.nav-text
-//-                 | Logout
-
-
-link(rel='stylesheet', href='https://www.w3schools.com/w3css/4/w3.css')
- 
-#mySidebar.w3-sidebar.w3-bar-block.w3-card.w3-animate-left(style='display:none')
-  button.w3-bar-item.w3-button.w3-large(onclick='w3_close()') Cerrar ×
-  hr
-  a.w3-bar-item.w3-button(href='/users/registrarTesis') Tesis
-  a.w3-bar-item.w3-button(href='/users/investigador') Investigadores
-  a.w3-bar-item.w3-button(href='/users/status') Status
-  a.w3-bar-item.w3-button(href='#') Link 3
-#main
-  .w3-teal
-    if isAuthenticated
-      button#openNav.w3-button.w3-teal.w3-xlarge(onclick='w3_open()') ☰
-    .w3-container
-      div(class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")   
-        li(style="list-style:none;").pull-left
-          h2(text-select style="color:white;") Borges
-        ul(class="nav navbar-nav navbar-right")
-           li
-              a.i.fa.fa-home.fa-2x(href="/")
-            li
-              a(href="/")= 'Inicio'
-            if !isAuthenticated
+//-               a.i.fa.fa-home.fa-2x(href="/")
+//-             li
+//-               a(href="/")= 'Inicio'
+//-             if !isAuthenticated
                 
+//-               li
+//-                 a(href="/auth/signup")= 'Registrarse'
+//-               li
+//-                 a(href="/auth/signin")= 'Iniciar Sesion'
+//-               li
+//-                 a.page-scroll.button#myBtn.btn-link Registrarse
+//-               li
+//-                 a.page-scroll.button#myBtn1.btn-link  Iniciar Sesión
+//-             if isAuthenticated
+//-               //- li
+//-               //-   a.page-scroll(href='')='Bienvenido..' +user.nombre  
+//-               li
+//-                 a.page-scroll(href='/users/panel') Perfil
+//-               li
+//-                 a.page-scroll(href='/auth/logout') salir
+//-               //- li
+//-               //-   a.page-scroll(href='/users/investigador') investigador
+//-   section#services
+//-     include ../users/signup
+//-   section#services1
+//-     include ../users/signin
+//- script.
+//-   function w3_open() {
+//-   document.getElementById("main").style.marginLeft = "25%";
+//-   document.getElementById("main2").style.marginLeft = "25%";
+//-   document.getElementById("main3").style.marginLeft = "25%";
+//-   document.getElementById("mySidebar").style.width = "25%";
+//-   document.getElementById("mySidebar").style.display = "block";
+//-   document.getElementById("openNav").style.display = 'none';
+//-   }
+//-   function w3_close() {
+//-   document.getElementById("main").style.marginLeft = "0%";
+//-   document.getElementById("main2").style.marginLeft = "0%";
+//-   document.getElementById("main3").style.marginLeft = "0%";
+//-   document.getElementById("mySidebar").style.display = "none";
+//-   document.getElementById("openNav").style.display = "inline-block";
+//-   }
+
+link(rel='stylesheet', href='/stylesheets/nav.css')
+link(rel='stylesheet', href='/stylesheets/modal.css')
+//- link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+//- script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+
+
+.container
+  .row
+    .col-xs-12.flex
+      nav.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
+        .container
+          // Brand and toggle get grouped for better mobile display
+          .navbar-header.page-scroll
+            button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
+              span.sr-only 
+              span.icon-bar
+              span.icon-bar
+              span.icon-bar
+            ul.navbar-nav.navbar-right
               li
-                a(href="/auth/signup")= 'Registrarse'
+                a.page-scroll(href='/')
+                  //- img.img-responsive(src="../images/me1.png", width='150', height='20') 
+                  h1 &nbsp;&nbsp;&nbsp;Borges &nbsp;
               li
-                a(href="/auth/signin")= 'Iniciar Sesion'
-            if isAuthenticated
+                a
               //- li
-              //-   a.page-scroll(href='')='Bienvenido..' +user.nombre  
-              li
-                a.page-scroll(href='/users/panel') Perfil
-              li
-                a.page-scroll(href='/auth/logout') salir
+              //-   a.page-scroll(href="http://expoenverdeser.com/" ,target="_blank")
+              //-     img.img-responsive(src="http://ced.sascdn.com/diff/1028/7181081/Banner-ME-EEVS-2017.gif", border="0" width="530" height="70")
+
+          #bs-example-navbar-collapse-1.collapse.navbar-collapse
+            ul.nav.navbar-nav.navbar-right
               //- li
-              //-   a.page-scroll(href='/users/investigador') investigador
- 
-script.
-  function w3_open() {
-  document.getElementById("main").style.marginLeft = "25%";
-  document.getElementById("main2").style.marginLeft = "25%";
-  document.getElementById("main3").style.marginLeft = "25%";
-  document.getElementById("mySidebar").style.width = "25%";
-  document.getElementById("mySidebar").style.display = "block";
-  document.getElementById("openNav").style.display = 'none';
-  }
-  function w3_close() {
-  document.getElementById("main").style.marginLeft = "0%";
-  document.getElementById("main2").style.marginLeft = "0%";
-  document.getElementById("main3").style.marginLeft = "0%";
-  document.getElementById("mySidebar").style.display = "none";
-  document.getElementById("openNav").style.display = "inline-block";
-  }
+              //-   a.page-scroll(href="http://expoenverdeser.com/" ,target="_blank")
+              //-     img.img-responsive(src="http://ced.sascdn.com/diff/1028/7181081/Banner-ME-EEVS-2017.gif", border="0" width="530" height="70")
+              li.hidden
+                a.page-scroll(href='#page-top')    
+              li  
+                a.page-scroll(href='/') Inicio
+                  i.fa.fa-home
+                  
+              if !isAuthenticated
+                li
+                  a.page-scroll.button#myBtn.btn-link Registrarse
+                li
+                  a.page-scroll.button#myBtn1.btn-link  Iniciar Sesión
+              if isAuthenticated
+                //- li
+                //-   a.page-scroll(href='')='Bienvenido..' +user.nombre  
+                li
+                  a.page-scroll(href='/users/panel') Perfil
+                li
+                  a.page-scroll(href='/auth/logout') salir
+          // /.navbar-collapse
+        // /.container-fluid
+
+
+if isAuthenticated             
+  include menu
+  //- hr
+  //- section#about
+if !isAuthenticated    
+  section#services
+  include ../users/signup
+  section#services1
+  include ../users/signin
+  
+            
+script(src='../javascripts/nav.js')
+
 

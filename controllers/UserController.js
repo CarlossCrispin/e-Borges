@@ -29,24 +29,25 @@ module.exports = {
 		})*/
 		var email = req.body.email;
 		var nombre = req.body.nombre;
-		var password1 = password;
+		var password1 =password;
+		// var password1 = req.body.password;
 		const connection = require('.././database/config');
 		// connection.query('SELECT * FROM public.users where  email = $1',[email],(err,results) => {
 		// 	console.log(err,results)
-		connection.query('INSERT INTO users(email,nombre,password) values($1,$2,$3)',
+		connection.query('INSERT INTO public.users(email,nombre,password) values($1,$2,$3)',
 		[email,nombre,password1],(err, results) => {
 			console.log(err,results)
 			console.log("-------------------------------------------");
-			var resp =JSON.stringify(results.rows);
+			// var resp =JSON.stringify(results.rows);
 			console.log(resp);
 			//console.log(results.rows);
 			console.log("-------------------------------------------");
 			
-   });
-   //revsar 
-//connection.end()
+  		 });
+		//revsar 
+		//connection.end()
 		req.flash('info', 'Se ha registrado correctamente, ya puede iniciar sesion');
-		return res.redirect('/auth/signin');
+		return res.redirect('/');
 	},
 
 	getSignIn: function(req, res, next){
@@ -55,25 +56,10 @@ module.exports = {
 
 	logout : function(req, res, next){
 		req.logout();
-		res.redirect('/auth/signin');
+		res.redirect('/');
 	},
 
-	getUserPanel : function(req, res, next){
-
-
-		connection.query('SELECT * FROM public.investigador',(err,results) => {
-			console.log(err,results)
-			
-			//connection.end()
-
-			res.render('users/panel', {
-				isAuthenticated : req.isAuthenticated(),
-				user : req.user,
-				items: results.rows,
-				
-			});
-		});
-	},
+	
 	getInvestigador:function(req,res,next){
 		connection.query('SELECT * FROM public.investigador',(err,results) => {
 			console.log(err,results)
@@ -137,5 +123,5 @@ module.exports = {
 			});
 		});
 		
-	},
+	}
 };
