@@ -1,7 +1,12 @@
 //var mysql = require('mysql');
-//const {Pool}  = require("pg")
+// const pg = require('pg')
 var bcrypt = require('bcryptjs');
 const connection = require('.././database/config');
+var pg = require("pg")
+
+
+var client = new pg.Client(connection);
+client.connect();
 module.exports = {
 
 	getSignUp : function(req, res, next){
@@ -31,17 +36,19 @@ module.exports = {
 		var nombre = req.body.nombre;
 		var password1 =password;
 		// var password1 = req.body.password;
-		const connection = require('.././database/config');
+	
 		// connection.query('SELECT * FROM public.users where  email = $1',[email],(err,results) => {
 		// 	console.log(err,results)
-		connection.query('INSERT INTO public.users(email,nombre,password) values($1,$2,$3)',
+		client.query('INSERT INTO public.users(email,nombre,password) values($1,$2,$3)',
 		[email,nombre,password1],(err, results) => {
+			
 			console.log(err,results)
 			console.log("-------------------------------------------");
 			// var resp =JSON.stringify(results.rows);
 			console.log(resp);
 			//console.log(results.rows);
 			console.log("-------------------------------------------");
+			
 			
   		 });
 		//revsar 
@@ -61,7 +68,7 @@ module.exports = {
 
 	
 	getInvestigador:function(req,res,next){
-		connection.query('SELECT * FROM public.investigador',(err,results) => {
+		client.query('SELECT * FROM public.investigador',(err,results) => {
 			console.log(err,results)
 			
 			//connection.end()
@@ -76,7 +83,7 @@ module.exports = {
 	},
 	getRegistrarTesis: function(req, res, next){
 
-		connection.query('SELECT * FROM public.investigador',(err,results) => {
+		client.query('SELECT * FROM public.investigador',(err,results) => {
 			console.log(err,results)
 			
 			//connection.end()

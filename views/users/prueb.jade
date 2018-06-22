@@ -1,11 +1,10 @@
-script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
-extends ../templates/default
-
 block content
     br
     br
     br
     br
+    
+    
     h1.title.text-center='Bienvenido    ' + user.nombre
     h1.title.text-center='Rol ' + user.rol
     br
@@ -40,23 +39,24 @@ block content
                             th Alumno
                             th Grado
                             th Investigador
+                            
                     tbody
                         each item, i in items
                             //- -if (item.alumno_id === user.id)
                              p sientro
                             tr
-                                td= item.titulodetesis
-                                td= item.resumen
-                                td= item.alumno_id
-                                td= item.grado_id
-                                td= item.investigador1_id
+                            td= item.titulodetesis
+                            td= item.resumen
+                            td= item.alumno_id
+                            td= item.grado_id
+                            td= item.investigador1_id
+                           
+                                
 
-   
+        section#services
+        include ../users/registrarTesis
+                        
+        section#services1
+        include ../users/signin
 
     script(src='../javascripts/table.js') 
-
-    
-    section#services
-    include ../users/registrarTesis
-                    
-   

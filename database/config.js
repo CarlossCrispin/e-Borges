@@ -17,14 +17,17 @@ var config = pgp("postgres://emmas:emmas@localhost:3000/tesis");
 };*/
 // ocultar la conexion 
 const {Pool}= require('pg')
+const pg = require('pg');
 
-const config = new Pool({
+const config = {
   //user: 'crispin',
   user: 'crispin',
   host: 'localhost',
   database: 'eborgestesis',
   password: 'crispin',
   port: 5432
-})
+}
 
 module.exports = config;
+
+
