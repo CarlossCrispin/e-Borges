@@ -27,11 +27,11 @@ input[type=text]:focus {
   width: 100%;
 }
 td{
-  text-align: center;
+  /* text-align: center; */
 }
 th{
   background: #009383;
-  text-align: center;
+  /* text-align: center; */
 }
 th a {
   color: black;
