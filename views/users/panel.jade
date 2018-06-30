@@ -50,26 +50,61 @@ block content
                             th Investigador
                             th boton
                     tbody
-                        each item, i in items
-                            -if (user.rol=== "alumno")
-                                -if (item.id=== user.id)
+                       
+                        -if (user.rol=== "alumno")
+                             each item, i in items
+                                -if (item.id_alumno=== user.id)
                             
                                     tr
-                                        td= item.titulo
+                                        td= item.titulodetesis
                                         td= item.resumen
                                         td= item.alumno
                                         td= item.ngrado
                                         td= item.director1
                                         td 
-                                            //- form(action='/users/panel' method='post' autocomplete='off')
-                                            //-     .form-group
-                                            //-         input#valor1.form-control(required type='text' name='valor1' placeholder='valor1' value='2' style="display:none")
-                                            //-         input#tesiseliminar.form-control(type='text' name='eliminart'  value=item.id style="display:none")
-                                            //-         //- input#gradoeliminar.form-control(required type='text' name='eliminarg' placeholder='valor1' value=item.grado style="display:none")
-                                            //-     button.btn.btn-danger.btn-default.pull-right(type='submit' ) si
+                                            //- button.btn.btn-info(type='button', data-toggle='modal', data-target='#exampleModalCenter')
+                                            //-     | Editar
+                                            button.btn.btn-info.btn-lg(type='button', data-toggle='modal', data-target='#myModal') Editar Tesis
                                             // Button trigger modal
-                                            button.btn.btn-danger(type='button', data-toggle='modal', data-target='#exampleModalCenter')
+                                            button.btn.btn-danger(type='button', data-toggle='modal', data-target='#exampleModalCenter1')
                                                 | Eliminar
+                                            // Modal
+                                            #exampleModalCenter1.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
+                                                .modal-dialog.modal-dialog-centered(role='document')
+                                                    .modal-content(style="color:red")
+                                                        .modal-header(style="background:#AB1D1D")
+                                                            #exampleModalLongTitle.modal-title Eliminar Tesis
+                                                                button.close(type='button', data-dismiss='modal', aria-label='Close')
+                                                                    span(aria-hidden='true') ×
+                                                        .modal-body
+                                                            h2 Confirmar Eliminar Tesis
+                                                        .modal-footer
+                                                            form(action='/users/panel' method='post' autocomplete='off')
+                                                                .form-group
+                                                                    input#valor1.form-control(required type='text' name='valor1' placeholder='valor1' value='2' style="display:none")
+                                                                    input#tesiseliminar.form-control(required type='text' name='eliminart' placeholder='valor1' value=item.id style="display:none")
+                                                                    //- input#gradoeliminar.form-control(required type='text' name='eliminarg' placeholder='valor1' value=item.grado style="display:none")
+                                                                button.btn.btn-danger.btn-default.pull-right(type='submit' ) si
+                                                                span
+                                                                    button.btn.btn-primary.btn-default.pull-left(type='button', data-dismiss='modal') NO
+                                                                    
+
+                                            
+                      
+                                                
+                            -if (user.rol=== "administrador")
+                                each item, i in items
+                                     //- -if (item.id=== user.id)
+                            
+                                    tr
+                                        td= item.id
+                                        td= item.resumen
+                                        td= item.alumno
+                                        td= item.ngrado
+                                        td= item.director1
+                                        td 
+                                            button.btn.btn-danger(type='button', data-toggle='modal', data-target='#exampleModalCenter')
+                                                    | Eliminar
                                             // Modal
                                             #exampleModalCenter.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
                                                 .modal-dialog.modal-dialog-centered(role='document')
@@ -88,45 +123,46 @@ block content
                                                                     //- input#gradoeliminar.form-control(required type='text' name='eliminarg' placeholder='valor1' value=item.grado style="display:none")
                                                                 button.btn.btn-danger.btn-default.pull-right(type='submit' ) si
                                                                 span
-                                                                    button.btn.btn-primary.btn-default.pull-left(type='button', data-dismiss='modal') NO
-
-                                            
-                      
-                                                
-                            -if (user.rol=== "administrador")
+                                                                    buutton.btn.btn-info.btn-default.pull-right(data-dismiss='modal' ) no
+                            -if (user.rol=== "investigador" )
                                 //- -if (item.id=== user.id)
-                            
-                                tr
-                                    td= item.id
-                                    td= item.resumen
-                                    td= item.alumno
-                                    td= item.ngrado
-                                    td= item.director1
-                                    td 
-                                        button.btn.btn-danger(type='button', data-toggle='modal', data-target='#exampleModalCenter')
-                                                | Eliminar
-                                        // Modal
-                                        #exampleModalCenter.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
-                                            .modal-dialog.modal-dialog-centered(role='document')
-                                                .modal-content
-                                                    .modal-header(Style="color:red")
-                                                        h5#exampleModalLongTitle.modal-title Eliminar Tesis
-                                                            button.close(type='button', data-dismiss='modal', aria-label='Close')
-                                                                span(aria-hidden='true') ×
-                                                    .modal-body
-                                                        | Confirmar Eliminar Tesis
-                                                    .modal-footer
-                                                        form(action='/users/panel' method='post' autocomplete='off')
-                                                            .form-group
-                                                                input#valor1.form-control(required type='text' name='valor1' placeholder='valor1' value='2' style="display:none")
-                                                                input#tesiseliminar.form-control(required type='text' name='eliminart' placeholder='valor1' value=item.id style="display:none")
-                                                                //- input#gradoeliminar.form-control(required type='text' name='eliminarg' placeholder='valor1' value=item.grado style="display:none")
-                                                            button.btn.btn-danger.btn-default.pull-right(type='submit' ) si
-                                                            span
-                                                                buutton.btn.btn-info.btn-default.pull-right(data-dismiss='modal' ) no
-                                            //- // Button trigger modal
-                                        //- button.btn.btn-info(type='submit'  ) Editar
+                               
+
+                             
+                                each item, i in items
+                                    -if (user.id=== item.id_dir1 )
+                                        tr
                                         
+                                            td= item.id_dir1 
+                                            td= item.resumen
+                                            td= item.alumno
+                                            td= item.ngrado
+                                            td= item.director1
+                                            td
+                                                button.btn.btn-danger(type='button', data-toggle='modal', data-target='#exampleModalCenter')
+                                                        | Eliminar
+                                                // Modal
+                                                #exampleModalCenter.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
+                                                    .modal-dialog.modal-dialog-centered(role='document')
+                                                        .modal-content
+                                                            .modal-header(Style="color:red")
+                                                                h5#exampleModalLongTitle.modal-title Eliminar Tesis
+                                                                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                                                                        span(aria-hidden='true') ×
+                                                            .modal-body
+                                                                | Confirmar Eliminar Tesis
+                                                            .modal-footer
+                                                                form(action='/users/panel' method='post' autocomplete='off')
+                                                                    .form-group
+                                                                        input#valor1.form-control(required type='text' name='valor1' placeholder='valor1' value='2' style="display:none")
+                                                                        input#tesiseliminar.form-control(required type='text' name='eliminart' placeholder='valor1' value=item.id style="display:none")
+                                                                        //- input#gradoeliminar.form-control(required type='text' name='eliminarg' placeholder='valor1' value=item.grado style="display:none")
+                                                                    button.btn.btn-danger.btn-default.pull-right(type='submit' ) si
+                                                                    span
+                                                                        buutton.btn.btn-info.btn-default.pull-right(data-dismiss='modal' ) no
+                                                    //- // Button trigger modal
+                                            //- button.btn.btn-info(type='submit'  ) Editar
+                                            
                                         //- button.btn.btn-danger(type='button') Eliminar
 
 

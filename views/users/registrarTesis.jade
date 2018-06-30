@@ -16,6 +16,7 @@
                         span.glyphicon.glyphicon-user
                         |  Alumno
                         //- input#usrname.form-control(required type='email' name='email' placeholder='Email')
+                        
                         input#valor1.form-control(required type='text' name='valor1' placeholder='valor1' value='1' style="display:none")
                         input#alumno.form-control(required type='text' name='alumno' placeholder='alumno' value=user.id style="display:none")
                         //readonly
@@ -27,7 +28,7 @@
                           label.col-md-6.control-label(for='file')
                             h3#alumno(name='alumno')= "Nombre : "+ user.nombre+ " "+user.apellido_1+" "+ user.apellido_2
                           label.col-md-6.control-label(for='file')
-                            h3=" Matricula : "+ user.matricula    
+                            h3=" Matricula : "+ user.matricula
                     .form-group
                         label(for='Título')
                         span.glyphicon.glyphicon-text-width
@@ -88,34 +89,10 @@
                       
                         select#investigador1(name="investigador1"  class="form-control" required)
                           option(value='', disabled='', selected='') Elija una opcion
-                          optgroup(label ="Ciencias Químicas" )
                             each item, i in items4
-                                -if (item.departamento_id === '1' )
-                                    option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1} &nbsp;&nbsp;&nbsp;#{item.apellido_1}            
-                          optgroup(label ="Físisca" )
-                                each item, i in items4
-                                    -if (item.departamento_id === '2' )
-                                        option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1}&nbsp;&nbsp;&nbsp;#{item.apellido_1}
-                          optgroup(label ="Física Aplicada (Unidad Mérida)" )
-                                each item, i in items4
-                                    -if (item.departamento_id === '3' )
-                                        option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1}&nbsp;&nbsp;&nbsp;#{item.apellido_1}
-                          optgroup(label ="Física Teórica (Unidad Mérida)" )
-                                each item, i in items4
-                                    -if (item.departamento_id === '4' )
-                                        option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1}&nbsp;&nbsp;&nbsp;#{item.apellido_1}
-                          optgroup(label ="Fisicoquímica (Unidad Mérida)" )
-                                each item, i in items4
-                                    -if (item.departamento_id === '5' )
-                                        option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1}&nbsp;&nbsp;&nbsp;#{item.apellido_1}
-                          optgroup(label ="Ingeniería y Física Biomédicas (Unidad Monterrey)" )
-                                each item, i in items4
-                                    -if (item.departamento_id === '6' )
-                                        option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1}&nbsp;&nbsp;&nbsp;#{item.apellido_1}
-                          optgroup(label ="Matemáticas" )
-                                each item, i in items4
-                                    -if (item.departamento_id === '7' )
-                                        option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1}&nbsp;&nbsp;&nbsp;#{item.apellido_1}
+                                -if (item.departamento_id === user.departamento_id ) 
+                                    option(value=i+1) #{item.departamento_id}#{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1} &nbsp;&nbsp;&nbsp;#{item.apellido_1}            
+                            
                     .form-group
                         label(for="investigador2")
                         span.glyphicon.glyphicon-plus
@@ -260,7 +237,7 @@
                           
                  
 
-                    button.btn.btn-success.btn-default.pull-right(type='submit' name="registro")
+                    button.btn.btn-success.btn-default.btn-block(type='submit' name="registro")
                         span.glyphicon.glyphicon-ok
                         |  Registrar
                     //- button.btn.btn-danger.btn-default.pull-left(type='submit', data-dismiss='modal')
@@ -272,7 +249,7 @@
                 //-     span.glyphicon.glyphicon-remove
                 //-     |  Cerrar
                 
-                button.btn.btn-danger.btn-block(type='submit', data-dismiss='modal')
+                button.btn.btn-danger(type='submit', data-dismiss='modal')
                     span.glyphicon.glyphicon-remove
                     |  Cerrar
                 

@@ -68,7 +68,14 @@ module.exports = {
 
 	
 	getInvestigador:function(req,res,next){
-		client.query('SELECT * FROM public.investigador',(err,results) => {
+		client.query(`select i.id, i.nombre,i.apellido_1,i.apellido_2,i.esexterno,
+		g.ngenero,
+		g1.ngrado,
+		d.ndepartamento
+		from investigador i
+		inner join genero g on i.genero_id=g.id
+		inner join grado g1 on i.grado_id=g1.id
+		inner join departamento d on i.departamento_id=d.id`,(err,results) => {
 			console.log(err,results)
 			
 			//connection.end()

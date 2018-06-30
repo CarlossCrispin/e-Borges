@@ -17,7 +17,7 @@ client.connect();
 module.exports = {
     getUserPanel : function(req, res, next){
 
-        var valor= req.body.name
+        var valor= req.body.departamento_id
        
        
 		// connection.query('SELECT * FROM public.investigador',(err,results) => {
@@ -33,31 +33,43 @@ module.exports = {
 		// 	});
 		// });
 		client.query(`select 
-            t.id,
-            t.titulodetesis,
-            t.resumen,
-            (a.nombre || ' '|| a.apellido_1 ||' '||a.apellido_2) as alumno,
-            a1.id as id_alumno,
-            g.ngrado, 
-            d.ndepartamento,
-            u.nunidad,
-            (i.nombre || ' '|| i.apellido_1 ||' '||i.apellido_2) as director1,
-            (i2.nombre || ' '|| i2.apellido_1 ||' '||i2.apellido_2) as director2,
-            (i3.nombre || ' '|| i3.apellido_1 ||' '||i3.apellido_2) as director3,
-            (i4.nombre || ' '|| i4.apellido_1 ||' '||i4.apellido_2) as director4,
-            (i5.nombre || ' '|| i5.apellido_1 ||' '||i5.apellido_2) as director5
-            from  tesis t
-            inner join alumno a on t.alumno_id=a.id
-            inner join alumno a1 on t.alumno_id=a1.id
-            inner join grado g on t.grado_id=g.id
-            inner join unidad u on t.unidad_id=u.id
-            inner join departamento d on t.departamento_id=d.id
-            inner join investigador i on t.investigador1_id=i.id
-            left join investigador i2 on t.investigador2_id=i2.id
-            left join investigador i3 on t.investigador2_id=i3.id
-            left join investigador i4 on t.investigador2_id=i4.id
-            left join investigador i5 on t.investigador2_id=i5.id`,(err,results) => {
-			// console.log(err,results)
+        t.id,
+        t.titulodetesis,
+        t.resumen,
+        (a.nombre || ' '|| a.apellido_1 ||' '||a.apellido_2) as alumno,
+        a1.id as id_alumno,
+        g.ngrado, 
+        d.ndepartamento,
+        u.nunidad,
+        (i.nombre || ' '|| i.apellido_1 ||' '||i.apellido_2) as director1,
+        i11.id as id_dir1,
+        (i2.nombre || ' '|| i2.apellido_1 ||' '||i2.apellido_2) as director2,
+        i22.id as id_dir2,
+        (i3.nombre || ' '|| i3.apellido_1 ||' '||i3.apellido_2) as director3,
+        i33.id as id_dir3,
+        (i4.nombre || ' '|| i4.apellido_1 ||' '||i4.apellido_2) as director4,
+        i44.id as id_dir4,
+        (i5.nombre || ' '|| i5.apellido_1 ||' '||i5.apellido_2) as director5,
+        i55.id as id_dir5
+        from  tesis t
+        inner join alumno a on t.alumno_id=a.id
+        inner join alumno a1 on t.alumno_id=a1.id
+        inner join grado g on t.grado_id=g.id
+        inner join unidad u on t.unidad_id=u.id
+        inner join departamento d on t.departamento_id=d.id
+        inner join investigador i on t.investigador1_id=i.id
+        inner join investigador i11 on t.investigador1_id=i11.id
+        left join investigador i2 on t.investigador2_id=i2.id
+        left join investigador i22 on t.investigador2_id=i22.id
+        left join investigador i3 on t.investigador2_id=i3.id
+        left join investigador i33 on t.investigador2_id=i33.id
+        left join investigador i4 on t.investigador2_id=i4.id
+        left join investigador i44 on t.investigador2_id=i44.id
+        left join investigador i5 on t.investigador2_id=i5.id
+        left join investigador i55 on t.investigador2_id=i55.id`,(err,results) => {
+            // console.log(err,results)
+            var valor= results.rows.departamento
+            console.log('depto----->'+valor)
         client.query('SELECT * FROM public.grado',(err,results1) => {
             //console.log(err,results1)	
         client.query('SELECT * FROM public.unidad',(err,results2) => {
@@ -65,6 +77,7 @@ module.exports = {
         client.query('SELECT * FROM public.departamento',(err,results3) => {
             //console.log(err,results3)
         client.query('SELECT * FROM public.investigador',(err,results4) => {
+            
             //console.log(err,results4)
 			//connection.end()
 
@@ -87,7 +100,7 @@ module.exports = {
         });
 	},
 	postUserPanel : function(req, res, next){
-      
+        
         var bot=req.body.valor1
         var alumno = req.body.alumno;
         var titulo= req.body.titulo;
@@ -98,14 +111,15 @@ module.exports = {
         var investigador1=req.body.investigador1;
         var tipo1=951;
        
-        var investigador2 = ( req.body.investigador2  ) ? 'req.body.investigador2' : 'null';
+        // var investigador2 = ( req.body.investigador2  ) ? !punt: 'null';
         var tipo2=952;
-        var investigador3 = ( req.body.investigador3  ) ? 'req.body.investigador3' : 'null';
-        var investigador4 = ( req.body.investigador4  ) ? 'req.body.investigador4' : 'null';
-        var investigador5 = ( req.body.investigador5  ) ? 'req.body.investigador5' : 'null';
+        var inv1,inv2,inv3,inv4,inv5;
         var eliminar1=req.body.eliminart;
-        var eliminar2=req.body.eliminarg;
-
+        var investigador2 = req.body.investigador2 === undefined ? inv1=null:inv1= req.body.investigador2
+        var investigador3 = req.body.investigador3 === undefined ? inv2=null:inv2= req.body.investigador3
+        var investigador4 = req.body.investigador4 === undefined ? inv3=null:inv3= req.body.investigador4
+        var investigador2 = req.body.investigador5 === undefined ? inv4=null:inv4= req.body.investigador5
+        
         if(bot ==="1")
         {
             console.log("*****************************************************");
@@ -119,11 +133,15 @@ module.exports = {
                 'investigador4_id,tipoasesor4_id,investigador5_id,tipoasesor5_id) values (nextval (\'hibernate_sequence\'),\''+
                 titulo+'\', null,\''+description+'\',null,null,null,null,\''+alumno+'\',\''+grado+'\',\''+departamento+'\','+
                 '\''+unidad+'\',\''+investigador1+'\',\''+tipo1+'\','+
-                'null,\''+tipo2+'\',null,\''+tipo2+'\',null,\''+tipo2+'\',null,\''+tipo2+'\')',
+                inv1+',\''+tipo2+'\','+inv2+',\''+tipo2+'\','+inv3+',\''+tipo2+'\','+inv4+',\''+tipo2+'\')',
                 (err, results) => {
                 console.log(err,results)
-                if(err) throw err;
-                    req.flash('tesiser', 'Se ha presentado un erro');
+                // if(err) throw err;
+                // if(err){
+                //     req.flash('tesiser', 'Se ha presentado un erro');
+                // }else{
+                    
+                // }
                 console.log("-------------------------------------------");
                 // var resp =JSON.stringify(results.rows);
                 // console.log();
@@ -157,7 +175,39 @@ module.exports = {
             req.flash('tesis', 'Se ha registrado correctamente su tesis');
             return res.redirect('/users/panel');
         }
-      
+        if(bot==="3"){
+            console.log("*****************************************************");
+            console.log("*****************************************************");
+            console.log("*****************************************************");
+            console.log("entra 3")
+            client.query(
+                'UPDATE public.tesis(id,titulodetesis,fechadepublicacion,resumen,'+
+                'clasificacion,clasificacion_1,anio,mes,alumno_id,grado_id,departamento_id,unidad_id,'+
+                'investigador1_id,tipoasesor1_id,investigador2_id,tipoasesor2_id,investigador3_id,tipoasesor3_id,'+
+                'investigador4_id,tipoasesor4_id,investigador5_id,tipoasesor5_id) SET (nextval (\'hibernate_sequence\'),\''+
+                titulo+'\', null,\''+description+'\',null,null,null,null,\''+alumno+'\',\''+grado+'\',\''+departamento+'\','+
+                '\''+unidad+'\',\''+investigador1+'\',\''+tipo1+'\','+
+                ''+inv1+',\''+tipo2+'\','+inv2+',\''+tipo2+'\','+inv3+',\''+tipo2+'\','+inv4+',\''+tipo2+'\')  where id=\''+eliminar1+'\'',
+                (err, results) => {
+                console.log(err,results)
+                // if(err) throw err;
+                // if(err){
+                //     req.flash('tesiser', 'Se ha presentado un erro');
+                // }else{
+                    
+                // }
+                console.log("-------------------------------------------");
+                // var resp =JSON.stringify(results.rows);
+                // console.log();
+                //console.log(results.rows);
+                console.log("-------------------------------------------");
+    
+            });
+            req.flash('tesis', 'Se ha registrado correctamente su tesis');
+            return res.redirect('/users/panel');
+        }
+ 
+        
         // var num ="nextval (\'hibernate_sequence\')";
         // console.log("*****************************************************");
         // console.log(user.nombre);
@@ -174,3 +224,4 @@ module.exports = {
         
 	}
 }
+// otrooooo
