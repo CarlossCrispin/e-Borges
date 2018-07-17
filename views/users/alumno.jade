@@ -1,6 +1,14 @@
+//- link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+//- |   
+//- script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+//- |   
+//- script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+//- link(rel='stylesheet prefetch', href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css')
+ 
 .panel.panel-default
     .panel-heading
-       
+        -if (user.rol=== "alumno")
+            button.btn.btn-info.btn-lg(type='button', data-toggle='modal', data-target='#myModal') Registrar Tesis
         br
         table#example.table.table-striped.table-bordered
             
@@ -11,7 +19,7 @@
                     th Resumen
                     th Alumno
                     th Grado
-                   
+                    th Investigador
                   
                     th boton
             tfoot
@@ -21,30 +29,52 @@
                     th Resumen
                     th Alumno
                     th Grado
-                    
+                    th Investigador
               
                     th boton
             tbody 
+                -var cont=0;   
                 each item, i in items
-                    -if (item.id_dir1 === user.id)
+                    -if (item.id_alumno === user.id)
+                        
+                        -var ind1=`${i}`;
                         tr
-                            
+                         
                             td= item.titulodetesis
                             td= item.resumen
                             td= item.alumno
                             td= item.ngrado
-                        
-                            
+                            td= item.director1
+                          
                             td
-                                .col-md-8
-                                       
+                                .col-md-12
+                                    .col-md-4
+                                        //- -var prueba=[{"id":item.id,"titulodetesis":item.titulodetesis}]
+                                        //- -var obj = { "name":"John", "age":30, "city":"New York"};
+                                        //- -var myJSON = JSON.stringify(obj); 
+                                        //- -var prueba1="emmas"
+                                        //- p #{myJSON}
+                                        buttonbutton#myBtn1.btn.btn-info(type='button', data-toggle='modal',
+                                            data-target='#exampleModalCenter1',
+                                            onclick=`showID("${item.id}"),
+                                            showTitulo("${item.titulodetesis}"),
+                                            showResumen("${item.resumen}"),
+                                            showGrado("${item.ngrado}"),
+                                            showUnidad("${item.nunidad}"),
+                                            showDepartamento("${item.ndepartamento}"),
+                                            showDir1("${item.id_dir1}"),
+                                            showDir2("${item.id_dir2}"),
+                                            showDir3("${item.id_dir3}"),
+                                            showDir4("${item.id_dir4}"),
+                                            showDir5("${item.id_dir5}")
+                                            `) Editar
+                                        include editar
                 
                                     .col-md-3
-                                        buttonbutton#myBtn.btn.btn-success(type='button', data-toggle='modal', data-target='#exampleModalCenter',
+                                        buttonbutton#myBtn.btn.btn-danger(type='button', data-toggle='modal', data-target='#exampleModalCenter',
                                             onclick="showEliminar("+item.id+")") Eliminar
                                             span
-                                                &nbsp;&nbsp;&nbsp;
-                                                i.fa.fa-check
+                                                i.fa.fa-trash
                                         // The Modal
                                         #exampleModalCenter.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
                                             .modal-dialog.modal-dialog-centered(role='document')
@@ -65,9 +95,10 @@
                                                             button.btn.btn-danger.btn-default.pull-right(type='submit' ) si
                                                             span
                                                                 buutton.btn.btn-info.btn-default.pull-right(data-dismiss='modal' ) no
+   
 
-
-script(src='../javascripts/table.js') 
+        script(src='../javascripts/table.js') 
+    script(type='text/javascript', src='/javascripts/tesisEdit.js')
     
-    
-    
+    section#services
+    include ../users/registrarTesis

@@ -98,7 +98,11 @@ module.exports = {
         });
         });
         });
-	},
+    },
+    postUserPanelVal:function(req,res,next){
+        var eliminar = req.body.eliminart
+        
+    },
 	postUserPanel : function(req, res, next){
         
         var bot=req.body.valor1
@@ -115,6 +119,7 @@ module.exports = {
         var tipo2=952;
         var inv1,inv2,inv3,inv4,inv5;
         var eliminar1=req.body.eliminart;
+        var editar=req.body.editar;
         var investigador2 = req.body.investigador2 === undefined ? inv1=null:inv1= req.body.investigador2
         var investigador3 = req.body.investigador3 === undefined ? inv2=null:inv2= req.body.investigador3
         var investigador4 = req.body.investigador4 === undefined ? inv3=null:inv3= req.body.investigador4
@@ -160,7 +165,8 @@ module.exports = {
             console.log("*****************************************************");
             console.log("*****************************************************");
             console.log("entra 2")
-            client.query('Delete from tesis where id=\''+eliminar1+'\'',
+            client.query(
+                        `Delete from tesis where id=${eliminar1}`,
                 (err, results) => {
                 console.log(err,results)
                 if(err) throw err;
@@ -181,13 +187,8 @@ module.exports = {
             console.log("*****************************************************");
             console.log("entra 3")
             client.query(
-                'UPDATE public.tesis(id,titulodetesis,fechadepublicacion,resumen,'+
-                'clasificacion,clasificacion_1,anio,mes,alumno_id,grado_id,departamento_id,unidad_id,'+
-                'investigador1_id,tipoasesor1_id,investigador2_id,tipoasesor2_id,investigador3_id,tipoasesor3_id,'+
-                'investigador4_id,tipoasesor4_id,investigador5_id,tipoasesor5_id) SET (nextval (\'hibernate_sequence\'),\''+
-                titulo+'\', null,\''+description+'\',null,null,null,null,\''+alumno+'\',\''+grado+'\',\''+departamento+'\','+
-                '\''+unidad+'\',\''+investigador1+'\',\''+tipo1+'\','+
-                ''+inv1+',\''+tipo2+'\','+inv2+',\''+tipo2+'\','+inv3+',\''+tipo2+'\','+inv4+',\''+tipo2+'\')  where id=\''+eliminar1+'\'',
+                `UPDATE public.tesis SET resumen='${description}'  where id=${editar} `
+               ,
                 (err, results) => {
                 console.log(err,results)
                 // if(err) throw err;

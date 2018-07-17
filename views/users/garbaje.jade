@@ -1,51 +1,109 @@
-//- pruebas de angular
- div(ng-app="myApp" )
-  div(ng-controller="myCtrl")
-    p
-        | Name : 
-        input(type='text', ng-model='name')
-      h1 Hello {{name}}
 
-    p Select a car:
-    select(ng-model='selectedCar', ng-options='x for (x, y) in cars')
-    h1 You selected: {{selectedCar.brand}}
-    h2 Model: {{selectedCar.model}}
-    h3 Color: {{selectedCar.color}}
-   
-  div(ng-controller='customersCtrl')
-    table
-      th N° 
-      th Nombre
-      th Puesto
-      tr(ng-repeat='x in names')
-        td {{ $index + 1 }}
-        p="   "
-        td {{ x.Name }}
-        td {{ x.Country }}
-    
-   //- div(ng-app='myApp2', ng-controller='myCtrl2')
-          //-     p Select a car:
-          //-     select(ng-model='selected', ng-options='x for (x, y) in cars')
-          //-     h1 You selected: {{selectedCar}}
-            
-          //-   script.
-          //-     var app = angular.module('myApp2', []);
-          //-     app.controller('myCtrl2', function($scope) {
-          //-     $scope.cars = for item in items
-          //-     });
-          //- for item in items
-              
-          //-   p #{item.nombre}
-          //- for item in items
-          //-   - var key = Object.keys( item )[1]
-          //-   - var val = item
-          //-   p #{key} #{item.nombre}
-        //- div(class='col-md-12 col-md-offset-0')
-        //-   div(class='table-responsive' )  
-        //-     table#datatable.table.table-striped.table-bordered 
-        //-       thead
-        //-         th Nombres
-        //-       tbody
-        //-         each item, i in items
-        //-           tr
-        //-             td= item.nombre
+                                    //- form(action='/users/panel' method='post' )
+                                    //-     .form-group
+                                    //-         button.btn.btn-danger(type='button', data-toggle='modal', data-target='#exampleModalCenter1')
+                                    //-             | Eliminar
+                                    //-         h3=item.id
+                                            
+                                                
+                                    //-         input#valor1.form-control(type='text' name='valor1' placeholder='valor1' value='2' style="display:none")
+                                            
+                                    //-         input#tesiseliminar.form-control( name='eliminart'  value=item.id)
+                                
+                                    //-         #exampleModalCenter1.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
+                                    //-             .modal-dialog.modal-dialog-centered(role='document')
+                                    //-                 .modal-content
+                                    //-                     .modal-header(style="background:#AB1D1D")
+                                    //-                         #exampleModalLongTitle.modal-title Eliminar Tesis
+                                    //-                             button.close(type='button', data-dismiss='modal', aria-label='Close')
+                                    //-                                 span(aria-hidden='true') ×
+                                        
+                                    //-                     .modal-body
+                                    //-                         h2 Confirmar Eliminar Tesis
+                                    //-                         h3=item.id
+                                                            
+                                    
+                                    //-                     .modal-footer
+                                                            
+                                                           
+                                    //-                         //- input#gradoeliminar.form-control(required type='text' name='eliminarg' placeholder='valor1' value=item.grado style="display:none")
+                                    //-                         button.btn.btn-danger.btn-default.pull-right(type='submit' ) si
+                                    //-                         span
+                                    //-                             button.btn.btn-primary.btn-default.pull-left(type='button', data-dismiss='modal') NO
+
+                                                            
+
+                                            
+                      
+                                                
+                            //- -if (user.rol=== "administrador")
+                            //-     each item, i in items
+                            //-         tr
+                                        
+                            //-             td= item.id_dir1 
+                            //-             td= item.resumen
+                            //-             td= item.alumno
+                            //-             td= item.ngrado
+                            //-             td= item.director1
+                            //-             td 
+                            //-                 button.btn.btn-danger(type='button', data-toggle='modal', data-target='#exampleModalCenter')
+                            //-                         | Eliminar
+                            //-                 // Modal
+                            //-                 #exampleModalCenter.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
+                            //-                     .modal-dialog.modal-dialog-centered(role='document')
+                            //-                         .modal-content
+                            //-                             .modal-header(Style="color:red")
+                            //-                                 h5#exampleModalLongTitle.modal-title Eliminar Tesis
+                            //-                                     button.close(type='button', data-dismiss='modal', aria-label='Close')
+                            //-                                         span(aria-hidden='true') ×
+                            //-                             .modal-body
+                            //-                                 | Confirmar Eliminar Tesis
+                            //-                             .modal-footer
+                            //-                                 form(action='/users/panel' method='post' autocomplete='off')
+                            //-                                     .form-group
+                            //-                                         input#valor1.form-control(required type='text' name='valor1' placeholder='valor1' value='2' style="display:none")
+                            //-                                         input#tesiseliminar.form-control(required type='text' name='eliminart' placeholder='valor1' value=item.id style="display:none")
+                            //-                                         //- input#gradoeliminar.form-control(required type='text' name='eliminarg' placeholder='valor1' value=item.grado style="display:none")
+                            //-                                     button.btn.btn-danger.btn-default.pull-right(type='submit' ) si
+                            //-                                     span
+                            //-                                         buutton.btn.btn-info.btn-default.pull-right(data-dismiss='modal' ) no
+                            //- -if (user.rol=== "investigador" )
+                                //- -if (item.id=== user.id)
+                               
+
+                             
+                                each item, i in items
+                                    -if (user.id=== item.id_dir1 )
+                                        tr
+                                        
+                                            td= item.id_dir1 
+                                            td= item.resumen
+                                            td= item.alumno
+                                            td= item.ngrado
+                                            td= item.director1
+                                            td
+                                                button.btn.btn-danger(type='button', data-toggle='modal', data-target='#exampleModalCenter')
+                                                        | Eliminar
+                                                // Modal
+                                                #exampleModalCenter.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
+                                                    .modal-dialog.modal-dialog-centered(role='document')
+                                                        .modal-content
+                                                            .modal-header(Style="color:red")
+                                                                h5#exampleModalLongTitle.modal-title Eliminar Tesis
+                                                                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                                                                        span(aria-hidden='true') ×
+                                                            .modal-body
+                                                                | Confirmar Eliminar Tesis
+                                                            .modal-footer
+                                                                form(action='/users/panel' method='post' autocomplete='off')
+                                                                    .form-group
+                                                                        input#valor1.form-control(required type='text' name='valor1' placeholder='valor1' value='2' style="display:none")
+                                                                        input#tesiseliminar.form-control(required type='text' name='eliminart' placeholder='valor1' value=item.id style="display:none")
+                                                                        //- input#gradoeliminar.form-control(required type='text' name='eliminarg' placeholder='valor1' value=item.grado style="display:none")
+                                                                    button.btn.btn-danger.btn-default.pull-right(type='submit' ) si
+                                                                    span
+                                                                        buutton.btn.btn-info.btn-default.pull-right(data-dismiss='modal' ) no
+                                                    //- // Button trigger modal
+                                            //- button.btn.btn-info(type='submit'  ) Editar
+                                            
+                                        //- button.btn.btn-danger(type='button') Eliminar

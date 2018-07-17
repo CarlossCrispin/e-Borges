@@ -1,0 +1,327 @@
+//- link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+//- |   
+//- script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+//- |   
+//- script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+//- link(rel='stylesheet prefetch', href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css')
+
+//- link(rel='stylesheet', href='../stylesheets/tab.css')
+link(rel='stylesheet prefetch', href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css')
+//- link(rel='stylesheet prefetch', href='https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome-font-awesome.min.css')
+      
+
+.panel.panel-default
+    .panel-heading
+        
+        .container(ng-app='myModule')
+            div(ng-controller='myController')
+                br
+                |       
+                .row.mb-3
+                    .col-md-12
+                        form.form-inline
+                            .input-group.mt-3
+                                .input-group-prepend
+                                    span#basic-addon1.input-group-text
+                                        span.fa.fa-user
+                                    |           
+                                    input.form-control(type='text1', placeholder='Search name...', aria-label='Search name', aria-describedby='basic-addon1', ng-model='search.name')
+                                      
+                            .input-group.ml-2.mt-3
+                                .input-group-prepend
+                                    span#basic-addon1.input-group-text Order By
+                                    |               
+                                    select#orderby.custom-select(ng-model='sortCol')
+                                        option(value='name') Name Asc
+                                        |                 
+                                        option(value='dob') DOB Asc
+                                        |                 
+                                        option(value='gender') Gender Asc
+                                        |                 
+                                        option(value='-salary') Salary Desc
+                            |             
+                            ul#pills-tab.nav.nav-pills.ml-2.mt-3(role='tablist')
+                                li.nav-item
+                                    a#pills-home-tab.nav-link.active(data-toggle='pill', href='#pills-home', role='tab', aria-controls='pills-home', aria-selected='true')
+                                        i.fa.fa-th-list
+                                               
+                                li.nav-item
+                                    a#pills-profile-tab.nav-link(data-toggle='pill', href='#pills-profile', role='tab', aria-controls='pills-profile', aria-selected='false')
+                                        i.fa.fa-th-large
+                             
+                            a.btn.btn-success.ml-3.mt-3(href='', data-toggle='modal', data-target='#addModal')
+                                i.fa.fa-plus
+                                |  Add
+                .row
+                    .col-md-12
+                        #noti-box
+                        |           
+                        br
+                        |           
+                        #pills-tabContent.tab-content
+                            #pills-home.tab-pane.fade.show.active(role='tabpanel', aria-labelledby='pills-home-tab')
+                                table.table.table-bordered.table-hover
+                                    thead
+                                        tr
+                                        th Name
+                                        |                     
+                                        th Email
+                                        |                     
+                                        th Salary
+                                        |                     
+                                        th Action
+                                        |                 
+                                    tbody
+                                        tr(ng-repeat='employee in employees | orderBy: sortCol | filter:search')
+                                            td
+                                                img.rounded-circle.mx-auto(ng-src='{{employee.photo}}', alt='Card image cap', height='20', width='20')
+                                                |  {{employee.name | uppercase}}
+                                            |                     
+                                            td {{employee.email | lowercase}}
+                                            |                     
+                                            td {{employee.salary | currency:&quot;&pound;&quot;}} 
+                                            |                     
+                                            td
+                                                .dropdown.dropleft
+                                                a#dropdownMenuLink.btn.btn-primary.btn-sm.dropdown-toggle(href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                                                    i.fa.fa-gear
+                                                |                         
+                                                .dropdown-menu(aria-labelledby='dropdownMenuLink')
+                                                    a.dropdown-item(href='', data-toggle='modal', data-target='#viewModal', ng-click='viewDetails(employee.name)')
+                                                        i.fa.fa-eye
+                                                        |  View
+                                                        |                           
+                                                    a.dropdown-item(href='', data-toggle='modal', data-target='#editModal', ng-click='fetchDetails(employee.name)')
+                                                        i.fa.fa-edit
+                                                        |  Edit
+                                                        |                           
+                                                    a.dropdown-item(href='', ng-click='delEmployee(employee.name)')
+                                                        i.fa.fa-trash
+                                                        |  Delete
+                                    |             
+                            #pills-profile.tab-pane.fade(role='tabpanel', aria-labelledby='pills-profile-tab')
+                                didv#card-view.row
+                                    .col-md-3.col-sm-6.col-6.mb-3(ng-repeat='employee in employees | orderBy: sortCol | filter:search')
+                                        .card.text-center
+                                        img.rounded-circle.mt-3.mx-auto.d-block(ng-src='{{employee.photo}}', alt='Card image cap', height='100', width='100')
+                                        |                     
+                                        .card-body
+                                            h5.card-title {{employee.name}}
+                                            |                       
+                                            p {{employee.quote}}
+                                            |                       
+                                            a.action.btn.btn-sm.btn-info(href='', data-toggle='modal', data-target='#viewModal', ng-click='viewDetails(employee.name)')
+                                                i.fa.fa-eye
+                                                |                       
+                                            a.action.btn.btn-sm.btn-warning(href='', data-toggle='modal', data-target='#editModal', ng-click='fetchDetails(employee.name)')
+                                                i.fa.fa-edit
+                                                |                       
+                                            a.action.btn.btn-sm.btn-danger(href='', ng-click='delEmployee(employee.name)')
+                                                i.fa.fa-trash
+                // Modal Add
+                form(ng-submit='addEmployee()')
+                    #addModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='addModalLabel', aria-hidden='true')
+                        .modal-dialog(role='document')
+                            .modal-content
+                                .modal-header
+                                    h5#addModalLabel.modal-title Add Employee
+                                    |                 
+                                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                                        span(aria-hidden='true') &times;
+                                    |               
+                                .modal-body
+                                    .form-group.row
+                                        label.col-sm-2.col-form-label(for='inputname') Name
+                                        |                   
+                                        .col-sm-10
+                                            input.form-control(type='text', ng-model='name', placeholder='John Doe', required='')
+                                    |                 
+                                    .form-group.row
+                                        label.col-sm-2.col-form-label(for='inputEmail') Email
+                                        |                   
+                                        .col-sm-10
+                                            input.form-control(type='email', ng-model='email', placeholder='eample@abc.com', required='')
+                                    |                 
+                                    .form-group.row
+                                        label.col-sm-2.col-form-label(for='inputDate') DOB
+                                        |                   
+                                        .col-sm-10
+                                            input.form-control(type='date', ng-model='dob', required='')
+                                    |                 
+                                    .form-group.row
+                                        .col-sm-2 Gender
+                                        |                   
+                                        .col-sm-10
+                                            .form-check.form-check-inline
+                                                input.form-check-input(type='radio', ng-model='gender', value='Male', ng-required='!gender')
+                                                |                       
+                                                label.form-check-label(for='inlineRadio1') Male
+                                            |                     
+                                            .form-check.form-check-inline
+                                                input.form-check-input(type='radio', ng-model='gender', value='Female', ng-required='!gender')
+                                                |                       
+                                                label.form-check-label(for='inlineRadio2') Female
+                                    |                 
+                                    .form-group.row
+                                        label.col-sm-2.col-form-label(for='inputPosition') Position
+                                        |                   
+                                        .col-sm-10
+                                            input.form-control(type='text', ng-model='position', placeholder='e.g: Receptionist', required='')
+                                    |                 
+                                    .form-group.row
+                                        label.col-sm-2.col-form-label(for='inputSal') Salary
+                                        |                   
+                                        .col-sm-10
+                                            input.form-control(type='number', ng-model='salary', placeholder='000', required='')
+                                    |                 
+                                    .form-group.row
+                                        label.col-sm-2.col-form-label(for='inputPhoto') Photo URL
+                                        |                   
+                                        .col-sm-10
+                                            input.form-control(type='url', ng-model='photo', placeholder='http://www.abc.com/uploads/photo.jpg', required='')
+                                    |                 
+                                    .form-group.row
+                                        label.col-sm-2.col-form-label(for='inputQuote') Quote
+                                        |                   
+                                        .col-sm-10
+                                            textarea.form-control(ng-model='quote', placeholder='Lorem ipsum...', required='')
+                                    |               
+                                .modal-footer
+                                    button.btn.btn-danger(type='button', data-dismiss='modal') Cancel
+                                    |                 
+                                    input.btn.btn-primary(type='submit', value='Add')
+                    // Modal Edit
+                form(ng-submit='updateEmployee()')
+                    #editModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='EditModalLabel', aria-hidden='true')
+                        .modal-dialog(role='document')
+                            .modal-content
+                                .modal-header
+                                    h5#addModalLabel.modal-title Edit Employee
+                                    |                 
+                                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                                        span(aria-hidden='true') &times;
+                                    |               
+                                .modal-body
+                                    .form-group.row
+                                        label.col-sm-2.col-form-label(for='inputname') Name
+                                        |                   
+                                        .col-sm-10
+                                        input.form-control(type='text', ng-model='name2', placeholder='John Doe', required='')
+                                    |                 
+                                    .form-group.row
+                                        label.col-sm-2.col-form-label(for='inputEmail') Email
+                                        |                   
+                                        .col-sm-10
+                                        input.form-control(type='email', ng-model='email2', placeholder='eample@abc.com', required='')
+                                    |                 
+                                    .form-group.row
+                                        label.col-sm-2.col-form-label(for='inputDate') DOB
+                                        |                   
+                                        .col-sm-10
+                                        input.form-control(type='date', ng-model='dob2', required='')
+                                    |                 
+                                    .form-group.row
+                                        .col-sm-2 Gender
+                                        |                   
+                                        .col-sm-10
+                                        .form-check.form-check-inline
+                                            input.form-check-input(type='radio', ng-model='gender2', value='Male', ng-required='!gender2')
+                                            |                       
+                                            label.form-check-label(for='inlineRadio1') Male
+                                        |                     
+                                        .form-check.form-check-inline
+                                            input.form-check-input(type='radio', ng-model='gender2', value='Female', ng-required='!gender2')
+                                            |                       
+                                            label.form-check-label(for='inlineRadio2') Female
+                                    |                 
+                                    .form-group.row
+                                        label.col-sm-2.col-form-label(for='inputPosition') Position
+                                        |                   
+                                        .col-sm-10
+                                        input.form-control(type='text', ng-model='position2', placeholder='e.g: Receptionist', required='')
+                                    |                 
+                                    .form-group.row
+                                        label.col-sm-2.col-form-label(for='inputSal') Salary
+                                        |                   
+                                        .col-sm-10
+                                        input.form-control(type='number', ng-model='salary2', placeholder='000', required='')
+                                    |                 
+                                    .form-group.row
+                                        label.col-sm-2.col-form-label(for='inputPhoto') Photo URL
+                                        |                   
+                                        .col-sm-10
+                                        input.form-control(type='url', ng-model='photo2', placeholder='http://www.abc.com/uploads/photo.jpg', required='')
+                                    |                 
+                                    .form-group.row
+                                        label.col-sm-2.col-form-label(for='inputQuote') Quote
+                                        |                   
+                                        .col-sm-10
+                                        textarea.form-control(ng-model='quote2', placeholder='Lorem ipsum...', required='')
+                                    |               
+                                .modal-footer
+                                    button.btn.btn-danger(type='button', data-dismiss='modal') Cancel
+                                    |                 
+                                    input.btn.btn-primary(type='submit', value='Update')
+                // Modal
+                #viewModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
+                    .modal-dialog(role='document')
+                        .modal-content.text-center
+                            .row
+                                .col-md-12
+                                    .cover
+                                        .c-overlay
+                                            |                   
+                                            button.close(type='button', data-dismiss='modal', aria-label='Close', style='position:absolute; color:#fff; top: 10px; right:10px;')
+                                                span(aria-hidden='true') &times;
+                                                |                   
+                                                h1.h1 {{name3}}
+                                                |                   
+                                                h3.h3 {{position3}}
+                                                |                 
+                                                .detail
+                                                    img.rounded-circle.mx-auto.mb-3(ng-src='{{photo3}}', alt='Photo', height='100', width='100', style='margin-top:-50px;')
+                                                    |                   
+                                                    dl.row
+                                                        dt.col-6.text-right Email ID :
+                                                        |                     
+                                                        dd.col-6.text-left {{email3}}
+                                                        |                     
+                                                        dt.col-6.text-right Date of Birth :
+                                                        |                     
+                                                        dd.col-6.text-left {{dob3 | date:&apos;dd/MM/yyyy&apos;}}
+                                                        |                     
+                                                        dt.col-6.text-right Gender :
+                                                        |                     
+                                                        dd.col-6.text-left {{gender3}}
+                                                        |                     
+                                                        dt.col-6.text-right Salary :
+                                                        |                     
+                                                        dd.col-6.text-left {{salary3 | currency:&apos;&pound;&apos;}}
+                                                        |                     
+                                                        dt.col-6.text-right Quote :
+                                                        |                     
+                                                        dd.col-6.text-left {{quote3}}
+            |   
+            script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+            |   
+            script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js')
+            |   
+            script(src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js')
+            |   
+            script(src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.9/angular.js')
+         
+
+
+
+
+
+
+       
+
+   
+
+        script(src='../javascripts/table.js')
+        script(src='../javascripts/tab.js')  
+
+    
+    

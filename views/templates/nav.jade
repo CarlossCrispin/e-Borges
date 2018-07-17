@@ -109,7 +109,33 @@ script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'
                   a.page-scroll.button#myBtn1.btn-link  Iniciar Sesión
               if isAuthenticated
                 //- li
-                //-   a.page-scroll(href='')='Bienvenido..' +user.nombre  
+                //-   a.page-scroll(href='')='Bienvenido..' +user.nombre 
+                -if (user.rol=== "administrador")
+                  li.dropdown
+                    a.dropdown-toggle(data-toggle='dropdown', href='#') Entidades
+                      span.caret     
+                        ul.dropdown-menu
+                          li
+                            a(href='#') Page 1-1          
+                          li
+                            a(href='#') Page 1-2        
+                          li
+                            a(href='#') Page 1-3
+                //- li.dropdown
+                //-   button.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown')
+                //-       | Dropdown Example
+                //-       span.caret
+                       
+                //-     ul.dropdown-menu
+                //-       li
+                //-         a(href='#') HTML
+                //-       |     
+                //-       li
+                //-         a(href='#') CSS
+                //-       |     
+                //-       li
+                //-         a(href='#') JavaScript
+
                 li
                   a.page-scroll(href='/users/panel') Perfil
                 li

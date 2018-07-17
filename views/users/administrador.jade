@@ -1,0 +1,97 @@
+.panel.panel-default
+    .panel-heading
+        button.btn.btn-info.btn-lg(type='button', data-toggle='modal', data-target='#myModal') Registrar Tesis
+        br
+        table#example.table.table-striped.table-bordered
+            
+            thead
+                tr
+                   
+                    th Título
+                    th Resumen
+                    th Alumno
+                    th Grado
+                    th Investigador
+                  
+                    th boton
+            tfoot
+                tr
+                 
+                    th Título
+                    th Resumen
+                    th Alumno
+                    th Grado
+                    th Investigador
+              
+                    th boton
+            tbody 
+                each item, i in items
+               
+                    tr
+                        
+                        td= item.titulodetesis
+                        td= item.resumen
+                        td= item.alumno
+                        td= item.ngrado
+                        td= item.director1
+                        
+                        td
+                            .col-md-12
+                                .col-md-4
+                                    //- -var prueba=[{"id":item.id,"titulodetesis":item.titulodetesis}]
+                                    //- -var obj = { "name":"John", "age":30, "city":"New York"};
+                                    //- -var myJSON = JSON.stringify(obj); 
+                                    //- -var prueba1="emmas"
+                                    //- p #{myJSON}
+                                    buttonbutton#myBtn1.btn.btn-info(type='button', data-toggle='modal',
+                                        data-target='#exampleModalCenter1',
+                                        onclick=`showID("${item.id}"),
+                                        showTitulo("${item.titulodetesis}"),
+                                        showResumen("${item.resumen}"),
+                                        showGrado("${item.ngrado}"),
+                                        showUnidad("${item.nunidad}"),
+                                        showDepartamento("${item.ndepartamento}"),
+                                        showDir1("${item.id_dir1}"),
+                                        showDir2("${item.id_dir2}"),
+                                        showDir3("${item.id_dir3}"),
+                                        showDir4("${item.id_dir4}"),
+                                        showDir5("${item.id_dir5}")
+                                        `) Editar
+                                        span
+                                            &nbsp;&nbsp;&nbsp;
+                                            i.fa.fa-trash
+                                    include editar
+            
+                                .col-md-3
+                                    buttonbutton#myBtn.btn.btn-danger(type='button', data-toggle='modal', data-target='#exampleModalCenter',
+                                        onclick="showEliminar("+item.id+")") Eliminar
+                                        span
+                                            &nbsp;&nbsp;&nbsp;
+                                            i.fa.fa-trash
+                                    // The Modal
+                                    #exampleModalCenter.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
+                                        .modal-dialog.modal-dialog-centered(role='document')
+                                            .modal-content
+                                                .modal-header(Style="color:red")
+                                                    h5#exampleModalLongTitle.modal-title Eliminar Tesis
+                                                        button.close(type='button', data-dismiss='modal', aria-label='Close')
+                                                            span(aria-hidden='true') ×
+                                                .modal-body
+                                                    | Confirmar Eliminar Tesis
+                                                .modal-footer
+                                                    form(action='/users/panel' method='post' autocomplete='off')
+                                                        .form-group
+                                                            input#valor1.form-control(required type='text' name='valor1' placeholder='valor1' value='2' style="display:none")
+                                                            //- input#tesiseliminar.form-control(required type='text' name='eliminart' placeholder='valor1' value=item.id )
+                                                            input#eliminar(type="text",name='eliminart')
+                                                            //- input#gradoeliminar.form-control(required type='text' name='eliminarg' placeholder='valor1' value=item.grado style="display:none")
+                                                        button.btn.btn-danger.btn-default.pull-right(type='submit' ) si
+                                                        span
+                                                            buutton.btn.btn-info.btn-default.pull-right(data-dismiss='modal' ) no
+
+
+        script(src='../javascripts/table.js') 
+    script(type='text/javascript', src='/javascripts/tesisEdit.js')
+    
+    section#services
+    include ../users/registrarTesis
