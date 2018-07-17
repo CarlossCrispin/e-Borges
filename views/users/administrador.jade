@@ -57,16 +57,14 @@
                                         showDir4("${item.id_dir4}"),
                                         showDir5("${item.id_dir5}")
                                         `) Editar
-                                        span
-                                            &nbsp;&nbsp;&nbsp;
+                                        span &nbsp;&nbsp;&nbsp;
                                             i.fa.fa-trash
                                     include editar
             
                                 .col-md-3
                                     buttonbutton#myBtn.btn.btn-danger(type='button', data-toggle='modal', data-target='#exampleModalCenter',
                                         onclick="showEliminar("+item.id+")") Eliminar
-                                        span
-                                            &nbsp;&nbsp;&nbsp;
+                                        span &nbsp;&nbsp;&nbsp;
                                             i.fa.fa-trash
                                     // The Modal
                                     #exampleModalCenter.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')

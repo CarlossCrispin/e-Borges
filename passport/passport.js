@@ -53,7 +53,7 @@ module.exports = function(passport){
 			//connection.end()
 
 		
-		client.query('SELECT * FROM public.alumno where  nombre = $1',[email],(err,results) => {
+		client.query('SELECT * FROM public.alumno where  nombre = $1',[email,],(err,results) => {
 			console.log(err,results)
 			if(err) throw err;
 			// client.end((err) => {
@@ -62,73 +62,73 @@ module.exports = function(passport){
 			// 	  console.log('error during disconnection', err.stack)
 			// 	}
 			//   })
-			client.query('SELECT * FROM public.investigador where  nombre = $1',[email],(err,results1) => {
-				console.log(err,results1)
-				if(err) throw err;
-					console.log(err)
-			client.query('SELECT * FROM public.jhi_user where  login = $1',[email],(err,results2) => {
-				console.log(err,results2)
-				if(err) throw err;
-					console.log(err)
-				
+		client.query('SELECT * FROM public.investigador where  id = $1',[password],(err,results1) => {
+			console.log(err,results1)
+			if(err) throw err;
+				console.log(err)
+		client.query('SELECT * FROM public.jhi_user where  login = $1',[email],(err,results2) => {
+			console.log(err,results2)
+			if(err) throw err;
+				console.log(err)
 			
+		
+			
+			if(results.rows.length  !== 0){
 				
-				if(results.rows.length  !== 0){
-					
-					var user = results.rows[0];
-					/*console.log(password);
-					console.log('-----'+bcrypt.compareSync(password, user.password));
-					if(bcrypt.compareSync(password, user.password)){*/
-					if(password == user.matricula){
-						return done(null, {
-							id:user.id,
-							nombre : user.nombre,
-							apellido_1: user.apellido_1,
-							apellido_2: user.apellido_2,
-							matricula :user.matricula,
-							departamento_id: user.departamento_id,
-							rol:'alumno'
-						});
-					}
-				}
-				if(results1.rows.length  > 0){
-					console.log(JSON.stringify(results1))
-					
-					var user = results1.rows[0];
-					console.log(user);
-					console.log(password+'-------------'+user.id);
-					/*console.log(password);
-					console.log('-----'+bcrypt.compareSync(password, user.password));
-					if(bcrypt.compareSync(password, user.password)){*/
-					if(password == user.id){
-						console.log('si entra')
-						return done(null, {
-							id:user.id,
+				var user = results.rows[0];
+				/*console.log(password);
+				console.log('-----'+bcrypt.compareSync(password, user.password));
+				if(bcrypt.compareSync(password, user.password)){*/
+				if(password == user.matricula){
+					return done(null, {
+						id:user.id,
 						nombre : user.nombre,
 						apellido_1: user.apellido_1,
 						apellido_2: user.apellido_2,
-						rol:'investigador'
-						});
-					}
+						matricula :user.matricula,
+						departamento_id: user.departamento_id,
+						rol:'alumno'
+					});
 				}
-				if(results2.rows.length  > 0){
-					console.log(JSON.stringify(results1))
-					
-					var user = results2.rows[0];
-					console.log(user);
-					console.log(password+'-------------'+user.id);
-					/*console.log(password);
-					console.log('-----'+bcrypt.compareSync(password, user.password));
-					if(bcrypt.compareSync(password, user.password)){*/
-					if(password == user.id){
-						console.log('si entra')
-						return done(null, {
-							id:user.id,
-						nombre : user.login,
-						rol:'administrador'
-						});
-					}
+			}
+			if(results1.rows.length  > 0){
+				console.log(JSON.stringify(results1))
+				
+				var user = results1.rows[0];
+				console.log(user);
+				console.log(password+'-------------'+user.id);
+				/*console.log(password);
+				console.log('-----'+bcrypt.compareSync(password, user.password));
+				if(bcrypt.compareSync(password, user.password)){*/
+				if(password == user.id){
+					console.log('si entra')
+					return done(null, {
+						id:user.id,
+					nombre : user.nombre,
+					apellido_1: user.apellido_1,
+					apellido_2: user.apellido_2,
+					rol:'investigador'
+					});
 				}
+			}
+			if(results2.rows.length  > 0){
+				console.log(JSON.stringify(results1))
+				
+				var user = results2.rows[0];
+				console.log(user);
+				console.log(password+'-------------'+user.id);
+				/*console.log(password);
+				console.log('-----'+bcrypt.compareSync(password, user.password));
+				if(bcrypt.compareSync(password, user.password)){*/
+				if(password == user.id){
+					console.log('si entra')
+					return done(null, {
+						id:user.id,
+					nombre : user.login,
+					rol:'administrador'
+					});
+				}
+			}
 				
 				
 			

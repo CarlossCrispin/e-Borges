@@ -61,12 +61,12 @@ module.exports = {
         inner join investigador i11 on t.investigador1_id=i11.id
         left join investigador i2 on t.investigador2_id=i2.id
         left join investigador i22 on t.investigador2_id=i22.id
-        left join investigador i3 on t.investigador2_id=i3.id
-        left join investigador i33 on t.investigador2_id=i33.id
-        left join investigador i4 on t.investigador2_id=i4.id
-        left join investigador i44 on t.investigador2_id=i44.id
-        left join investigador i5 on t.investigador2_id=i5.id
-        left join investigador i55 on t.investigador2_id=i55.id`,(err,results) => {
+        left join investigador i3 on t.investigador3_id=i3.id
+        left join investigador i33 on t.investigador3_id=i33.id
+        left join investigador i4 on t.investigador4_id=i4.id
+        left join investigador i44 on t.investigador4_id=i44.id
+        left join investigador i5 on t.investigador5_id=i5.id
+        left join investigador i55 on t.investigador5_id=i55.id`,(err,results) => {
             // console.log(err,results)
             var valor= results.rows.departamento
             console.log('depto----->'+valor)
@@ -117,7 +117,7 @@ module.exports = {
        
         // var investigador2 = ( req.body.investigador2  ) ? !punt: 'null';
         var tipo2=952;
-        var inv1,inv2,inv3,inv4,inv5;
+        var inv1,inv2,inv3,inv4;
         var eliminar1=req.body.eliminart;
         var editar=req.body.editar;
         var investigador2 = req.body.investigador2 === undefined ? inv1=null:inv1= req.body.investigador2
@@ -131,15 +131,22 @@ module.exports = {
             console.log("*****************************************************");
             console.log("*****************************************************");
             console.log("entra 1")
-            client.query(
-                'INSERT INTO public.tesis(id,titulodetesis,fechadepublicacion,resumen,'+
-                'clasificacion,clasificacion_1,anio,mes,alumno_id,grado_id,departamento_id,unidad_id,'+
-                'investigador1_id,tipoasesor1_id,investigador2_id,tipoasesor2_id,investigador3_id,tipoasesor3_id,'+
-                'investigador4_id,tipoasesor4_id,investigador5_id,tipoasesor5_id) values (nextval (\'hibernate_sequence\'),\''+
-                titulo+'\', null,\''+description+'\',null,null,null,null,\''+alumno+'\',\''+grado+'\',\''+departamento+'\','+
-                '\''+unidad+'\',\''+investigador1+'\',\''+tipo1+'\','+
-                inv1+',\''+tipo2+'\','+inv2+',\''+tipo2+'\','+inv3+',\''+tipo2+'\','+inv4+',\''+tipo2+'\')',
-                (err, results) => {
+
+
+            console.log(`uno--->${inv1}`);
+            console.log(`dos--->${inv2}`);
+            console.log(`tres--->${inv3}`);
+            console.log(`cuatro--->${inv4}`);
+            console.log("*****************************************************");
+            console.log("*****************************************************");
+            console.log("*****************************************************");
+            client.query(`INSERT INTO public.tesis(id,titulodetesis,fechadepublicacion,resumen,
+                clasificacion,clasificacion_1,anio,mes,alumno_id,grado_id,departamento_id,unidad_id,
+                investigador1_id,tipoasesor1_id,investigador2_id,tipoasesor2_id,investigador3_id,tipoasesor3_id,
+                investigador4_id,tipoasesor4_id,investigador5_id,tipoasesor5_id) values (nextval (\'hibernate_sequence\'),
+                '${titulo}',null,'${description}',null,null,null,null,${alumno},${grado},${departamento},
+                ${unidad},${investigador1},${tipo1},${inv1},${tipo2},${inv2},${tipo2},${inv3},
+                ${tipo2},${inv4},${tipo2})`,(err, results) => {
                 console.log(err,results)
                 // if(err) throw err;
                 // if(err){
