@@ -10,11 +10,12 @@ block content
         .panel.panel-default
             .panel-heading
             
-                h1.inverse.title.text-center Investigadores
+                h1.inverse.title.text-center Alumnos
                 hr
                 div.col-md-10
-        .panel.panel-default
+         .panel.panel-default
             .panel-heading
+                button.btn.btn-info.btn-lg(type='button', data-toggle='modal', data-target='#myModal') Registrar Alumno
                 br
                 table#example.table.table-striped.table-bordered
                     thead
@@ -22,7 +23,7 @@ block content
                             th Nombre
                             th Apellido P
                             th Apellido M
-                            th ¿Es externo?
+                            th Matricula
                             th Genero
                             th Grado
                             th Departamento
@@ -33,14 +34,9 @@ block content
                                 td= item.nombre
                                 td= item.apellido_1
                                 td= item.apellido_2
-                                -if (item.esexterno === false)
-                                    td No
-                                -if(item.esexterno === true)
-                                    td Si
-                                td= item.ngenero
-                                td= item.ngrado
-                                td= item.ndepartamento
-
+                                td= item.matricula
 
 
     script(src='../javascripts/table.js')
+    section#services
+    include ../alumno/registrarAlumno

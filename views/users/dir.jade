@@ -1,0 +1,70 @@
+.panel.panel-default
+    .panel-heading
+        div( style="overflow-x:auto;")
+        br
+        .table-responsive
+        table#example.table.table-striped.table-bordered
+            
+            thead
+                tr
+                
+                    th Título
+                    th Resumen
+                    th Alumno
+                    th Grado
+                
+                
+                    th boton
+           
+            tbody 
+                each item, i in items
+                    -if ((item.id_dir1 === user.id) || (item.id_dir2 === user.id)|| (item.id_dir3 === user.id)|| (item.id_dir4 === user.id)|| (item.id_dir5 === user.id))
+                        tr
+                            
+                            td= item.titulodetesis
+                            td= item.resumen
+                            td= item.alumno
+                            td= item.ngrado
+                        
+                            
+                            td
+                                .col-md-12
+                                    
+                
+                                    .col-md-3
+                                        .action.btn.btn-sm.btn-danger(type='button', data-toggle='modal', data-target='#exampleModalCenter',
+                                            onclick="showEliminar("+item.id+")") 
+                                                i.fa.fa-times
+                                    .col-md-3
+                                        .action.btn#myBtn.btn-sm.btn-success(type='button', data-toggle='modal', data-target='#exampleModalCenter',
+                                            onclick="showEliminar("+item.id+")") 
+                                                i.fa.fa-check
+                                        //- .action.button#myBtn.btn-sm.btn-success(type='button', data-toggle='modal', data-target='#exampleModalCenter',
+                                        //-     onclick="showEliminar("+item.id+")")
+                                        //-         i.fa.fa-check
+                                        // The Modal
+                                        #exampleModalCenter.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
+                                            .modal-dialog.modal-dialog-centered(role='document')
+                                                .modal-content
+                                                    .modal-header(Style="color:red")
+                                                        h5#exampleModalLongTitle.modal-title Eliminar Tesis
+                                                            button.close(type='button', data-dismiss='modal', aria-label='Close')
+                                                                span(aria-hidden='true') ×
+                                                    .modal-body
+                                                        | Confirmar Eliminar Tesis
+                                                    .modal-footer
+                                                        form(action='/users/panel' method='post' autocomplete='off')
+                                                            .form-group
+                                                                input#valor1.form-control(required type='text' name='valor1' placeholder='valor1' value='2' style="display:none")
+                                                                //- input#tesiseliminar.form-control(required type='text' name='eliminart' placeholder='valor1' value=item.id )
+                                                                input#eliminar(type="text",name='eliminart')
+                                                                //- input#gradoeliminar.form-control(required type='text' name='eliminarg' placeholder='valor1' value=item.grado style="display:none")
+                                                            button.btn.btn-danger.btn-default.pull-right(type='submit' ) si
+                                                            span
+                                                                buutton.btn.btn-info.btn-default.pull-right(data-dismiss='modal' ) no
+
+script(type='text/javascript', src='/javascripts/tesisEdit.js')
+script(src='../javascripts/table.js') 
+    
+    
+    

@@ -17,16 +17,26 @@
                         |  Alumno
                         input#valor1.form-control(required type='text' name='valor1' placeholder='valor1' value='3' style="display:none")
                         //- input#val(type="text",name='editar' style="display:none")
-                        input#ID(type="text",name='editar' )
-                        input#alumno.form-control(required type='text' name='alumno' placeholder='alumno' value=user.id style="display:none")
+                        input#ID(type="text",name='editar',style="display:none" )
+                        //- input#alumno.form-control(required type='text' name='alumno' placeholder='alumno' value=user.id style="display:none")
                         //readonly
-                    .alert.alert-success.col-md-12
-                        
-                        -var alumno1 =user.id; 
-                        label.col-md-6.control-label(for='file')
-                            h3#alumno(name='alumno')= "Nombre : "+ user.nombre+ " "+user.apellido_1+" "+ user.apellido_2
-                        label.col-md-6.control-label(for='file')
-                            h3=" Matricula : "+ user.matricula
+                        -if (user.rol=== "alumno")
+                            input#alumno.form-control(required type='text' name='alumno' placeholder='alumno' value=user.id style="display:none")
+                            .alert.alert-success.col-md-12
+                            
+                                //- span(style='float:right') Matricula : {{vm.account.lastName}} 
+                                //- | Nombre  : {{vm.account.firstName}}
+                                -var alumno1 =user.id; 
+                                label.col-md-6.control-label(for='file')
+                                    h3#alumno(name='alumno')= "Nombre : "+ user.nombre+ " "+user.apellido_1+" "+ user.apellido_2
+                                label.col-md-6.control-label(for='file')
+                                    h3=" Matricula : "+ user.matricula
+                        -if (user.rol=== "administrador")
+                            select#alu(name="alumno"  class="form-control" required)
+                                option(value='', disabled='', selected='') 
+                                    each item, i in items5 
+                                        option(value=item.id) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1} &nbsp;&nbsp;&nbsp;#{item.apellido_2}
+                            
                     .form-group
                         label(for='Título')
                         span.glyphicon.glyphicon-text-width
@@ -78,12 +88,17 @@
                         span.glyphicon.glyphicon-user
                         |Director
                         //- por id
-                        select#investigador1(name="investigador1" , class="form-control" required)
-                            option(value='', disabled='', selected='') Elija una opcion
-                            each item, i in items4
-                                -if (item.departamento_id === user.departamento_id ) 
-                                    option(value=i+1) #{item.departamento_id}#{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1} &nbsp;&nbsp;&nbsp;#{item.apellido_1}            
-                            
+                        -if (user.rol=== "alumno")
+                            select#investigador1(name="investigador1", class="form-control" required)
+                                option(value='', disabled='', selected='') Elija una opcion
+                                    each item, i in items4
+                                        -if (item.departamento_id === user.departamento_id ) 
+                                            option(value=i+1) #{item.departamento_id}#{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1} &nbsp;&nbsp;&nbsp;#{item.apellido_1}            
+                        -if (user.rol=== "administrador") 
+                            select#investigador1(name="investigador1"  class="form-control" required)
+                                option(value='', disabled='', selected='') Elija una opcion
+                                    each item, i in items4   
+                                        option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1} &nbsp;&nbsp;&nbsp;#{item.apellido_1} 
                     .form-group
                         label(for="investigador2")
                         span.glyphicon.glyphicon-plus

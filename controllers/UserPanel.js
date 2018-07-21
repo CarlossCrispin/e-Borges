@@ -77,6 +77,7 @@ module.exports = {
         client.query('SELECT * FROM public.departamento',(err,results3) => {
             //console.log(err,results3)
         client.query('SELECT * FROM public.investigador',(err,results4) => {
+        client.query('SELECT * FROM public.alumno',(err,results5) => {
             
             //console.log(err,results4)
 			//connection.end()
@@ -89,10 +90,12 @@ module.exports = {
                 items2: results2.rows,
                 items3: results3.rows,
                 items4: results4.rows,
+                items5: results5.rows,
                 tesis : req.flash('tesis'),
                 tesiser : req.flash('tesiser')
 				
 			});
+        });
         });
         });
         });
@@ -194,9 +197,10 @@ module.exports = {
             console.log("*****************************************************");
             console.log("entra 3")
             client.query(
-                `UPDATE public.tesis SET resumen='${description}'  where id=${editar} `
-               ,
-                (err, results) => {
+                `UPDATE public.tesis SET titulodetesis='${titulo}',resumen='${description}',
+                grado_id=${grado},departamento_id=${departamento},unidad_id=${unidad},
+                investigador1_id=${investigador1},investigador2_id=${inv1},investigador3_id=${inv2},
+                investigador4_id=${inv3},investigador5_id=${inv4} where id=${editar} `,(err, results) => {
                 console.log(err,results)
                 // if(err) throw err;
                 // if(err){

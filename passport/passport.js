@@ -53,7 +53,7 @@ module.exports = function(passport){
 			//connection.end()
 
 		
-		client.query('SELECT * FROM public.alumno where  nombre = $1',[email,],(err,results) => {
+		client.query('SELECT * FROM public.alumno where  nombre = $1 and matricula= $2' ,[email,password],(err,results) => {
 			console.log(err,results)
 			if(err) throw err;
 			// client.end((err) => {
@@ -62,11 +62,11 @@ module.exports = function(passport){
 			// 	  console.log('error during disconnection', err.stack)
 			// 	}
 			//   })
-		client.query('SELECT * FROM public.investigador where  id = $1',[password],(err,results1) => {
+		client.query('SELECT * FROM public.investigador where  nombre = $1 and id= $2',[email,password],(err,results1) => {
 			console.log(err,results1)
 			if(err) throw err;
 				console.log(err)
-		client.query('SELECT * FROM public.jhi_user where  login = $1',[email],(err,results2) => {
+		client.query('SELECT * FROM public.jhi_user where  login = $1 and id= $2',[email,password],(err,results2) => {
 			console.log(err,results2)
 			if(err) throw err;
 				console.log(err)

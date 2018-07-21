@@ -9,6 +9,7 @@ html {
     color: #ffffff;
     
     }
+
     /* #fondotabla{
     background-color: #ffffff; 
     opacity: 0.5;
@@ -25,3 +26,55 @@ html {
         text-align: center;
         padding-top: 4px;
       }  */
+/* 
+    footer {
+    background-color: black;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+    color: white;
+    } */
+    .cover {
+        width:100%;
+        position: relative;
+        padding:-10px -5px 0 -5px;
+        min-height: 200px;
+        padding:50px 10px 80px 10px;
+        background: url(http://blog.fancyyarnbazar.com/wp-content/uploads/2018/04/architecture-2562705_1920-1024x576.jpg) no-repeat center fixed;
+        background-size: cover;
+        z-index: 0;
+        border-bottom: 1px solid #ccc;
+      color: black;
+    }
+    .c-overlay{
+      background:rgba(0,0,0,0.6);
+      position:absolute;
+      top:0;
+      left:0;
+      right:0;
+      bottom:0;
+      z-index:-1
+    }
+    .detail{
+      position:relative;
+      z-index:1;
+    }
+    p{  
+      color:black
+      
+    }
+    
+    @media(max-width:992px){
+      .container{
+        padding-left:10px;
+        padding-right:10px;
+      }
+      .ml-2{
+        margin-left:0 !important;
+      }
+      .detail {
+        padding:0px;
+      }
+    
+    }

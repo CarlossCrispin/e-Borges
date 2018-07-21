@@ -103,8 +103,8 @@ script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'
                   i.fa.fa-home
                   
               if !isAuthenticated
-                li
-                  a.page-scroll.button#myBtn.btn-link Registrarse
+                //- li
+                //-   a.page-scroll.button#myBtn.btn-link Registrarse
                 li
                   a.page-scroll.button#myBtn1.btn-link  Iniciar Sesión
               if isAuthenticated
@@ -116,7 +116,8 @@ script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'
                       span.caret     
                         ul.dropdown-menu
                           li
-                            a(href='#') Page 1-1          
+                            a(href='../alumno/showAlumno') Alumno         
+                                   
                           li
                             a(href='#') Page 1-2        
                           li

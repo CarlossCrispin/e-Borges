@@ -12,18 +12,8 @@
                     th Alumno
                     th Grado
                     th Investigador
-                  
-                    th boton
-            tfoot
-                tr
-                 
-                    th Título
-                    th Resumen
-                    th Alumno
-                    th Grado
-                    th Investigador
-              
-                    th boton
+                    th Boton
+            
             tbody 
                 each item, i in items
                
@@ -36,14 +26,15 @@
                         td= item.director1
                         
                         td
-                            .col-md-12
-                                .col-md-4
+                            .col-md-10
+                                .col-md-3
                                     //- -var prueba=[{"id":item.id,"titulodetesis":item.titulodetesis}]
                                     //- -var obj = { "name":"John", "age":30, "city":"New York"};
                                     //- -var myJSON = JSON.stringify(obj); 
                                     //- -var prueba1="emmas"
                                     //- p #{myJSON}
-                                    buttonbutton#myBtn1.btn.btn-info(type='button', data-toggle='modal',
+                                    //- buttonbutton#myBtn1.btn.btn-info
+                                    a.action.btn.btn-sm.btn-primary(type='button', data-toggle='modal',
                                         data-target='#exampleModalCenter1',
                                         onclick=`showID("${item.id}"),
                                         showTitulo("${item.titulodetesis}"),
@@ -51,20 +42,21 @@
                                         showGrado("${item.ngrado}"),
                                         showUnidad("${item.nunidad}"),
                                         showDepartamento("${item.ndepartamento}"),
+                                        showAlumno2("${item.id_alumno}"),
                                         showDir1("${item.id_dir1}"),
                                         showDir2("${item.id_dir2}"),
                                         showDir3("${item.id_dir3}"),
                                         showDir4("${item.id_dir4}"),
                                         showDir5("${item.id_dir5}")
-                                        `) Editar
-                                        span &nbsp;&nbsp;&nbsp;
-                                            i.fa.fa-trash
+                                        `) 
+                                        
+                                            i.fa.fa-edit
                                     include editar
             
                                 .col-md-3
-                                    buttonbutton#myBtn.btn.btn-danger(type='button', data-toggle='modal', data-target='#exampleModalCenter',
-                                        onclick="showEliminar("+item.id+")") Eliminar
-                                        span &nbsp;&nbsp;&nbsp;
+                                    .action.btn.btn-sm.btn-danger(type='button', data-toggle='modal', data-target='#exampleModalCenter',
+                                        onclick="showEliminar("+item.id+")") 
+                                        
                                             i.fa.fa-trash
                                     // The Modal
                                     #exampleModalCenter.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
@@ -81,12 +73,36 @@
                                                         .form-group
                                                             input#valor1.form-control(required type='text' name='valor1' placeholder='valor1' value='2' style="display:none")
                                                             //- input#tesiseliminar.form-control(required type='text' name='eliminart' placeholder='valor1' value=item.id )
-                                                            input#eliminar(type="text",name='eliminart')
+                                                            input#eliminar(type="text",name='eliminart',style="display:none")
                                                             //- input#gradoeliminar.form-control(required type='text' name='eliminarg' placeholder='valor1' value=item.grado style="display:none")
-                                                        button.btn.btn-danger.btn-default.pull-right(type='submit' ) si
+                                                        //- button.btn.btn-danger.btn-default.pull-right(type='submit' ) si
+                                                        button.btn.btn-success.btn-default.btn-block(type='submit' name="registro")
+                                                            span.glyphicon.glyphicon-ok
+                                                            |  Si
+                                                        br
                                                         span
-                                                            buutton.btn.btn-info.btn-default.pull-right(data-dismiss='modal' ) no
-
+                                                            buutton.btn.btn-info.btn-danger.pull-right(data-dismiss='modal' ) no
+                                .col-md-3
+                                    a.action.btn.btn-sm.btn-info(href='', data-toggle='modal', data-target='#viewModal'
+                                        onclick=`showID("${item.id}"),
+                                        showPersona("${item.alumno}"),
+                                        showTitulo("${item.titulodetesis}"),
+                                        showResumen("${item.resumen}"),
+                                        showGrado("${item.ngrado}"),
+                                        showUnidad("${item.nunidad}"),
+                                        showDepartamento("${item.ndepartamento}"),
+                                        showNom1("${item.director1}"),
+                                        showNom2("${item.director2}"),
+                                        showNom3("${item.director3}"),
+                                        showNom4("${item.director4}"),
+                                        showNom5("${item.director5}")
+                                        `) 
+                                        i.fa.fa-eye
+                                    include detalles
+                                                                
+                                                                  
+                                                            
+   
 
         script(src='../javascripts/table.js') 
     script(type='text/javascript', src='/javascripts/tesisEdit.js')
