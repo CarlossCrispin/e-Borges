@@ -28,9 +28,12 @@ input[type=text]:focus {
 }
 td{
   /* text-align: center; */
+  
 }
 th{
   background: #009383;
+   
+
   /* text-align: center; */
 }
 th a {
@@ -93,3 +96,5 @@ th a:hover {
   background: none;
   color: #999;
 }
+/* jrfgkh */
+

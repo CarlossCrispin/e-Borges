@@ -4,44 +4,51 @@
 //- |   
 //- script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
 //- link(rel='stylesheet prefetch', href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css')
+//- script.
+//-     $(document).ready(function(){
+//-     $('[data-toggle="tooltip"]').tooltip();
+//-     });
+
  
 .panel.panel-default
     .panel-heading
         -if (user.rol=== "alumno")
             button.btn.btn-info.btn-lg(type='button', data-toggle='modal', data-target='#myModal') Registrar Tesis
         br
-        div(class="table-responsive ")
+       
+        .container       
+        
+        div(class='table-responsive' )  
             table#example.table.table-striped.table-bordered
-                
                 thead
                     tr
                     
                         th Título
                         th Resumen
-                        th Alumno
                         th Grado
                         th Investigador
-                    
                         th boton
-                
-                
-                     
+                    
                 tbody 
-                    -var cont=0;   
+                    
                     each item, i in items
                         -if (item.id_alumno === user.id)
                             
-                            -var ind1=`${i}`;
                             tr
                             
                                 td= item.titulodetesis
                                 td= item.resumen
-                                td= item.alumno
                                 td= item.ngrado
                                 td= item.director1
-                            
+                                //- td
+                                //-     .demo
+                                //-         p
+                                //-             a(href='#', data-tooltip='I’m the tooltip text.') I’m a link with a tooltip.
+                                //-         p
+                                //-             button(data-tooltip='asdfghjklñ{}') I’m a button with a tooltip
+
                                 td
-                                    .col-md-10
+                                    .col-md-12
                                         .col-md-3
                                             //- -var prueba=[{"id":item.id,"titulodetesis":item.titulodetesis}]
                                             //- -var obj = { "name":"John", "age":30, "city":"New York"};
@@ -49,8 +56,9 @@
                                             //- -var prueba1="emmas"
                                             //- p #{myJSON}
                                             //- buttonbutton#myBtn1.btn.btn-info
-                                            a.action.btn.btn-sm.btn-primary(type='button', data-toggle='modal',
-                                                data-target='#exampleModalCenter1',
+                                            
+                                            a.action.btn.btn-sm.btn-primary(type='button', data-toggle='modal',title='Editar',
+                                                data-target='#exampleModalCenter1',data-tooltip='Editar'
                                                 onclick=`showID("${item.id}"),
                                                 showTitulo("${item.titulodetesis}"),
                                                 showResumen("${item.resumen}"),
@@ -67,10 +75,9 @@
                                                 
                                                     i.fa.fa-edit
                                             include editar
-                    
                                         .col-md-3
                                             .action.btn.btn-sm.btn-danger(type='button', data-toggle='modal', data-target='#exampleModalCenter',
-                                                onclick="showEliminar("+item.id+")") 
+                                                onclick="showEliminar("+item.id+")",data-tooltip='Eliminar') 
                                                 
                                                     i.fa.fa-trash
                                             // The Modal
@@ -88,7 +95,7 @@
                                                                 .form-group
                                                                     input#valor1.form-control(required type='text' name='valor1' placeholder='valor1' value='2' style="display:none")
                                                                     //- input#tesiseliminar.form-control(required type='text' name='eliminart' placeholder='valor1' value=item.id )
-                                                                    input#eliminar(type="text",name='eliminart')
+                                                                    input#eliminar(type="text",name='eliminart',style="display:none")
                                                                     //- input#gradoeliminar.form-control(required type='text' name='eliminarg' placeholder='valor1' value=item.grado style="display:none")
                                                                 //- button.btn.btn-danger.btn-default.pull-right(type='submit' ) si
                                                                 button.btn.btn-success.btn-default.btn-block(type='submit' name="registro")
@@ -98,25 +105,25 @@
                                                                 span
                                                                     buutton.btn.btn-info.btn-danger.pull-right(data-dismiss='modal' ) no
                                         .col-md-3
-                                            a.action.btn.btn-sm.btn-info(href='', data-toggle='modal', data-target='#viewModal'
-                                                onclick=`showID("${item.id}"),
-                                                showPersona("${item.alumno}"),
-                                                showTitulo("${item.titulodetesis}"),
-                                                showResumen("${item.resumen}"),
-                                                showGrado("${item.ngrado}"),
-                                                showUnidad("${item.nunidad}"),
-                                                showDepartamento("${item.ndepartamento}"),
-                                                showNom1("${item.director1}"),
-                                                showNom2("${item.director2}"),
-                                                showNom3("${item.director3}"),
-                                                showNom4("${item.director4}"),
-                                                showNom5("${item.director5}")
-                                                `) 
-                                                i.fa.fa-eye
-                                            include detalles
+                                                a.action.btn.btn-sm.btn-info( data-toggle='modal', data-target='#viewModal',data-tooltip='Consultar',
+                                                    onclick=`showID("${item.id}"),
+                                                    showPersona("${item.alumno}"),
+                                                    showTitulo("${item.titulodetesis}"),
+                                                    showResumen("${item.resumen}"),
+                                                    showGrado("${item.ngrado}"),
+                                                    showUnidad("${item.nunidad}"),
+                                                    showDepartamento("${item.ndepartamento}"),
+                                                    showNom1("${item.director1}"),
+                                                    showNom2("${item.director2}"),
+                                                    showNom3("${item.director3}"),
+                                                    showNom4("${item.director4}"),
+                                                    showNom5("${item.director5}")
+                                                    `) 
+                                                    i.fa.fa-eye
+                                                include detalles
+                                                                            
                                                                         
-                                                                  
-                                                            
+                                                                
    
 
         script(src='../javascripts/table.js') 

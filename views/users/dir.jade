@@ -33,11 +33,11 @@
                 
                                     .col-md-3
                                         .action.btn.btn-sm.btn-danger(type='button', data-toggle='modal', data-target='#exampleModalCenter',
-                                            onclick="showEliminar("+item.id+")") 
+                                            onclick="showEliminar("+item.id+")",data-tooltip='Rechazar') 
                                                 i.fa.fa-times
                                     .col-md-3
                                         .action.btn#myBtn.btn-sm.btn-success(type='button', data-toggle='modal', data-target='#exampleModalCenter',
-                                            onclick="showEliminar("+item.id+")") 
+                                            onclick="showEliminar("+item.id+")",data-tooltip='Aceptar') 
                                                 i.fa.fa-check
                                         //- .action.button#myBtn.btn-sm.btn-success(type='button', data-toggle='modal', data-target='#exampleModalCenter',
                                         //-     onclick="showEliminar("+item.id+")")

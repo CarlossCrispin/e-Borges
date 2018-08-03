@@ -16,12 +16,13 @@ block content
     h1.title.text-center='Rol ' + user.rol
     br
     .container
+        div(class='col-md-12 col-md-offset-0')
         .panel.panel-default
             .panel-heading
             
                 h1.inverse.title.text-center Status Tesis
                 hr
-                div.col-md-10
+            
         -if (user.rol=== "alumno")
             include alumno
         -if (user.rol=== "administrador")

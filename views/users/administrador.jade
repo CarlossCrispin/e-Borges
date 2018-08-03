@@ -48,14 +48,14 @@
                                         showDir3("${item.id_dir3}"),
                                         showDir4("${item.id_dir4}"),
                                         showDir5("${item.id_dir5}")
-                                        `) 
+                                        `,data-tooltip='Editar') 
                                         
                                             i.fa.fa-edit
                                     include editar
             
                                 .col-md-3
                                     .action.btn.btn-sm.btn-danger(type='button', data-toggle='modal', data-target='#exampleModalCenter',
-                                        onclick="showEliminar("+item.id+")") 
+                                        onclick="showEliminar("+item.id+")",data-tooltip='Eliminar') 
                                         
                                             i.fa.fa-trash
                                     // The Modal
@@ -83,7 +83,7 @@
                                                         span
                                                             buutton.btn.btn-info.btn-danger.pull-right(data-dismiss='modal' ) no
                                 .col-md-3
-                                    a.action.btn.btn-sm.btn-info(href='', data-toggle='modal', data-target='#viewModal'
+                                    a.action.btn.btn-sm.btn-info(href='', data-toggle='modal', data-target='#viewModal',data-tooltip='Consultar'
                                         onclick=`showID("${item.id}"),
                                         showPersona("${item.alumno}"),
                                         showTitulo("${item.titulodetesis}"),
