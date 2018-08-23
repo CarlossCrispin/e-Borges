@@ -1,25 +1,20 @@
 .snip1336 {
     position: relative;
-    float: left;
+    float: right;
     overflow: hidden;
     margin: 10px 1%;
-    
     width: 100%;
     color: #ffffff;
-    text-align: left;
+    text-align: justify;
     line-height: 1.4em;
     background-color: #44525a;
+    
   }
-  .snip1336 * {
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    -webkit-transition: all 0.25s ease;
-    transition: all 0.25s ease;
-  }
+  
   .snip1336 img {
     max-width: 100%;
     vertical-align: top;
-    opacity: 0.85;
+    opacity: 0.4;
   }
   .snip1336 figcaption {
     width: 100%;
@@ -58,4 +53,20 @@
   }
 
 
-  
+  .contenedor{
+    position: relative;
+    display: inline-block;
+    text-align: center;
+}
+ 
+.texto-encima{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+.centrado{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
