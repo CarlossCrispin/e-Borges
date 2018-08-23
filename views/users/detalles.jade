@@ -1,65 +1,130 @@
+link(rel='stylesheet', href='/stylesheets/detalle.css')
+
+//- #viewModal.modal.fade( role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
+    //- .modal-dialog(role='document')
+    //-     .modal-content.text-center
+    //-         .row
+    //-             .col-md-12
+    //-                 .cover
+    //-                     .c-overlay
+    //-                         button.close(type='button', data-dismiss='modal', aria-label='Close', style='position:absolute; color:#fff; top: 10px; right:10px;')
+    //-                             span(aria-hidden='true') ×
+    //-                         br
+    //-                         h1.span.i.fa.fa-text-width
+    //-                             |  Título
+    //-                         h1#TituloS
+    //-                         //- h1#AlumnoS
+                
+    //-                 br  
+    //-                 h3 Detalles :
+    //-                 hr          
+    //-                 .detail
+    //-                     .col-md-12
+    //-                         .col-md-5
+    //-                             li.col-md-6.text-right
+    //-                                 a Alumno:
+    //-                             li.col-md-6.text-left
+    //-                                 a#AlumnoS
+    //-                             li.col-md-6.text-right
+    //-                                 a Resumen:
+    //-                             li.col-md-6.text-left
+    //-                                 a#descriptionS
+    //-                             li.col-md-6.text-right
+    //-                                 a Departamento:
+    //-                             li.col-md-6.text-left
+    //-                                 a#departamentoS
+    //-                             li.col-md-6.text-right
+    //-                                 a Grado:
+    //-                             li.col-md-6.text-left
+    //-                                 a#gradoS
+    //-                             li.col-md-6.text-right
+    //-                                 a Unidad:
+    //-                             li.col-md-6.text-left
+    //-                                 a#unidadS
+    //-                         .col-md-7
+                                
+    //-                             li.col-md-6.text-right
+    //-                                 a Director:
+    //-                             li.col-md-6.text-left
+    //-                                 a#investigador1S
+                           
+    //-                             li.col-md-6.text-right
+    //-                                 a Codirector 1:
+    //-                             li.col-md-6.text-left
+    //-                                 a#investigador2S
+                           
+    //-                             li.col-md-6.text-right
+    //-                                 a Codirector 2:
+    //-                             li.col-md-6.text-left
+    //-                                 a#investigador3S
+                           
+    //-                             li.col-md-6.text-right
+    //-                                 a Codirector 3:
+    //-                             li.col-md-6.text-left
+    //-                                 a#investigador4S
+                           
+    //-                             li.col-md-6.text-right
+    //-                                 a Codirector 4:
+    //-                             li.col-md-6.text-left
+    //-                                 a#investigador5S
+
+                        
 #viewModal.modal.fade( role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
     .modal-dialog(role='document')
         .modal-content.text-center
-            .row
-                .col-md-12
-                    .cover
-                        .c-overlay
-                            button.close(type='button', data-dismiss='modal', aria-label='Close', style='position:absolute; color:#fff; top: 10px; right:10px;')
-                                span(aria-hidden='true') ×
-                            br
-                            h1#TituloS
-                            //- h1#AlumnoS
-                
-                    br  
-                    h3 Detalles :
-                    hr          
-                    .detail
-                        .col-md-12
-                            .col-md-5
-                                li.col-md-6.text-right
-                                    a Alumno:
-                                li.col-md-6.text-left
-                                    a#AlumnoS
-                                li.col-md-6.text-right
-                                    a Resumen:
-                                li.col-md-6.text-left
-                                    a#descriptionS
-                                li.col-md-6.text-right
-                                    a Departamento:
-                                li.col-md-6.text-left
-                                    a#departamentoS
-                                li.col-md-6.text-right
-                                    a Grado:
-                                li.col-md-6.text-left
-                                    a#gradoS
-                                li.col-md-6.text-right
-                                    a Unidad:
-                                li.col-md-6.text-left
-                                    a#unidadS
-                            .col-md-7
+            figure.snip1336
+                img(src='http://eitmedia.mx/media/k2/items/cache/d7ef0b021f0753c7a876ceb95a8308cb_XL.jpg')  
+                figcaption
+                    h3#TituloS.text-center
+                    hr
+                    .container
+                        #accordion2.accordion
+                            .accordion-group
+                                .accordion-heading
+                                    a.accordion-toggle(data-toggle='collapse', data-parent='#accordion2', href='#collapseOne')
+                                        i.fa.fa-list
+                                        | Resumen          
+                                #collapseOne.accordion-body.collapse
+                                    .accordion-inner                    
+                                        p#descriptionS              
+                            .accordion-group
+                                .accordion-heading
+                                    a.accordion-toggle(data-toggle='collapse', data-parent='#accordion2', href='#collapseTwo')
+                                        i.fa.fa-user
+                                        | Alumno
+                                                          
+                                #collapseTwo.accordion-body.collapse
+                                    .accordion-inner
+                                        p#AlumnoS
+                                        
+                            .accordion-group
+                                .accordion-heading
+                                    a.accordion-toggle(data-toggle='collapse', data-parent='#accordion2', href='#collapseThree')
+                                        i.icon-cog.icon-white
+                                        | Director
+                                    |                   
+                                #collapseThree.accordion-body.collapse
+                                    .accordion-inner
+                                        h3#investigador1S
+                                        hr
+                                        .col-md-12
+                                            .col-md-2
+                                                label(for="director")
+                                                    | Codirector(es) :
+                                            .col-md-4
+                                                p#investigador2S
+                                                p#investigador3S
+                                                p#investigador4S
+                                                p#investigador5S
+                            .accordion-heading
+                                a.accordion-toggle.button.btn.btn-danger(type='submit', data-dismiss='modal')
+                                    span.i.fas.fa-times
+                                    |  Cerrar
+                         
+                    
                                 
-                                li.col-md-6.text-right
-                                    a Director:
-                                li.col-md-6.text-left
-                                    a#investigador1S
-                           
-                                li.col-md-6.text-right
-                                    a Codirector 1:
-                                li.col-md-6.text-left
-                                    a#investigador2S
-                           
-                                li.col-md-6.text-right
-                                    a Codirector 2:
-                                li.col-md-6.text-left
-                                    a#investigador3S
-                           
-                                li.col-md-6.text-right
-                                    a Codirector 3:
-                                li.col-md-6.text-left
-                                    a#investigador4S
-                           
-                                li.col-md-6.text-right
-                                    a Codirector 4:
-                                li.col-md-6.text-left
-                                    a#investigador5S
+
+                                        
+                
+
+                        

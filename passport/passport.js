@@ -26,6 +26,8 @@ module.exports = function(passport){
 
 		db.query('SELECT * FROM users WHERE email = ?'*/
 		
+
+		
 			// console.log("-------------------------------------------");
 			// var resp =JSON.stringify(results.rows);
 			// console.log(resp);

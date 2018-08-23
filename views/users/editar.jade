@@ -5,15 +5,15 @@
             .modal-header(style='padding:40px 50px;')
                 button.close(type='button', data-dismiss='modal') ×
                 h4
-                span.glyphicon.glyphicon-pencil
-                |  Editar Tesis
+                    span.i.fa.fa-pencil-alt
+                    |  Editar Tesis
                 h3=Id
             .modal-body(style='padding:40px 50px;')
                 form(action='/users/panel' method='post' autocomplete='off')
                     .form-group
                         label(for='alumno')
-                        span.glyphicon.glyphicon-user
-                        |  Alumno
+                            span.i.fa.fa-user
+                            |  Alumno
                         input#valor1.form-control(required type='text' name='valor1' placeholder='valor1' value='3' style="display:none")
                         //- input#val(type="text",name='editar' style="display:none")
                         input#ID(type="text",name='editar',style="display:none" )
@@ -38,23 +38,23 @@
                             
                     .form-group
                         label(for='Título')
-                        span.glyphicon.glyphicon-text-width
-                        |  Título
+                            span.i.fa.fa-text-width
+                            |  Título
                         h3=Id
                         -if(item.id ===valor)
                         input#Titulo.form-control( type='text' name='titulo' placeholder='Título' )
                     .form-group
                         label(for='description')
-                        span.glyphicon.glyphicon-list
-                    
-                        |   Resumen:
+                            span.i.fa.fa-list
+                        
+                            |   Resumen:
                         .col-md-12
                         textarea#description.form-control(required name='description', cols='30', rows='2')
                     .form-group
                         label(for="grado")
-                        span.glyphicon.glyphicon-tasks
-                        |Grado
-                        
+                            span.i.fas.fa-user-graduate
+                            |Grado
+                            
 
                         //- input#grado1.form-control( type='text' name='grado' placeholder='Grado' )
                         select#grado(name="grado"  class="form-control" data-style="btn-info")
@@ -64,8 +64,8 @@
                                 option(value=i+1) #{item.ngrado}
                     .form-group
                         label(for="unidad")
-                        span.glyphicon.glyphicon-home
-                        |Unidad
+                            span.i.fas.fa-university
+                            |Unidad
                     
                         select#unidad(name="unidad"  class="form-control" required)
                             option(value='', disabled='', selected='') Elija una opcion
@@ -73,8 +73,8 @@
                                 option(value=i+1) #{item.nunidad}
                     .form-group
                         label(for="departamento")
-                        span.glyphicon.glyphicon-gift
-                        |Departamento
+                            span.i.fas.fa-vector-square
+                            |Departamento
                     
                         select#departamento(name="departamento" , class="form-control" required)
                             option(value='', disabled='', selected='') Elija una opcion
@@ -84,8 +84,8 @@
                     
                     .form-group
                         label(for="investigador1")
-                        span.glyphicon.glyphicon-user
-                        |Director
+                            span.i.fas.fa-user-tie
+                            |Director
                         //- por id
                         -if (user.rol=== "alumno")
                             select#investigador1(name="investigador1", class="form-control" required)
@@ -100,8 +100,8 @@
                                         option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1} &nbsp;&nbsp;&nbsp;#{item.apellido_1} 
                     .form-group
                         label(for="investigador2")
-                        span.glyphicon.glyphicon-plus
-                        |Codirector 1
+                            span.i.fas.fa-user-plus
+                            |Codirector 1
                     
                         select#investigador2(name="investigador2"  class="form-control" )
                             option(value='', disabled='', selected='') Elija una opcion
@@ -135,8 +135,8 @@
                                             option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1}&nbsp;&nbsp;&nbsp;#{item.apellido_1}
                     .form-group
                         label(for="investigador3")
-                        span.glyphicon.glyphicon-plus
-                        |Codirector 2
+                            span.i.fas.fa-user-plus
+                            |Codirector 1
                     
                         select#investigador3(name="investigador3"  class="form-control" )
                             option(value='', disabled='', selected='') Elija una opcion
@@ -170,8 +170,8 @@
                                             option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1}&nbsp;&nbsp;&nbsp;#{item.apellido_1}
                     .form-group
                         label(for="investigador4")
-                        span.glyphicon.glyphicon-plus-sign
-                        |Codirector 3
+                            span.i.fas.fa-user-plus
+                            |Codirector 1
                     
                         select#investigador4(name="investigador4"  class="form-control" )
                             option(value='', disabled='', selected='') Elija una opcion
@@ -206,8 +206,8 @@
                     
                     .form-group
                         label(for="investigador5")
-                        span.glyphicon.glyphicon-plus-sign
-                        |Codirector 4
+                            span.i.fas.fa-user-plus
+                            |Codirector 1
                     
                         select#investigador5(name="investigador5"  class="form-control" )
                             option(value='', disabled='', selected='') Elija una opcion
@@ -243,17 +243,12 @@
                 
 
                     button.btn.btn-success.btn-default.btn-block(type='submit' name="registro")
-                        span.glyphicon.glyphicon-ok
+                        span.i.fas.fa-check
                         |  Actualizar
                     //- button.btn.btn-danger.btn-default.pull-left(type='submit', data-dismiss='modal')
                     //-     span.glyphicon.glyphicon-remove
                     //-     |  Cerrar
             .modal-footer
-                
-                //- button.btn.btn-danger.btn-default.pull-left(type='submit', data-dismiss='modal')
-                //-     span.glyphicon.glyphicon-remove
-                //-     |  Cerrar
-                
                 button.btn.btn-danger(type='submit', data-dismiss='modal')
-                    span.glyphicon.glyphicon-remove
+                    span.i.fas.fa-times
                     |  Cerrar

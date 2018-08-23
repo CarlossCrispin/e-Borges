@@ -26,7 +26,7 @@
                         td= item.director1
                         
                         td
-                            .col-md-10
+                            .col-md-12
                                 .col-md-3
                                     //- -var prueba=[{"id":item.id,"titulodetesis":item.titulodetesis}]
                                     //- -var obj = { "name":"John", "age":30, "city":"New York"};
@@ -77,13 +77,15 @@
                                                             //- input#gradoeliminar.form-control(required type='text' name='eliminarg' placeholder='valor1' value=item.grado style="display:none")
                                                         //- button.btn.btn-danger.btn-default.pull-right(type='submit' ) si
                                                         button.btn.btn-success.btn-default.btn-block(type='submit' name="registro")
-                                                            span.glyphicon.glyphicon-ok
+                                                            span.i.fas.fa-check
                                                             |  Si
                                                         br
                                                         span
-                                                            buutton.btn.btn-info.btn-danger.pull-right(data-dismiss='modal' ) no
+                                                            buutton.btn.btn-info.btn-danger.pull-right(data-dismiss='modal' )
+                                                                span.i.fas.fa-times
+                                                                |  No
                                 .col-md-3
-                                    a.action.btn.btn-sm.btn-info(href='', data-toggle='modal', data-target='#viewModal',data-tooltip='Consultar'
+                                    a.action.btn.btn-sm.btn-info( data-toggle='modal', data-target='#viewModal',data-tooltip='Consultar'
                                         onclick=`showID("${item.id}"),
                                         showPersona("${item.alumno}"),
                                         showTitulo("${item.titulodetesis}"),

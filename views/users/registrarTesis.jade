@@ -7,14 +7,14 @@
             .modal-header(style='padding:40px 50px;')
                 button.close(type='button', data-dismiss='modal') ×
                 h4
-                span.glyphicon.glyphicon-pencil
-                |  Registrar Tesis
+                    span.i.fa.fa-pencil-alt
+                    |  Registrar Tesis
             .modal-body(style='padding:40px 50px;')
                 form(action='/users/panel' method='post' autocomplete='off')
                     .form-group
                         label(for='alumno')
-                        span.glyphicon.glyphicon-user
-                        |  Alumno
+                            span.i.fa.fa-user
+                            |  Alumno
                         //- input#usrname.form-control(required type='email' name='email' placeholder='Email')
                         
                         input#valor1.form-control(required type='text' name='valor1' placeholder='valor1' value='1' style="display:none")
@@ -38,20 +38,20 @@
                                     option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1} &nbsp;&nbsp;&nbsp;#{item.apellido_2}
                     .form-group
                         label(for='Título')
-                        span.glyphicon.glyphicon-text-width
-                        |  Título
+                            span.i.fa.fa-text-width
+                            |  Título
                         input#titulo.form-control(required type='text' name='titulo' placeholder='Título')
                     .form-group
                         label(for='description')
-                        span.glyphicon.glyphicon-list
-                       
-                        |   Resumen:
+                            span.i.fa.fa-list
+                        
+                            |   Resumen:
                         .col-md-12
                         textarea#description.form-control(required name='description', cols='30', rows='2')
                     .form-group
                         label(for="grado")
-                        span.glyphicon.glyphicon-tasks
-                        |Grado
+                            span.i.fas.fa-user-graduate
+                            |Grado
                       
                         select(name="grado"  class="form-control" data-style="btn-info")
                             option(value='', disabled='', selected='') Elija una opcion
@@ -59,8 +59,8 @@
                                 option(value=i+1) #{item.ngrado}
                     .form-group
                         label(for="unidad")
-                        span.glyphicon.glyphicon-home
-                        |Unidad
+                            span.i.fas.fa-university
+                            |Unidad
                       
                         select(name="unidad"  class="form-control" required)
                           option(value='', disabled='', selected='') Elija una opcion
@@ -68,37 +68,24 @@
                             option(value=i+1) #{item.nunidad}
                     .form-group
                         label(for="departamento")
-                        span.glyphicon.glyphicon-gift
-                        |Departamento
+                            span.i.fas.fa-vector-square
+                            |Departamento
                       
                         select#departamento(name="departamento" , class="form-control" required)
                           option(value='', disabled='', selected='') Elija una opcion
                           each item, i in items3
                             option(value=i+1) #{item.ndepartamento}
-                        
-                       
-                   
-                    //- .form-group
-                    //-     label(for="investigador1")
-                    //-     span.glyphicon.glyphicon-user
-                    //-     |Director
-                    //-     select#Investigador1(name="Investigador1",  class="form-control" required)
-                    //-       option(value='', disabled='', selected='') Elija una opcion
-                    //-       each item, i in items4
-                    //-         //- -if (item.departamento_id === 'valor'  )
-                    //-         //- -if (item.departamento_id === valor  )
-                    //-         option(value=i+1) #{item.nombre} 
-
+                 
                     .form-group
                         label(for="investigador1")
-                        span.glyphicon.glyphicon-user
-                        |Director
+                            span.i.fas.fa-user-tie
+                            |Director
                         -if (user.rol=== "alumno")
                             select#investigador1(name="investigador1"  class="form-control" required)
                                 option(value='', disabled='', selected='') Elija una opcion
                                     each item, i in items4
                                         -if (item.departamento_id === user.departamento_id ) 
-                                            option(value=i+1) #{item.departamento_id}#{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1} &nbsp;&nbsp;&nbsp;#{item.apellido_1}            
+                                            option(value=i+1) #{item.departamento_id}#{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_2} &nbsp;&nbsp;&nbsp;#{item.apellido_1}            
                         -if (user.rol=== "administrador")
                             select#investigador1(name="investigador1"  class="form-control" required)
                                 option(value='', disabled='', selected='') Elija una opcion
@@ -106,189 +93,130 @@
                                         option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1} &nbsp;&nbsp;&nbsp;#{item.apellido_2}
                     .form-group
                         label(for="investigador2")
-                        span.glyphicon.glyphicon-plus
-                        |Codirector 1
-                      
+                            span.i.fas.fa-user-plus
+                            |Codirector 1
                         select#investigador2(name="investigador2"  class="form-control" )
                           option(value='', disabled='', selected='') Elija una opcion
-                          optgroup(label ="Ciencias Químicas" )
+                         
                             each item, i in items4
-                                -if (item.departamento_id === '1' )
-                                    option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1} &nbsp;&nbsp;&nbsp;#{item.apellido_1}            
-                          optgroup(label ="Físisca" )
-                                each item, i in items4
-                                    -if (item.departamento_id === '2' )
-                                        option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1}&nbsp;&nbsp;&nbsp;#{item.apellido_1}
-                          optgroup(label ="Física Aplicada (Unidad Mérida)" )
-                                each item, i in items4
-                                    -if (item.departamento_id === '3' )
-                                        option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1}&nbsp;&nbsp;&nbsp;#{item.apellido_1}
-                          optgroup(label ="Física Teórica (Unidad Mérida)" )
-                                each item, i in items4
-                                    -if (item.departamento_id === '4' )
-                                        option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1}&nbsp;&nbsp;&nbsp;#{item.apellido_1}
-                          optgroup(label ="Fisicoquímica (Unidad Mérida)" )
-                                each item, i in items4
-                                    -if (item.departamento_id === '5' )
-                                        option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1}&nbsp;&nbsp;&nbsp;#{item.apellido_1}
-                          optgroup(label ="Ingeniería y Física Biomédicas (Unidad Monterrey)" )
-                                each item, i in items4
-                                    -if (item.departamento_id === '6' )
-                                        option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1}&nbsp;&nbsp;&nbsp;#{item.apellido_1}
-                          optgroup(label ="Matemáticas" )
-                                each item, i in items4
-                                    -if (item.departamento_id === '7' )
-                                        option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1}&nbsp;&nbsp;&nbsp;#{item.apellido_1}
+                              
+                                option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1} &nbsp;&nbsp;&nbsp;#{item.apellido_2}            
+                       
                     .form-group
                         label(for="investigador3")
-                        span.glyphicon.glyphicon-plus
-                        |Codirector 2
+                            span.i.fas.fa-user-plus
+                            |Codirector 2
                       
                         select#investigador3(name="investigador3"  class="form-control" )
                           option(value='', disabled='', selected='') Elija una opcion
                           optgroup(label ="Ciencias Químicas" )
                             each item, i in items4
                                 -if (item.departamento_id === '1' )
-                                    option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1} &nbsp;&nbsp;&nbsp;#{item.apellido_1}            
+                                    option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1} &nbsp;&nbsp;&nbsp;#{item.apellido_2}            
                           optgroup(label ="Físisca" )
                                 each item, i in items4
                                     -if (item.departamento_id === '2' )
-                                        option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1}&nbsp;&nbsp;&nbsp;#{item.apellido_1}
+                                        option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1}&nbsp;&nbsp;&nbsp;#{item.apellido_2}
                           optgroup(label ="Física Aplicada (Unidad Mérida)" )
                                 each item, i in items4
                                     -if (item.departamento_id === '3' )
-                                        option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1}&nbsp;&nbsp;&nbsp;#{item.apellido_1}
+                                        option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1}&nbsp;&nbsp;&nbsp;#{item.apellido_2}
                           optgroup(label ="Física Teórica (Unidad Mérida)" )
                                 each item, i in items4
                                     -if (item.departamento_id === '4' )
-                                        option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1}&nbsp;&nbsp;&nbsp;#{item.apellido_1}
+                                        option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1}&nbsp;&nbsp;&nbsp;#{item.apellido_2}
                           optgroup(label ="Fisicoquímica (Unidad Mérida)" )
                                 each item, i in items4
                                     -if (item.departamento_id === '5' )
-                                        option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1}&nbsp;&nbsp;&nbsp;#{item.apellido_1}
+                                        option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1}&nbsp;&nbsp;&nbsp;#{item.apellido_2}
                           optgroup(label ="Ingeniería y Física Biomédicas (Unidad Monterrey)" )
                                 each item, i in items4
                                     -if (item.departamento_id === '6' )
-                                        option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1}&nbsp;&nbsp;&nbsp;#{item.apellido_1}
+                                        option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1}&nbsp;&nbsp;&nbsp;#{item.apellido_2}
                           optgroup(label ="Matemáticas" )
                                 each item, i in items4
                                     -if (item.departamento_id === '7' )
-                                        option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1}&nbsp;&nbsp;&nbsp;#{item.apellido_1}
+                                        option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1}&nbsp;&nbsp;&nbsp;#{item.apellido_2}
                     .form-group
                         label(for="investigador4")
-                        span.glyphicon.glyphicon-plus-sign
-                        |Codirector 3
-                      
+                            span.i.fas.fa-user-plus
+                            |Codirector 3
+                        
                         select#investigador4(name="investigador4"  class="form-control" )
                           option(value='', disabled='', selected='') Elija una opcion
                           optgroup(label ="Ciencias Químicas" )
                             each item, i in items4
                                 -if (item.departamento_id === '1' )
-                                    option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1} &nbsp;&nbsp;&nbsp;#{item.apellido_1}            
+                                    option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1} &nbsp;&nbsp;&nbsp;#{item.apellido_2}            
                           optgroup(label ="Físisca" )
                                 each item, i in items4
                                     -if (item.departamento_id === '2' )
-                                        option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1}&nbsp;&nbsp;&nbsp;#{item.apellido_1}
+                                        option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1}&nbsp;&nbsp;&nbsp;#{item.apellido_2}
                           optgroup(label ="Física Aplicada (Unidad Mérida)" )
                                 each item, i in items4
                                     -if (item.departamento_id === '3' )
-                                        option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1}&nbsp;&nbsp;&nbsp;#{item.apellido_1}
+                                        option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1}&nbsp;&nbsp;&nbsp;#{item.apellido_2}
                           optgroup(label ="Física Teórica (Unidad Mérida)" )
                                 each item, i in items4
                                     -if (item.departamento_id === '4' )
-                                        option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1}&nbsp;&nbsp;&nbsp;#{item.apellido_1}
+                                        option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1}&nbsp;&nbsp;&nbsp;#{item.apellido_2}
                           optgroup(label ="Fisicoquímica (Unidad Mérida)" )
                                 each item, i in items4
                                     -if (item.departamento_id === '5' )
-                                        option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1}&nbsp;&nbsp;&nbsp;#{item.apellido_1}
+                                        option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1}&nbsp;&nbsp;&nbsp;#{item.apellido_2}
                           optgroup(label ="Ingeniería y Física Biomédicas (Unidad Monterrey)" )
                                 each item, i in items4
                                     -if (item.departamento_id === '6' )
-                                        option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1}&nbsp;&nbsp;&nbsp;#{item.apellido_1}
+                                        option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1}&nbsp;&nbsp;&nbsp;#{item.apellido_2}
                           optgroup(label ="Matemáticas" )
                                 each item, i in items4
                                     -if (item.departamento_id === '7' )
-                                        option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1}&nbsp;&nbsp;&nbsp;#{item.apellido_1}
+                                        option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1}&nbsp;&nbsp;&nbsp;#{item.apellido_2}
                     
                     .form-group
                         label(for="investigador5")
-                        span.glyphicon.glyphicon-plus-sign
-                        |Codirector 4
+                            span.i.fas.fa-user-plus
+
+                            |Codirector 4
                       
                         select#investigador5(name="investigador5"  class="form-control" )
                           option(value='', disabled='', selected='') Elija una opcion
                           optgroup(label ="Ciencias Químicas" )
                             each item, i in items4
                                 -if (item.departamento_id === '1' )
-                                    option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1} &nbsp;&nbsp;&nbsp;#{item.apellido_1}            
-                          optgroup(label ="Físisca" )
-                                each item, i in items4
-                                    -if (item.departamento_id === '2' )
-                                        option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1}&nbsp;&nbsp;&nbsp;#{item.apellido_1}
-                          optgroup(label ="Física Aplicada (Unidad Mérida)" )
-                                each item, i in items4
-                                    -if (item.departamento_id === '3' )
-                                        option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1}&nbsp;&nbsp;&nbsp;#{item.apellido_1}
-                          optgroup(label ="Física Teórica (Unidad Mérida)" )
-                                each item, i in items4
-                                    -if (item.departamento_id === '4' )
-                                        option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1}&nbsp;&nbsp;&nbsp;#{item.apellido_1}
-                          optgroup(label ="Fisicoquímica (Unidad Mérida)" )
-                                each item, i in items4
-                                    -if (item.departamento_id === '5' )
-                                        option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1}&nbsp;&nbsp;&nbsp;#{item.apellido_1}
-                          optgroup(label ="Ingeniería y Física Biomédicas (Unidad Monterrey)" )
-                                each item, i in items4
-                                    -if (item.departamento_id === '6' )
-                                        option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1}&nbsp;&nbsp;&nbsp;#{item.apellido_1}
-                          optgroup(label ="Matemáticas" )
-                                each item, i in items4
-                                    -if (item.departamento_id === '7' )
-                                        option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1}&nbsp;&nbsp;&nbsp;#{item.apellido_1}
-                          
-                 
+                                    option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1} &nbsp;&nbsp;&nbsp;#{item.apellido_2}            
+                            optgroup(label ="Físisca" )
+                                    each item, i in items4
+                                        -if (item.departamento_id === '2' )
+                                            option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1}&nbsp;&nbsp;&nbsp;#{item.apellido_2}
+                            optgroup(label ="Física Aplicada (Unidad Mérida)" )
+                                    each item, i in items4
+                                        -if (item.departamento_id === '3' )
+                                            option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1}&nbsp;&nbsp;&nbsp;#{item.apellido_2}
+                            optgroup(label ="Física Teórica (Unidad Mérida)" )
+                                    each item, i in items4
+                                        -if (item.departamento_id === '4' )
+                                            option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1}&nbsp;&nbsp;&nbsp;#{item.apellido_2}
+                            optgroup(label ="Fisicoquímica (Unidad Mérida)" )
+                                    each item, i in items4
+                                        -if (item.departamento_id === '5' )
+                                            option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1}&nbsp;&nbsp;&nbsp;#{item.apellido_2}
+                            optgroup(label ="Ingeniería y Física Biomédicas (Unidad Monterrey)" )
+                                    each item, i in items4
+                                        -if (item.departamento_id === '6' )
+                                            option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1}&nbsp;&nbsp;&nbsp;#{item.apellido_2}
+                            optgroup(label ="Matemáticas" )
+                                    each item, i in items4
+                                        -if (item.departamento_id === '7' )
+                                            option(value=i+1) #{item.nombre}  &nbsp;&nbsp;&nbsp;#{item.apellido_1}&nbsp;&nbsp;&nbsp;#{item.apellido_2}
+                    
 
                     button.btn.btn-success.btn-default.btn-block(type='submit' name="registro")
-                        span.glyphicon.glyphicon-ok
+                        span.i.fas.fa-check
                         |  Registrar
-                    //- button.btn.btn-danger.btn-default.pull-left(type='submit', data-dismiss='modal')
-                    //-     span.glyphicon.glyphicon-remove
-                    //-     |  Cerrar
             .modal-footer
-                
-                //- button.btn.btn-danger.btn-default.pull-left(type='submit', data-dismiss='modal')
-                //-     span.glyphicon.glyphicon-remove
-                //-     |  Cerrar
-                
                 button.btn.btn-danger(type='submit', data-dismiss='modal')
-                    span.glyphicon.glyphicon-remove
+                    span.i.fas.fa-times
                     |  Cerrar
                 
 
-    //revisar 
-//- script(src='https://code.jquery.com/jquery-3.1.0.js')
-//- script.
-//-     $(document).ready(function(){
-//-     //- $("#myBtn").click(function(){
-//-     //- $("#myModal").modal();
-//-     //- });
-//-     $("#departamento").change(function() {
-//-           if($("#departamento").val() !== "0"){
-//-             $('#Investigador1').prop('disabled', false);
-//-           }
-//-         }
-//-       });
-
-//-         //- $(document).on('change', '#departamento', function(event) {
-//-         //-     $('#servicioSelecionado').val($("#departamento option:selected").text());
-//-         //-     var valor = $("#departamento option:selected").val()
-//-         //-     alert(valor);
-//-         //- });
-//-         //- $('#departamento').change(function(){
- 
-//-         //-     var ciudad = $(this).val()
-            
-//-         //-     alert('Has seleccionado ' + ciudad);
-            
-//-         //-     });
-//-     });

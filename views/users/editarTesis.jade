@@ -7,16 +7,16 @@
             .modal-header(style='padding:40px 50px;')
                 button.close(type='button', data-dismiss='modal') ×
                 h4
-                span.glyphicon.glyphicon-pencil
-                |  Editar Tesis 
-                h3=item.id
+                    span.i.fa.fa-pencil-alt
+                    |  Editar Tesis 
+                    //- h3=item.id
                 
             .modal-body(style='padding:40px 50px;')
                 form(action='/users/panel' method='post' autocomplete='off')
                     .form-group
                         label(for='alumno')
-                        span.glyphicon.glyphicon-user
-                        |  Alumno
+                            span.i.fas.fa-user
+                            |  Alumnogggggggggggggggggggg
                         //- input#usrname.form-control(required type='email' name='email' placeholder='Email')
                         
                         input#valor1.form-control(required type='text' name='valor1' placeholder='valor1' value='3' style="display:none")
@@ -33,9 +33,9 @@
                             h3=" Matricula : "+ user.matricula
                     .form-group
                         label(for='Título')
-                        span.glyphicon.glyphicon-text-width
-                        |  Título
-                        input#titulo.form-control(required type='text' name='titulo'  value=item.titulodetesis )
+                            span.i.fa.fa-text-width
+                            |  Título
+                            input#titulo.form-control(required type='text' name='titulo'  value=item.titulodetesis )
                     .form-group
                         label(for='description')
                         span.glyphicon.glyphicon-list
