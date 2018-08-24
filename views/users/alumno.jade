@@ -9,24 +9,24 @@
 //-     $('[data-toggle="tooltip"]').tooltip();
 //-     });
 
- 
+
+
 .panel.panel-default
     .panel-heading
         -if (user.rol=== "alumno")
             button.btn.btn-info.btn-lg(type='button', data-toggle='modal', data-target='#myModal') Registrar Tesis
-        br
-       
-        .container       
+        br    
         
-        div(class='table-responsive' )  
+       
+        div(class="table-responsive" )
             table#example.table.table-striped.table-bordered
                 thead
                     tr
-                    
+                       
                         th Título
                         th Resumen
                         th Grado
-                        th Investigador
+                        th Director
                         th boton
                     
                 tbody 
@@ -35,7 +35,7 @@
                         -if (item.id_alumno === user.id)
                             
                             tr
-                            
+                                
                                 td= item.titulodetesis
                                 td= item.resumen
                                 td= item.ngrado
@@ -121,7 +121,7 @@
                                                     `) 
                                                     i.fa.fa-eye
                                                 include detalles
-                                                                            
+                                                                    
                                                                         
                                                                 
    

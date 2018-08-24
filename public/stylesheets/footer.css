@@ -25,10 +25,10 @@ a {
 
 #footer {
   background: #373737;
-  margin-top: auto;
+  position: auto;
+  bottom: 0;
   width: 100%;
-  
-  
+
 }
 
 .footer-list-top {

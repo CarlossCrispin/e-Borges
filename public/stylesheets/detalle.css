@@ -1,12 +1,11 @@
 .snip1336 {
-    position: relative;
+
     float: right;
     overflow: hidden;
     margin: 10px 1%;
     width: 100%;
     color: #ffffff;
     text-align: justify;
-    line-height: 1.4em;
     background-color: #44525a;
     
   }
@@ -38,7 +37,7 @@
     border: 1px solid #ffffff;
     color: #ffffff;
     font-size: 0.7em;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     margin: 10px 0;
     display: inline-block;
     opacity: 0.65;
@@ -46,7 +45,8 @@
     text-align: center;
     text-decoration: none;
     font-weight: 600;
-    letter-spacing: 1px;
+    font-size: 15px;
+    letter-spacing: 5px;
   }
   .snip1336 figcaption a:hover {
     opacity: 1;

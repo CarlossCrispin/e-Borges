@@ -1,37 +1,19 @@
 extends templates/default
 
 block content
-  //- header#mainHeading
-  //-   #banner
-      //- .row
-      //-   .col-md-8.col-md-offset-2
-      //-     .headings
-      //-       .header-content-inner
-      //-         h1 Bienvenido al Módulo de Registro de Tesis
-      //-         hr
-      //-         h3
-      //-           | Este módulo tiene como objetivo el registro de tesis,
-      //-           | asignación de director, codirectores y la generación de
-      //-           | actas de toma de grado de los diferentes departamentos de CINVESTAV.
-      //-         br
-      //-         a(href='#about',style='color:#fff') desplazarse hacia abajo! ▼
-      //-         br
-      //-         br
-  //- hr
-  //- hr.light
   
-  div(class='col-md-6 col-md-offset-3')
-  
+  //- div(class='col-md-6 col-md-offset-3')
+  //-Mensajes de inicio de sesion 
+  div
     if message.length > 0
       script(src='../javascripts/correcto.js')
-      //div(class='alert sweetalert-success' role='alert')= message
       
     if authmessage.length > 0
       script(src='../javascripts/error.js')
-      //div(class='alert alert-danger' role='alert')= authmessage 
+    
 
   section#about
-  .row
+  .container
     .col-md-8.col-md-offset-2
       .jumbotron
         h1.text-center Bienvenido al M&oacute;dulo de Registro de Tesis
@@ -48,8 +30,8 @@ block content
             | , asignaci&oacute;n de director , codirectores y la generaci&oacute;n de
             | actas de toma de grado de los diferentes departamentos de CINVESTAV.
 
-    
-       
+      
+        
 
      
 

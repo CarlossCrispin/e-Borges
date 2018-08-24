@@ -8,6 +8,7 @@
  *
  * Date: Tue Jan 02 2014
  */
+ 
  input.classy[type=text] {
   width: 160px;
   box-sizing: border-box;
@@ -26,15 +27,19 @@
 input[type=text]:focus {
   width: 100%;
 }
+
+
 td{
-  /* text-align: center; */
-  
+  text-align: center;
+  width: 5px;
+  height: auto;
 }
+
 th{
   background: #009383;
-   
-
   /* text-align: center; */
+  width: 5px;
+  height: auto;
 }
 th a {
   color: black;
@@ -84,7 +89,7 @@ th a:hover {
 }
 
 .dynatable-active-page {
-  background: #009383;
+  background: #455757;
   border-radius: 5px;
   color: #fff;
 }

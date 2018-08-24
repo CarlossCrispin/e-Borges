@@ -4,7 +4,7 @@
     width: 90%;
     margin: 0 auto;
     padding: 0.866% 0;
-    font-family: 'Raleway', sans-serif;
+    /* font-family: 'Raleway', sans-serif; */
     font-size: 15px;
   }
   
@@ -170,7 +170,7 @@ hr{
   /* End Hexagons */
   /* fork on github button */
   #fork{
-    font-family: 'Raleway', sans-serif;
+    /* font-family: 'Raleway', sans-serif; */
     position:fixed;
     top:90%;
     left:88%;

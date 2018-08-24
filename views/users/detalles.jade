@@ -8,23 +8,25 @@ link(rel='stylesheet', href='/stylesheets/detalle.css')
                     img(src='http://eitmedia.mx/media/k2/items/cache/d7ef0b021f0753c7a876ceb95a8308cb_XL.jpg')
                         
                     //- .texto-encima Texto
-                    |   
                     .centrado 
-                        h1#TituloS.text-center
+                        div(class='col-md-4 col-md-offset-0') 
+                            h2#TituloS.text-center
                     
 
                 figcaption
                     .container
                         #accordion2.accordion
                             .accordion-group
-                                
+                              
                                 .accordion-heading
                                     a.accordion-toggle(data-toggle='collapse', data-parent='#accordion2', href='#collapseOne')
                                         i.fa.fa-list
                                         | Resumen        
                                 #collapseOne.accordion-body.collapse.in
-                                    .accordion-inner                   
-                                        p#descriptionS
+                                    .accordion-inner
+                                        div(class='col-md-12 col-md-offset-0')   
+                                            .col-md-5              
+                                                p#descriptionS
                                             
                             
                             .accordion-group
@@ -33,7 +35,7 @@ link(rel='stylesheet', href='/stylesheets/detalle.css')
                                         i.fa.fa-user
                                         | Alumno
                                                         
-                                #collapseTwo.accordion-body.collapse
+                                #collapseTwo.accordion-body.collapse.in
                                     .accordion-inner
                                         h3#AlumnoS
                                 
@@ -44,7 +46,7 @@ link(rel='stylesheet', href='/stylesheets/detalle.css')
                                         i.fas.fa-user-graduate
                                         | Grado
                                                         
-                                #collapseGrado.accordion-body.collapse
+                                #collapseGrado.accordion-body.collapse.in
                                     .accordion-inner
                                         p#gradoS
                                 
@@ -54,7 +56,7 @@ link(rel='stylesheet', href='/stylesheets/detalle.css')
                                         i.fas.fa-university
                                         | Unidad
                                                         
-                                #collapseUnidad.accordion-body.collapse
+                                #collapseUnidad.accordion-body.collapse.in
                                     .accordion-inner
                                         p#unidadS
                                 
@@ -64,7 +66,7 @@ link(rel='stylesheet', href='/stylesheets/detalle.css')
                                         i.fas.fa-vector-square
                                         | Departamento
                                                         
-                                #collapseDepto.accordion-body.collapse
+                                #collapseDepto.accordion-body.collapse.in
                                     .accordion-inner
                                         p#departamentoS
                                         
@@ -72,12 +74,13 @@ link(rel='stylesheet', href='/stylesheets/detalle.css')
                                 .accordion-heading
                                     a.accordion-toggle(data-toggle='collapse', data-parent='#accordion2', href='#collapseThree')
                                         i.fas.fa-user-tie
-                                        | Director
-                                    |                   
-                                #collapseThree.accordion-body.collapse
+                                        | Director                 
+                                #collapseThree.accordion-body.collapse.in
                                     .accordion-inner
                                         h3#investigador1S
-                                        hr
+                                        div(class='col-md-12 col-md-offset-0')   
+                                            .col-md-5              
+                                                hr
                                         .col-md-8
                                             
                                             .col-md-3

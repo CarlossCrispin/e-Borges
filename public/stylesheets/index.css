@@ -1,11 +1,20 @@
 @import url(https://fonts.googleapis.com/css?family=Lato:300);
 BODY {
     background: #282931;
+    /* font-family: 'Lato';
+    font-style: normal;
+    font-weight: 300; */
     font-family: sans-serif;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
   }
+  hr{
+    border-top: 4px solid #18bd9b;
+  }
   
+  hr.light{
+    border-top: 4px solid #fff;
+  }
   canvas {
     height: 100vh;
     z-index: -10;
@@ -33,15 +42,14 @@ BODY {
   }
   
   h2 {
-    color: #555560;
+    color: #ffffff;
     font-size: 3rem;
-    font-weight: bold;
     margin: 0px;
     padding: 0px;
   }
   
   .logo {
-    font-family: 'Monoton', cursive;
+    
     color: white;
     font-size: 8rem;
   }

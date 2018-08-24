@@ -1,6 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Lato:300);
-html {
-    /* font-family: sans-serif; */
+/* html {
+    font-family: sans-serif; 
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%; }
 #mySidebar{
@@ -8,7 +8,7 @@ html {
     opacity: 0.5;
     color: #ffffff;
     
-    }
+    } */
 
     /* #fondotabla{
     background-color: #ffffff; 
@@ -16,8 +16,9 @@ html {
     color: #ffffff;
     } */
     #fondotabla{
-        background-color: #ffffff
+        background-color: #44525a
     }
+    
     /* hr{ 
  
         background-color:#61ebcf; 
@@ -68,6 +69,7 @@ html {
       
     }
      */
+    
     @media(max-width:992px){
       .container{
         padding-left:10px;
@@ -142,3 +144,5 @@ html {
       filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=100);
       opacity: 1;
       }
+
+      
