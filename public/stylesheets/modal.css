@@ -3,7 +3,12 @@
     color:white !important;
     text-align: center;
     font-size: 30px;
+   
     }
+.modal-body{
+    padding:40px 50px;
+     background-color: #44525a;
+}
 .modal-footer {
-background-color: #f9f9f9;
+    background-color: #363a3d;
 }

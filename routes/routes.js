@@ -25,6 +25,11 @@ router.get('/users/investigador', AuthMiddleware.isLogged , controllers.UserCont
 // Entidades
 // --->Alumno
 router.get('/alumno/showAlumno', AuthMiddleware.isLogged , controllers.ShowAlumno.getShowAlumno);
-			
+router.post('/alumno/showAlumno', AuthMiddleware.isLogged , controllers.ShowAlumno.postShowAlumno);
+
+//--->Genero
+router.get('/genero/genero', AuthMiddleware.isLogged , controllers.genero.getGenero);
+router.post('/genero/genero', AuthMiddleware.isLogged , controllers.genero.postGenero);
+
 
 module.exports = router;

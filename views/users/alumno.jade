@@ -99,11 +99,16 @@
                                                                     //- input#gradoeliminar.form-control(required type='text' name='eliminarg' placeholder='valor1' value=item.grado style="display:none")
                                                                 //- button.btn.btn-danger.btn-default.pull-right(type='submit' ) si
                                                                 button.btn.btn-success.btn-default.btn-block(type='submit' name="registro")
-                                                                    span.glyphicon.glyphicon-ok
+                                                                    span.i.fas.fa-check
                                                                     |  Si
                                                                 br
-                                                                span
-                                                                    buutton.btn.btn-info.btn-danger.pull-right(data-dismiss='modal' ) no
+                                                                
+                                                                buutton.btn.btn-info.btn-danger.pull-right(data-dismiss='modal' )
+                                                                    span.i.fas.fa-times
+                                                                    |   NO
+
+
+                                                           
                                         .col-md-4
                                             a.action.btn.btn-sm.btn-info( data-toggle='modal', data-target='#viewModal',data-tooltip='Consultar',
                                                     onclick=`showID("${item.id}"),

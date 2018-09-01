@@ -1,25 +1,18 @@
-
 function showEliminar(valor){
     var valor = valor;
-    
-    // $('#modal-create-thanks-you').modal('show');
-    //- alert("Ejemplo de alerta con JavaScript" + valor);
-    //texto agregado
     $('#eliminar').val(valor);
-    
-    //- var id=$('#val1').val(valor);
-    //- var Id=document.getElementById(valor).val();
 }
 function showID(valor){
     var valor = valor;
     $('#ID').val(valor);  
 
 }
+
+// Tesis
 function showPersona(valor){
     var valor = valor; 
     $("#AlumnoS").text(valor);
     
-
 }
 function showAlumno2(valor){
 

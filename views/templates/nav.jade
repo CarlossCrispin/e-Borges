@@ -1,8 +1,6 @@
 
 link(rel='stylesheet', href='/stylesheets/nav.css')
 link(rel='stylesheet', href='/stylesheets/modal.css')
-//- link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
-//- script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
 script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
 
 
@@ -56,6 +54,8 @@ script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'
                           li
                             a(href='../alumno/showAlumno') Alumno         
                           li
+                            a(href='../genero/genero') Genero       
+                          li
                             a(href='../alumno/showInvestigadores') Investigador      
                                    
                           li
@@ -95,7 +95,6 @@ if !isAuthenticated
   section#services1
   include ../users/signin
   
-            
 script(src='../javascripts/nav.js')
 
 

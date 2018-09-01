@@ -1,0 +1,39 @@
+ 
+.col-md-8
+#registrarGenero.modal.fade(role='dialog')
+    .modal-dialog
+        // Modal content
+        .modal-content
+            .modal-header(style='padding:40px 50px;')
+                button.close(type='button', data-dismiss='modal') ×
+                h4
+                span.i.fa.fa-pencil-alt
+                |  Registrar Alumno
+            .modal-body
+                
+                form(class="well form-horizontal" action='/genero/genero' method='post' autocomplete='off' )
+                    .form-group
+                        input#opc.form-control(required type='text' name='opc'  value='1' style="display:none")
+                        label.col-md-4.control-label Genero
+                        .col-md-8.inputGroupContainer
+                            .input-group
+                                span.input-group-addon
+                                    span.i.fas.fa-transgender-alt
+                                input#genero.form-control(name='genero', placeholder='genero', type='text' required)
+                    
+                    hr
+                    .form-group
+                        div(class='col-md-10 col-md-offset-2')
+                            .col-md-5
+                        
+                                button.btn.btn-success(type='submit' name="registro")
+                                    span.i.fas.fa-check
+                                    |  Registrar
+                            .col-md-5
+                                button.btn.btn-danger(type='submit', data-dismiss='modal')
+                                    span.i.fas.fa-times
+                                    |  Cerrar
+            //- .modal-footer
+                    
+
+  
