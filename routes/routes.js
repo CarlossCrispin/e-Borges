@@ -31,5 +31,17 @@ router.post('/alumno/showAlumno', AuthMiddleware.isLogged , controllers.ShowAlum
 router.get('/genero/genero', AuthMiddleware.isLogged , controllers.genero.getGenero);
 router.post('/genero/genero', AuthMiddleware.isLogged , controllers.genero.postGenero);
 
+//--->Grado
+router.get('/grado/grado', AuthMiddleware.isLogged , controllers.grado.getGrado);
+router.post('/grado/grado', AuthMiddleware.isLogged , controllers.grado.postGrado);
+
+//--->Especialidad
+router.get('/especialidad/especialidad', AuthMiddleware.isLogged , controllers.especialidad.getEspecialidad);
+router.post('/especialidad/especialidad', AuthMiddleware.isLogged , controllers.especialidad.postEspecialidad);
+
+//--->Departamento
+router.get('/departamento/departamento', AuthMiddleware.isLogged , controllers.departamento.getDepartamento);
+router.post('/departamento/departamento', AuthMiddleware.isLogged , controllers.departamento.postDepartamento);
+
 
 module.exports = router;

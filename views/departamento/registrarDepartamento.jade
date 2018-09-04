@@ -1,6 +1,5 @@
  
-.col-md-8
-#registrarGenero.modal.fade(role='dialog')
+#registrarDepartamento.modal.fade(role='dialog')
     .modal-dialog
         // Modal content
         .modal-content
@@ -8,22 +7,31 @@
                 button.close(type='button', data-dismiss='modal') ×
                 h4
                 span.i.fa.fa-pencil-alt
-                |  Registrar Alumno
+                |  Registrar Departamento
             .modal-body
                 
-                form(class="well form-horizontal" action='/genero/genero' method='post' autocomplete='off' )
+                form(class="well form-horizontal" action='/departamento/departamento' method='post' autocomplete='off' )
                     .form-group
                         input#opc.form-control(required type='text' name='opc'  value='1' style="display:none")
-                        label.col-md-4.control-label Genero
+                        label.col-md-4.control-label Departamento
                         .col-md-8.inputGroupContainer
                             .input-group
                                 span.input-group-addon
-                                    span.i.fas.fa-transgender-alt
-                                input#genero.form-control(name='genero', placeholder='genero', type='text' required)
+                                    span.i.fas.fa-vector-square
+                                input#departamento.form-control(name='departamento', placeholder='departamento', type='text' required)
+                    .form-group
+                        label.col-md-4.control-label Especialidad
+                        .col-md-8.inputGroupContainer
+                            .input-group
+                                span.input-group-addon
+                                    span.i.fas.fa-flask
+                                select#especialidad.form-control(name="especialidad"  class="form-control" data-style="btn-info" required)
+                                    option(value='', disabled='', selected='') Elija una opcion
+                                    each item, i in items2
+                                        option(value=i+1) #{item.nespecialidad}
                     
                     hr
                     .form-group
-                        
                         .col-md-2
                         .col-md-3
                     
@@ -36,16 +44,6 @@
                                 span.i.fas.fa-times
                                 |  Cerrar
                         .col-md-2
-                        //- div(class='col-md-10 col-md-offset-2')
-                        //-     .col-md-5
-                        
-                        //-         button.btn.btn-success(type='submit' name="registro")
-                        //-             span.i.fas.fa-check
-                        //-             |  Registrar
-                        //-     .col-md-5
-                        //-         button.btn.btn-danger(type='submit', data-dismiss='modal')
-                        //-             span.i.fas.fa-times
-                        //-             |  Cerrar
             //- .modal-footer
                     
 

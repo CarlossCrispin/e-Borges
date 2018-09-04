@@ -1,0 +1,69 @@
+extends ../templates/default
+
+block content
+    br
+    br
+    br
+    div(class='col-md-6 col-md-offset-3')
+  
+        if Insert.length > 0
+            script(src='../javascripts/insert.js')
+        if Edit.length > 0
+            script(src='../javascripts/edit.js')
+        if Delete.length > 0
+            script(src='../javascripts/delete.js')
+       
+    .container
+        .panel.panel-default
+            .panel-heading
+            
+                h1.inverse.title.text-center Departamento
+                hr
+        .panel.panel-default
+            .panel-heading
+                button.btn.btn-info.btn-lg(type='button', data-toggle='modal', data-target='#registrarDepartamento') Registrar Departamento
+                br
+                div(class="table-responsive" )
+                    table#example.table.table-striped.table-bordered
+                        thead
+                            tr
+                                th Departamento
+                                th Especialidad
+                                th Accion  
+                            
+                        
+                        tbody
+                        
+                            each item, i in items
+                                tr
+                                    td= item.ndepartamento
+                                    td= item.nespecialidad
+                                    td
+                                        .col-md-12
+                                            .col-md-4 
+                                                a.action.btn.btn-sm.btn-primary(type='button', data-toggle='modal',title='Editar',
+                                                    data-target='#editarDepartamento',data-tooltip='Editar'
+                                                    onclick=`showID("${item.id}"),
+                                                        showText1("${item.ndepartamento}"),
+                                                        showSelect1("${item.nespecialidad}")`)
+                                                    i.fa.fa-edit 
+                                                include editardepartamento
+                                            .col-md-4  
+                                                .action.btn.btn-sm.btn-danger(type='button', data-toggle='modal', data-target='#delete',
+                                                    onclick="showEliminar("+item.id+")",data-tooltip='Eliminar') 
+                                                        i.fa.fa-trash
+                                                include eliminarDepartamento
+                                                           
+                                            .col-md-4 
+                                                a.action.btn.btn-sm.btn-info( data-toggle='modal', data-target='#consultar',data-tooltip='Consultar',
+                                                        onclick=`showID("${item.id}"),
+                                                        showText1("${item.ndepartamento}"),
+                                                        showText2("${item.nespecialidad}")`)
+                                                        i.fa.fa-eye 
+                                                include consultarDepartamento
+
+    script(type='text/javascript', src='/javascripts/data.js')                       
+    section#services
+    include ../departamento/registrarDepartamento                       
+                                
+                                

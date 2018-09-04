@@ -1,39 +1,44 @@
 #myModal1.modal.fade(role='dialog')
     .modal-dialog
-        // Modal content
         .modal-content
             .modal-header(style='padding:35px 10px;')
                 button.close(type='button', data-dismiss='modal') ×
                 h4
                 span.i.fa.fa-lock
                 |  Iniciar Sesión
-            .modal-body(style='padding:40px 50px;')
-                form(action='/auth/signin' method='post' autocomplete='off')
-                        
+            //- .modal-body(style='padding:40px 50px;')
+            .modal-body
+                form(class="well form-horizontal" action='/auth/signin' method='post' autocomplete='off' )
                     .form-group
-                        label(for='email')
-                            span.i.fa.fa-user
-                            |  Usuario
-                        input#psw.form-control(required formnovalidate="formnovalidate" type='text' name='username' placeholder='Usuario' autofocus )
+                        //- input#opc.form-control(required type='text' name='opc'  value='1' style="display:none")
+                        label.col-md-4.control-label(for='email') Usuario :
+                        .col-md-8.inputGroupContainer
+                            .input-group
+                                span.input-group-addon
+                                    span.i.fas.fa-user
+                                input#psw.form-control(required formnovalidate="formnovalidate" type='text' name='username' placeholder='Usuario' autofocus )
                     .form-group
-                        label(for='password')
-                            span.i.fa.fa-key
-                            |  Contraseña
-                        input#psw.form-control(required formnovalidate="formnovalidate"  type='number' name='password' placeholder='Contraseña' )
-                    
+                        label.col-md-4.control-label(for='password') Contraseña :
+                        .col-md-8.inputGroupContainer
+                            .input-group
+                                span.input-group-addon
+                                    span.i.fas.fa-key
+                                input#psw.form-control(required formnovalidate="formnovalidate"  type='number' name='password' placeholder='Contraseña' )
                         
+                    hr
+                    .form-group
+                        .col-md-2
+                        .col-md-3
                     
-                    //.checkbox
-                        label
-                        input(type='checkbox', value='', checked='')
-                        | Remember me
-                    button.btn.btn-success.btn-block(type='submit')
-                        span.i.fas.fa-check
-                        |  Iniciar Sesión
-            .modal-footer
-                button.btn.btn-danger.btn-default.pull-left(type='submit', data-dismiss='modal')
-                    span.i.fas.fa-times
-                    |  Cerrar
+                            button.btn.btn-success(type='submit' name="registro")
+                                span.i.fas.fa-check
+                                |  Iniciar Sesión
+                        .col-md-2
+                        .col-md-3
+                            button.btn.btn-danger(type='submit', data-dismiss='modal')
+                                span.i.fas.fa-times
+                                |  Cerrar
+                        .col-md-2
 script.
     $(document).ready(function(){
     $("#myBtn1").click(function(){
