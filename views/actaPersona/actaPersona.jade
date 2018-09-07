@@ -17,49 +17,51 @@ block content
         .panel.panel-default
             .panel-heading
             
-                h1.inverse.title.text-center Especialidad
+                h1.inverse.title.text-center Acta Persona
                 hr
         .panel.panel-default
             .panel-heading
-                button.btn.btn-info.btn-lg(type='button', data-toggle='modal', data-target='#registrarEspecialidad') Registrar Especialidad
+                button.btn.btn-info.btn-lg(type='button', data-toggle='modal', data-target='#registrar') Registrar Acta
                 br
                 div(class="table-responsive" )
                     table#example.table.table-striped.table-bordered
                         thead
                             tr
-                                th Especialidad
-                                th Detalles  
+                                th Acta
+                                th Persona
+                                th Tipo
+                                th Detalles 
                             
                         
                         tbody
                         
                             each item, i in items
                                 tr
-                                    td= item.especialidad
+                                    td= item
+                                    td= item
+                                    td= item
                                     td
                                         .col-md-12
                                             .col-md-4 
                                                 a.action.btn.btn-sm.btn-primary(type='button', data-toggle='modal',title='Editar',
-                                                    data-target='#editarEspecialidad',data-tooltip='Editar'
+                                                    data-target='#editarActa',data-tooltip='Editar'
                                                     onclick=`showID("${item.id}"),
-                                                        showText1("${item.especialidad}")`)
+                                                        showActa("${item.Acta}")`)
                                                     i.fa.fa-edit 
-                                                include editarEspecialidad
+                                                include editarActaPersona
                                             .col-md-4  
                                                 .action.btn.btn-sm.btn-danger(type='button', data-toggle='modal', data-target='#delete',
                                                     onclick="showEliminar("+item.id+")",data-tooltip='Eliminar') 
                                                         i.fa.fa-trash
-                                                include eliminarEspecialidad
+                                                include eliminarActaPersona
                                                            
                                             .col-md-4 
                                                 a.action.btn.btn-sm.btn-info( data-toggle='modal', data-target='#consultar',data-tooltip='Consultar',
                                                         onclick=`showID("${item.id}"),
-                                                        showText1("${item.especialidad}")`)
+                                                        showActa("${item.Acta}")`)
                                                         i.fa.fa-eye 
-                                                include consultarEspecialidad
+                                                include consultarActaPersona
 
     script(type='text/javascript', src='/javascripts/data.js')                       
     section#services
-    include ../especialidad/registrarEspecialidad                       
-                                
-                                
+    include ../actaPersona/registrarActaPersona   

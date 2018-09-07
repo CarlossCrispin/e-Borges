@@ -1,5 +1,5 @@
 var pg = require("pg")
-const connection = require('.././database/config');
+const connection = require('.././database/config2');
 const connectionString = process.env.DATABASE_URL || connection;
 
 module.exports = {
@@ -20,11 +20,11 @@ module.exports = {
                 return res.status(500).json({ success: false, data: err });
             }
             // SQL Query > Select Data
-            const query = client.query(`SELECT a.id, a.ndepartamento, 
-                c.nespecialidad
-                FROM public.departamento a
-                inner join especialidad c on a.especialidad_id=c.id`);
-            const query2 = client.query(`SELECT nespecialidad from especialidad`);
+            const query = client.query(`SELECT a.id, a.departamento,
+            c.especialidad
+            FROM "Tesis".departamento a
+            inner join "Tesis".especialidad c on a.idespecialidad=c.id`);
+            const query2 = client.query(`SELECT * from "Tesis".especialidad`);
             // Stream results back one row at a time
             query.on('row', (row) => {
                 results.push(row);
@@ -76,8 +76,8 @@ module.exports = {
                 }
                 // SQL Query > Select Data
                 
-                const query = client.query(`INSERT INTO public.departamento(
-                    id, ndepartamento, especialidad_id)
+                const query = client.query(`INSERT INTO "Tesis".departamento(
+                    id, departamento, idespecialidad)
                     VALUES (nextval (\'hibernate_sequence\'), '${departamento}','${especialidad}')`);
                 // Stream results back one row at a time
                 query.on('row', (row) => {
@@ -104,7 +104,7 @@ module.exports = {
                     return res.status(500).json({ success: false, data: err });
                 }
                 // SQL Query > Select Data
-                const query = client.query(`DELETE FROM public.departamento
+                const query = client.query(`DELETE FROM "Tesis".departamento
                 WHERE id=${eliminar}`);
                 // Stream results back one row at a time
                 query.on('row', (row) => {
@@ -131,8 +131,8 @@ module.exports = {
                     return res.status(500).json({ success: false, data: err });
                 }
                 // SQL Query > Select Data
-                const query = client.query(`UPDATE public.departamento SET
-                ndepartamento='${departamento}', especialidad_id=${especialidad}
+                const query = client.query(`UPDATE "Tesis".departamento SET
+                departamento='${departamento}', idespecialidad=${especialidad}
                 WHERE id=${editar}`);
                 // Stream results back one row at a time
                 query.on('row', (row) => {

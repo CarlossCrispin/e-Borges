@@ -4,12 +4,12 @@ const connectionString = process.env.DATABASE_URL || connection;
 
 module.exports = {
     /*--------------------------------------------
-	*         CONSULTAS PARA LA VISTA GRADO
+	*         CONSULTAS PARA LA VISTA UNIDAD
 	*-----------------------------------------------*/
-    getGrado: function (req, res, next) {
+    getUnidad: function (req, res, next) {
 
         const results = [];
-        console.log(results)
+  
         // cliente de Postgres del grupo de conexiones
         pg.connect(connectionString, function(err, client, done)  {
             // Handle connection errors
@@ -19,17 +19,21 @@ module.exports = {
                 return res.status(500).json({ success: false, data: err });
             }
             // SQL Query > Select Data
-            const query = client.query('SELECT * FROM "Tesis".grado ');
+            const query = client.query(`SELECT *
+                FROM "Tesis".unidad`);
+            
             // Stream results back one row at a time
             query.on('row', (row) => {
                 results.push(row);
             });
+            
             // After all data is returned, close connection and return results
+            
             query.on('end', () => {
                 done();
-                console.log("se cerro base de datos")
+                console.log("se cerro base de datos\n------------->\n\n\n")
                 console.log(JSON.stringify(results))
-                return res.render('grado/grado', {
+                return res.render('unidad/unidad', {
                     isAuthenticated: req.isAuthenticated(),
                     user: req.user,
                     items: results,
@@ -42,12 +46,14 @@ module.exports = {
         });    
 
     },
-    postGrado : function(req,res,next){
+    postUnidad: function(req,res,next){
         var opc = req.body.opc;
-        var grado = req.body.grado;
+        var nombre= req.body.unidad;
+        var lugar= req.body.lugar;
         var eliminar=req.body.eliminar;
         var editar =req.body.editar;
-        console.log(`-------DATOS------\n${opc}\n${grado}\n${eliminar}\n${editar}`)
+        console.log(`-------DATOS------\n${opc}\n${nombre}\n${eliminar}
+        \n${lugar}\n${editar}\n---------------------`)
         if(opc ==='1'){
 
             pg.connect(connectionString, function(err, client, done)  {
@@ -58,21 +64,25 @@ module.exports = {
                     return res.status(500).json({ success: false, data: err });
                 }
                 // SQL Query > Select Data
-                
-                const query = client.query(`INSERT INTO "Tesis".grado(
-                    id, grado)
-                    VALUES (nextval (\'hibernate_sequence\'), '${grado}')`);
+                // INSERT INTO "Tesis".unidad(
+                //     id, unidad, especialidad_id)
+                //     VALUES (nextval (\'hibernate_sequence\'), '${nombre}','${lugar}'
+                const query = client.query(`
+                    INSERT INTO "Tesis".unidad(
+                        idunidad, nombre, lugar)
+                        VALUES (nextval (\'hibernate_sequence\'),'${nombre}','${lugar}')`);
                 // Stream results back one row at a time
                 query.on('row', (row) => {
                     results.push(row);
+                    console.log(JSON.stringify(row));
                 });
                 // After all data is returned, close connection and return results
                 query.on('end', () => {
                     done();
                     console.log("se cerro base de datos")
-                    // console.log(results)
+                    // console.log(results.row)
                     req.flash('Insert', 'Se ha registrado correctamente');
-                    return res.redirect('/grado/grado');
+                    return res.redirect('/unidad/unidad');
                 });
                 
             });    
@@ -87,8 +97,8 @@ module.exports = {
                     return res.status(500).json({ success: false, data: err });
                 }
                 // SQL Query > Select Data
-                const query = client.query(`DELETE FROM "Tesis".grado
-                WHERE id=${eliminar}`);
+                const query = client.query(`DELETE FROM "Tesis".unidad
+                WHERE idunidad=${eliminar}`);
                 // Stream results back one row at a time
                 query.on('row', (row) => {
                     results.push(row);
@@ -99,7 +109,7 @@ module.exports = {
                     console.log("se cerro base de datos")
                     // console.log(results)
                     req.flash('Delete', 'Se ha eliminado correctamente');
-                    return res.redirect('/grado/grado');
+                    return res.redirect('/unidad/unidad');
                 });
                 
             });    
@@ -114,8 +124,9 @@ module.exports = {
                     return res.status(500).json({ success: false, data: err });
                 }
                 // SQL Query > Select Data
-                const query = client.query(`UPDATE "Tesis".grado SET
-                grado='${grado}' WHERE id=${editar}`);
+                const query = client.query(`UPDATE "Tesis".unidad
+                SET nombre='${nombre}', lugar='${lugar}'
+                WHERE  idunidad=${editar}`);
                 // Stream results back one row at a time
                 query.on('row', (row) => {
                     results.push(row);
@@ -126,7 +137,7 @@ module.exports = {
                     console.log("se cerro base de datos")
                     // console.log(results)
                     req.flash('Edit', 'Se ha editado correctamente');
-                    return res.redirect('/grado/grado');
+                    return res.redirect('/unidad/unidad');
                 });
                 
             });    

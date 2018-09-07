@@ -1,10 +1,11 @@
 var pg = require("pg")
-const connection = require('.././database/config');
+const connection = require('.././database/config2');
 const connectionString = process.env.DATABASE_URL || connection;
 
 module.exports = {
     /*--------------------------------------------
-	*         CONSULTAS PARA LA VISTA GENERO
+    *         CONSULTAS PARA LA VISTA GENERO
+    CREATE SEQUENCE hibernate_sequence START WITH 1 INCREMENT BY 1 NO CYCLE;
 	*-----------------------------------------------*/
     getGenero: function (req, res, next) {
 
@@ -19,7 +20,8 @@ module.exports = {
                 return res.status(500).json({ success: false, data: err });
             }
             // SQL Query > Select Data
-            const query = client.query('SELECT * FROM genero ');
+            const query = client.query(`SELECT id, genero
+            FROM "Tesis".genero`);
             // Stream results back one row at a time
             query.on('row', (row) => {
                 results.push(row);
@@ -59,8 +61,8 @@ module.exports = {
                 }
                 // SQL Query > Select Data
                 
-                const query = client.query(`INSERT INTO public.genero(
-                    id, ngenero)
+                const query = client.query(`INSERT INTO "Tesis".genero(
+                    id, genero)
                     VALUES (nextval (\'hibernate_sequence\'), '${genero}')`);
                 // Stream results back one row at a time
                 query.on('row', (row) => {
@@ -87,7 +89,7 @@ module.exports = {
                     return res.status(500).json({ success: false, data: err });
                 }
                 // SQL Query > Select Data
-                const query = client.query(`DELETE FROM public.genero
+                const query = client.query(`DELETE FROM "Tesis".genero
                 WHERE id=${eliminar}`);
                 // Stream results back one row at a time
                 query.on('row', (row) => {
@@ -114,8 +116,8 @@ module.exports = {
                     return res.status(500).json({ success: false, data: err });
                 }
                 // SQL Query > Select Data
-                const query = client.query(`UPDATE public.genero SET
-                ngenero='${genero}' WHERE id=${editar}`);
+                const query = client.query(`UPDATE "Tesis".genero SET
+                genero='${genero}' WHERE id=${editar}`);
                 // Stream results back one row at a time
                 query.on('row', (row) => {
                     results.push(row);

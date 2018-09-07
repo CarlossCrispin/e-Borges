@@ -28,21 +28,21 @@ block content
                         thead
                             tr
                                 th Genero
-                                th Accion  
+                                th Detalles   
                             
                         
                         tbody
                         
                             each item, i in items
                                 tr
-                                    td= item.ngenero
+                                    td= item.genero
                                     td
                                         .col-md-12
                                             .col-md-4 
                                                 a.action.btn.btn-sm.btn-primary(type='button', data-toggle='modal',title='Editar',
                                                     data-target='#editarGenero',data-tooltip='Editar'
                                                     onclick=`showID("${item.id}"),
-                                                        showGenero("${item.ngenero}")`)
+                                                        showGenero("${item.genero}")`)
                                                     i.fa.fa-edit 
                                                 include editarGenero
                                             .col-md-4  
@@ -54,7 +54,7 @@ block content
                                             .col-md-4 
                                                 a.action.btn.btn-sm.btn-info( data-toggle='modal', data-target='#consultar',data-tooltip='Consultar',
                                                         onclick=`showID("${item.id}"),
-                                                        showGenero("${item.ngenero}")`)
+                                                        showGenero("${item.genero}")`)
                                                         i.fa.fa-eye 
                                                 include consultarGenero
 

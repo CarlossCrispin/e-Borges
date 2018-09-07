@@ -29,23 +29,23 @@ block content
                             tr
                                 th Departamento
                                 th Especialidad
-                                th Accion  
+                                th Detalles   
                             
                         
                         tbody
                         
                             each item, i in items
                                 tr
-                                    td= item.ndepartamento
-                                    td= item.nespecialidad
+                                    td= item.departamento
+                                    td= item.especialidad
                                     td
                                         .col-md-12
                                             .col-md-4 
                                                 a.action.btn.btn-sm.btn-primary(type='button', data-toggle='modal',title='Editar',
                                                     data-target='#editarDepartamento',data-tooltip='Editar'
                                                     onclick=`showID("${item.id}"),
-                                                        showText1("${item.ndepartamento}"),
-                                                        showSelect1("${item.nespecialidad}")`)
+                                                        showText1("${item.departamento}"),
+                                                        showSelect1("${item.especialidad}")`)
                                                     i.fa.fa-edit 
                                                 include editardepartamento
                                             .col-md-4  
@@ -57,8 +57,8 @@ block content
                                             .col-md-4 
                                                 a.action.btn.btn-sm.btn-info( data-toggle='modal', data-target='#consultar',data-tooltip='Consultar',
                                                         onclick=`showID("${item.id}"),
-                                                        showText1("${item.ndepartamento}"),
-                                                        showText2("${item.nespecialidad}")`)
+                                                        showText1("${item.departamento}"),
+                                                        showText2("${item.especialidad}")`)
                                                         i.fa.fa-eye 
                                                 include consultarDepartamento
 

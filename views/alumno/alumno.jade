@@ -1,0 +1,92 @@
+extends ../templates/default
+
+block content
+    br
+    br
+    br
+    div(class='col-md-6 col-md-offset-3')
+  
+        if Insert.length > 0
+            script(src='../javascripts/insert.js')
+        if Edit.length > 0
+            script(src='../javascripts/edit.js')
+        if Delete.length > 0
+            script(src='../javascripts/delete.js')
+       
+    .container
+        .panel.panel-default
+            .panel-heading
+            
+                h1.inverse.title.text-center Alumno
+                hr
+        .panel.panel-default
+            .panel-heading
+                button.btn.btn-info.btn-lg(type='button', data-toggle='modal', data-target='#registrar') Registrar Alumno
+                br
+                div(class="table-responsive" )
+                    table#example.table.table-striped.table-bordered
+                        thead
+                            tr
+                                th Nombre
+                                th Nombre2
+                                th Nombre3
+                                th Apellido
+                                th Apellido2
+                                th Apellido3
+                                th Matricula
+                                th Genero
+                                th Departamento
+                                th Grado
+                                th Detalles
+                            
+                        
+                        tbody
+                        
+                            each item, i in items
+                                tr
+                                    td= item.nombre
+                                    td= item.nombre2
+                                    td= item.nombre3
+                                    td= item.apellido
+                                    td= item.apellido2
+                                    td= item.apellido3
+                                    td= item.matricula
+                                    td= item.idgenero
+                                    td= item.iddepartamento
+                                    td= item.idgrado
+                                   
+                                    td
+                                        .col-md-12
+                                            .col-md-4 
+                                                a.action.btn.btn-sm.btn-primary(type='button', data-toggle='modal',title='Editar',
+                                                    data-target='#editar',data-tooltip='Editar'
+                                                    onclick=`showID("${item.idalumno}"),
+                                                        showText1("${item.nombre}"),
+                                                        showText2("${item.nombre2}"),
+                                                        showText3("${item.nombre3}"),
+                                                        showText4("${item.apellido}"),
+                                                        showText5("${item.apellido2}"),
+                                                        showText6("${item.apellido3}"),
+                                                        showText7("${item.matricula}"),
+                                                        showSelectVal1("${item.iddepartamento}"),
+                                                        showSelectVal2("${item.idgrado}"),
+                                                        showSelectVal3("${item.idgenero}")
+                                                        `)
+                                                    i.fa.fa-edit 
+                                                include editarAlumno
+                                            .col-md-4  
+                                                .action.btn.btn-sm.btn-danger(type='button', data-toggle='modal', data-target='#delete',
+                                                    onclick="showEliminar("+item.id+")",data-tooltip='Eliminar') 
+                                                        i.fa.fa-trash
+                                                include eliminarAlumno
+                                                           
+                                            .col-md-4 
+                                                a.action.btn.btn-sm.btn-info( data-toggle='modal', data-target='#consultar',data-tooltip='Consultar',
+                                                        onclick=`showID("${item.id}"),
+                                                        showAlumno("${item}")`)
+                                                        i.fa.fa-eye 
+                                                include consultarAlumno
+
+    script(type='text/javascript', src='/javascripts/data.js')                       
+    section#services
+    include ../alumno/registrarAlumno

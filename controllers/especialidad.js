@@ -1,5 +1,5 @@
 var pg = require("pg")
-const connection = require('.././database/config');
+const connection = require('.././database/config2');
 const connectionString = process.env.DATABASE_URL || connection;
 
 module.exports = {
@@ -19,7 +19,7 @@ module.exports = {
                 return res.status(500).json({ success: false, data: err });
             }
             // SQL Query > Select Data
-            const query = client.query('SELECT * FROM especialidad ');
+            const query = client.query('SELECT * FROM "Tesis".especialidad ');
             // Stream results back one row at a time
             query.on('row', (row) => {
                 results.push(row);
@@ -59,8 +59,8 @@ module.exports = {
                 }
                 // SQL Query > Select Data
                 
-                const query = client.query(`INSERT INTO public.especialidad(
-                    id, nespecialidad)
+                const query = client.query(`INSERT INTO "Tesis".especialidad(
+                    id, especialidad)
                     VALUES (nextval (\'hibernate_sequence\'), '${especialidad}')`);
                 // Stream results back one row at a time
                 query.on('row', (row) => {
@@ -87,7 +87,7 @@ module.exports = {
                     return res.status(500).json({ success: false, data: err });
                 }
                 // SQL Query > Select Data
-                const query = client.query(`DELETE FROM public.especialidad
+                const query = client.query(`DELETE FROM "Tesis".especialidad
                 WHERE id=${eliminar}`);
                 // Stream results back one row at a time
                 query.on('row', (row) => {
@@ -114,8 +114,8 @@ module.exports = {
                     return res.status(500).json({ success: false, data: err });
                 }
                 // SQL Query > Select Data
-                const query = client.query(`UPDATE public.especialidad SET
-                nespecialidad='${especialidad}' WHERE id=${editar}`);
+                const query = client.query(`UPDATE "Tesis".especialidad SET
+                especialidad='${especialidad}' WHERE id=${editar}`);
                 // Stream results back one row at a time
                 query.on('row', (row) => {
                     results.push(row);

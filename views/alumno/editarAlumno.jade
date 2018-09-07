@@ -1,0 +1,113 @@
+
+#editar.modal.fade(role='dialog')
+    .modal-dialog
+        // Modal content
+        .modal-content
+            .modal-header(style='padding:40px 50px;')
+                button.close(type='button', data-dismiss='modal') ×
+                h4
+                span.i.fa.fa-pencil-alt
+                |  Editar Alumno
+            .modal-body
+                
+                form(class="well form-horizontal" action='/alumno/alumno' method='post' autocomplete='off' )
+                    .form-group
+                        input#opc.form-control(required type='text' name='opc'  value='3' style="display:none")
+                        input#ID.form-control(required type='text' name='editar' style="display:none")
+                        label.col-md-4.control-label Primer Nombre
+                        .col-md-8.inputGroupContainer
+                            .input-group
+                                span.input-group-addon
+                                    span.i.fa.fa-user
+                                input#val.form-control(name='nombre', placeholder='Primer Nombre', type='text' required)
+                    
+                    .form-group
+                        label.col-md-4.control-label Segundo Nombre
+                        .col-md-8.inputGroupContainer
+                            .input-group
+                                span.input-group-addon
+                                    span.i.fa.fa-user
+                                input#val2.form-control(name='nombre2', placeholder='Segundo Nombre', type='text' required)
+                    .form-group
+                        label.col-md-4.control-label Tercer Nombre
+                        .col-md-8.inputGroupContainer
+                            .input-group
+                                span.input-group-addon
+                                    span.i.fa.fa-user
+                                input#val3.form-control(name='nombre3', placeholder='Tercer Nombre', type='text' required)
+                    .form-group
+                        label.col-md-4.control-label Primer Apellido 
+                        .col-md-8.inputGroupContainer
+                            .input-group
+                                span.input-group-addon
+                                    span.i.fa.fa-user
+                                input#val4.form-control(name='ap', placeholder='Primer Apellido', type='text' required)
+                    .form-group
+                        label.col-md-4.control-label Segundo Apellido 
+                        .col-md-8.inputGroupContainer
+                            .input-group
+                                span.input-group-addon
+                                    span.i.fa.fa-user
+                                input#val5.form-control(name='ap2', placeholder='Segundo Apellido', type='text' required)
+                    .form-group
+                        label.col-md-4.control-label Tercer Apellido 
+                        .col-md-8.inputGroupContainer
+                            .input-group
+                                span.input-group-addon
+                                    span.i.fa.fa-user
+                                input#val6.form-control(name='ap3', placeholder='Tercer Apellido', type='text' required)
+                    .form-group
+                        label.col-md-4.control-label Matricula
+                        .col-md-8.inputGroupContainer
+                            .input-group
+                                span.input-group-addon
+                                    span.i.fa.fa-fingerprint
+                                input#val7.form-control(name='matricula', placeholder='matricula', type='number' required)
+                    .form-group
+                        label.col-md-4.control-label Departramento
+                        .col-md-8.inputGroupContainer
+                            .input-group
+                                span.input-group-addon
+                                    span.i.fas.fa-vector-square
+                                select#selectVal1.form-contro(name="departamento" , class="form-control"  required)
+                                    option(value='', disabled='', selected='') Elija una opcion
+                                    each item, i in items3
+                                        option(value=item.id) #{item.departamento}
+                    .form-group
+                        label.col-md-4.control-label Grado
+                        .col-md-8.inputGroupContainer
+                            .input-group
+                                span.input-group-addon
+                                    span.i.fas.fa-user-graduate
+                                select#selectVal2.form-control(name="grado"  class="form-control" data-style="btn-info" required)
+                                    option(value='', disabled='', selected='') Elija una opcion
+                                    each item, i in items4
+                                        //- -if (item.idgrado == 1 & item.idgrado ==2 )
+                                        -if (item.idgrado !== 3  & item.idgrado !== 4 & item.idgrado !== 5 & item.idgrado !== 6 & item.idgrado !== 7)
+                                            option(value=item.idgrado)  #{item.grado}
+                    .form-group
+                        label.col-md-4.control-label Genero
+                        .col-md-8.inputGroupContainer
+                            .input-group
+                                span.input-group-addon
+                                    span.i.fas.fa-transgender-alt
+                                select#selectVal3.form-control(name="genero"  class="form-control" data-style="btn-info" required)
+                                    option(value='', disabled='', selected='') Elija una opcion
+                                    each item, i in items2
+                                        option(value=item.id) #{item.genero}    
+                    hr
+                    .form-group
+                        .col-md-2
+                        .col-md-3
+                    
+                            button.btn.btn-success(type='submit' name="registro")
+                                span.i.fas.fa-sync-alt
+                                |  Atualizar
+                        .col-md-2
+                        .col-md-3
+                            button.btn.btn-danger(type='submit', data-dismiss='modal')
+                                span.i.fas.fa-times
+                                |  Cerrar
+                        .col-md-2
+
+  

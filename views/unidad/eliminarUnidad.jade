@@ -1,0 +1,23 @@
+#delete.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
+    .modal-dialog.modal-dialog-centered(role='document')
+        .modal-content
+            .modal-header(Style="color:red")
+                h5#exampleModalLongTitle.modal-title Eliminar Unidad
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                        span(aria-hidden='true') ×
+            .modal-body
+                h2.text-center Confirmar Eliminar Unidad
+                form(action='/unidad/unidad'  method='post' autocomplete='off')
+                    .form-group
+                        input#opc.form-control(required type='text' name='opc' value='2' ,style="display:none")
+                        
+                        input#eliminar(type="text",name='eliminar',style="display:none")
+                    
+                    button.btn.btn-success.btn-default.btn-block(type='submit' name="registro")
+                        span.i.fas.fa-check
+                        |  Si
+                    br
+                    
+                    buutton.btn.btn-info.btn-danger.pull-right(data-dismiss='modal' )
+                        span.i.fas.fa-times
+                        |   NO

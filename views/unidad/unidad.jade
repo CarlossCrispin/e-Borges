@@ -17,17 +17,18 @@ block content
         .panel.panel-default
             .panel-heading
             
-                h1.inverse.title.text-center Especialidad
+                h1.inverse.title.text-center Unidad
                 hr
         .panel.panel-default
             .panel-heading
-                button.btn.btn-info.btn-lg(type='button', data-toggle='modal', data-target='#registrarEspecialidad') Registrar Especialidad
+                button.btn.btn-info.btn-lg(type='button', data-toggle='modal', data-target='#registrarUnidad') Registrar Unidad
                 br
                 div(class="table-responsive" )
                     table#example.table.table-striped.table-bordered
                         thead
                             tr
-                                th Especialidad
+                                th Unidad
+                                th Lugar
                                 th Detalles  
                             
                         
@@ -35,31 +36,33 @@ block content
                         
                             each item, i in items
                                 tr
-                                    td= item.especialidad
+                                    td= item.nombre
+                                    td= item.lugar
                                     td
                                         .col-md-12
                                             .col-md-4 
                                                 a.action.btn.btn-sm.btn-primary(type='button', data-toggle='modal',title='Editar',
-                                                    data-target='#editarEspecialidad',data-tooltip='Editar'
-                                                    onclick=`showID("${item.id}"),
-                                                        showText1("${item.especialidad}")`)
+                                                    data-target='#editarUnidad',data-tooltip='Editar'
+                                                    onclick=`showID("${item.idunidad}"),
+                                                        showText1("${item.nombre}"),
+                                                        showText2("${item.lugar}")`)
                                                     i.fa.fa-edit 
-                                                include editarEspecialidad
+                                                include editarUnidad
                                             .col-md-4  
                                                 .action.btn.btn-sm.btn-danger(type='button', data-toggle='modal', data-target='#delete',
-                                                    onclick="showEliminar("+item.id+")",data-tooltip='Eliminar') 
+                                                    onclick=`showEliminar("${item.idunidad}")`,data-tooltip='Eliminar') 
                                                         i.fa.fa-trash
-                                                include eliminarEspecialidad
+                                                include eliminarUnidad
                                                            
                                             .col-md-4 
                                                 a.action.btn.btn-sm.btn-info( data-toggle='modal', data-target='#consultar',data-tooltip='Consultar',
-                                                        onclick=`showID("${item.id}"),
-                                                        showText1("${item.especialidad}")`)
-                                                        i.fa.fa-eye 
-                                                include consultarEspecialidad
+                                                    onclick=`showID("${item.idunidad}"),
+                                                        showText1("${item.nombre}"),
+                                                        showText3("${item.lugar}")`)
+                                                    i.fa.fa-eye 
+                                                include consultarUnidad
 
     script(type='text/javascript', src='/javascripts/data.js')                       
     section#services
-    include ../especialidad/registrarEspecialidad                       
-                                
+    include ../unidad/registrarUnidad                       
                                 

@@ -1,5 +1,5 @@
-
-#editarGenero.modal.fade(role='dialog')
+ 
+#registrar.modal.fade(role='dialog')
     .modal-dialog
         // Modal content
         .modal-content
@@ -7,19 +7,18 @@
                 button.close(type='button', data-dismiss='modal') ×
                 h4
                 span.i.fa.fa-pencil-alt
-                |  Editar Genero
+                |  Registrar Acta
             .modal-body
                 
-                form(class="well form-horizontal" action='/genero/genero' method='post' autocomplete='off' )
+                form(class="well form-horizontal" action='/grado/grado' method='post' autocomplete='off' )
                     .form-group
-                        input#opc.form-control(required type='text' name='opc'  value='3' style="display:none")
-                        input#ID.form-control(required type='text' name='editar' style="display:none")
-                        label.col-md-4.control-label Genero
+                        input#opc.form-control(required type='text' name='opc'  value='1' style="display:none")
+                        label.col-md-4.control-label Acta
                         .col-md-8.inputGroupContainer
                             .input-group
                                 span.input-group-addon
-                                    span.i.fas.fa-transgender-alt
-                                input#genero.form-control(name='genero', placeholder='genero', type='text' required)
+                                    span.i.fas.fa-user-graduate
+                                input#grado.form-control(name='grado', placeholder='grado', type='text' required)
                     
                     hr
                     .form-group
@@ -27,13 +26,15 @@
                         .col-md-3
                     
                             button.btn.btn-success(type='submit' name="registro")
-                                span.i.fas.fa-sync-alt
-                                |  Atualizar
+                                span.i.fas.fa-check
+                                |  Registrar
                         .col-md-2
                         .col-md-3
                             button.btn.btn-danger(type='submit', data-dismiss='modal')
                                 span.i.fas.fa-times
                                 |  Cerrar
                         .col-md-2
+            //- .modal-footer
+                    
 
   

@@ -28,33 +28,33 @@ block content
                         thead
                             tr
                                 th Grado
-                                th Accion  
+                                th Detalles   
                             
                         
                         tbody
                         
                             each item, i in items
                                 tr
-                                    td= item.ngrado
+                                    td= item.grado
                                     td
                                         .col-md-12
                                             .col-md-4 
                                                 a.action.btn.btn-sm.btn-primary(type='button', data-toggle='modal',title='Editar',
                                                     data-target='#editarGrado',data-tooltip='Editar'
-                                                    onclick=`showID("${item.id}"),
-                                                        showGenero("${item.ngrado}")`)
+                                                    onclick=`showID("${item.idgrado}"),
+                                                        showGenero("${item.grado}")`)
                                                     i.fa.fa-edit 
                                                 include editarGrado
                                             .col-md-4  
                                                 .action.btn.btn-sm.btn-danger(type='button', data-toggle='modal', data-target='#delete',
-                                                    onclick="showEliminar("+item.id+")",data-tooltip='Eliminar') 
+                                                    onclick="showEliminar("+item.idgrado+")",data-tooltip='Eliminar') 
                                                         i.fa.fa-trash
                                                 include eliminarGrado
                                                            
                                             .col-md-4 
                                                 a.action.btn.btn-sm.btn-info( data-toggle='modal', data-target='#consultar',data-tooltip='Consultar',
-                                                        onclick=`showID("${item.id}"),
-                                                        showGenero("${item.ngrado}")`)
+                                                        onclick=`showID("${item.idgrado}"),
+                                                        showGenero("${item.grado}")`)
                                                         i.fa.fa-eye 
                                                 include consultarGrado
 
