@@ -69,8 +69,8 @@ module.exports = {
                 //     VALUES (nextval (\'hibernate_sequence\'), '${nombre}','${lugar}'
                 const query = client.query(`
                     INSERT INTO "Tesis".unidad(
-                        idunidad, nombre, lugar)
-                        VALUES (nextval (\'hibernate_sequence\'),'${nombre}','${lugar}')`);
+                         nombre, lugar)
+                        VALUES ('${nombre}','${lugar}')`);
                 // Stream results back one row at a time
                 query.on('row', (row) => {
                     results.push(row);

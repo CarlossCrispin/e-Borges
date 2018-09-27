@@ -21,49 +21,45 @@
                             //- .col-md-6
                             //-     .form-group
                             //-         input.form-control.datepicker(type='text', placeholder='Nombre')
-                            label.col-md-2.control-label Nombre
-                            .col-md-8.inputGroupContainer
+                            label.col-md-3.control-label Nombre
+                            .col-md-7.inputGroupContainer
                                 .input-group
                                     span.input-group-addon
                                         span.i.fa.fa-user
-                                    input#nombre.form-control.datepicker(name='nombre', placeholder='Nombre', type='text' required)
-                            .col-md-2
-                                button.btn.btn-primary.btn-sm.add_field_button
+                                    input#nombre.form-control.apellido(name='nombre', placeholder='Nombre', type='text' required)
+                            .col-md-1
+                                a.action.btn.btn-primary.btn-sm.add_field_button(type='button',title='Agregar',data-tooltip='Agregar')
+                                    //- button(data-tooltip='Agregar').btn.btn-primary.btn-sm.add_field_button
                                     i.fa.fa-plus
-                                    |  Add 
+                                    //- |  Add 
                         .form-group
                             .input_fields_wrap
+                        .form-group
+                           
+                            label.col-md-3.control-label Apellido
+                            .col-md-7.inputGroupContainer
+                                .input-group
+                                    span.input-group-addon
+                                        span.i.fa.fa-user
+                                    input#apellido.form-control.datepicker(name='apellido', placeholder='apellido', type='text' required)
+                            .col-md-2
+                                a.action.btn.btn-primary.btn-sm.add_field_button2(type='button',title='Agregar',data-tooltip='Agregar')
+                                    //- button.btn.btn-primary.btn-sm.add_field_button2
+                                    i.fa.fa-plus
+                                     
+                        .form-group
+                            .input_fields_wrap2
+                        
                         
                         .form-group
-                            label.col-md-4.control-label Primer Apellido 
-                            .col-md-8.inputGroupContainer
-                                .input-group
-                                    span.input-group-addon
-                                        span.i.fa.fa-user
-                                    input#ap1.form-control(name='ap', placeholder='Primer Apellido', type='text' required)
-                        .form-group
-                            label.col-md-4.control-label Segundo Apellido 
-                            .col-md-8.inputGroupContainer
-                                .input-group
-                                    span.input-group-addon
-                                        span.i.fa.fa-user
-                                    input#ap2.form-control(name='ap2', placeholder='Segundo Apellido', type='text' required)
-                        .form-group
-                            label.col-md-4.control-label Tercer Apellido 
-                            .col-md-8.inputGroupContainer
-                                .input-group
-                                    span.input-group-addon
-                                        span.i.fa.fa-user
-                                    input#ap2.form-control(name='ap3', placeholder='Tercer Apellido', type='text' required)
-                        .form-group
-                            label.col-md-4.control-label Matricula
+                            label.col-md-3.control-label Matricula
                             .col-md-8.inputGroupContainer
                                 .input-group
                                     span.input-group-addon
                                         span.i.fa.fa-fingerprint
                                     input#matricula.form-control(name='matricula', placeholder='matricula', type='number' required)
                         .form-group
-                            label.col-md-4.control-label Departramento
+                            label.col-md-3.control-label Departramento
                             .col-md-8.inputGroupContainer
                                 .input-group
                                     span.input-group-addon
@@ -73,7 +69,7 @@
                                         each item, i in items3
                                             option(value=item.id) #{item.departamento}
                         .form-group
-                            label.col-md-4.control-label Grado
+                            label.col-md-3.control-label Grado
                             .col-md-8.inputGroupContainer
                                 .input-group
                                     span.input-group-addon
@@ -85,7 +81,7 @@
                                             -if (item.idgrado !== 3  & item.idgrado !== 4 & item.idgrado !== 5 & item.idgrado !== 6 & item.idgrado !== 7)
                                                 option(value=item.idgrado)  #{item.grado}
                         .form-group
-                            label.col-md-4.control-label Genero
+                            label.col-md-3.control-label Genero
                             .col-md-8.inputGroupContainer
                                 .input-group
                                     span.input-group-addon
@@ -107,3 +103,4 @@
                                         span.i.fas.fa-times
                                         |  Cerrar
 script(type='text/javascript', src='/javascripts/addNombre.js')  
+script(type='text/javascript', src='/javascripts/addApellido.js')  

@@ -60,8 +60,8 @@ module.exports = {
                 // SQL Query > Select Data
                 
                 const query = client.query(`INSERT INTO "Tesis".especialidad(
-                    id, especialidad)
-                    VALUES (nextval (\'hibernate_sequence\'), '${especialidad}')`);
+                    especialidad)
+                    VALUES ('${especialidad}')`);
                 // Stream results back one row at a time
                 query.on('row', (row) => {
                     results.push(row);

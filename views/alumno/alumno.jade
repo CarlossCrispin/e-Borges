@@ -51,13 +51,13 @@ block content
                                     td= item.apellido2
                                     td= item.apellido3
                                     td= item.matricula
-                                    td= item.idgenero
-                                    td= item.iddepartamento
-                                    td= item.idgrado
+                                    td= item.genero
+                                    td= item.departamento
+                                    td= item.grado
                                    
                                     td
                                         .col-md-12
-                                            .col-md-4 
+                                            
                                                 a.action.btn.btn-sm.btn-primary(type='button', data-toggle='modal',title='Editar',
                                                     data-target='#editar',data-tooltip='Editar'
                                                     onclick=`showID("${item.idalumno}"),
@@ -68,22 +68,33 @@ block content
                                                         showText5("${item.apellido2}"),
                                                         showText6("${item.apellido3}"),
                                                         showText7("${item.matricula}"),
-                                                        showSelectVal1("${item.iddepartamento}"),
-                                                        showSelectVal2("${item.idgrado}"),
-                                                        showSelectVal3("${item.idgenero}")
+                                                        showSelect1("${item.departamento}"),
+                                                        showSelect2("${item.grado}"),
+                                                        showSelect3("${item.genero}")
                                                         `)
                                                     i.fa.fa-edit 
                                                 include editarAlumno
-                                            .col-md-4  
+                                        .col-md-12  
                                                 .action.btn.btn-sm.btn-danger(type='button', data-toggle='modal', data-target='#delete',
-                                                    onclick="showEliminar("+item.id+")",data-tooltip='Eliminar') 
+                                                    onclick="showEliminar("+item.idalumno+")",data-tooltip='Eliminar') 
                                                         i.fa.fa-trash
                                                 include eliminarAlumno
                                                            
-                                            .col-md-4 
+                                        .col-md-12 
                                                 a.action.btn.btn-sm.btn-info( data-toggle='modal', data-target='#consultar',data-tooltip='Consultar',
-                                                        onclick=`showID("${item.id}"),
-                                                        showAlumno("${item}")`)
+                                                        onclick=`showID("${item.idalumno}"),
+                                                        showText1("${item.nombre}"),
+                                                        showText2("${item.nombre2}"),
+                                                        showText3("${item.nombre3}"),
+                                                        showText4("${item.apellido}"),
+                                                        showText5("${item.apellido2}"),
+                                                        showText6("${item.apellido3}"),
+                                                        showText7("${item.matricula}"),
+                                                        showSelect1("${item.departamento}"),
+                                                        showSelect1("${item.departamento}"),
+                                                        showSelect2("${item.grado}"),
+                                                        showSelect3("${item.genero}")
+                                                        `)
                                                         i.fa.fa-eye 
                                                 include consultarAlumno
 

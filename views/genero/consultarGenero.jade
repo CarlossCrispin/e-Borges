@@ -10,9 +10,7 @@ link(rel='stylesheet', href='/stylesheets/detalle.css')
                     //- .texto-encima Texto
                     .centrado 
                         div(class='col-md-4 col-md-offset-0') 
-                            h2#TituloS.text-center
-                    
-
+                            h1 {{clickedUser.genero}} 
                 figcaption
                     .container
                         #accordion2.accordion
@@ -24,12 +22,7 @@ link(rel='stylesheet', href='/stylesheets/detalle.css')
                                         | Genero       
                                 #collapseOne.accordion-body.collapse.in
                                     .accordion-inner
-                                        div(class='col-md-12 col-md-offset-0')   
-                                            .col-md-5              
-                                                p#generoS
-                                            
-                            
-                            
+                                        p {{clickedUser.genero}}             
                             .accordion-heading
                                 a.accordion-toggle.button.btn.btn-danger(type='submit', data-dismiss='modal')
                                     span.i.fas.fa-times

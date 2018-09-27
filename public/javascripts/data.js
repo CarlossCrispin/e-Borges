@@ -62,11 +62,29 @@ function showText10(valor) {
 }
 function showSelect1(valor){
     var valor = valor;
-    alert("Ejemplo de alerta con JavaScript--->" + valor);
 
-    $("#selectVal1").text(valor);
+    $("#selecText1").text(valor);
     
     $("#select1")
+    
+        .find("option:contains("+valor+")")
+        .prop("selected", true);
+} 
+function showSelect2(valor){
+    var valor = valor;
+    $("#selecText2").text(valor);
+    
+    $("#select2")
+    
+        .find("option:contains("+valor+")")
+        .prop("selected", true);
+} 
+function showSelect3(valor){
+    var valor = valor;
+
+    $("#selecText3").text(valor);
+    
+    $("#select3")
     
         .find("option:contains("+valor+")")
         .prop("selected", true);

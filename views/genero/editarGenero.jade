@@ -1,39 +1,80 @@
-
-#editarGenero.modal.fade(role='dialog')
+#editar.modal.fade(role='dialog')
     .modal-dialog
         // Modal content
         .modal-content
-            .modal-header(style='padding:40px 50px;')
+            .modal-header
                 button.close(type='button', data-dismiss='modal') ×
-                h4
-                span.i.fa.fa-pencil-alt
-                |  Editar Genero
+                h4.modal-title
+                    span.i.fa.fa-edit
+                    |  Editar Genero
             .modal-body
-                
-                form(class="well form-horizontal" action='/genero/genero' method='post' autocomplete='off' )
-                    .form-group
-                        input#opc.form-control(required type='text' name='opc'  value='3' style="display:none")
-                        input#ID.form-control(required type='text' name='editar' style="display:none")
-                        label.col-md-4.control-label Genero
-                        .col-md-8.inputGroupContainer
-                            .input-group
-                                span.input-group-addon
-                                    span.i.fas.fa-transgender-alt
-                                input#genero.form-control(name='genero', placeholder='genero', type='text' required)
+                .panel.panel-default
+                    .panel-heading
+                        h3.panel-title Genero
+                    br
+                    form.form-horizontal(name='myFormEdit', novalidate='')
+                        .form-group
+                            label.col-md-4.control-label Nombre Genero :
+                            .col-md-7.inputGroupContainer
+                                .input-group
+                                    span.input-group-addon
+                                        span.i.fas.fa-transgender-alt
+                                    input.form-control(name='genero',type='text', ng-model='clickedUser.genero', required, ng-maxlength="50")
+                                span(style='color:red', ng-show='myFormEdit.genero.$invalid')
+                                    span(ng-show='myFormEdit.genero.$error.required') ingresa genero.
+                                    span(ng-show='myFormEdit.genero.$error.maxlength') Muy largo.
                     
-                    hr
-                    .form-group
-                        .col-md-2
-                        .col-md-3
+                    .panel-footer.text-right 
+                        hr   
+                        button.btn.btn-success(type='button', ng-click='updateUser(clickedUser)', data-dismiss='modal') 
+                            span.i.fas.fa-sync-alt
+                            |  Atualizar
+                        button.btn.btn-danger(type='button', data-dismiss='modal',ng-click='recupera()') 
+                            span.i.fas.fa-times
+                            |  Cerrar
+                        
+            //- .modal-footer
+               
+//- #editar.modal.fade(role='dialog')
+//-     .modal-dialog
+//-         // Modal content
+//-         .modal-content
+//-             .modal-header(style='padding:40px 50px;')
+//-                 button.close(type='button', data-dismiss='modal') ×
+//-                 h4
+//-                 span.i.fa.fa-pencil-alt
+//-                 |  Editar Genero
+//-             .modal-body
+//-                 .panel.panel-default
+//-                     .panel-heading
+//-                         h3.panel-title Genero
                     
-                            button.btn.btn-success(type='submit' name="registro")
-                                span.i.fas.fa-sync-alt
-                                |  Atualizar
-                        .col-md-2
-                        .col-md-3
-                            button.btn.btn-danger(type='submit', data-dismiss='modal')
-                                span.i.fas.fa-times
-                                |  Cerrar
-                        .col-md-2
-
-  
+//-                     form#actualizar(class="well form-horizontal" name="actualizar" action='/genero/genero' method='post' autocomplete='off' )
+//-                         .form-group
+//-                             input#opc.form-control( type='text' name='opc'  value='3' style="display:none")
+//-                             input.form-control(type='text' name='editar' style="display:none" ng-model='clickedUser.idgenero')
+//-                         .form-group
+//-                             label.col-md-4.control-label Genero
+//-                             .col-md-8.inputGroupContainer
+//-                                 .input-group
+//-                                     span.input-group-addon
+//-                                         span.i.fas.fa-transgender-alt
+//-                                     //- input#text1.form-control(name='genero', placeholder='genero', type='text' required,)
+//-                                     input.form-control(name='genero',type='text', ng-model='clickedUser.genero')
+                                    
+                        
+//-                         hr
+//-                         .form-group
+                            
+//-                             .col-md-2
+//-                             .col-md-3
+                        
+//-                                 button.btn.btn-success(type='submit' name="registro")
+//-                                     span.i.fas.fa-sync-alt
+//-                                     |  Editar
+//-                             .col-md-2
+//-                             .col-md-3
+//-                                 button.btn.btn-danger(data-dismiss='modal')
+//-                                     span.i.fas.fa-times
+//-                                     |  Cerrar
+//-                             .col-md-2

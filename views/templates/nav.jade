@@ -23,15 +23,10 @@ script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'
                   h1 &nbsp;&nbsp;&nbsp;Borges &nbsp;
               li
                 a
-              //- li
-              //-   a.page-scroll(href="http://expoenverdeser.com/" ,target="_blank")
-              //-     img.img-responsive(src="http://ced.sascdn.com/diff/1028/7181081/Banner-ME-EEVS-2017.gif", border="0" width="530" height="70")
-
+          
           #bs-example-navbar-collapse-1.collapse.navbar-collapse
             ul.nav.navbar-nav.navbar-right
-              //- li
-              //-   a.page-scroll(href="http://expoenverdeser.com/" ,target="_blank")
-              //-     img.img-responsive(src="http://ced.sascdn.com/diff/1028/7181081/Banner-ME-EEVS-2017.gif", border="0" width="530" height="70")
+             
               li.hidden
                 a.page-scroll(href='#page-top')    
               li  
@@ -47,28 +42,32 @@ script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'
                 //- li
                 //-   a.page-scroll(href='')='Bienvenido..' +user.nombre 
                 -if (user.rol=== "administrador")
-                  li.dropdown
-                    a.dropdown-toggle(data-toggle='dropdown', href='#') Entidades
-                      span.caret     
-                        ul.dropdown-menu
-                          li
-                            a(href='../acta/acta') Acta        
-                          li
-                            a(href='../actaPersona/actaPersona') Acta Persona     
-                          li
-                            a(href='../alumno/alumno') Alumno                
-                          li
-                            a(href='../genero/genero') Genero       
-                          li
-                            a(href='../grado/grado') Grado      
-                          li
-                            a(href='../departamento/departamento') Departamento      
-                          li
-                            a(href='../especialidad/especialidad') Especialidad      
-                          li
-                            a(href='../unidad/unidad') Unidad     
-                          li
-                            a(href='../alumno/showInvestigadores') Investigador      
+              li.dropdown
+                a.dropdown-toggle(data-toggle='dropdown', href='#') Entidades
+                  span.caret     
+                    ul.dropdown-menu
+                      li
+                        a(href='../acta/acta') Acta        
+                      li
+                        a(href='../actaPersona/actaPersona') Acta Persona     
+                      li
+                        a(href='../alumno/alumno') Alumno                
+                      li
+                        a(href='../departamento/departamento') Departamento      
+                      li
+                        a(href='../especialidad/especialidad') Especialidad      
+                      li
+                        a(href='../genero/genero') Genero       
+                      li
+                        a(href='../grado/grado') Grado      
+                      li
+                        a(href='../persona/persona') Persona     
+                      li
+                        a(href='../unidad/unidad') Unidad     
+                      li
+                        a(href='../usuario/usuario') Usuario    
+                      li
+                        a(href='../alumno/showInvestigadores') Investigador      
                                    
                           //- li
                           //-   a(href='#') Page 1-2        

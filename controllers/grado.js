@@ -60,8 +60,8 @@ module.exports = {
                 // SQL Query > Select Data
                 
                 const query = client.query(`INSERT INTO "Tesis".grado(
-                    id, grado)
-                    VALUES (nextval (\'hibernate_sequence\'), '${grado}')`);
+                    grado)
+                    VALUES (nextval ('${grado}')`);
                 // Stream results back one row at a time
                 query.on('row', (row) => {
                     results.push(row);
@@ -88,7 +88,7 @@ module.exports = {
                 }
                 // SQL Query > Select Data
                 const query = client.query(`DELETE FROM "Tesis".grado
-                WHERE id=${eliminar}`);
+                WHERE idgrado=${eliminar}`);
                 // Stream results back one row at a time
                 query.on('row', (row) => {
                     results.push(row);
@@ -115,7 +115,7 @@ module.exports = {
                 }
                 // SQL Query > Select Data
                 const query = client.query(`UPDATE "Tesis".grado SET
-                grado='${grado}' WHERE id=${editar}`);
+                grado='${grado}' WHERE idgrado=${editar}`);
                 // Stream results back one row at a time
                 query.on('row', (row) => {
                     results.push(row);

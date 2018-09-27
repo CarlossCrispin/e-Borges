@@ -27,7 +27,7 @@
                             .input-group
                                 span.input-group-addon
                                     span.i.fa.fa-user
-                                input#val2.form-control(name='nombre2', placeholder='Segundo Nombre', type='text' required)
+                                input#val2.form-control(name='nombre2', placeholder='Segundo Nombre', type='text' )
                     .form-group
                         label.col-md-4.control-label Tercer Nombre
                         .col-md-8.inputGroupContainer
@@ -41,21 +41,21 @@
                             .input-group
                                 span.input-group-addon
                                     span.i.fa.fa-user
-                                input#val4.form-control(name='ap', placeholder='Primer Apellido', type='text' required)
+                                input#val4.form-control(name='apellido', placeholder='Primer Apellido', type='text' required)
                     .form-group
                         label.col-md-4.control-label Segundo Apellido 
                         .col-md-8.inputGroupContainer
                             .input-group
                                 span.input-group-addon
                                     span.i.fa.fa-user
-                                input#val5.form-control(name='ap2', placeholder='Segundo Apellido', type='text' required)
+                                input#val5.form-control(name='apellido2', placeholder='Segundo Apellido', type='text')
                     .form-group
                         label.col-md-4.control-label Tercer Apellido 
                         .col-md-8.inputGroupContainer
                             .input-group
                                 span.input-group-addon
                                     span.i.fa.fa-user
-                                input#val6.form-control(name='ap3', placeholder='Tercer Apellido', type='text' required)
+                                input#val6.form-control(name='apellido3', placeholder='Tercer Apellido', type='text')
                     .form-group
                         label.col-md-4.control-label Matricula
                         .col-md-8.inputGroupContainer
@@ -69,7 +69,7 @@
                             .input-group
                                 span.input-group-addon
                                     span.i.fas.fa-vector-square
-                                select#selectVal1.form-contro(name="departamento" , class="form-control"  required)
+                                select#select1.form-contro(name="departamento" , class="form-control"  required)
                                     option(value='', disabled='', selected='') Elija una opcion
                                     each item, i in items3
                                         option(value=item.id) #{item.departamento}
@@ -79,7 +79,7 @@
                             .input-group
                                 span.input-group-addon
                                     span.i.fas.fa-user-graduate
-                                select#selectVal2.form-control(name="grado"  class="form-control" data-style="btn-info" required)
+                                select#select2.form-control(name="grado"  class="form-control" data-style="btn-info" required)
                                     option(value='', disabled='', selected='') Elija una opcion
                                     each item, i in items4
                                         //- -if (item.idgrado == 1 & item.idgrado ==2 )

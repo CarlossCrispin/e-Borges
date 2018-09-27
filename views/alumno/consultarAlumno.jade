@@ -1,39 +1,101 @@
-
-#editarGenero.modal.fade(role='dialog')
-    .modal-dialog
-        // Modal content
+link(rel='stylesheet', href='/stylesheets/detalle.css')
+                        
+#consultar.modal.fade( role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
+    .modal-dialog(role='document')
         .modal-content
-            .modal-header(style='padding:40px 50px;')
-                button.close(type='button', data-dismiss='modal') ×
-                h4
-                span.i.fa.fa-pencil-alt
-                |  Editar Alumno
-            .modal-body
+            figure.snip1336
+                .contenedor
+                    img(src='http://eitmedia.mx/media/k2/items/cache/d7ef0b021f0753c7a876ceb95a8308cb_XL.jpg')
+                        
+                    //- .texto-encima Texto
+                    .centrado 
+                        div(class='col-md-4 col-md-offset-0') 
+                            h2#TituloS.text-center
                 
-                form(class="well form-horizontal" action='/genero/genero' method='post' autocomplete='off' )
-                    .form-group
-                        input#opc.form-control(required type='text' name='opc'  value='3' style="display:none")
-                        input#ID.form-control(required type='text' name='editar' style="display:none")
-                        label.col-md-4.control-label Genero
-                        .col-md-8.inputGroupContainer
-                            .input-group
-                                span.input-group-addon
-                                    span.i.fas.fa-transgender-alt
-                                input#genero.form-control(name='genero', placeholder='genero', type='text' required)
-                    
-                    hr
-                    .form-group
-                        .col-md-2
-                        .col-md-3
-                    
-                            button.btn.btn-success(type='submit' name="registro")
-                                span.i.fas.fa-sync-alt
-                                |  Atualizar
-                        .col-md-2
-                        .col-md-3
-                            button.btn.btn-danger(type='submit', data-dismiss='modal')
-                                span.i.fas.fa-times
-                                |  Cerrar
-                        .col-md-2
 
-  
+                figcaption
+                    .container
+                        #accordion2.accordion
+                            .accordion-group
+                              
+                                .accordion-heading
+                                    a.accordion-toggle(data-toggle='collapse', data-parent='#accordion2', href='#collapseOne')
+                                        span.i.fa.fa-user
+                                        | Nombre       
+                                #collapseOne.accordion-body.collapse.in
+                                    .accordion-inner
+                                        div(class='col-md-12 col-md-offset-0')   
+                                            .col-md-6
+                                                .col-md-2             
+                                                    p#text1
+                                                .col-md-2            
+                                                    p#text2
+                                                .col-md-2             
+                                                    p#text3
+                                               
+                                .accordion-heading
+                                    a.accordion-toggle(data-toggle='collapse', data-parent='#accordion', href='#collapse2')
+                                        span.i.fa.fa-user
+                                        | Apellido       
+                                #collapse2.accordion-body.collapse.in
+                                    .accordion-inner
+                                        div(class='col-md-12 col-md-offset-0')   
+                                            div(class='col-md-12 col-md-offset-0')   
+                                            .col-md-6
+                                                .col-md-2             
+                                                    p#text4
+                                                .col-md-2            
+                                                    p#text5
+                                                .col-md-2             
+                                                    p#text6
+                                .accordion-heading
+                                    a.accordion-toggle(data-toggle='collapse', data-parent='#accordion2', href='#collapse3')
+                                        span.i.fa.fa-fingerprint
+                                        | Matricula     
+                                #collapse3.accordion-body.collapse.in
+                                    .accordion-inner
+                                        div(class='col-md-12 col-md-offset-0')   
+                                            .col-md-5              
+                                                p#text7
+                                .accordion-heading
+                                    a.accordion-toggle(data-toggle='collapse', data-parent='#accordion2', href='#collapse4')
+                                        span.i.fas.fa-vector-square
+                                        | Departramento     
+                                #collapse4.accordion-body.collapse.in
+                                    .accordion-inner
+                                        div(class='col-md-12 col-md-offset-0')   
+                                            .col-md-5              
+                                                p#selecText1
+                                .accordion-heading
+                                    a.accordion-toggle(data-toggle='collapse', data-parent='#accordion2', href='#collapse5')
+                                        span.i.fas.fa-user-graduate
+                                        | Grado     
+                                #collapse5.accordion-body.collapse.in
+                                    .accordion-inner
+                                        div(class='col-md-12 col-md-offset-0')   
+                                            .col-md-5              
+                                                p#selecText2
+                                .accordion-heading
+                                    a.accordion-toggle(data-toggle='collapse', data-parent='#accordion2', href='#collapse6')
+                                        span.i.fas.fa-transgender-alt
+                                        | Genero     
+                                #collapse6.accordion-body.collapse.in
+                                    .accordion-inner
+                                        div(class='col-md-12 col-md-offset-0')   
+                                            .col-md-5              
+                                                p#selecText3
+                                                
+                            
+                            
+                            .accordion-heading
+                                a.accordion-toggle.button.btn.btn-danger(type='submit', data-dismiss='modal')
+                                    span.i.fas.fa-times
+                                    |  Cerrar
+                            
+                    
+                                
+
+                                        
+                
+
+                        

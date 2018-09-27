@@ -10,16 +10,59 @@
                 |  Registrar Acta
             .modal-body
                 
-                form(class="well form-horizontal" action='/grado/grado' method='post' autocomplete='off' )
+                form(class="well form-horizontal" action='/acta/acta' method='post' autocomplete='off' )
                     .form-group
                         input#opc.form-control(required type='text' name='opc'  value='1' style="display:none")
-                        label.col-md-4.control-label Acta
+                    //- .form-group
+                    //-     label.col-md-4.control-label Tesis
+                    //-     .col-md-8.inputGroupContainer
+                    //-         .input-group
+                    //-             span.input-group-addon
+                    //-                 span.i.fas.fa-book
+                    //-             input#grado.form-control(name='tesis', placeholder='tesis', type='text' required)
+                    .form-group
+                        label.col-md-4.control-label Tesis
                         .col-md-8.inputGroupContainer
                             .input-group
                                 span.input-group-addon
-                                    span.i.fas.fa-user-graduate
-                                input#grado.form-control(name='grado', placeholder='grado', type='text' required)
+                                    span.i.fas.fa-book
+                                select#tesis.form-control(name="tesis"  class="form-control" data-style="btn-info" required)
+                                    option(value='', disabled='', selected='') Elija una opcion
+                                    //- each item, i in items2
+                                        option(value=item.id) #{item.especialidad} 
+                                    option(value=null) prueba1
+                                    option(value=null) prueba2
+                    .form-group
+                        label.col-md-4.control-label Folio
+                        .col-md-8.inputGroupContainer
+                            .input-group
+                                span.input-group-addon
+                                    span.i.fas.fa-barcode
+                                input#folio.form-control(name='folio', placeholder='folio', type='text' required)
+                    .form-group
+                        label.col-md-4.control-label Lugar
+                        .col-md-8.inputGroupContainer
+                            .input-group
+                                span.input-group-addon
+                                    span.i.fas.fa-map-marker-alt
+                                select#lugar.form-control(name="lugar"  class="form-control" data-style="btn-info" required)
+                                    option(value='', disabled='', selected='') Elija una opcion
+                                    //- each item, i in items2
+                                        option(value=item.id) #{item.especialidad} 
+                                    option(value=3001) prueba1
+                                    option(value=3002) prueba2
+                    .form-group
+                        label.col-md-4.control-label Fecha
+                        .col-md-8.inputGroupContainer
+                            .input-group
+                                span.input-group-addon
+                                    span.i.fas.fa-calendar-alt
+                                input#fecha.form-control(name='fecha', placeholder='fecha', type='date' required)
+                                
                     
+
+
+
                     hr
                     .form-group
                         .col-md-2

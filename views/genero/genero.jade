@@ -4,62 +4,90 @@ block content
     br
     br
     br
-    div(class='col-md-6 col-md-offset-3')
-  
-        if Insert.length > 0
-            script(src='../javascripts/insert.js')
-        if Edit.length > 0
-            script(src='../javascripts/edit.js')
-        if Delete.length > 0
-            script(src='../javascripts/delete.js')
-       
-    .container
-        .panel.panel-default
-            .panel-heading
-            
-                h1.inverse.title.text-center Genero
-                hr
-        .panel.panel-default
-            .panel-heading
-                button.btn.btn-info.btn-lg(type='button', data-toggle='modal', data-target='#registrarGenero') Registrar Genero
-                br
-                div(class="table-responsive" )
-                    table#example.table.table-striped.table-bordered
-                        thead
-                            tr
-                                th Genero
-                                th Detalles   
-                            
+    div(ng-app='sortApp', ng-Cloak)
+        div(ng-controller='sortController') 
+            div(ng-init='recupera()')   
+                .container
+                    .panel.panel-default
+                        .panel-heading
+                            h1.inverse.title.text-center Genero
+                            hr
+                    .panel.panel-default
+                        .panel-heading
                         
-                        tbody
-                        
-                            each item, i in items
-                                tr
-                                    td= item.genero
-                                    td
-                                        .col-md-12
-                                            .col-md-4 
+                            br
+                            .panel-body
+                                .form-group.well
+                                    .input-group.col-md-12
+                                    
+                                        .col-md-4
+                                            button.btn.btn-info.btn-lg(type='button', data-toggle='modal', 
+                                                data-target='#registrar') Registrar Genero
+                                            include registrarGenero  
+                                        .col-md-4 
+                                            .input-group
+                                                .input-group-addon 
+                                                    label.control-label mostrar 
+                                                .inputGroupContainer
+                                                    select.btn.btn-default(ng-model='pageSize', ng-init="paginas[0]" ng-options='x for x in paginas ',  ng-click='informa();configPages(); ')
+                                                        //- option(value='') --Elige opcion--    
+                                        .col-md-4
+                                            .input-group
+                                                .input-group-addon
+                                                    span.fa.fa-search
+                                                input.form-control(type='text', ng-model='searchUserTerm', placeholder='Buscar...')
+                                                    
+                                .alert.alert-warning.fade.in.myAlert(ng-if='alertMassege')
+                                    a.close(href='#', data-dismiss='alert', ng-click='clickedAlert()') ×
+                                    h4 {{alertMassege}}
+                                table.table.table-striped.table-bordered(ng-init='configPages(); ')
+                                    tr.text-center
+                                        //- th Index
+                                        th 
+                                            a( ng-click="sortName = 'id'; sortReverse = !sortReverse")
+                                                | Genero
+                                                span.fa.fa-caret-down(ng-show='!sortReverse')
+                                                span.fa.fa-caret-up(ng-show='sortReverse')
+                                        
+                                        th Editar
+                                        th Borrar
+                                        th Detalles
+                                    tbody
+                                            //- tr(ng-repeat='user in users')
+                                        tr(ng-repeat='usuario in usuarios |orderBy:sortName:sortReverse|filter: searchUserTerm | startFromGrid: currentPage * pageSize | limitTo: pageSize', ,='', ng-click='seleccionarUsuario(idgenero)')
+                                            //- td {{$index+1}}
+                                            td {{usuario.genero}}
+                                            
+                                            td
+                                                //- button.btn.btn-warning(data-toggle='modal', data-target='#editModal', ng-click='selectUser(usuario)') Edit
                                                 a.action.btn.btn-sm.btn-primary(type='button', data-toggle='modal',title='Editar',
-                                                    data-target='#editarGenero',data-tooltip='Editar'
-                                                    onclick=`showID("${item.id}"),
-                                                        showGenero("${item.genero}")`)
+                                                    data-target='#editar',data-tooltip='Editar',ng-click='selectUser(usuario)')
                                                     i.fa.fa-edit 
                                                 include editarGenero
-                                            .col-md-4  
-                                                .action.btn.btn-sm.btn-danger(type='button', data-toggle='modal', data-target='#delete',
-                                                    onclick="showEliminar("+item.id+")",data-tooltip='Eliminar') 
+                                        
+                                            td
+                                                //- button.btn.btn-danger(data-toggle='modal', data-target='#deleteModal', ng-click='selectUser(user)') Delete
+                                                a.action.btn.btn-sm.btn-danger(type='button', data-toggle='modal', data-target='#delete',
+                                                    data-tooltip='Eliminar', ng-click='selectUser(usuario)') 
                                                         i.fa.fa-trash
                                                 include eliminarGenero
-                                                           
-                                            .col-md-4 
+                                            td  
+                                                
                                                 a.action.btn.btn-sm.btn-info( data-toggle='modal', data-target='#consultar',data-tooltip='Consultar',
-                                                        onclick=`showID("${item.id}"),
-                                                        showGenero("${item.genero}")`)
-                                                        i.fa.fa-eye 
-                                                include consultarGenero
+                                                    ng-click='selectUser(usuario)')
+                                                    i.fa.fa-eye 
+                                                include consultarGenero   
+                                
+                            .btn-group
+                                button.btn.btn-default(type='button', ng-disabled='currentPage == 0', ng-click='currentPage = currentPage - 1') «
+                                button.btn.btn-default(type='button', ng-disabled='currentPage == page.no - 1', ng-click='setPage(page.no)', ng-repeat='page in pages') {{page.no}}
+                                button.btn.btn-default(type='button', ng-disabled='currentPage >= usuarios.length/pageSize - 1', ,='', ng-click='currentPage = currentPage + 1') »
+                            
+           
+                                        
 
     script(type='text/javascript', src='/javascripts/genero.js')                       
-    section#services
-    include ../genero/registrarGenero                       
-                                
+                      
+                             
+                             
                                 

@@ -30,7 +30,8 @@ router.post('/acta/acta', AuthMiddleware.isLogged , controllers.acta.postActa);
 // --->ActaPersona
 router.get('/actaPersona/actaPersona', AuthMiddleware.isLogged , controllers.actaPersona.getActaPersona);
 router.post('/actaPersona/actaPersona', AuthMiddleware.isLogged , controllers.actaPersona.postActaPersona);
-// --->ActaPersona
+
+// --->Alumno
 router.get('/alumno/alumno', AuthMiddleware.isLogged , controllers.alumno.getAlumno);
 router.post('/alumno/alumno', AuthMiddleware.isLogged , controllers.alumno.postAlumno);
 
@@ -38,26 +39,39 @@ router.post('/alumno/alumno', AuthMiddleware.isLogged , controllers.alumno.postA
 router.get('/alumno/showAlumno', AuthMiddleware.isLogged , controllers.ShowAlumno.getShowAlumno);
 router.post('/alumno/showAlumno', AuthMiddleware.isLogged , controllers.ShowAlumno.postShowAlumno);
 
-//--->Genero
-router.get('/genero/genero', AuthMiddleware.isLogged , controllers.genero.getGenero);
-router.post('/genero/genero', AuthMiddleware.isLogged , controllers.genero.postGenero);
-
-//--->Grado
-router.get('/grado/grado', AuthMiddleware.isLogged , controllers.grado.getGrado);
-router.post('/grado/grado', AuthMiddleware.isLogged , controllers.grado.postGrado);
+//--->Departamento
+router.get('/departamento/departamento', AuthMiddleware.isLogged , controllers.departamento.getDepartamento);
+router.post('/departamento/departamento', AuthMiddleware.isLogged , controllers.departamento.postDepartamento);
 
 //--->Especialidad
 router.get('/especialidad/especialidad', AuthMiddleware.isLogged , controllers.especialidad.getEspecialidad);
 router.post('/especialidad/especialidad', AuthMiddleware.isLogged , controllers.especialidad.postEspecialidad);
 
-//--->Departamento
-router.get('/departamento/departamento', AuthMiddleware.isLogged , controllers.departamento.getDepartamento);
-router.post('/departamento/departamento', AuthMiddleware.isLogged , controllers.departamento.postDepartamento);
+//--->Genero
+router.get('/genero/genero',  controllers.genero.getGenero);
+router.get('/datos',  controllers.genero.data);
+// router.post('/genero/genero' , controllers.genero.postGenero);
+router.post('/insert' , controllers.genero.insert);
+router.post('/delete' , controllers.genero.delete);
+router.post('/update' , controllers.genero.update);
 
+
+//--->Grado
+router.get('/grado/grado', AuthMiddleware.isLogged , controllers.grado.getGrado);
+router.post('/grado/grado', AuthMiddleware.isLogged , controllers.grado.postGrado);
+
+//--->Persona
+router.get('/persona/persona',  controllers.persona.getPersona);
+router.get('/datos/persona',  controllers.persona.data);
+router.post('/persona/persona',  controllers.persona.postPersona);
 
 //--->Unidad
 router.get('/unidad/unidad', AuthMiddleware.isLogged , controllers.unidad.getUnidad);
 router.post('/unidad/unidad', AuthMiddleware.isLogged , controllers.unidad.postUnidad);
+
+//--->User
+router.get('/usuario/usuario', AuthMiddleware.isLogged , controllers.usuario.getUsuario);
+
 
 
 module.exports = router;

@@ -22,8 +22,12 @@ module.exports = {
                 return res.status(500).json({ success: false, data: err });
             }
             // SQL Query > Select Data
-            const query = client.query(`SELECT *
-            FROM "Tesis".alumno`);
+            const query = client.query(`SELECT a.idalumno, a.nombre, a.nombre2,a.nombre3,a.apellido,a.apellido2,a.apellido3,a.matricula, 
+            g.genero,
+            d.departamento
+            FROM "Tesis".alumno a
+            inner join "Tesis".genero g on a.idgenero=g.idgenero
+            inner join "Tesis".departamento d on a.iddepartamento=d.iddepartamento`);
             const query2 = client.query(`SELECT *
             FROM "Tesis".genero`);
             const query3 = client.query(`SELECT *
@@ -82,17 +86,23 @@ module.exports = {
     postAlumno : function(req,res,next){
         var opc = req.body.opc;
         var nombre = req.body.nombre;
-        var nombre2 = req.body.nombre2;
-        var nombre3 = req.body.nombre3;
-        var apellido = req.body.ap;
-        var apellido2 = req.body.ap2;
-        var apellido3 = req.body.ap3;
+        // var nombre2 = req.body.nombre2;
+        // var nombre3 = req.body.nombre3;
+        var apellido = req.body.apellido;
+        // var apellido2 = req.body.ap2;
+        // var apellido3 = req.body.ap3;
         var matricula= req.body.matricula;
         var departamento= req.body.departamento;
         var genero=req.body.genero;
         var grado = req.body.grado;
         var eliminar=req.body.eliminar;
         var editar =req.body.editar;
+        var nom2 = req.body.nombre2 === undefined ? nombre2 = '' : nombre2 = req.body.nombre2
+        var nom3 = req.body.nombre3 === undefined ? nombre3 = '' : nombre3 = req.body.nombre3
+        var ape2 = req.body.apellido2 === undefined ? apellido2 = '' : apellido2 = req.body.apellido2
+        var ape3 = req.body.apellido3 === undefined ? apellido3 = '' : apellido3 = req.body.apellido3
+        
+        
         console.log(`-------DATOS------\n${opc}\n${eliminar}\n${editar}
         \n----------------------------------\n${nombre}\n${nombre2}\n${nombre3}\n${apellido}
         \n${apellido2}\n${apellido3}\n${matricula}\n${genero}\n${departamento}\n${grado}`)
@@ -109,9 +119,9 @@ module.exports = {
                 
                 const query = client.query(`INSERT INTO "Tesis".alumno(
                     idalumno, nombre, nombre2, nombre3, apellido,
-                     apellido2, apellido3, matricula, idgenero, iddepartamento, idgrado)
+                     apellido2, apellido3, matricula, idgenero, iddepartamento)
                     VALUES (nextval (\'hibernate_sequence\'),'${nombre}', '${nombre2}', '${nombre3}',
-                    '${apellido}', '${apellido2}', '${apellido3}', ${matricula}, ${genero}, ${departamento}, ${grado})`);
+                    '${apellido}', '${apellido2}', '${apellido3}', ${matricula}, ${genero}, ${departamento})`);
                 // Stream results back one row at a time
                 query.on('row', (row) => {
                     results.push(row);
@@ -137,7 +147,8 @@ module.exports = {
                     return res.status(500).json({ success: false, data: err });
                 }
                 // SQL Query > Select Data
-                const query = client.query(``);
+                const query = client.query(`DELETE FROM "Tesis".alumno
+                WHERE idalumno=${eliminar}`);
                 // Stream results back one row at a time
                 query.on('row', (row) => {
                     results.push(row);
@@ -166,7 +177,7 @@ module.exports = {
                 const query = client.query(`UPDATE "Tesis".alumno
                 SET  nombre='${nombre}', nombre2='${nombre2}', nombre3='${nombre3}', apellido='${apellido}',
                 apellido2= '${apellido2}', apellido3='${apellido3}', matricula=${matricula}, idgenero=${genero}, 
-                iddepartamento= ${departamento}, idgrado= ${grado}
+                iddepartamento= ${departamento}
                 WHERE  idalumno=${editar} `);
                 // Stream results back one row at a time
                 query.on('row', (row) => {

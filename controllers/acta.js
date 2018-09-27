@@ -46,10 +46,13 @@ module.exports = {
     },
     postActa : function(req,res,next){
         var opc = req.body.opc;
-        var acta = req.body.acta;
+        var tesis = req.body.tesis;
+        var folio = req.body.folio;
+        var lugar = req.body.lugar;
+        var fecha = req.body.fecha;
         var eliminar=req.body.eliminar;
         var editar =req.body.editar;
-        console.log(`-------DATOS------\n${opc}\n${acta}\n${eliminar}\n${editar}`)
+        console.log(`-------DATOS------\n${opc}\n${tesis}\n${folio}\n${lugar}\n${fecha}\n${eliminar}\n${editar}`)
         if(opc ==='1'){
 
             pg.connect(connectionString, function(err, client, done)  {
@@ -62,8 +65,8 @@ module.exports = {
                 // SQL Query > Select Data
                 
                 const query = client.query(`INSERT INTO "Tesis".acta(
-                    id, acta)
-                    VALUES (nextval (\'hibernate_sequence\'), '${acta}')`);
+                    idtesis, folio, idunidad, fecha)
+                    VALUES ( ${tesis},${folio},${lugar},'${fecha}')`);
                 // Stream results back one row at a time
                 query.on('row', (row) => {
                     results.push(row);

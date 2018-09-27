@@ -1,0 +1,154 @@
+link(rel='stylesheet', href='/stylesheets/check.css')
+#registrar.modal.fade(role='dialog')
+    .modal-dialog
+        // Modal content
+        .modal-content
+            .modal-header(style='padding:40px 50px;')
+                button.close(type='button', data-dismiss='modal') ×
+                h4
+                span.i.fa.fa-pencil-alt
+                |  Registrar Persona
+            .modal-body
+                .panel.panel-default
+                    .panel-heading
+                        h3.panel-title Persona
+                  
+                        
+                    form(class="well form-horizontal" action='/persona/persona' method='post' autocomplete='off' )
+                        .form-group
+                            input#opc.form-control(required type='text' name='opc'  value='1' style="display:none")
+                        .form-group
+                            label.col-md-3.control-label Nombre
+                            .col-md-7.inputGroupContainer
+                                .input-group
+                                    span.input-group-addon
+                                        span.i.fa.fa-user
+                                    input#nombre.form-control.apellido(name='nombre', placeholder='Nombre', type='text' required)
+                            .col-md-1
+                                a.action.btn.btn-primary.btn-sm.add_field_button(type='button',title='Agregar',data-tooltip='Agregar')
+                                    //- button(data-tooltip='Agregar').btn.btn-primary.btn-sm.add_field_button
+                                    i.fa.fa-plus
+                                    //- |  Add 
+                        .form-group
+                            .input_fields_wrap
+                        .form-group
+                           
+                            label.col-md-3.control-label Apellido
+                            .col-md-7.inputGroupContainer
+                                .input-group
+                                    span.input-group-addon
+                                        span.i.fa.fa-user
+                                    input#apellido.form-control.datepicker(name='apellido', placeholder='apellido', type='text' required)
+                            .col-md-2
+                                a.action.btn.btn-primary.btn-sm.add_field_button2(type='button',title='Agregar',data-tooltip='Agregar')
+                                    i.fa.fa-plus
+                                     
+                        .form-group
+                            .input_fields_wrap2
+                        
+                        .form-group
+                            label.col-md-3.control-label Grado
+                            .col-md-8.inputGroupContainer
+                                .input-group
+                                    span.input-group-addon
+                                        span.i.fas.fa-user-graduate
+                                    select(name="grado"  class="form-control" data-style="btn-info" required)
+                                        option(value='', disabled='', selected='') Elija una opcion
+                                        each item, i in items4
+                                            option(value=item.idgrado)  #{item.grado}
+                        .form-group
+                            label.col-md-3.control-label Genero
+                            .col-md-8.inputGroupContainer
+                                .input-group
+                                    span.input-group-addon
+                                        span.i.fas.fa-transgender-alt
+                                    select(name="genero"  class="form-control" data-style="btn-info" required)
+                                        option(value='', disabled='', selected='') Elija una opcion
+                                        each item, i in items2
+                                            option(value=item.idgenero) #{item.genero}
+                        .form-group
+                            label.col-md-3.control-label Departramento
+                            .col-md-8.inputGroupContainer
+                                .input-group
+                                    span.input-group-addon
+                                        span.i.fas.fa-vector-square
+                                    select#departamento(name="departamento" , class="form-control"  required)
+                                        option(value='', disabled='', selected='') Elija una opcion
+                                        each item, i in items3
+                                            option(value=item.iddepartamento) #{item.departamento}
+                        .form-group
+                            label.col-md-3.control-label ¿Es externo?
+                            .col-md-8.inputGroupContainer
+                                .input-group
+                                    span.input-group-addon
+                                        span.i.fa.fa-external-link-alt
+                                    .btn-group.btn-group-toggle(data-toggle='buttons')
+                                        .col-md-4
+                                            label.btn.btn-info.active
+                                                input#option1(type='radio', name='options', autocomplete='off',value='0',
+                                                onchange='javascript:showContent2()',required ) 
+                                                |  No 
+                                        .col-md-2
+                                        .col-md-2
+                                            label.btn.btn-info
+                                                input#option2(type='radio', name='options', autocomplete='off', value='1',
+                                                onchange='javascript:showContent2()' required)
+                                                |  Si
+                
+
+                        #content(style='display: none;')
+                                   
+                            .form-group
+                                label.col-md-3.control-label Institución
+                                .col-md-8.inputGroupContainer
+                                    .input-group
+                                        span.input-group-addon
+                                            span.i.fa.fa-building
+                                            
+                                        input#institucion.form-control(name='institucion', placeholder='Institución', type='text', required )
+                                
+                            .form-group
+                                label.col-md-3.control-label Puesto
+                                .col-md-8.inputGroupContainer
+                                    .input-group
+                                        span.input-group-addon
+                                            span.i.fa.fa-user-tie
+                                            
+                                        input#puesto.form-control(name='puesto', placeholder='Puesto', type='text', required)
+                   
+                        
+                        hr
+                        .form-group
+                            .col-md-2
+                            .col-md-3
+                        
+                                button.btn.btn-success(type='submit' name="registro")
+                                    span.i.fas.fa-sync-alt
+                                    |  Atualizar
+                            .col-md-2
+                            .col-md-3
+                                button.btn.btn-danger(type='submit', data-dismiss='modal')
+                                    span.i.fas.fa-times
+                                    |  Cerrar
+                            .col-md-2
+    script(type='text/javascript').
+        function showContent2() {
+            element = document.getElementById("content");
+            check = document.getElementById("option2");
+            if (check.checked) {
+                element.style.display='block';
+                document.getElementById("puesto").disabled=false;
+                document.getElementById("institucion").disabled=false;
+            }
+            element = document.getElementById("content");
+            check = document.getElementById("option1");
+            if (check.checked) {
+                element.style.display='none';
+                document.getElementById("puesto").disabled=true;
+                document.getElementById("institucion").disabled=true;
+            
+            }
+            
+        }                
+script(type='text/javascript', src='/javascripts/addNombre.js')  
+script(type='text/javascript', src='/javascripts/addApellido.js')  
