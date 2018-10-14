@@ -21,8 +21,8 @@ block content
                                     
                                         .col-md-4
                                             button.btn.btn-info.btn-lg(type='button', data-toggle='modal', 
-                                                data-target='#registrar') Registrar Genero
-                                            //- include registrarGenero  
+                                                data-target='#registrar') Registrar Persona
+                                            include registrarPersona  
                                         .col-md-4 
                                             .input-group
                                                 .input-group-addon 
@@ -39,136 +39,81 @@ block content
                                 .alert.alert-warning.fade.in.myAlert(ng-if='alertMassege')
                                     a.close(href='#', data-dismiss='alert', ng-click='clickedAlert()') ×
                                     h4 {{alertMassege}}
-                                div.col-md-12(class="table-responsive")
-                                    table.table.table-striped.table-bordered(ng-init='configPages(); ')
-                                        tr
-                                            th 
-                                                a( ng-click="sortName = 'idpersona'; sortReverse = !sortReverse")
-                                                    | Nombre
-                                                    span.fa.fa-caret-down(ng-show='!sortReverse')
-                                                    span.fa.fa-caret-up(ng-show='sortReverse')
-                                            th Nombre2
-                                            th Nombre3
-                                            th Apellido
-                                            th Apellido2
-                                            th Apellido3
-                                            th Grado
-                                            th Genero
-                                            th Departamento
-                                            th Externo
-                                            th Institucion
-                                            th Puesto
-                                            th Editar
-                                            th Detalles 
-                                            th Detalles 
-                                            
-                                        tbody
-                                            
-                                            tr(ng-repeat='persona in personas |orderBy:sortName:sortReverse|filter: searchUserTerm | startFromGrid: currentPage * pageSize | limitTo: pageSize', )
-                                                //- tr(ng-repeat='usuario in usuarios |orderBy:sortName:sortReverse|filter: searchUserTerm | startFromGrid: currentPage * pageSize | limitTo: pageSize') 
-                                                //- td {{persona.idpersona}}   
-                                                td {{persona.nombre}}
-                                                td {{persona.nombre2}}
-                                                //- td(ng-if='persona.nombre3 !== "NULL                                              "') {{persona.nombre3}}
-                                                td {{persona.nombre3}}
-                                                td {{persona.apellido}}
-                                                td {{persona.apellido2}}
-                                                td {{persona.apellido3}}
-                                                td {{persona.grado}}
-                                                td {{persona.genero}}
-                                                td {{persona.departamento}}
-                                                td {{persona.esexterno}}
-                                                td {{persona.institucion}}
-                                                td {{persona.puesto}}
-
-                                    .btn-group
-                                        button.btn.btn-default(type='button', ng-disabled='currentPage == 0', ng-click='currentPage = currentPage - 1') «
-                                        button.btn.btn-default(type='button', ng-disabled='currentPage == page.no - 1', ng-click='setPage(page.no)', ng-repeat='page in pages') {{page.no}}
-                                        button.btn.btn-default(type='button', ng-disabled='currentPage >= personas.length/pageSize - 1', ,='', ng-click='currentPage = currentPage + 1') » 
-                                        //- button.btn.btn-default(type='button', ng-disabled='currentPage >= usuarios.length/pageSize - 1', ,='', ng-click='currentPage = currentPage + 1') »
-                
-                                //- table#example.table.table-striped.table-bordered
-                                    thead
-                                        tr
-                                            th Nombre
-                                            th Nombre2
-                                            th Nombre3
-                                            th Apellido
-                                            th Apellido2
-                                            th Apellido3
-                                            th Grado
-                                            th Genero
-                                            th Departamento
-                                            th Externo
-                                            th Institucion
-                                            th Puesto
-                                            th Detalles   
-                                        
-                                    
-                                    tbody
-                                    
-                                        //- each item, i in items
-                                        for item in items
+                                .div(style="overflow-x:auto; " )
+                                    .table-responsive
+                                        table.table.table-striped.table-bordered.table-condensed(ng-init='configPages(); ')
                                             tr
-                                                td= item.nombre
-                                        
+                                                th 
+                                                    a( ng-click="sortName = 'idpersona'; sortReverse = !sortReverse")
+                                                        | Nombre
+                                                        span.fa.fa-caret-down(ng-show='!sortReverse')
+                                                        span.fa.fa-caret-up(ng-show='sortReverse')
+                                                th Nombre2
+                                                th Nombre3
+                                                th Apellido
+                                                th Apellido2
+                                                th Apellido3
+                                                th Grado
+                                                th Genero
+                                                th Departamento
+                                                th Externo
+                                                th Institucion
+                                                th Puesto
+                                                th Editar
+                                                th Borrar
+                                                th Detalles 
                                                 
-                                                td= item.nombre2
-                                            
-                                                -if (item.nombre3 === "NULL                                              ")
+                                            tbody
+                                                
+                                                tr(ng-repeat='persona in personas |orderBy:sortName:sortReverse|filter: searchUserTerm | startFromGrid: currentPage * pageSize | limitTo: pageSize', )
+                                                    //- tr(ng-repeat='usuario in usuarios |orderBy:sortName:sortReverse|filter: searchUserTerm | startFromGrid: currentPage * pageSize | limitTo: pageSize') 
+                                                    //- td {{persona.idpersona}}   
+                                                    //- td {{persona.nombre}}
+                                                    //- td {{persona.nombre2}}
+                                                    td(ng-show='persona.nombre !== "NULL                                              "') {{persona.nombre}}
+                                                    td(ng-show='persona.nombre == "NULL                                              "')
+                                                    td(ng-show='persona.nombre2 !== "NULL                                              "') {{persona.nombre2}}
+                                                    td(ng-show='persona.nombre2 == "NULL                                              "')
+                                                    td(ng-show='persona.nombre3 !== "NULL                                              "') {{persona.nombre3}}
+                                                    td(ng-show='persona.nombre3 == "NULL                                              "')
+                                                    td(ng-show='persona.apellido !== "NULL                                              "') {{persona.apellido}}
+                                                    td(ng-show='persona.apellido == "NULL                                              "')
+                                                    td(ng-show='persona.apellido2 !== "NULL                                              "') {{persona.apellido2}}
+                                                    td(ng-show='persona.apellido2 == "NULL                                              "')
+                                                    td(ng-show='persona.apellido3 !== "NULL                                              "') {{persona.apellido3}}
+                                                    td(ng-show='persona.apellido3 == "NULL                                              "')
+                                                    td {{persona.grado}}
+                                                    td {{persona.genero}}
+                                                    td {{persona.departamento}}
+                                                    //- td {{persona.esexterno}}
+                                                    //- td {{persona.institucion}}
+                                                    //- td {{persona.puesto}}
                                                     td 
-                                                -if (item.nombre3 !== "NULL                                              ")
-                                                    td= item.nombre3
-                                            
-                                                td= item.apellido
+                                                        a.action.btn.btn-sm.btn-primary(type='button', data-toggle='modal',title='Editar',
+                                                            data-target='#editar',data-tooltip='Editar',ng-click='selectPersona(persona)')
+                                                            i.fa.fa-edit 
+                                                    td
+                                                                   
+                                                        a.action.btn.btn-sm.btn-danger(type='button', data-toggle='modal', data-target='#delete',
+                                                            data-tooltip='Eliminar',ng-click='selectPersona(persona)') 
+                                                            i.fa.fa-trash
+                                                    td  
                                                 
-                                                -if (item.apellido2 === "NULL                                              ")
-                                                    td 
-                                                -if (item.apellido2 !== "NULL                                              ")
-                                                    td= item.apellido2
-                                                -if (item.apellido3 === "NULL                                              ")
-                                                    td 
-                                                -if (item.apellido3 !== "NULL                                              ")
-                                                    td= item.apellido3
-                                                td= item.grado
-                                                td= item.genero
-                                                td= item.departamento
-                                                
-                                                -if (item.esexterno === null)
-                                                    td No
-                                                td= item.institucion
-                                                td= item.puesto
-                                                td
-                                                
-                                                    //- .col-md-4 
-                                                    a.action.btn.btn-sm.btn-primary(type='button', data-toggle='modal',title='editar',
-                                                        data-target='#editar',data-tooltip='Editar'
-                                                        onclick=`showID("${item.idpersona}"),
-                                                            showText1("${item.nombre}"),
-                                                            showText2("${item.nombre2}"),
-                                                            showText3("${item.nombre3}"),
-                                                            showText4("${item.apellido}"),
-                                                            showText5("${item.apellido2}"),
-                                                            showText6("${item.apellido3}"),
-                                                            showSelect1("${item.grado}"),
-                                                            showSelect2("${item.genero}"),
-                                                            showSelect3("${item.departamento}")
-                                                            `)
-                                                        i.fa.fa-edit 
-                                                    //- include editarPersona
-                                                    //- .col-md-4  
-                                                    //-     .action.btn.btn-sm.btn-danger(type='button', data-toggle='modal', data-target='#delete',
-                                                    //-         onclick="showEliminar("+item.idPersona+")",data-tooltip='Eliminar') 
-                                                    //-             i.fa.fa-trash
-                                                    //-     //- include eliminarPersona
-                                                                    
-                                                    //- .col-md-4 
-                                                    //-     a.action.btn.btn-sm.btn-info( data-toggle='modal', data-target='#consultar',data-tooltip='Consultar',
-                                                    //-             onclick=`showID("${item.idPersona}"),
-                                                    //-             showPersona("${item.Persona}")`)
-                                                    //-             i.fa.fa-eye 
-                                                    //-     //- include consultarPersona
+                                                        a.action.btn.btn-sm.btn-info( data-toggle='modal', data-target='#consultar',data-tooltip='Consultar',
+                                                            ng-click='selectPersona(persona)')
+                                                            i.fa.fa-eye 
+                                                 
+                                                    
 
+                                        .btn-group
+                                            button.btn.btn-default(type='button', ng-disabled='currentPage == 0', ng-click='currentPage = currentPage - 1') «
+                                            button.btn.btn-default(type='button', ng-disabled='currentPage == page.no - 1', ng-click='setPage(page.no)', ng-repeat='page in pages') {{page.no}}
+                                            button.btn.btn-default(type='button', ng-disabled='currentPage >= personas.length/pageSize - 1', ,='', ng-click='currentPage = currentPage + 1') » 
+            
+            //- Modales
+            include editarPersona 
+            include eliminarPersona    
+            include consultarPersona                                     
     script(type='text/javascript', src='/javascripts/persona.js')   
                       
                                 

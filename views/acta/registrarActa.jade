@@ -1,83 +1,99 @@
- 
+
 #registrar.modal.fade(role='dialog')
     .modal-dialog
         // Modal content
         .modal-content
             .modal-header(style='padding:40px 50px;')
+                
                 button.close(type='button', data-dismiss='modal') ×
                 h4
                 span.i.fa.fa-pencil-alt
                 |  Registrar Acta
             .modal-body
+                .panel.panel-default
+                    .panel-heading
+                        h3.panel-title Acta
+                    br
                 
-                form(class="well form-horizontal" action='/acta/acta' method='post' autocomplete='off' )
-                    .form-group
-                        input#opc.form-control(required type='text' name='opc'  value='1' style="display:none")
-                    //- .form-group
-                    //-     label.col-md-4.control-label Tesis
-                    //-     .col-md-8.inputGroupContainer
-                    //-         .input-group
-                    //-             span.input-group-addon
-                    //-                 span.i.fas.fa-book
-                    //-             input#grado.form-control(name='tesis', placeholder='tesis', type='text' required)
-                    .form-group
-                        label.col-md-4.control-label Tesis
-                        .col-md-8.inputGroupContainer
-                            .input-group
-                                span.input-group-addon
-                                    span.i.fas.fa-book
-                                select#tesis.form-control(name="tesis"  class="form-control" data-style="btn-info" required)
-                                    option(value='', disabled='', selected='') Elija una opcion
-                                    //- each item, i in items2
-                                        option(value=item.id) #{item.especialidad} 
-                                    option(value=null) prueba1
-                                    option(value=null) prueba2
-                    .form-group
-                        label.col-md-4.control-label Folio
-                        .col-md-8.inputGroupContainer
-                            .input-group
-                                span.input-group-addon
-                                    span.i.fas.fa-barcode
-                                input#folio.form-control(name='folio', placeholder='folio', type='text' required)
-                    .form-group
-                        label.col-md-4.control-label Lugar
-                        .col-md-8.inputGroupContainer
-                            .input-group
-                                span.input-group-addon
-                                    span.i.fas.fa-map-marker-alt
-                                select#lugar.form-control(name="lugar"  class="form-control" data-style="btn-info" required)
-                                    option(value='', disabled='', selected='') Elija una opcion
-                                    //- each item, i in items2
-                                        option(value=item.id) #{item.especialidad} 
-                                    option(value=3001) prueba1
-                                    option(value=3002) prueba2
-                    .form-group
-                        label.col-md-4.control-label Fecha
-                        .col-md-8.inputGroupContainer
-                            .input-group
-                                span.input-group-addon
-                                    span.i.fas.fa-calendar-alt
-                                input#fecha.form-control(name='fecha', placeholder='fecha', type='date' required)
-                                
-                    
+                    form.form-horizontal(name='myFormReg', novalidate='')
+                        {{newActa}}
+                        //- {{tesis}}
+                        .form-group
+                            label.col-md-3.control-label Tesis
+                            .col-md-8.inputGroupContainer
+                                .input-group
+                                    .input-group-addon
+                                        span.i.fa.fa-book
+                                    .inputGroupContainer
+                                        select.btn.btn-default.col-md-8(name="tesis",ng-init="tesis" ,ng-model='newActa.tesis',ng-options='x.titulo for x in tesis',required )
+                                            option(style='display:none', value='') elige tesis ....    
+                                        span.input-group-text(style='color:red', ng-show='myFormReg.tesis.$invalid && myFormReg.tesis.$touched' )
+                                            span(ng-show='myFormReg.tesis.$error.required')     
+                                                | ingresa tesis.
+                        
+                        .form-group
+                            label.col-md-3.control-label Folio
+                            .col-md-8.inputGroupContainer
+                                .input-group
+                                    span.input-group-addon
+                                        span.i.fa.fa-file-signature
+                                    input.form-control(name='folio', placeholder='Folio', type='text', ng-model='newActa.folio', required, ng-maxlength="6" , disabled)
+                                       
+                                span(style='color:red', ng-show='myFormReg.folio.$invalid && myFormReg.folio.$touched')
+                                    span(ng-show='myFormReg.folio.$error.required') ingresa folio.
+                                    span(ng-show='myFormReg.folio.$error.maxlength') maximo 6.
+                        .form-group
+                            label.col-md-3.control-label Unidad
+                            .col-md-8.inputGroupContainer
+                                .input-group
+                                    .input-group-addon
+                                        span.i.fa.fa-book
+                                    .inputGroupContainer
+                                        select.btn.btn-default.col-md-8(name="unidad",ng-init="unidad" ,ng-model='newActa.unidad',ng-options='x.nombre for x in unidad',required )
+                                            option(style='display:none', value='') elige unidad ....    
+                                        span.input-group-text(style='color:red', ng-show='myFormReg.unidad.$invalid && myFormReg.unidad.$touched' )
+                                            span(ng-show='myFormReg.unidad.$error.required')     
+                                                | ingresa unidad.
+                        .form-group
+                            label.col-md-3.control-label Fecha
+                            .col-md-8.inputGroupContainer
+                                .input-group
+                                    span.input-group-addon
+                                        span.i.fa.fa-calendar-alt
+                                    input.form-control(type='date', name='fecha', ng-model='newActa.fecha', placeholder='yyyy-MM-dd', min='1996-01-01', max="{{anio}}-01-02", required)
+                                     
+                                span(style='color:red', ng-show='myFormReg.fecha.$invalid || myFormReg.fecha.$touched')
+                                    span(ng-show='myFormReg.fecha.$error.required') ingresa fecha.
+                                    span(ng-show='myFormReg.fecha.$error.max') error fecha no valida!.
+                                    span(ng-show='myFormReg.fecha.$error.date') fecha no valida!      
+                                                     
+                        .form-group
+                            label.col-md-3.control-label Libro
+                            .col-md-8.inputGroupContainer
+                                .input-group
+                                    span.input-group-addon
+                                        span.i.fa.fa-book
+                                    input.form-control(name='libro', placeholder='Libro', type='text', ng-model='newActa.libro', required, ng-maxlength="50" , 
+                                    )
+                                       
+                                span(style='color:red', ng-show='myFormReg.libro.$invalid && myFormReg.libro.$touched')
+                                    span(ng-show='myFormReg.libro.$error.required') ingresa libro.
+                                    span(ng-show='myFormReg.libro.$error.maxlength') maximo 6.
+                                          
+                        
 
+                     
+                    .panel-footer.text-right
+                        hr
+                        button.btn.btn-success(type='button', ng-click='saveActa()',data-dismiss='modal', 
+                            ng-disabled=`myFormReg.tesis.$invalid || 
+                                myFormReg.folio.$invalid || myFormReg.fecha.$invalid  
+                                || myFormReg.libro.$invalid` )
+                            span.i.fas.fa-check
+                            |  Registrar
+                        button.btn.btn-danger(data-dismiss='modal' ,ng-click='getActa()')
+                            span.i.fas.fa-times
+                            |  Cerrar
+                            
+                        
 
-
-                    hr
-                    .form-group
-                        .col-md-2
-                        .col-md-3
-                    
-                            button.btn.btn-success(type='submit' name="registro")
-                                span.i.fas.fa-check
-                                |  Registrar
-                        .col-md-2
-                        .col-md-3
-                            button.btn.btn-danger(type='submit', data-dismiss='modal')
-                                span.i.fas.fa-times
-                                |  Cerrar
-                        .col-md-2
-            //- .modal-footer
-                    
-
-  

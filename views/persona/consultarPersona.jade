@@ -10,7 +10,7 @@ link(rel='stylesheet', href='/stylesheets/detalle.css')
                     //- .texto-encima Texto
                     .centrado 
                         //- div(class='col-md-4 col-md-offset-0') 
-                        h1 {{clickedAlumno.nombre}} 
+                        h1 {{clickedPersona.nombre}} 
                 figcaption
                     .container
                         #accordion2.accordion
@@ -22,17 +22,17 @@ link(rel='stylesheet', href='/stylesheets/detalle.css')
                                         | Nombre     
                                 #collapseOne.accordion-body.collapse.in
                                     .accordion-inner
-                                        p {{clickedAlumno.nombre}} {{clickedAlumno.nombre2}} {{clickedAlumno.nombre3}}    
-                                         |   {{clickedAlumno.apellido}}  {{clickedAlumno.apellido2}} {{clickedAlumno.apellido3}}                
+                                        p {{clickedPersona.nombre}} {{clickedPersona.nombre2}} {{clickedPersona.nombre3}}    
+                                            {{clickedPersona.apellido}}  {{clickedPersona.apellido2}} {{clickedPersona.apellido3}}                
                             
                             
                                 .accordion-heading
                                     a.accordion-toggle(data-toggle='collapse', data-parent='#accordion3', href='#collapse2')
-                                        span.i.fa.fa-fingerprint
-                                        | Matrícula 
+                                        span.i.fas.fa-user-graduate
+                                        | Grado    
                                 #collapse2.accordion-body.collapse.in
                                     .accordion-inner
-                                        p {{clickedAlumno.matricula}}
+                                        p {{clickedPersona.grado}}
                             
                                 .accordion-heading
                                     a.accordion-toggle(data-toggle='collapse', data-parent='#accordion4', href='#collapse3')
@@ -40,7 +40,7 @@ link(rel='stylesheet', href='/stylesheets/detalle.css')
                                         | Genero    
                                 #collapse3.accordion-body.collapse.in
                                     .accordion-inner
-                                        p {{clickedAlumno.genero}}
+                                        p {{clickedPersona.genero}}
 
                                 .accordion-heading
                                     a.accordion-toggle(data-toggle='collapse', data-parent='#accordion5', href='#collapse4')
@@ -48,7 +48,7 @@ link(rel='stylesheet', href='/stylesheets/detalle.css')
                                         | Departamento   
                                 #collapse4.accordion-body.collapse.in
                                     .accordion-inner
-                                        p {{clickedAlumno.iddepartamento}}
+                                        p {{clickedPersona.departamento}}
                             
                             
                             .accordion-heading

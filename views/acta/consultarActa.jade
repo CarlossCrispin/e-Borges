@@ -10,9 +10,8 @@ link(rel='stylesheet', href='/stylesheets/detalle.css')
                     //- .texto-encima Texto
                     .centrado 
                         div(class='col-md-4 col-md-offset-0') 
-                            h2#TituloS.text-center
-                    
-
+                        h3 {{clickedActa.titulo}} 
+                            
                 figcaption
                     .container
                         #accordion2.accordion
@@ -20,20 +19,64 @@ link(rel='stylesheet', href='/stylesheets/detalle.css')
                               
                                 .accordion-heading
                                     a.accordion-toggle(data-toggle='collapse', data-parent='#accordion2', href='#collapseOne')
-                                        span.i.fas.fa-user-graduate
-                                        | Grado      
+                                        span.i.fas.fa-transgender-alt
+                                        | Título     
                                 #collapseOne.accordion-body.collapse.in
                                     .accordion-inner
-                                        div(class='col-md-12 col-md-offset-0')   
-                                            .col-md-5              
-                                                p#generoS
-                                            
-                            
-                            
-                            .accordion-heading
-                                a.accordion-toggle.button.btn.btn-danger(type='submit', data-dismiss='modal')
-                                    span.i.fas.fa-times
-                                    |  Cerrar
+                                        div(class='col-md-12 col-md-offset-0') 
+                                            .col-md-5
+                                                p.text-center {{clickedActa.titulo}}    
+                            .accordion-group
+                                .accordion-heading
+                                    a.accordion-toggle(data-toggle='collapse', data-parent='#accordion2', href='#collapseTwo')
+                                        i.fa.fa-file-signature
+                                        | Folio
+                                                        
+                                #collapseTwo.accordion-body.collapse.in
+                                    .accordion-inner
+                                        div(class='col-md-12 col-md-offset-0') 
+                                            .col-md-5
+                                                p {{clickedActa.folio}}      
+                            .accordion-group
+                                .accordion-heading
+                                    a.accordion-toggle(data-toggle='collapse', data-parent='#accordion2', href='#collapse3')
+                                        i.fa.fa-calendar-alt
+                                        | Fecha
+                                                        
+                                #collapse3.accordion-body.collapse.in
+                                    .accordion-inner
+                                        div(class='col-md-12 col-md-offset-0') 
+                                            .col-md-5
+                                                p {{clickedActa.fecha | date:'MM/dd/yyyy' }}      
+                            .accordion-group
+                                .accordion-heading
+                                    a.accordion-toggle(data-toggle='collapse', data-parent='#accordion2', href='#collapse4')
+                                        i.fa.fa-building
+                                        | Unidad
+                                                        
+                                #collapse4.accordion-body.collapse.in
+                                    .accordion-inner
+                                        div(class='col-md-12 col-md-offset-0') 
+                                            .col-md-5
+                                                p {{clickedActa.nombre }}      
+                            .accordion-group
+                                .accordion-heading
+                                    a.accordion-toggle(data-toggle='collapse', data-parent='#accordion2', href='#collapse5')
+                                        span.i.fas.fa-book
+                                        | Libro
+                                                        
+                                #collapse5.accordion-body.collapse.in
+                                    .accordion-inner
+                                        div(class='col-md-12 col-md-offset-0') 
+                                            .col-md-5
+                                                p {{clickedActa.libro }}      
+                            br     
+                        #accordion3.accordion
+                            .accordion-group               
+                                .accordion-heading
+                                    a.accordion-toggle.button.btn.btn-danger(type='submit', data-dismiss='modal')
+                                        span.i.fas.fa-times
+                                        |  Cerrar
                             
                     
                                 

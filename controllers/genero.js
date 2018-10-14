@@ -60,8 +60,8 @@ module.exports = {
             // SQL Query > Select Data
             
             const query = client.query(`INSERT INTO "Tesis".genero(
-                idgenero, genero)
-                VALUES (nextval('"Tesis".genero_idgenero_seq'), '${genero}')`);
+                genero)
+                VALUES ('${genero}')`);
             // Stream results back one row at a time
             query.on('row', (row) => {
                 results.push(row);

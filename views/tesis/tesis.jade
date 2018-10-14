@@ -1,0 +1,153 @@
+extends ../templates/default
+
+block content
+    br
+    br
+    br
+    
+    //- table#example.table.table-striped.table-bordered
+ 
+    //-     thead
+    //-         tr
+    //-             th Firstname
+    //-             th Lastname
+    //-             th Age
+    //-     tbody
+    //-         tr
+    //-             td Jill
+    //-             td Smith
+    //-             td 50
+    //-         tr
+    //-             td Eve
+    //-             td Jackson
+    //-             td 94
+    //-         tr
+    //-             td John
+    //-             td Doe
+    //-             td 80
+
+    div(ng-app='tesisApp', ng-Cloak)
+        div(ng-controller='tesisController') 
+            div(ng-init='getTesis()')   
+                .container
+                    .panel.panel-default
+                        .panel-heading
+                            h1.inverse.title.text-center Tesis
+                            hr
+                    .panel.panel-default
+                        .panel-heading
+                        
+                            br
+                            .panel-body
+                                .form-group.well
+                                    .input-group.col-md-12
+                                    
+                                        .col-md-4
+                                            button.btn.btn-info.btn-lg(type='button', data-toggle='modal', 
+                                                data-target='#registrar') Registrar Tesis
+                                            //- include registrartesis  
+                                        .col-md-4 
+                                            .input-group
+                                                .input-group-addon 
+                                                    label.control-label mostrar 
+                                                .inputGroupContainer
+                                                    select.btn.btn-default(ng-model='pageSize', ng-init="paginas[1]" ng-options='x for x in paginas ',  ng-click='informa();configPages(); ')
+                                                    //- input.form-control(type='text', name='buscar',ng-model='pageSize')
+                                                    //- input.form-control(type="text", ng-model="pageSize")
+                                                        //- option(value='') --Elige opcion--    
+                                           
+                                        .col-md-4
+                                        form.form-horizontal(name='myFormReg', novalidate='')
+                                            .input-group(name='myFormReg', novalidate='')
+                                                .input-group-addon
+                                                    span.fas.fa-search-plus
+                                                    //- |    Buscar
+                                                input.form-control(type='text', name='buscar',ng-model='buscar', placeholder='Buscar...',required)
+                                                input(ng-model='filtered.length', style="display:none")
+                                                span.input-group-btn
+                                                    a.action.button.btn.btn-danger(ng-click="buscar='';getTesis();configPages();filtroMensaje=false " ,ng-disabled="myFormReg.buscar.$invalid",data-tooltip='Borrar')
+                                                        span.i.fas.fa-times
+                                                    a.action.button.btn.btn-info(ng-click="configPages(); getTesis(); filtroMensaje=true" ,ng-disabled="myFormReg.buscar.$invalid",data-tooltip='Buscar')
+                                                        span.fas.fa-search
+
+                                                //- input.form-control(type='text', ng-model='startFromGrid', placeholder='Buscar...')
+                                                    
+                                .alert.alert-warning.fade.in.myAlert(ng-if='alertMassege')
+                                    a.close(href='#', data-dismiss='alert', ng-click='clickedAlert()') ×
+                                    h4 {{alertMassege}}
+                                
+                                //- {{entro}}
+                                | Total de Tesis {{tesis.length}} 
+                                br
+                                //- input(ng-model='filtered.length')
+                                //- alertMassege = "sfdghjk!!";
+                                div(ng-show="filtroMensaje")
+                                    h5 lista filtrada de {{filtered.length}} Tesis que contienen 
+                                        span(style='color:green'){{buscar}}
+                                table.table.table-striped.table-bordered(ng-init='configPages() ',)
+                                    tr.text-center
+                                        //- th Index
+                                        th ID
+                                        th 
+                                            a( ng-click="sortName = 'id'; sortReverse = !sortReverse")
+                                                | tesis
+                                                span.fa.fa-caret-down(ng-show='!sortReverse')
+                                                span.fa.fa-caret-up(ng-show='sortReverse')
+                                        th Resumen
+                                        th Alumno
+                                        th Director
+                                        th Editar
+                                        th Borrar
+                                        th Detalles
+                                    tbody
+                                            //- tr(ng-repeat='user in users')
+                                        tr(ng-repeat='item in filtered = (tesis | filter:buscar2)  |orderBy:sortName:sortReverse | startFromGrid: currentPage * pageSize | limitTo: pageSize')
+                                            //- tr(ng-repeat='item in filtered = (tesis | filter:buscar2)  |orderBy:sortName:sortReverse | startFromGrid: currentPage * pageSize | limitTo: pageSize',ng-if="item.idpersona==8")
+                                            //- td {{$index+1}}
+                                            div
+                                                td {{item.idtesis}}
+                                                td {{item.titulo}}
+                                                td {{item.resumen}}
+                                                td {{item.alumno}}
+                                                td {{item.idpersona}}
+                                                td {{item.persona}}
+                                            
+                                            td
+                                                //- button.btn.btn-warning(data-toggle='modal', data-target='#editModal', ng-click='selectUser(usuario)') Edit
+                                                a.action.btn.btn-sm.btn-primary(type='button', data-toggle='modal',title='Editar',
+                                                    data-target='#editar',data-tooltip='Editar',ng-click='selectUser(x)')
+                                                    i.fa.fa-edit 
+                                                //- include editartesis
+                                        
+                                            td
+                                                //- button.btn.btn-danger(data-toggle='modal', data-target='#deleteModal', ng-click='selectUser(user)') Delete
+                                                a.action.btn.btn-sm.btn-danger(type='button', data-toggle='modal', data-target='#delete',
+                                                    data-tooltip='Eliminar', ng-click='selectTesis(item)') 
+                                                        i.fa.fa-trash
+                                                //- include eliminartesis
+                                            td  
+                                                
+                                                a.action.btn.btn-sm.btn-info( data-toggle='modal', data-target='#consultar',data-tooltip='Consultar',
+                                                    ng-click='selectTesis(item)')
+                                                    i.fa.fa-eye 
+                                                //- include consultartesis   
+
+                           
+                            .btn-group
+                                button.btn.btn-default(type='button', ng-disabled='currentPage == 0', ng-click='currentPage = currentPage - 1') «
+                                button.btn.btn-default(type='button', ng-disabled='currentPage == page.no - 1', ng-click='setPage(page.no)', ng-repeat='page in pages') {{page.no}}
+                                button.btn.btn-default(type='button', ng-disabled='currentPage >= filtered.length/pageSize - 1', ,='', ng-click='currentPage = currentPage + 1') »
+                            
+           
+                                        
+            //- Modales
+            //- include editarPersona 
+            //- include eliminarPersona    
+            include consultarTesis                                    
+     
+    script(type='text/javascript', src='/javascripts/tesis.js')                       
+                          
+                      
+                             
+                             
+                                

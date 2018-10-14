@@ -4,100 +4,147 @@ block content
     br
     br
     br
-    div(class='col-md-6 col-md-offset-3')
-  
-        if Insert.length > 0
-            script(src='../javascripts/insert.js')
-        if Edit.length > 0
-            script(src='../javascripts/edit.js')
-        if Delete.length > 0
-            script(src='../javascripts/delete.js')
-       
-    .container
-        .panel.panel-default
-            .panel-heading
-            
-                h1.inverse.title.text-center Alumno
-                hr
-        .panel.panel-default
-            .panel-heading
-                button.btn.btn-info.btn-lg(type='button', data-toggle='modal', data-target='#registrar') Registrar Alumno
-                br
-                div(class="table-responsive" )
-                    table#example.table.table-striped.table-bordered
-                        thead
-                            tr
-                                th Nombre
-                                th Nombre2
-                                th Nombre3
-                                th Apellido
-                                th Apellido2
-                                th Apellido3
-                                th Matricula
-                                th Genero
-                                th Departamento
-                                th Grado
-                                th Detalles
+    div(ng-app='alumnoApp', ng-Cloak)
+        div(ng-controller='alumnoController') 
+            div(ng-init='getAlumno()')   
+                .container
+                    .panel.panel-default
+                        .panel-heading
+                            h1.inverse.title.text-center Alumno
+                            hr
+                    .panel.panel-default
+                        .panel-heading
+                            br
+                            .form-group.well
+                                .input-group.col-md-12
+                                
+                                    .col-md-4
+                                        button.btn.btn-info.btn-lg(type='button', data-toggle='modal', 
+                                            data-target='#registrar', ng-click="setFolio()") Registrar alumno
+                                        include registraralumno  
+                                    .col-md-4 
+                                        .input-group
+                                            .input-group-addon 
+                                                label.control-label mostrar 
+                                            .inputGroupContainer
+                                                select.btn.btn-default(ng-model='pageSize', ng-init="paginas[0]" ng-options='x for x in paginas ',  ng-click='informa();configPages(); ')
+                                                    //- option(value='') --Elige opcion--    
+                                    .col-md-4
+                                        form.form-horizontal(name='myFormSeacrh', novalidate='')
+                                            .input-group
+                                                .input-group-addon
+                                                    span.fas.fa-search-plus
+                                                    //- |    Buscar
+                                                input.form-control(type='text', name='buscar',ng-model='buscar', placeholder='Buscar...',required, ng-change="buscar2 = '';getAlumno();configPages();informa()")
+                                                
+                                                //- input(ng-model='filtered.length', style="display:none")
+                                                //- span.input-group-btn
+                                                //-     a.action.button.btn.btn-danger(ng-click="buscar='';getAlumno();configPages();filtroMensaje=false " ,ng-disabled="myFormSeacrh.buscar.$invalid",data-tooltip='Borrar')
+                                                //-         span.i.fas.fa-times
+                                                //-     a.action.button.btn.btn-info(ng-click="configPages(); getAlumno(); filtroMensaje=true" ,ng-disabled="myFormSeacrh.buscar.$invalid",data-tooltip='Buscar')
+                                                //-         span.fas.fa-search
+                                                
                             
-                        
-                        tbody
-                        
-                            each item, i in items
-                                tr
-                                    td= item.nombre
-                                    td= item.nombre2
-                                    td= item.nombre3
-                                    td= item.apellido
-                                    td= item.apellido2
-                                    td= item.apellido3
-                                    td= item.matricula
-                                    td= item.genero
-                                    td= item.departamento
-                                    td= item.grado
-                                   
-                                    td
-                                        .col-md-12
+                            
+                            
+                        .panel-body
+                            .alert.alert-warning.fade.in.myAlert(ng-if='alertMassege')
+                                a.close(href='#', data-dismiss='alert', ng-click='clickedAlert()') ×
+                                h4 {{alertMassege}}
+                            | Total de Alumnos {{alumnos.length}} 
+                            div(ng-show="buscar")
+                                h5 lista filtrada de {{filtered.length}} Tesis que contienen 
+                                    span(style='color:green') {{buscar}}
+                            .div(style="overflow-x:auto; " )
+                                .table-responsive
+                                    table.table.table-striped.table-bordered(ng-init='configPages(); ')
+                                        tr.text-center
+                                            //- th Index
+                                            th 
+                                                a( ng-click="sortName = 'id'; sortReverse = !sortReverse")
+                                                    | alumno
+                                                    span.fa.fa-caret-down(ng-show='!sortReverse')
+                                                    span.fa.fa-caret-up(ng-show='sortReverse')
                                             
-                                                a.action.btn.btn-sm.btn-primary(type='button', data-toggle='modal',title='Editar',
-                                                    data-target='#editar',data-tooltip='Editar'
-                                                    onclick=`showID("${item.idalumno}"),
-                                                        showText1("${item.nombre}"),
-                                                        showText2("${item.nombre2}"),
-                                                        showText3("${item.nombre3}"),
-                                                        showText4("${item.apellido}"),
-                                                        showText5("${item.apellido2}"),
-                                                        showText6("${item.apellido3}"),
-                                                        showText7("${item.matricula}"),
-                                                        showSelect1("${item.departamento}"),
-                                                        showSelect2("${item.grado}"),
-                                                        showSelect3("${item.genero}")
-                                                        `)
-                                                    i.fa.fa-edit 
-                                                include editarAlumno
-                                        .col-md-12  
-                                                .action.btn.btn-sm.btn-danger(type='button', data-toggle='modal', data-target='#delete',
-                                                    onclick="showEliminar("+item.idalumno+")",data-tooltip='Eliminar') 
-                                                        i.fa.fa-trash
-                                                include eliminarAlumno
-                                                           
-                                        .col-md-12 
-                                                a.action.btn.btn-sm.btn-info( data-toggle='modal', data-target='#consultar',data-tooltip='Consultar',
-                                                        onclick=`showID("${item.idalumno}"),
-                                                        showText1("${item.nombre}"),
-                                                        showText2("${item.nombre2}"),
-                                                        showText3("${item.nombre3}"),
-                                                        showText4("${item.apellido}"),
-                                                        showText5("${item.apellido2}"),
-                                                        showText6("${item.apellido3}"),
-                                                        showText7("${item.matricula}"),
-                                                        showSelect1("${item.departamento}"),
-                                                        showSelect1("${item.departamento}"),
-                                                        showSelect2("${item.grado}"),
-                                                        showSelect3("${item.genero}")
-                                                        `)
+                                            
+                                            th Nombre
+                                            th Nombre2
+                                            th Nombre3
+                                            th Apellido
+                                            th Apellido2
+                                            th Apellido3
+                                            th Matricula
+                                            th Genero
+                                        
+                                            th Editar
+                                            th Borrar
+                                            th Detalles
+                                        tbody
+                                                //- tr(ng-repeat='user in users')
+                                            tr(ng-repeat='item in filtered = (alumnos| filter:buscar2)  |orderBy:sortName:sortReverse| startFromGrid: currentPage * pageSize | limitTo: pageSize', ,='', ng-click='seleccionarUsuario(idalumno)')
+                                                //- td {{$index+1}}
+                                                td {{item.idalumno}}
+                                                td(ng-show='item.nombre !== "NULL                                              "') {{item.nombre}}
+                                                td(ng-show='item.nombre == "NULL                                              "')
+                                                td(ng-show='item.nombre2 !== "NULL                                              "') {{item.nombre2}}
+                                                td(ng-show='item.nombre2 == "NULL                                              "')
+                                                td(ng-show='item.nombre3 !== "NULL                                              "') {{item.nombre3}}
+                                                td(ng-show='item.nombre3 == "NULL                                              "')
+                                                td(ng-show='item.apellido !== "NULL                                              "') {{item.apellido}}
+                                                td(ng-show='item.apellido == "NULL                                              "')
+                                                td(ng-show='item.apellido2 !== "NULL                                              "') {{item.apellido2}}
+                                                td(ng-show='item.apellido2 == "NULL                                              "')
+                                                td(ng-show='item.apellido3 !== "NULL                                              "') {{item.apellido3}}
+                                                td(ng-show='item.apellido3 == "NULL                                              "')
+                                                td {{item.matricula}}
+                                                td {{item.genero}}
+                                                
+                                                td
+                                                    
+                                                    a.action.btn.btn-sm.btn-primary(type='button', data-toggle='modal',title='Editar',
+                                                        data-target='#editar',data-tooltip='Editar',ng-click='selectAlumno(item)')
+                                                        i.fa.fa-edit 
+                                                    
+                                            
+                                                td
+                                                    //- button.btn.btn-danger(data-toggle='modal', data-target='#deleteModal', ng-click='selectAlumno(user)') Delete
+                                                    a.action.btn.btn-sm.btn-danger(type='button', data-toggle='modal', data-target='#delete',
+                                                        data-tooltip='Eliminar', ng-click='selectAlumno(item)') 
+                                                            i.fa.fa-trash
+                                                   
+                                                td  
+                                                    
+                                                    a.action.btn.btn-sm.btn-info( data-toggle='modal', data-target='#consultar',data-tooltip='Consultar',
+                                                        ng-click='selectAlumno(item)')
                                                         i.fa.fa-eye 
-                                                include consultarAlumno
 
-    script(type='text/javascript', src='/javascripts/data.js')                       
-    section#services
-    include ../alumno/registrarAlumno
+                            .panel-footer
+                                //- .col-md-12  
+                                .input-group                    
+                                    .inputGroupContainer(ng-show="pages.length > 5")
+                                        h5 Estas en la Pagína No. 
+                                            span(style='color:green')  {{currentPage+1}}
+      
+                                    .btn-group(ng-show="pages.length > 5")
+                                        button.btn.btn-default(type='button', ng-disabled='currentPage == 0', ng-click='currentPage = currentPage - 1') «
+                                        button.btn.btn-default(type='button', ng-disabled='currentPage == page.no - 1', ng-click='setPage(page.no)', ng-repeat='page in pages | limitTo:5') {{page.no}} 
+                                        input-group-addon
+                                            span .....
+                                            button.btn.btn-default(type='button', ng-disabled='currentPage == page.no - 1', ng-click='setPage(page.no)', ng-repeat='page in pages | limitTo:5:alumno.length-5') {{page.no}} 
+                                            button.btn.btn-default(type='button', ng-disabled='currentPage >= filtered.length/pageSize - 1', ,='', ng-click='currentPage = currentPage + 1 ') »
+                                    .btn-group(ng-show="pages.length < 5")
+                                        button.btn.btn-default(type='button', ng-disabled='currentPage == 0', ng-click='currentPage = currentPage - 1') «
+                                        button.btn.btn-default(type='button', ng-disabled='currentPage == page.no - 1', ng-click='setPage(page.no)', ng-repeat='page in pages') {{page.no}}
+                                        button.btn.btn-default(type='button', ng-disabled='currentPage >= filtered.length/pageSize - 1', ,='', ng-click='currentPage = currentPage + 1') »
+                
+                                        
+                    //- Modales
+                    include editaralumno
+                    include eliminarAlumno   
+                    include consultaralumno                                     
+    
+    script(type='text/javascript', src='/javascripts/alumno.js')                       
+                      
+                             
+                             
+                                

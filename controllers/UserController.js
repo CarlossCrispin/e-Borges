@@ -18,10 +18,11 @@ module.exports = {
 		var salt = bcrypt.genSaltSync(10);
 		var password = bcrypt.hashSync(req.body.password, salt);
 
-		/*var user = {
+		var user = {
 			email : req.body.email,
 			nombre : req.body.nombre,
 			password : password
+		}
 		
        /* const {Pool} = require('pg')
 

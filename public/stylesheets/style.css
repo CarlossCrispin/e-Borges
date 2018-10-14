@@ -70,19 +70,8 @@
     }
      */
     
-    @media(max-width:992px){
-      .container{
-        padding-left:10px;
-        padding-right:10px;
-      }
-      .ml-2{
-        margin-left:0 !important;
-      }
-      .detail {
-        padding:0px;
-      }
     
-    }
+
     [data-tooltip] {
       position: relative;
       z-index: 2;

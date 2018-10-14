@@ -9,39 +9,62 @@ module.exports = {
 	*-----------------------------------------------*/
     getActa: function (req, res, next) {
 
-        const results = [];
+        return res.render('acta/acta',{
+            isAuthenticated: req.isAuthenticated(),
+            user: req.user
+        });
+
+    },
+    datosActa : function(req,res,next){
+        var results = [];
+        var results2 = [];
+        var results3 = [];
+        var datos=[];
         console.log(results)
         // cliente de Postgres del grupo de conexiones
         pg.connect(connectionString, function(err, client, done)  {
-            // Handle connection errors
+            // Error
             if (err) {
                 done();
                 console.log(err);
                 return res.status(500).json({ success: false, data: err });
             }
             // SQL Query > Select Data
-            const query = client.query(`SELECT *
-            FROM "Tesis".acta`);
-            // Stream results back one row at a time
+            var select = client.query(`SELECT * FROM "Tesis".vacta`);
+            var select2 = client.query(`SELECT idtesis,titulo FROM "Tesis".tesis`);
+            var select3 = client.query(`SELECT * FROM "Tesis".unidad`);
+            
+
+            var query = select
             query.on('row', (row) => {
                 results.push(row);
+            });
+            var query = select2
+            query.on('row', (row) => {
+                results2.push(row);
+            });
+            var query = select3
+            query.on('row', (row) => {
+                results3.push(row);
             });
             // After all data is returned, close connection and return results
             query.on('end', () => {
                 done();
                 console.log("se cerro base de datos")
-                console.log(JSON.stringify(results))
-                return res.render('acta/acta', {
-                    isAuthenticated: req.isAuthenticated(),
-                    user: req.user,
-                    items: results,
-                    Insert:req.flash('Insert'),
-                    Delete:req.flash('Delete'),
-                    Edit:req.flash('Edit')
-                });;
+                // console.log(JSON.stringify(results))
+                datos=[{
+                    actas:results,
+                    tesis:results2,
+                    unidad:results3
+
+                }]
+                console.log(datos)
+                return res.json(datos);
             });
             
         });    
+    },
+    insertActa : function(req,res,next){
 
     },
     postActa : function(req,res,next){

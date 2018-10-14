@@ -4,8 +4,8 @@ app.controller('sortController', function ($scope, $http) {
     $scope.currentPage = 0;
     $scope.pageSize = 5;
     $scope.pages = [];
-
-    $scope.newUser = {};
+    $scope.usuarios=[];
+    $scope.newUser = [];
     $scope.clickedUser = {};
     $scope.alertMassege = "";
  
@@ -49,7 +49,8 @@ app.controller('sortController', function ($scope, $http) {
                 if ($scope.currentPage >= $scope.pages.length)
                     $scope.currentPage = $scope.pages.length - 1;
             });
-    }
+    };
+    // $scope.recupera()
 
     $scope.saveUser = function () {
         console.log($scope.newUser)
@@ -134,10 +135,17 @@ app.controller('sortController', function ($scope, $http) {
     };
 
 })
-    .filter('startFromGrid', function () {
-        return function (input, start) {
-            start = +start;
-            return input.slice(start);
-        }
-    });
+app.filter('startFromGrid', function () {
+    return function (input, start) {
+        if (!input || !input.length) { return; }
+        start = +start;
+        return input.slice(start);
+    }
+});
+    // .filter('startFromGrid', function () {
+    //     return function (input, start) {
+    //         start = +start;
+    //         return input.slice(start);
+    //     }
+    // });
 

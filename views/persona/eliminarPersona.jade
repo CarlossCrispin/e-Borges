@@ -7,19 +7,19 @@
                 button.close(type='button', data-dismiss='modal') ×
                 h4
                 span.i.fa.fa-trash-alt
-                |  Borrar Alumno
+                |  Borrar Persona
             .modal-body
                 .panel.panel-default
                     .panel-heading
-                        h3.panel-title Alumno
+                        h3.panel-title Persona
                     br
                     h3.text-center| ¿Estás seguro de borrar 
-                        span(style='color:red') {{clickedAlumno.nombre}}
+                        span(style='color:red') {{clickedPersona.nombre}}
                         | ?
                     
                     .panel-footer.text-right
                         hr
-                        button.btn.btn-success(type='button', ng-click='deleteAlumno(clickedAlumno.idAlumno)', data-dismiss='modal' )
+                        button.btn.btn-success(type='button', ng-click='deletePersona(clickedPersona.idpersona)', data-dismiss='modal' )
                             span.i.fas.fa-check
                             |  Si
                         

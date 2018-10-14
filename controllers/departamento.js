@@ -1,5 +1,5 @@
 var pg = require("pg")
-const connection = require('.././database/config2');
+const connection = require('.././database/config');
 const connectionString = process.env.DATABASE_URL || connection;
 
 module.exports = {
@@ -20,10 +20,13 @@ module.exports = {
                 return res.status(500).json({ success: false, data: err });
             }
             // SQL Query > Select Data
-            const query = client.query(`SELECT a.iddepartamento, a.departamento,
-            c.especialidad
+            const query = client.query(`SELECT *
             FROM "Tesis".departamento a
-            inner join "Tesis".especialidad c on a.idespecialidad=c.idespecialidad`);
+       `);
+            // const query = client.query(`SELECT a.iddepartamento, a.departamento,
+            // c.especialidad
+            // FROM "Tesis".departamento a
+            // inner join "Tesis".especialidad c on a.idespecialidad=c.idespecialidad`);
             const query2 = client.query(`SELECT * from "Tesis".especialidad`);
             // Stream results back one row at a time
             query.on('row', (row) => {
