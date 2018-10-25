@@ -1,47 +1,54 @@
- 
-#registrarUnidad.modal.fade(role='dialog')
+
+#registrar.modal.fade(role='dialog')
     .modal-dialog
         // Modal content
         .modal-content
             .modal-header(style='padding:40px 50px;')
+                
                 button.close(type='button', data-dismiss='modal') ×
                 h4
                 span.i.fa.fa-pencil-alt
                 |  Registrar Unidad
             .modal-body
+                .panel.panel-default
+                    .panel-heading
+                        h3.panel-title Unidad
+                    br
                 
-                form(class="well form-horizontal" action='/unidad/unidad' method='post' autocomplete='off' )
-                    .form-group
-                        input#opc.form-control(required type='text' name='opc'  value='1' style="display:none")
-                        label.col-md-4.control-label Unidad
-                        .col-md-8.inputGroupContainer
-                            .input-group
-                                span.input-group-addon
-                                    span.i.fas.fa-university
-                                input#unidad.form-control(name='unidad', placeholder='unidad', type='text' required)
-                    .form-group
-                        label.col-md-4.control-label Lugar
-                        .col-md-8.inputGroupContainer
-                            .input-group
-                                span.input-group-addon
-                                    span.i.fas.fa-map-marker-alt
-                                textarea#lugar.form-control(required name='lugar',placeholder='lugar', cols='30', rows='2')
-                    
-                    hr
-                    .form-group
-                        .col-md-2
-                        .col-md-3
-                    
-                            button.btn.btn-success(type='submit' name="registro")
+                    form.form-horizontal(name='myFormReg', novalidate='')
+                        .form-group
+                            label.col-md-4.control-label Nombre Unidad :
+                            .col-md-7.inputGroupContainer
+                                .input-group
+                                    span.input-group-addon
+                                        span.i.fas.fa-university
+                                    input.form-control(name="unidad", type='text', placeholder='Unidad', ng-model='new.unidad', required, ng-maxlength="50")
+                                span(style='color:red', ng-show='myFormReg.unidad.$invalid && myFormReg.unidad.$touched')
+                                    span(ng-show='myFormReg.unidad.$error.required') ingresa unidad.
+                                    span(ng-show='myFormReg.unidad.$error.maxlength') Muy largo.
+                        .form-group
+                            label.col-md-4.control-label Lugar:
+                            .col-md-7.inputGroupContainer
+                                .input-group
+                                    span.input-group-addon
+                                        span.i.fas.fa-map-marker-alt
+                                    input.form-control(name="lugar", type='text', placeholder='Lugar', ng-model='new.lugar', required, ng-maxlength="50")
+                                span(style='color:red', ng-show='myFormReg.lugar.$invalid && myFormReg.lugar.$touched')
+                                    span(ng-show='myFormReg.lugar.$error.required') ingresa lugar.
+                                    span(ng-show='myFormReg.lugar.$error.maxlength') Muy largo.
+                                
+                     
+                        .panel-footer.text-right
+                            hr
+                            button.btn.btn-success(type='button', ng-click='save()',data-dismiss='modal', ng-disabled="myFormReg.unidad.$invalid || myFormReg.unidad.$invalid" )
                                 span.i.fas.fa-check
                                 |  Registrar
-                        .col-md-2
-                        .col-md-3
-                            button.btn.btn-danger(type='submit', data-dismiss='modal')
+                            button.btn.btn-danger(data-dismiss='modal' ,ng-click='get()')
                                 span.i.fas.fa-times
                                 |  Cerrar
-                        .col-md-2
-            //- .modal-footer
+                            
+                        
+
+
                     
 
-  

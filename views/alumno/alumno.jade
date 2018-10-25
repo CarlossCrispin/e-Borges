@@ -20,14 +20,14 @@ block content
                                 
                                     .col-md-4
                                         button.btn.btn-info.btn-lg(type='button', data-toggle='modal', 
-                                            data-target='#registrar', ng-click="setFolio()") Registrar alumno
-                                        include registraralumno  
+                                            data-target='#registrar') Registrar Alumno
+                                        include registrarAlumno
                                     .col-md-4 
                                         .input-group
                                             .input-group-addon 
                                                 label.control-label mostrar 
                                             .inputGroupContainer
-                                                select.btn.btn-default(ng-model='pageSize', ng-init="paginas[0]" ng-options='x for x in paginas ',  ng-click='informa();configPages(); ')
+                                                select.btn.btn-default(ng-model='pageSize', ng-init="paginas[0]" ng-options='x for x in paginas ',  ng-change='sizePag();configPages();')
                                                     //- option(value='') --Elige opcion--    
                                     .col-md-4
                                         form.form-horizontal(name='myFormSeacrh', novalidate='')
@@ -35,18 +35,9 @@ block content
                                                 .input-group-addon
                                                     span.fas.fa-search-plus
                                                     //- |    Buscar
-                                                input.form-control(type='text', name='buscar',ng-model='buscar', placeholder='Buscar...',required, ng-change="buscar2 = '';getAlumno();configPages();informa()")
-                                                
-                                                //- input(ng-model='filtered.length', style="display:none")
-                                                //- span.input-group-btn
-                                                //-     a.action.button.btn.btn-danger(ng-click="buscar='';getAlumno();configPages();filtroMensaje=false " ,ng-disabled="myFormSeacrh.buscar.$invalid",data-tooltip='Borrar')
-                                                //-         span.i.fas.fa-times
-                                                //-     a.action.button.btn.btn-info(ng-click="configPages(); getAlumno(); filtroMensaje=true" ,ng-disabled="myFormSeacrh.buscar.$invalid",data-tooltip='Buscar')
-                                                //-         span.fas.fa-search
-                                                
-                            
-                            
-                            
+                                                input.form-control(type='text', name='buscar',ng-model='buscar', placeholder='Buscar...',required, ng-change="buscar2 = '';getAlumno();configPages();sizePag()")
+
+                           
                         .panel-body
                             .alert.alert-warning.fade.in.myAlert(ng-if='alertMassege')
                                 a.close(href='#', data-dismiss='alert', ng-click='clickedAlert()') ×
@@ -61,7 +52,7 @@ block content
                                         tr.text-center
                                             //- th Index
                                             th 
-                                                a( ng-click="sortName = 'id'; sortReverse = !sortReverse")
+                                                a( ng-click="sortName = 'idalumno'; sortReverse = !sortReverse")
                                                     | alumno
                                                     span.fa.fa-caret-down(ng-show='!sortReverse')
                                                     span.fa.fa-caret-up(ng-show='sortReverse')

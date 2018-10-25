@@ -14,12 +14,12 @@
                         h3.panel-title Genero
                     br
                     h3.text-center| ¿Estás seguro de borrar 
-                        span(style='color:red') {{clickedUser.genero}}
+                        span(style='color:red') {{clicked.genero}} 
                         | ?
                     
                     .panel-footer.text-right
                         hr
-                        button.btn.btn-success(type='button', ng-click='deleteUser(clickedUser.idgenero)', data-dismiss='modal' )
+                        button.btn.btn-success(type='button', ng-click='delete(clicked.idgenero)', data-dismiss='modal' )
                             span.i.fas.fa-check
                             |  Si
                         

@@ -1,3 +1,5 @@
+
+
 link(rel='stylesheet', href='/stylesheets/detalle.css')
                         
 #consultar.modal.fade( role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
@@ -9,32 +11,35 @@ link(rel='stylesheet', href='/stylesheets/detalle.css')
                         
                     //- .texto-encima Texto
                     .centrado 
-                        div(class='col-md-4 col-md-offset-0') 
-                            h2#TituloS.text-center
-                    
-
+                        //- div(class='col-md-4 col-md-offset-0') 
+                        h1 {{clicked.especialidad}} 
                 figcaption
                     .container
                         #accordion2.accordion
                             .accordion-group
                               
-                                .accordion-heading
-                                    a.accordion-toggle(data-toggle='collapse', data-parent='#accordion2', href='#collapseOne')
-                                        span.i.fas.fa-flask
-                                        | Especialidad     
-                                #collapseOne.accordion-body.collapse.in
-                                    .accordion-inner
-                                        div(class='col-md-12 col-md-offset-0')   
-                                            .col-md-5              
-                                                p#text1
-                                            
                             
+                                .accordion-heading
+                                    a.accordion-toggle(data-toggle='collapse', data-parent='#accordion4', href='#collapse3')
+                                        pan.i.fas.fa-flask
+                                        | Especilaidad    
+                                #collapse3.accordion-body.collapse.in
+                                    .accordion-inner
+                                        p {{clicked.especialidad}}
+
                             
                             .accordion-heading
                                 a.accordion-toggle.button.btn.btn-danger(type='submit', data-dismiss='modal')
                                     span.i.fas.fa-times
                                     |  Cerrar
                             
+                    
+                                
+
+                                        
+                
+
+                        
                     
                                 
 

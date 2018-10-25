@@ -11,7 +11,7 @@
                 form(class="well form-horizontal" action='/auth/signin' method='post' autocomplete='off' )
                     .form-group
                         //- input#opc.form-control(required type='text' name='opc'  value='1' style="display:none")
-                        label.col-md-4.control-label(for='email') Usuario :
+                        label.col-md-4.control-label(for='username') Usuario :
                         .col-md-8.inputGroupContainer
                             .input-group
                                 span.input-group-addon
@@ -23,7 +23,7 @@
                             .input-group
                                 span.input-group-addon
                                     span.i.fas.fa-key
-                                input#pas.form-control(required formnovalidate="formnovalidate"  type='text' name='password' placeholder='Contraseña' )
+                                input#pas.form-control(required formnovalidate="formnovalidate"  type='password' name='password' placeholder='Contraseña' )
                         
                     hr
                     .form-group

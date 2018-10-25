@@ -8,10 +8,11 @@ var pg = require("pg")
 var client = new pg.Client(connection);
 client.connect();
 module.exports = {
-
+	
 	getSignUp : function(req, res, next){
 		return res.render('users/signup');
 	},
+
 
 	postSignUp: function(req, res, next){
 		
@@ -61,7 +62,7 @@ module.exports = {
 	getSignIn: function(req, res, next){
 		return res.render('users/signin', {message: req.flash('info'), authmessage : req.flash('authmessage')});
 	},
-
+	
 	logout : function(req, res, next){
 		req.logout();
 		res.redirect('/');

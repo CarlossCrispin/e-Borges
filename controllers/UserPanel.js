@@ -1,82 +1,148 @@
 
+// var pg = require("pg")
+// const connection = require('.././database/config');
+// var client = new pg.Client(connection);
+// client.connect();
 var pg = require("pg")
 const connection = require('.././database/config');
-var client = new pg.Client(connection);
-client.connect();
+const connectionString = process.env.DATABASE_URL || connection;
 module.exports = {
     getUserPanel: function (req, res, next) {
 
-        // var valor= req.body.departamento_id
-        client.query(`select 
-            t.id,
-            t.titulodetesis,
-            t.resumen,
-            (a.nombre || ' '|| a.apellido_1 ||' '||a.apellido_2) as alumno,
-            a1.id as id_alumno,
-            g.ngrado, 
-            d.ndepartamento,
-            u.nunidad,
-            (i.nombre || ' '|| i.apellido_1 ||' '||i.apellido_2) as director1,
-            i11.id as id_dir1,
-            (i2.nombre || ' '|| i2.apellido_1 ||' '||i2.apellido_2) as director2,
-            i22.id as id_dir2,
-            (i3.nombre || ' '|| i3.apellido_1 ||' '||i3.apellido_2) as director3,
-            i33.id as id_dir3,
-            (i4.nombre || ' '|| i4.apellido_1 ||' '||i4.apellido_2) as director4,
-            i44.id as id_dir4,
-            (i5.nombre || ' '|| i5.apellido_1 ||' '||i5.apellido_2) as director5,
-            i55.id as id_dir5
-            from  tesis t
-            inner join alumno a on t.alumno_id=a.id
-            inner join alumno a1 on t.alumno_id=a1.id
-            inner join grado g on t.grado_id=g.id
-            inner join unidad u on t.unidad_id=u.id
-            inner join departamento d on t.departamento_id=d.id
-            inner join investigador i on t.investigador1_id=i.id
-            inner join investigador i11 on t.investigador1_id=i11.id
-            left join investigador i2 on t.investigador2_id=i2.id
-            left join investigador i22 on t.investigador2_id=i22.id
-            left join investigador i3 on t.investigador3_id=i3.id
-            left join investigador i33 on t.investigador3_id=i33.id
-            left join investigador i4 on t.investigador4_id=i4.id
-            left join investigador i44 on t.investigador4_id=i44.id
-            left join investigador i5 on t.investigador5_id=i5.id
-            left join investigador i55 on t.investigador5_id=i55.id`, (err, results) => {
-                client.query('SELECT * FROM public.grado', (err, results1) => {
-                    //console.log(err,results1)	
-                    client.query('SELECT * FROM public.unidad', (err, results2) => {
-                        //console.log(err,results2)
-                        client.query('SELECT * FROM public.departamento', (err, results3) => {
-                            //console.log(err,results3)
-                            client.query('SELECT * FROM public.investigador', (err, results4) => {
+        return res.render('users/panel', {
+            isAuthenticated: req.isAuthenticated(),
+            user: req.user
 
-                                client.query('SELECT * FROM public.alumno', (err, results5) => {
+        });
+        // // var valor= req.body.departamento_id
+        // client.query(`select 
+        //     t.id,
+        //     t.titulodetesis,
+        //     t.resumen,
+        //     (a.nombre || ' '|| a.apellido_1 ||' '||a.apellido_2) as alumno,
+        //     a1.id as id_alumno,
+        //     g.ngrado, 
+        //     d.ndepartamento,
+        //     u.nunidad,
+        //     (i.nombre || ' '|| i.apellido_1 ||' '||i.apellido_2) as director1,
+        //     i11.id as id_dir1,
+        //     (i2.nombre || ' '|| i2.apellido_1 ||' '||i2.apellido_2) as director2,
+        //     i22.id as id_dir2,
+        //     (i3.nombre || ' '|| i3.apellido_1 ||' '||i3.apellido_2) as director3,
+        //     i33.id as id_dir3,
+        //     (i4.nombre || ' '|| i4.apellido_1 ||' '||i4.apellido_2) as director4,
+        //     i44.id as id_dir4,
+        //     (i5.nombre || ' '|| i5.apellido_1 ||' '||i5.apellido_2) as director5,
+        //     i55.id as id_dir5
+        //     from  tesis t
+        //     inner join alumno a on t.alumno_id=a.id
+        //     inner join alumno a1 on t.alumno_id=a1.id
+        //     inner join grado g on t.grado_id=g.id
+        //     inner join unidad u on t.unidad_id=u.id
+        //     inner join departamento d on t.departamento_id=d.id
+        //     inner join investigador i on t.investigador1_id=i.id
+        //     inner join investigador i11 on t.investigador1_id=i11.id
+        //     left join investigador i2 on t.investigador2_id=i2.id
+        //     left join investigador i22 on t.investigador2_id=i22.id
+        //     left join investigador i3 on t.investigador3_id=i3.id
+        //     left join investigador i33 on t.investigador3_id=i33.id
+        //     left join investigador i4 on t.investigador4_id=i4.id
+        //     left join investigador i44 on t.investigador4_id=i44.id
+        //     left join investigador i5 on t.investigador5_id=i5.id
+        //     left join investigador i55 on t.investigador5_id=i55.id`, (err, results) => {
+        //         client.query('SELECT * FROM public.grado', (err, results1) => {
+        //             //console.log(err,results1)	
+        //             client.query('SELECT * FROM public.unidad', (err, results2) => {
+        //                 //console.log(err,results2)
+        //                 client.query('SELECT * FROM public.departamento', (err, results3) => {
+        //                     //console.log(err,results3)
+        //                     client.query('SELECT * FROM public.investigador', (err, results4) => {
 
-                                    //console.log(err,results4)
-                                    //connection.end()
+        //                         client.query('SELECT * FROM public.alumno', (err, results5) => {
 
-                                    return res.render('users/panel', {
-                                        isAuthenticated: req.isAuthenticated(),
-                                        user: req.user,
-                                        // items: results.rows,
-                                        // items1: results1.rows,
-                                        // items2: results2.rows,
-                                        // items3: results3.rows,
-                                        // items4: results4.rows,
-                                        // items5: results5.rows,
-                                        tesis: req.flash('tesis'),
-                                        tesisEliminar: req.flash('tesisEliminar'),
-                                        tesisEditar: req.flash('tesisEditar'),
-                                        tesiser: req.flash('tesiser')
+        //                             //console.log(err,results4)
+        //                             //connection.end()
 
-                                    });
-                                });
-                            });
-                        });
-                    });
-                });
-            });
+        //                             return res.render('users/panel', {
+        //                                 isAuthenticated: req.isAuthenticated(),
+        //                                 user: req.user,
+        //                                 // items: results.rows,
+        //                                 // items1: results1.rows,
+        //                                 // items2: results2.rows,
+        //                                 // items3: results3.rows,
+        //                                 // items4: results4.rows,
+        //                                 // items5: results5.rows,
+        //                                 tesis: req.flash('tesis'),
+        //                                 tesisEliminar: req.flash('tesisEliminar'),
+        //                                 tesisEditar: req.flash('tesisEditar'),
+        //                                 tesiser: req.flash('tesiser')
+
+        //                             });
+        //                         });
+        //                     });
+        //                 });
+        //             });
+        //         });
+        //     });
     },
+    data: function (req, res, next) {
+        var results = [];
+        var results2 = [];
+        // var datos=[];
+        console.log(results)
+        var id = req.user.id
+        var rol = req.user.rol
+        // var query;
+        console.log("-------->" + rol)
+        console.log("-------->" + id)
+        // cliente de Postgres del grupo de conexiones
+
+        pg.connect(connectionString, function (err, client, done) {
+            // Handle connection errors
+            if (err) {
+                done();
+                console.log(err);
+                return res.status(500).json({ success: false, data: err });
+            }
+            // SQL Query > Select Data
+            var select = client.query(`SELECT * FROM "Tesis".vtesis`);
+            var select2 = client.query(`SELECT * FROM "Tesis".vtesis where idalumno=${id}`);
+            var select3 = client.query(`SELECT * FROM "Tesis".vtesis where iddirector=${id} OR idcodirector1=${id} OR idcodirector2=${id}
+                OR idcodirector3=${id} OR idcodirector4=${id}`);
+            var select4 = client.query(`SELECT * FROM "Tesis".alumno`);
+            if(rol === 'Administrador')  
+                var query = select
+            if (rol === 'alumno') 
+                var query = select2
+            if (rol === 'persona') 
+                var query = select3
+
+
+            query.on('row', (row) => {
+                results.push(row);
+            });
+           
+            var query = select4
+            query.on('row', (row) => {
+                results2.push(row);
+            });
+           
+            query.on('end', () => {
+                done();
+                console.log("se cerro base de datos")
+                // console.log(JSON.stringify(results))
+                // console.log(results)
+                // datos=[{
+                //     tesis=results,
+                //     alumno=results2
+                // }]
+                return res.json(results);
+            });
+
+
+        });
+    },
+
     postUserPanel: function (req, res, next) {
 
         var bot = req.body.valor1

@@ -13,157 +13,157 @@ link(rel='stylesheet', href='/stylesheets/check.css')
                     .panel-heading
                         h3.panel-title Alumno
                     br
-                    
-                    form.form-horizontal(name='myFormReg', novalidate='')
-                        //- {{newAlumno}}
-                        .form-group
-                            label.col-md-3.control-label Nombre 
-                            .col-md-8.inputGroupContainer
-                                .input-group
-                                    span.input-group-addon
-                                        span.i.fa.fa-user
-                                    input.form-control(name='nombre', placeholder='Nombre', type='text', ng-model='newAlumno.nombre', required, ng-maxlength="50" )
-                                    span.input-group-btn
-                                        button.btn.btn-primary(ng-show='!nombre2', ng-click='nombre2 = true',ng-disabled="myFormReg.nombre.$invalid ")
-                                            span.i.fa.fa-plus
-                                        //- button(ng-click="myFormReg.apellido.newAlumno.nombre.$rollbackViewValue(); newAlumno.nombre=''") 
-                                span(style='color:red', ng-show='myFormReg.nombre.$invalid && myFormReg.nombre.$touched')
-                                    span(ng-show='myFormReg.nombre.$error.required') ingresa nombre.
-                                    span(ng-show='myFormReg.nombre.$error.maxlength') maximo 50.
-                                    span.errorMes {{errorMes}}
-                                    span.errorMes {{errorMess}}
+                    .panel-body
+                        form.form-horizontal(name='myFormReg', novalidate='')
+                            //- {{newAlumno}}
+                            .form-group
+                                label.col-md-3.control-label Nombre 
+                                .col-md-8.inputGroupContainer
+                                    .input-group
+                                        span.input-group-addon
+                                            span.i.fa.fa-user
+                                        input.form-control(name='nombre', placeholder='Nombre', type='text', ng-model='newAlumno.nombre', required, ng-maxlength="50" )
+                                        span.input-group-btn
+                                            button.btn.btn-primary(ng-show='!nombre2', ng-click='nombre2 = true',ng-disabled="myFormReg.nombre.$invalid ")
+                                                span.i.fa.fa-plus
+                                            //- button(ng-click="myFormReg.apellido.newAlumno.nombre.$rollbackViewValue(); newAlumno.nombre=''") 
+                                    span(style='color:red', ng-show='myFormReg.nombre.$invalid && myFormReg.nombre.$touched')
+                                        span(ng-show='myFormReg.nombre.$error.required') ingresa nombre.
+                                        span(ng-show='myFormReg.nombre.$error.maxlength') maximo 50.
+                                        span.errorMes {{errorMes}}
+                                        span.errorMes {{errorMess}}
 
-            
-                        .form-group(ng-show='nombre2')
-                            label.col-md-3.control-label Nombre 2
-                            .col-md-8.inputGroupContainer
-                                .input-group
-                                    span.input-group-addon
-                                        span.i.fa.fa-user
-                                    input.form-control(name='nombre2', placeholder='Nombre 2', type='text', ng-model='newAlumno.nombre2', required, ng-maxlength="50" )
-                                    span.input-group-btn
-                                        button.btn.btn-primary(ng-show='!nombre3', ng-click='nombre3= true',ng-disabled="myFormReg.nombre2.$invalid ") 
-                                            span.i.fa.fa-plus
-                                        button.btn.btn-danger(ng-show='!nombre3', ng-click="nombre2 = false ;newAlumno.nombre2=''") 
-                                            span.i.fa.fa-minus
-                                  
-                                span(style='color:red', ng-show='myFormReg.nombre2.$invalid && myFormReg.nombre2.$touched')
-                                    span(ng-show='myFormReg.nombre2.$error.required') ingresa nombre.
-                                    span(ng-show='myFormReg.nombre2.$error.maxlength') maximo 50.
-                                    span.errorMes {{errorMes}}
-                                    span.errorMes {{errorMess}}
-                         
-                        .form-group(ng-show='nombre3')
-                            label.col-md-3.control-label Nombre 3
-                            .col-md-8.inputGroupContainer
-                                .input-group
-                                    span.input-group-addon
-                                        span.i.fa.fa-user
-                                    input.form-control(name='nombre3', placeholder='Nombre 3', type='text', ng-model='newAlumno.nombre3', required, ng-maxlength="50")
-                                    span.input-group-btn
-                                        button.btn.btn-danger(ng-click="nombre3 = false; newAlumno.nombre3=''") 
-                                            span.i.fa.fa-minus
-                                 
-                                span(style='color:red', ng-show='myFormReg.nombre3.$invalid && myFormReg.nombre3.$touched')
-                                    span(ng-show='myFormReg.nombre3.$error.required') ingresa nombre.
-                                    span(ng-show='myFormReg.nombre3.$error.maxlength') maximo 50.
-                                    span.errorMes {{errorMes}}
-                                    span.errorMes {{errorMess}}
-                                   
-  
-                        .form-group
-                            label.col-md-3.control-label Apellido
-                            .col-md-8.inputGroupContainer
-                                .input-group
-                                    span.input-group-addon
-                                        span.i.fa.fa-user
-                                    input.form-control(name='apellido', placeholder='Apellido', type='text', ng-model='newAlumno.apellido', required, ng-maxlength="50")
-                                    span.input-group-btn
-                                        button.btn.btn-primary(ng-show='!apellido2', ng-click='apellido2 = true', ng-disabled="myFormReg.apellido.$invalid")
-                                            span.i.fa.fa-plus
-                                        
-
-
-                                span(style='color:red', ng-show='myFormReg.apellido.$invalid && myFormReg.apellido.$touched')
-                                    span(ng-show='myFormReg.apellido.$error.required') ingresa apellido.
-                                    span(ng-show='myFormReg.apellido.$error.maxlength') maximo 50.
-                                    span.errorMes {{errorMes}}
-                                    span.errorMes {{errorMess}}
-                                   
-                            
-                        .form-group(ng-show='apellido2')
-                            label.col-md-3.control-label Apellido 2
-                            .col-md-8.inputGroupContainer
-                                .input-group
-                                    span.input-group-addon
-                                        span.i.fa.fa-user
-                                    input.form-control(name='apellido2', placeholder='Apellido 2', type='text', ng-model='newAlumno.apellido2', required, ng-maxlength="50")
-                                    span.input-group-btn
-                                        button.btn.btn-primary(ng-show='!apellido3', ng-click='apellido3= true',  ng-disabled="myFormReg.apellido.$invalid")
-                                            span.i.fa.fa-plus
-                                        button.btn.btn-danger(ng-show='!apellido3', ng-click="apellido2= false;newAlumno.apellido2=''")
-                                            span.i.fa.fa-minus
-                                span(style='color:red', ng-show='myFormReg.apellido2.$invalid  && myFormReg.apellido2.$touched')
-                                    span(ng-show='myFormReg.apellido2.$error.required') ingresa apellido.
-                                    span(ng-show='myFormReg.apellido2.$error.maxlength') maximo 50.
-                                    span.errorMes {{errorMes}}
-                                    span.errorMes {{errorMess}}
-
-                        .form-group(ng-show='apellido3')
-                            label.col-md-3.control-label Apellido 3
-                            .col-md-8.inputGroupContainer
-                                .input-group
-                                    span.input-group-addon
-                                        span.i.fa.fa-user
-                                    input.form-control(name='apellido3', placeholder='Apellido 3', type='text', ng-model='newAlumno.apellido3', required, ng-maxlength="50")
-                                    span.input-group-btn
-                                        button.btn.btn-danger(ng-click="apellido3= false;newAlumno.apellido3=''")
-                                            span.i.fa.fa-minus
-                                span(style='color:red', ng-show='myFormReg.apellido3.$invalid && myFormReg.apellido3.$touched' )
-                                    span(ng-show='myFormReg.apellido3.$error.required') ingresa apellido.
-                                    span(ng-show='myFormReg.apellido3.$error.maxlength') maximo 50.
-                                    span.errorMes {{errorMes}}
-                                    span.errorMes {{errorMess}}
-
-                        .form-group 
-                            label.col-md-3.control-label Matricula
-                            .col-md-8.inputGroupContainer
-                                .input-group
-                                    span.input-group-addon
-                                        span.i.fa.fa-fingerprint
-                                    input.form-control(name='matricula', placeholder='matricula', type='number', ng-model='newAlumno.matricula', required, ng-maxlength="8")    
-                                span(style='color:red', ng-show='myFormReg.matricula.$invalid && myFormReg.matricula.$touched')
-                                    span(ng-show='myFormReg.matricula.$error.required') ingresa matricula.
-                                    span(ng-show='myFormReg.matricula.$error.maxlength') maximo 50. 
+                
+                            .form-group(ng-show='nombre2')
+                                label.col-md-3.control-label Nombre 2
+                                .col-md-8.inputGroupContainer
+                                    .input-group
+                                        span.input-group-addon
+                                            span.i.fa.fa-user
+                                        input.form-control(name='nombre2', placeholder='Nombre 2', type='text', ng-model='newAlumno.nombre2', required, ng-maxlength="50" )
+                                        span.input-group-btn
+                                            button.btn.btn-primary(ng-show='!nombre3', ng-click='nombre3= true',ng-disabled="myFormReg.nombre2.$invalid ") 
+                                                span.i.fa.fa-plus
+                                            button.btn.btn-danger(ng-show='!nombre3', ng-click="nombre2 = false ;newAlumno.nombre2=''") 
+                                                span.i.fa.fa-minus
                                     
-                        .form-group
-                            label.col-md-3.control-label Genero
-                            .col-md-8.inputGroupContainer
-                                .input-group
-                                    .input-group-addon
-                                        span.i.fas.fa-transgender-alt
-                                    .inputGroupContainer
-                                        select.btn.btn-default(name="genero", ng-model='newAlumno.genero', ng-init="genero" ng-options='x.genero for x in genero',required )
-                                            option(style='display:none', value='') elige genero ....    
-                                        span.input-group-text(style='color:red', ng-show='myFormReg.genero.$invalid && myFormReg.genero.$touched' )
-                                            span(ng-show='myFormReg.genero.$error.required')     
-                                                | ingresa genero.
-                    
-                        .form-group
-                            label.col-md-3.control-label Departamento
-                            .col-md-8.inputGroupContainer
-                                .input-group
-                                    .input-group-addon
-                                        span.i.fas.fa-vector-square
-                                    .inputGroupContainer
+                                    span(style='color:red', ng-show='myFormReg.nombre2.$invalid && myFormReg.nombre2.$touched')
+                                        span(ng-show='myFormReg.nombre2.$error.required') ingresa nombre.
+                                        span(ng-show='myFormReg.nombre2.$error.maxlength') maximo 50.
+                                        span.errorMes {{errorMes}}
+                                        span.errorMes {{errorMess}}
+                            
+                            .form-group(ng-show='nombre3')
+                                label.col-md-3.control-label Nombre 3
+                                .col-md-8.inputGroupContainer
+                                    .input-group
+                                        span.input-group-addon
+                                            span.i.fa.fa-user
+                                        input.form-control(name='nombre3', placeholder='Nombre 3', type='text', ng-model='newAlumno.nombre3', required, ng-maxlength="50")
+                                        span.input-group-btn
+                                            button.btn.btn-danger(ng-click="nombre3 = false; newAlumno.nombre3=''") 
+                                                span.i.fa.fa-minus
+                                    
+                                    span(style='color:red', ng-show='myFormReg.nombre3.$invalid && myFormReg.nombre3.$touched')
+                                        span(ng-show='myFormReg.nombre3.$error.required') ingresa nombre.
+                                        span(ng-show='myFormReg.nombre3.$error.maxlength') maximo 50.
+                                        span.errorMes {{errorMes}}
+                                        span.errorMes {{errorMess}}
+                                    
+    
+                            .form-group
+                                label.col-md-3.control-label Apellido
+                                .col-md-8.inputGroupContainer
+                                    .input-group
+                                        span.input-group-addon
+                                            span.i.fa.fa-user
+                                        input.form-control(name='apellido', placeholder='Apellido', type='text', ng-model='newAlumno.apellido', required, ng-maxlength="50")
+                                        span.input-group-btn
+                                            button.btn.btn-primary(ng-show='!apellido2', ng-click='apellido2 = true', ng-disabled="myFormReg.apellido.$invalid")
+                                                span.i.fa.fa-plus
+                                            
+
+
+                                    span(style='color:red', ng-show='myFormReg.apellido.$invalid && myFormReg.apellido.$touched')
+                                        span(ng-show='myFormReg.apellido.$error.required') ingresa apellido.
+                                        span(ng-show='myFormReg.apellido.$error.maxlength') maximo 50.
+                                        span.errorMes {{errorMes}}
+                                        span.errorMes {{errorMess}}
+                                    
+                                
+                            .form-group(ng-show='apellido2')
+                                label.col-md-3.control-label Apellido 2
+                                .col-md-8.inputGroupContainer
+                                    .input-group
+                                        span.input-group-addon
+                                            span.i.fa.fa-user
+                                        input.form-control(name='apellido2', placeholder='Apellido 2', type='text', ng-model='newAlumno.apellido2', required, ng-maxlength="50")
+                                        span.input-group-btn
+                                            button.btn.btn-primary(ng-show='!apellido3', ng-click='apellido3= true',  ng-disabled="myFormReg.apellido.$invalid")
+                                                span.i.fa.fa-plus
+                                            button.btn.btn-danger(ng-show='!apellido3', ng-click="apellido2= false;newAlumno.apellido2=''")
+                                                span.i.fa.fa-minus
+                                    span(style='color:red', ng-show='myFormReg.apellido2.$invalid  && myFormReg.apellido2.$touched')
+                                        span(ng-show='myFormReg.apellido2.$error.required') ingresa apellido.
+                                        span(ng-show='myFormReg.apellido2.$error.maxlength') maximo 50.
+                                        span.errorMes {{errorMes}}
+                                        span.errorMes {{errorMess}}
+
+                            .form-group(ng-show='apellido3')
+                                label.col-md-3.control-label Apellido 3
+                                .col-md-8.inputGroupContainer
+                                    .input-group
+                                        span.input-group-addon
+                                            span.i.fa.fa-user
+                                        input.form-control(name='apellido3', placeholder='Apellido 3', type='text', ng-model='newAlumno.apellido3', required, ng-maxlength="50")
+                                        span.input-group-btn
+                                            button.btn.btn-danger(ng-click="apellido3= false;newAlumno.apellido3=''")
+                                                span.i.fa.fa-minus
+                                    span(style='color:red', ng-show='myFormReg.apellido3.$invalid && myFormReg.apellido3.$touched' )
+                                        span(ng-show='myFormReg.apellido3.$error.required') ingresa apellido.
+                                        span(ng-show='myFormReg.apellido3.$error.maxlength') maximo 50.
+                                        span.errorMes {{errorMes}}
+                                        span.errorMes {{errorMess}}
+
+                            .form-group 
+                                label.col-md-3.control-label Matricula
+                                .col-md-8.inputGroupContainer
+                                    .input-group
+                                        span.input-group-addon
+                                            span.i.fa.fa-fingerprint
+                                        input.form-control(name='matricula', placeholder='matricula', type='number', ng-model='newAlumno.matricula', required, ng-maxlength="8")    
+                                    span(style='color:red', ng-show='myFormReg.matricula.$invalid && myFormReg.matricula.$touched')
+                                        span(ng-show='myFormReg.matricula.$error.required') ingresa matricula.
+                                        span(ng-show='myFormReg.matricula.$error.maxlength') maximo 50. 
                                         
-                                        select.btn.btn-default.col-md-12(name="departamento", ng-model='newAlumno.departamento', ng-init="departamento" ng-options='x.departamento for x in departamento',required )
-                                            option(style='display:none', value='') elige departamento ....    
-                                        span.input-group-text(style='color:red', ng-show='myFormReg.departamento.$invalid && myFormReg.departamento.$touched' )
-                                            span(ng-show='myFormReg.departamento.$error.required')     
-                                                | ingresa departamento.
+                            .form-group
+                                label.col-md-3.control-label Genero
+                                .col-md-8.inputGroupContainer
+                                    .input-group
+                                        .input-group-addon
+                                            span.i.fas.fa-transgender-alt
+                                        .inputGroupContainer
+                                            select.btn.btn-default(name="genero", ng-model='newAlumno.genero', ng-init="genero" ng-options='x.genero for x in genero',required )
+                                                option(style='display:none', value='') elige genero ....    
+                                            span.input-group-text(style='color:red', ng-show='myFormReg.genero.$invalid && myFormReg.genero.$touched' )
+                                                span(ng-show='myFormReg.genero.$error.required')     
+                                                    | ingresa genero.
                         
-                        
+                            .form-group
+                                label.col-md-3.control-label Departamento
+                                .col-md-8.inputGroupContainer
+                                    .input-group
+                                        .input-group-addon
+                                            span.i.fas.fa-vector-square
+                                        .inputGroupContainer
+                                            
+                                            select.btn.btn-default.col-md-12(name="departamento", ng-model='newAlumno.departamento', ng-init="departamento" ng-options='x.departamento for x in departamento',required )
+                                                option(style='display:none', value='') elige departamento ....    
+                                            span.input-group-text(style='color:red', ng-show='myFormReg.departamento.$invalid && myFormReg.departamento.$touched' )
+                                                span(ng-show='myFormReg.departamento.$error.required')     
+                                                    | ingresa departamento.
+                            
+                            
                      
                         
                                       

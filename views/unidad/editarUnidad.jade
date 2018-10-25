@@ -1,5 +1,5 @@
 
-#editarUnidad.modal.fade(role='dialog')
+#editar.modal.fade(role='dialog')
     .modal-dialog
         // Modal content
         .modal-content
@@ -7,42 +7,46 @@
                 button.close(type='button', data-dismiss='modal') ×
                 h4
                 span.i.fa.fa-pencil-alt
-                |  Editar Unidad
+                |  Editar Departamento
             .modal-body
-                
-                form(class="well form-horizontal" action='/unidad/unidad' method='post' autocomplete='off' )
-                    .form-group
-                        input#opc.form-control(required type='text' name='opc'  value='3' style="display:none")
-                        input#ID.form-control(required type='text' name='editar' style="display:none")
-                        label.col-md-4.control-label Unidad
-                        .col-md-8.inputGroupContainer
-                            .input-group
-                                span.input-group-addon
-                                    span.i.fas.fa-university
-                                input#val.form-control(name='unidad', placeholder='unidad', type='text' required)
-                    .form-group
-                        label.col-md-4.control-label Lugar
-                        .col-md-8.inputGroupContainer
-                            .input-group
-                                span.input-group-addon
-                                    span.i.fas.fa-map-marker-alt
-                                textarea#text2.form-control(required name='lugar',placeholder='lugar', cols='30', rows='2')
+                .panel.panel-default
+                    .panel-heading
+                        h3.panel-title Departamento
+                    br
+                    .panel-body
+                        form.form-horizontal(name='myFormEdit', novalidate='')
+                            {{clicked}}
+                            .form-group
+                                label.col-md-4.control-label Nombre Unidad :
+                                .col-md-7.inputGroupContainer
+                                    .input-group
+                                        span.input-group-addon
+                                            span.i.fas.fa-university
+                                        input.form-control(name="unidad", type='text', placeholder='Unidad', ng-model='clicked.nombre', required, ng-maxlength="500")
+                                    span(style='color:red', ng-show='myFormEdit.unidad.$invalid && myFormEdit.unidad.$touched')
+                                        span(ng-show='myFormEdit.unidad.$error.required') ingresa unidad.
+                                        span(ng-show='myFormEdit.unidad.$error.maxlength') Muy largo.
+                            .form-group
+                                label.col-md-4.control-label Lugar :
+                                .col-md-7.inputGroupContainer
+                                    .input-group
+                                        span.input-group-addon
+                                            span.i.fas.fa-map-marker-alt
+                                        input.form-control(name="lugar", type='text', placeholder='Lugar', ng-model='clicked.lugar', required, ng-maxlength="500")
+                                    span(style='color:red', ng-show='myFormEdit.lugar.$invalid && myFormEdit.lugar.$touched')
+                                        span(ng-show='myFormEdit.lugar.$error.required') ingresa lugar.
+                                        span(ng-show='myFormEdit.lugar.$error.maxlength') Muy largo.
+                            
+                                       
                     
-                    hr
-                    .form-group
-                        .col-md-2
-                        .col-md-3
-                    
-                            button.btn.btn-success(type='submit' name="registro")
-                                span.i.fas.fa-sync-alt
-                                |  Atualizar
-                        .col-md-2
-                        .col-md-3
-                            button.btn.btn-danger(type='submit', data-dismiss='modal')
-                                span.i.fas.fa-times
-                                |  Cerrar
-                        .col-md-2
-            //- .modal-footer
-                    
-
+                    .panel-footer.text-right
+                        hr
+                        button.btn.btn-success(type='button', ng-click='update(clicked)',data-dismiss='modal', 
+                             ng-disabled=`myFormEdit.unidad.$error.required || myFormEdit.unidad.$error.required` )
+                            span.i.fas.fa-sync-alt
+                            |  Atualizar
+                        button.btn.btn-danger(data-dismiss='modal' ,ng-click='get()')
+                            span.i.fas.fa-times
+                            |  Cerrar
+                        
   

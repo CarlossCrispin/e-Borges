@@ -4,62 +4,123 @@ block content
     br
     br
     br
-    div(class='col-md-6 col-md-offset-3')
-  
-        if Insert.length > 0
-            script(src='../javascripts/insert.js')
-        if Edit.length > 0
-            script(src='../javascripts/edit.js')
-        if Delete.length > 0
-            script(src='../javascripts/delete.js')
-       
-    .container
-        .panel.panel-default
-            .panel-heading
-            
-                h1.inverse.title.text-center Grado
-                hr
-        .panel.panel-default
-            .panel-heading
-                button.btn.btn-info.btn-lg(type='button', data-toggle='modal', data-target='#registrarGrado') Registrar Grado
-                br
-                div(class="table-responsive" )
-                    table#example.table.table-striped.table-bordered
-                        thead
-                            tr
-                                th Grado
-                                th Detalles   
-                            
-                        
-                        tbody
-                        
-                            each item, i in items
-                                tr
-                                    td= item.grado
-                                    td
-                                        .col-md-12
-                                            .col-md-4 
-                                                a.action.btn.btn-sm.btn-primary(type='button', data-toggle='modal',title='Editar',
-                                                    data-target='#editarGrado',data-tooltip='Editar'
-                                                    onclick=`showID("${item.idgrado}"),
-                                                        showGenero("${item.grado}")`)
-                                                    i.fa.fa-edit 
-                                                include editarGrado
-                                            .col-md-4  
-                                                .action.btn.btn-sm.btn-danger(type='button', data-toggle='modal', data-target='#delete',
-                                                    onclick="showEliminar("+item.idgrado+")",data-tooltip='Eliminar') 
-                                                        i.fa.fa-trash
-                                                include eliminarGrado
-                                                           
-                                            .col-md-4 
-                                                a.action.btn.btn-sm.btn-info( data-toggle='modal', data-target='#consultar',data-tooltip='Consultar',
-                                                        onclick=`showID("${item.idgrado}"),
-                                                        showGenero("${item.grado}")`)
-                                                        i.fa.fa-eye 
-                                                include consultarGrado
+    div(ng-app='gradoApp', ng-Cloak)
+        div(ng-controller='gradoController') 
+            div(ng-init='get()')   
+                .container
+                    .panel.panel-default
+                        .panel-heading
+                            h1.inverse.title.text-center grado
+                            hr
+                    .panel.panel-default
+                        .panel-heading
+                            br
+                            .form-group.well
+                                .input-group.col-md-12
+                                
+                                    .col-md-4
+                                        button.btn.btn-info.btn-lg(type='button', data-toggle='modal', 
+                                            data-target='#registrar') Registrar grado
+                                        include registrarGrado
+                                    .col-md-4 
+                                        .input-group
+                                            .input-group-addon 
+                                                label.control-label mostrar 
+                                            .inputGroupContainer
+                                                select.btn.btn-default(ng-model='pageSize', ng-init="paginas[0]" ng-options='x for x in paginas ',  ng-change='sizePag();configPages();')
+                                                    //- option(value='') --Elige opcion--    
+                                    .col-md-4
+                                        form.form-horizontal(name='myFormSeacrh', novalidate='')
+                                            .input-group
+                                                .input-group-addon
+                                                    span.fas.fa-search-plus
+                                                    //- |    Buscar
+                                                input.form-control(type='text', name='buscar',ng-model='buscar', placeholder='Buscar...',required, ng-change="buscar2 = '';getgrado();configPages();sizePag()")
 
-    script(type='text/javascript', src='/javascripts/genero.js')                       
-    section#services
-    include ../grado/registrarGrado                       
+                        .panel-body
+                            .alert.alert-warning.fade.in.myAlert(ng-if='alertMassege')
+                                a.close(href='#', data-dismiss='alert', ng-click='clickedAlert()') ×
+                                h4 {{alertMassege}}
+                            div(ng-show="!buscar")
+                                h5 Total de grados {{datos.length}} 
+                            div(ng-show="buscar")
+                                h5 lista filtrada de {{filtered.length}} grados que contienen 
+                                    span(style='color:green') {{buscar}}
+                            .div(style="overflow-x:auto; " )
+                                .table-responsive
+                                    table.table.table-striped.table-bordered(ng-init='configPages(); ')
+                                        tr.text-center
+                                            
+                                            th 
+                                                a( ng-click="sortName = 'idgrado'; sortReverse = !sortReverse")
+                                                    | Index
+                                                    span.fa.fa-caret-down(ng-show='!sortReverse')
+                                                    span.fa.fa-caret-up(ng-show='sortReverse')
+                                            th 
+                                                a( ng-click="sortName = 'grado'; sortReverse = !sortReverse")
+                                                    | grado
+                                                    span.fa.fa-caret-down(ng-show='!sortReverse')
+                                                    span.fa.fa-caret-up(ng-show='sortReverse')
+                                            
                                 
-                                
+                                        
+                                            th Editar
+                                            th Borrar
+                                            th Detalles
+                                        tbody
+                                            tr(ng-repeat='item in filtered = (datos| filter:buscar2)  |orderBy:sortName:sortReverse| startFromGrid: currentPage * pageSize | limitTo: pageSize', ,='', ng-click='seleccionarUsuario(idalumno)')
+                                                //- td {{$index+1}}
+                                                td {{item.idgrado}}
+                                                td {{item.grado}}
+                                               
+                                              
+                                                
+                                                td
+                                                    
+                                                    a.action.btn.btn-sm.btn-primary(type='button', data-toggle='modal',title='Editar',
+                                                        data-target='#editar',data-tooltip='Editar',ng-click='select(item)')
+                                                        i.fa.fa-edit 
+                                                    
+                                            
+                                                td
+                                                    //- button.btn.btn-danger(data-toggle='modal', data-target='#deleteModal', ng-click='selectItem(user)') Delete
+                                                    a.action.btn.btn-sm.btn-danger(type='button', data-toggle='modal', data-target='#delete',
+                                                        data-tooltip='Eliminar', ng-click='select(item)')
+                                                            i.fa.fa-trash
+                                                   
+                                                td  
+                                                    
+                                                    a.action.btn.btn-sm.btn-info( data-toggle='modal', data-target='#consultar',data-tooltip='Consultar',
+                                                        ng-click='select(item)')
+                                                        i.fa.fa-eye 
+
+                            .panel-footer
+                                //- .col-md-12  
+                                .input-group(ng-show="pages.length > 10")                    
+                                    .inputGroupContainer
+                                        h5 Estas en la Pagína No. 
+                                            span(style='color:green')  {{currentPage+1}}
+      
+                                    .btn-group
+                                        button.btn.btn-default(type='button', ng-disabled='currentPage == 0', ng-click='currentPage = currentPage - 1') «
+                                        button.btn.btn-default(type='button', ng-disabled='currentPage == page.no - 1', ng-click='setPage(page.no)', ng-repeat='page in pages | limitTo:3') {{page.no}} 
+                                        input-group-addon
+                                            span .....
+                                            button.btn.btn-default(type='button', ng-disabled='currentPage == page.no - 1', ng-click='setPage(page.no)', ng-repeat='page in pages | limitTo:grados.length-3:3') {{page.no}} 
+                                            button.btn.btn-default(type='button', ng-disabled='currentPage >= filtered.length/pageSize - 1', ,='', ng-click='currentPage = currentPage + 1 ') »
+                                .input-group(ng-show="pages.length < 10")    
+                                    .btn-group
+                                        button.btn.btn-default(type='button', ng-disabled='currentPage == 0', ng-click='currentPage = currentPage - 1') «
+                                        button.btn.btn-default(type='button', ng-disabled='currentPage == page.no - 1', ng-click='setPage(page.no)', ng-repeat='page in pages') {{page.no}}
+                                        button.btn.btn-default(type='button', ng-disabled='currentPage >= filtered.length/pageSize - 1', ,='', ng-click='currentPage = currentPage + 1') »
+                
+                                        
+
+
+
+                //- Modales
+                include editarGrado
+                include eliminarGrado 
+                include consultarGrado                                   
+    
+    script(type='text/javascript', src='/javascripts/grado.js')        

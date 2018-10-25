@@ -1,0 +1,43 @@
+
+.main-color-bg{
+  background-color: #282931 !important;
+  border-color: #000000 !important;
+  color:#ffffff !important;
+  
+}
+
+
+/* breadcrumb */
+.breadcrumb{
+  background: #cccccc;
+  color:#333333;
+}
+.breadcrumb a{
+  color: #333333;
+}
+/* progress bar*/
+.progress-bar{
+  background: #333333;
+  color: #ffffff;
+}
+/* wells */
+/* li {
+  color: #e90606;
+} */
+
+.well.dash-box{
+  background-color: #18bd9b !important;
+  padding: 0;
+  float: left;
+  margin: 50px;
+  list-style: none;
+  outline: solid;
+  width: 150px;
+  height: 150px;
+}
+.dash-box{
+  text-align: center;
+  background-color: #f50505;
+  
+}
+

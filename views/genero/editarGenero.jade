@@ -19,17 +19,17 @@
                                 .input-group
                                     span.input-group-addon
                                         span.i.fas.fa-transgender-alt
-                                    input.form-control(name='genero',type='text', ng-model='clickedUser.genero', required, ng-maxlength="50")
+                                    input.form-control(name='genero',type='text', ng-model='clicked.genero', required, ng-maxlength="50")
                                 span(style='color:red', ng-show='myFormEdit.genero.$invalid')
                                     span(ng-show='myFormEdit.genero.$error.required') ingresa genero.
                                     span(ng-show='myFormEdit.genero.$error.maxlength') Muy largo.
                     
                     .panel-footer.text-right 
                         hr   
-                        button.btn.btn-success(type='button', ng-click='updateUser(clickedUser)', data-dismiss='modal') 
+                        button.btn.btn-success(type='button', ng-click='update(clicked)', data-dismiss='modal') 
                             span.i.fas.fa-sync-alt
                             |  Atualizar
-                        button.btn.btn-danger(type='button', data-dismiss='modal',ng-click='recupera()') 
+                        button.btn.btn-danger(type='button', data-dismiss='modal',ng-click='get()') 
                             span.i.fas.fa-times
                             |  Cerrar
                         

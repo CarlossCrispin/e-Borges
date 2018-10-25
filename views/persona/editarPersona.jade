@@ -15,14 +15,14 @@
                     br
                     
                     form.form-horizontal(name='myFormEdit', novalidate='')
-                        
+                        {{clicked}}
                         .form-group
                             label.col-md-3.control-label Nombre 
                             .col-md-8.inputGroupContainer
                                 .input-group
                                     span.input-group-addon
                                         span.i.fa.fa-user
-                                    input.form-control(name='nombre', placeholder='Nombre', type='text', ng-model='clickedPersona.nombre', required, ng-maxlength="50" )
+                                    input.form-control(name='nombre', placeholder='Nombre', type='text', ng-model='clicked.nombre', required, ng-maxlength="50" )
                                     span.input-group-btn
                                         button.btn.btn-primary(ng-show='!nombre2', ng-click='nombre2 = true',ng-disabled="myFormEdit.nombre.$invalid ")
                                             span.i.fa.fa-plus
@@ -40,11 +40,11 @@
                                 .input-group
                                     span.input-group-addon
                                         span.i.fa.fa-user
-                                    input.form-control(name='nombre2', placeholder='Nombre 2', type='text', ng-model='clickedPersona.nombre2', required, ng-maxlength="50" )
+                                    input.form-control(name='nombre2', placeholder='Nombre 2', type='text', ng-model='clicked.nombre2', required, ng-maxlength="50" )
                                     span.input-group-btn
                                         button.btn.btn-primary(ng-show='!nombre3', ng-click='nombre3= true',ng-disabled="myFormEdit.nombre2.$invalid ") 
                                             span.i.fa.fa-plus
-                                        button.btn.btn-danger(ng-show='!nombre3', ng-click="nombre2 = false ") 
+                                        button.btn.btn-danger(ng-show='!nombre3', ng-click="nombre2 = false; clicked.nombre2='' ") 
                                             span.i.fa.fa-minus
                                   
                                 span(style='color:red', ng-show='myFormEdit.nombre2.$invalid && myFormEdit.nombre2.$touched')
@@ -59,9 +59,9 @@
                                 .input-group
                                     span.input-group-addon
                                         span.i.fa.fa-user
-                                    input.form-control(name='nombre3', placeholder='Nombre 3', type='text', ng-model='clickedPersona.nombre3', required, ng-maxlength="50")
+                                    input.form-control(name='nombre3', placeholder='Nombre 3', type='text', ng-model='clicked.nombre3', required, ng-maxlength="50")
                                     span.input-group-btn
-                                        button.btn.btn-danger(ng-click="nombre3 = false") 
+                                        button.btn.btn-danger(ng-click="nombre3 = false; clicked.nombre3=''") 
                                             span.i.fa.fa-minus
                                  
                                 span(style='color:red', ng-show='myFormEdit.nombre3.$invalid && myFormEdit.nombre3.$touched')
@@ -77,7 +77,7 @@
                                 .input-group
                                     span.input-group-addon
                                         span.i.fa.fa-user
-                                    input.form-control(name='apellido', placeholder='Apellido', type='text', ng-model='clickedPersona.apellido', required, ng-maxlength="50")
+                                    input.form-control(name='apellido', placeholder='Apellido', type='text', ng-model='clicked.apellido', required, ng-maxlength="50")
                                     span.input-group-btn
                                         button.btn.btn-primary(ng-show='!apellido2', ng-click='apellido2 = true', ng-disabled="myFormEdit.apellido.$invalid")
                                             span.i.fa.fa-plus
@@ -97,11 +97,11 @@
                                 .input-group
                                     span.input-group-addon
                                         span.i.fa.fa-user
-                                    input.form-control(name='apellido2', placeholder='Apellido 2', type='text', ng-model='clickedPersona.apellido2', required, ng-maxlength="50")
+                                    input.form-control(name='apellido2', placeholder='Apellido 2', type='text', ng-model='clicked.apellido2', required, ng-maxlength="50")
                                     span.input-group-btn
                                         button.btn.btn-primary(ng-show='!apellido3', ng-click='apellido3= true',  ng-disabled="myFormEdit.apellido.$invalid")
                                             span.i.fa.fa-plus
-                                        button.btn.btn-danger(ng-show='!apellido3', ng-click="apellido2= false;")
+                                        button.btn.btn-danger(ng-show='!apellido3', ng-click="apellido2= false;clicked.apellido2=''")
                                             span.i.fa.fa-minus
                                 span(style='color:red', ng-show='myFormEdit.apellido2.$invalid  && myFormEdit.apellido2.$touched')
                                     span(ng-show='myFormEdit.apellido2.$error.required') ingresa apellido.
@@ -115,9 +115,9 @@
                                 .input-group
                                     span.input-group-addon
                                         span.i.fa.fa-user
-                                    input.form-control(name='apellido3', placeholder='Apellido 3', type='text', ng-model='clickedPersona.apellido3', required, ng-maxlength="50")
+                                    input.form-control(name='apellido3', placeholder='Apellido 3', type='text', ng-model='clicked.apellido3', required, ng-maxlength="50")
                                     span.input-group-btn
-                                        button.btn.btn-danger(ng-click="apellido3= false;newPersona.apellido3=''")
+                                        button.btn.btn-danger(ng-click="apellido3= false;clicked.apellido3=''")
                                             span.i.fa.fa-minus
                                 span(style='color:red', ng-show='myFormEdit.apellido3.$invalid && myFormEdit.apellido3.$touched' )
                                     span(ng-show='myFormEdit.apellido3.$error.required') ingresa apellido.
@@ -134,9 +134,9 @@
                                         span.i.fas.fa-user-graduate
                                     .inputGroupContainer
                                        
-                                        select.btn.btn-default(name="grado", ng-model='clickedPersona.idgrado ',required,)  
+                                        select.btn.btn-default(name="grado", ng-model='clicked.idgrado ',required,ng-init="grados")  
                                             option(style='display:none', value='') elige grado ....  
-                                            option( ng-repeat='x  in grado', value='{{x.idgrado}}', ng-selected='x.grado === clickedPersona.grado ' ) {{x.grado}}
+                                            option( ng-repeat='x  in grados', value='{{x.idgrado}}', ng-selected='x.idgrado === clicked.idgrado ' ) {{x.grado}}
                                         span.input-group-text(style='color:red', ng-show='myFormEdit.grado.$invalid && myFormEdit.grado.$touched' )
                                             span(ng-show='myFormEdit.grado.$error.required' placeholder="")     
                                                 | ingresa grado.
@@ -148,9 +148,9 @@
                                     .input-group-addon
                                         span.i.fas.fa-transgender-alt
                                     .inputGroupContainer
-                                        select.btn.btn-default(name="genero", ng-model='clickedPersona.idgenero',required )
+                                        select.btn.btn-default(name="genero", ng-model='clicked.idgenero',required ,ng-init="genero")
                                             option(style='display:none', value='') elige genero ....    
-                                            option( ng-repeat='x  in genero', value='{{x.idgenero}}', ng-selected='x.genero === clickedPersona.genero ' ) {{x.genero}} 
+                                            option( ng-repeat='x  in generos', value='{{x.idgenero}}', ng-selected='x.genero === clicked.genero ' ) {{x.genero}} 
                                         span.input-group-text(style='color:red', ng-show='myFormEdit.genero.$invalid && myFormEdit.genero.$touched' )
                                             span(ng-show='myFormEdit.genero.$error.required')     
                                                 | ingresa genero.
@@ -162,10 +162,9 @@
                                     .input-group-addon
                                         span.i.fas.fa-vector-square
                                     .inputGroupContainer
-                                        
-                                        select.btn.btn-default.col-md-12(name="depto", ng-model='clickedPersona.iddepartamento',required )
+                                        select.btn.btn-default.col-md-12(name="depto", ng-model='clicked.iddepartamento',required ,ng-init="departamentos")
                                             option(style='display:none', value='') elige departamento ....    
-                                            option( ng-repeat='x  in depto', value='{{x.iddepto}}', ng-selected='x.departamento === clickedPersona.departamento ' ) {{x.departamento}} 
+                                            option( ng-repeat='x  in departamentos', value='{{x.iddepto}}', ng-selected='x.departamento === clicked.departamento ' ) {{x.departamento}} 
                                         span.input-group-text(style='color:red', ng-show='myFormEdit.depto.$invalid && myFormEdit.depto.$touched' )
                                             span(ng-show='myFormEdit.depto.$error.required')     
                                                 | ingresa departamento.
@@ -173,32 +172,33 @@
                             label.col-md-3.control-label ¿Es externo?
                             .col-md-8.inputGroupContainer
                                 .input-group
+                                    //- .input-group
                                     span.input-group-addon
                                         span.i.fa.fa-external-link-alt
                                     span.input-group-addon
                                     label.btn.btn-info
-                                        input(type='radio', name='options',ng-model='clickedPersona.esexterno',
-                                        ng-click="externo=false; clickedPersona.institucion=null;clickedPersona.puesto=null", ng-value="0", ) 
+                                        input(type='radio', name='options',ng-model='clicked.esexterno',
+                                        ng-click="externo=false;clicked.institucion='';clicked.puesto=''", ng-value="0", ) 
                                         |  No  
                                     span.input-group-addon
                                     label.btn.btn-info
-                                        input(type='radio', name='options',ng-model='clickedPersona.esexterno'
-                                        ng-click='externo=true',ng-value="1") 
+                                        input(type='radio', name='options',ng-model='clicked.esexterno'
+                                        ng-change='externo=true',ng-value="1") 
                                         |  Si   
 
                         
-                        .form-group(ng-show='externo') 
+                        .form-group(ng-show=`clicked.esexterno == 1 ? externo=true : externo=false`)
                             label.col-md-3.control-label Institución
                             .col-md-8.inputGroupContainer
                                 .input-group
                                     span.input-group-addon
                                         span.i.fa.fa-building
-                                    input.form-control(name='institucion', placeholder='Institución', type='text', ng-model='clickedPersona.institucion', required, ng-maxlength="50")    
+                                    input.form-control(name='institucion', placeholder='Institución', type='text', ng-model='clicked.institucion', required, ng-maxlength="50")    
                                 span(style='color:red', ng-show='myFormEdit.institucion.$invalid && myFormEdit.institucion.$touched')
                                     span(ng-show='myFormEdit.institucion.$error.required') ingresa institucion.
                                     span(ng-show='myFormEdit.institucion.$error.maxlength') maximo 50.  
                         
-                        .form-group(ng-show='externo') 
+                        .form-group(ng-show=`clicked.esexterno == 1 ? externo=true : externo=false`)
                             label.col-md-3.control-label Puesto
                             .col-md-8.inputGroupContainer
                                 .input-group
@@ -206,7 +206,7 @@
                                         span.i.fa.fa-user-tie
                                         
                                     //- input#puesto.form-control(name='puesto', placeholder='Puesto', type='text', required)  
-                                    input.form-control(name='puesto', placeholder='Puesto', type='text', ng-model='clickedPersona.puesto', required, ng-maxlength="50")    
+                                    input.form-control(name='puesto', placeholder='Puesto', type='text', ng-model='clicked.puesto', required, ng-maxlength="50")    
                                 span(style='color:red', ng-show='myFormEdit.puesto.$invalid && myFormEdit.puesto.$touched')
                                     span(ng-show='myFormEdit.puesto.$error.required') ingresa puesto.
                                     span(ng-show='myFormEdit.puesto.$error.maxlength') maximo 50.           
@@ -215,19 +215,20 @@
                    
                     .panel-footer.text-right
                         hr
-                        button.btn.btn-success(data-dismiss='modal', type='button', ng-click='updatePersona(clickedPersona)',
+                        button.btn.btn-success(data-dismiss='modal', type='button', ng-click='update(clicked)',
                             ng-disabled=`myFormEdit.nombre.$invalid  && myFormEdit.apellido.$invalid && myFormEdit.grado.$invalid
                                             && myFormEdit.genero.$invalid && myFormEdit.depto.$invalid ` ng-show='!externo')
                             span.i.fas.fa-sync-alt
                             |  Atualizar
-                        button.btn.btn-success(data-dismiss='modal',type='button', ng-click='updatePersona(clickedPersona)', 
+                        button.btn.btn-success(data-dismiss='modal',type='button', ng-click='update(clicked)', 
                             ng-disabled=`myFormEdit.nombre.$invalid  && myFormEdit.apellido.$invalid && myFormEdit.grado.$invalid
                                             && myFormEdit.genero.$invalid && myFormEdit.depto.$invalid && myFormEdit.institucion.$invalid 
                                             && myFormEdit.puesto.$invalid ` ng-show='externo' )
                         
                             span.i.fas.fa-sync-alt
                             |  Atualizar
-                        button.btn.btn-danger(data-dismiss='modal' ,ng-click='getPersona()')
+                        //- button.btn.btn-danger(data-dismiss='modal' ,ng-click='get()')
+                        button.btn.btn-danger(data-dismiss='modal' ,ng-click='get()')
                             span.i.fas.fa-times
                             |  Cerrar
                         

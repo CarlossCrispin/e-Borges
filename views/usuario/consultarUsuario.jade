@@ -1,0 +1,77 @@
+
+link(rel='stylesheet', href='/stylesheets/detalle.css')
+                        
+#consultar.modal.fade( role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
+    .modal-dialog(role='document')
+        .modal-content
+            figure.snip1336
+                .contenedor
+                    img(src='http://eitmedia.mx/media/k2/items/cache/d7ef0b021f0753c7a876ceb95a8308cb_XL.jpg')
+                        
+                    //- .texto-encima Texto
+                    .centrado 
+                        div(class='col-md-4 col-md-offset-0') 
+                            h1 {{clicked.nombre}} 
+                figcaption
+                    .container
+                        #accordion2.accordion
+                            .accordion-group
+                              
+                                .accordion-heading
+                                    a.accordion-toggle(data-toggle='collapse', data-parent='#accordion2', href='#collapseOne')
+                                        span.i.fas.fa-user
+                                        | Usuario  
+                                #collapseOne.accordion-body.collapse.in
+                                    .accordion-inner
+                                        p {{clicked.nombre}} {{clicked.nombre2}} {{clicked.nombre3}}    
+                                              {{clicked.apellido}}  {{clicked.apellido2}} {{clicked.apellido3}}                     
+                            
+                            .accordion-group
+                                .accordion-heading
+                                    a.accordion-toggle(data-toggle='collapse', data-parent='#accordion2', href='#collapse2')
+                                        span.i.fas.fa-envelope-open
+                                        | Em@ail
+                                                        
+                                #collapse2.accordion-body.collapse.in
+                                    .accordion-inner
+                                        div(class='col-md-12 col-md-offset-0') 
+                                            .col-md-5
+                                                p {{clicked.email }}              
+                            .accordion-group
+                                .accordion-heading
+                                    a.accordion-toggle(data-toggle='collapse', data-parent='#accordion2', href='#collapse3')
+                                        span.i.fas.fa-users
+                                        | Rol
+                                                        
+                                #collapse3.accordion-body.collapse.in
+                                    .accordion-inner
+                                        div(class='col-md-12 col-md-offset-0') 
+                                            .col-md-5
+                                                p {{clicked.rol}}              
+
+                            .accordion-heading
+                                a.accordion-toggle.button.btn.btn-danger(type='submit', data-dismiss='modal')
+                                    span.i.fas.fa-times
+                                    |  Cerrar
+                            
+                    
+  
+                                
+
+                                        
+                
+
+                        
+                    
+                                
+
+                                        
+                
+
+                        
+                                                        
+
+                                        
+                
+
+                        

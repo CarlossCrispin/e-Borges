@@ -1,0 +1,30 @@
+
+#delete.modal.fade(role='dialog')
+    .modal-dialog
+        // Modal content
+        .modal-content
+            .modal-header(style='padding:40px 50px;')
+                button.close(type='button', data-dismiss='modal') ×
+                h4
+                span.i.fa.fa-trash-alt
+                |  Borrar Usuario
+            .modal-body
+                .panel.panel-default
+                    .panel-heading
+                        h3.panel-title Usuario
+                    br
+                    h3.text-center| ¿Estás seguro de borrar 
+                        span(style='color:red') {{clicked.nombre}}
+                        | ?
+                    
+                    .panel-footer.text-right
+                        hr
+                        button.btn.btn-success(type='button', ng-click='delete(clicked.nombre)', data-dismiss='modal' )
+                            span.i.fas.fa-check
+                            |  Si
+                        
+                        button.btn.btn-danger(data-dismiss='modal')
+                            span.i.fas.fa-times
+                            |  Cerrar
+                                    
+    

@@ -22,7 +22,7 @@
                                 .input-group
                                     span.input-group-addon
                                         span.i.fas.fa-transgender-alt
-                                    input.form-control(name="genero", type='text', placeholder='Genero', ng-model='newUser.genero', required, ng-maxlength="50")
+                                    input.form-control(name="genero", type='text', placeholder='Genero', ng-model='new.genero', required, ng-maxlength="50")
                                 span(style='color:red', ng-show='myFormReg.genero.$invalid && myFormReg.genero.$touched')
                                     span(ng-show='myFormReg.genero.$error.required') ingresa genero.
                                     span(ng-show='myFormReg.genero.$error.maxlength') Muy largo.
@@ -30,7 +30,7 @@
                      
                         .panel-footer.text-right
                             hr
-                            button.btn.btn-success(type='button', ng-click='saveUser()',data-dismiss='modal', ng-disabled="myFormReg.genero.$invalid" )
+                            button.btn.btn-success(type='button', ng-click='save()',data-dismiss='modal', ng-disabled="myFormReg.genero.$invalid" )
                                 span.i.fas.fa-check
                                 |  Registrar
                             button.btn.btn-danger(data-dismiss='modal' ,ng-click='recupera()')

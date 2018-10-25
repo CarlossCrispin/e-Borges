@@ -1,42 +1,62 @@
 
-var app = angular.module('sortApp', []);
-app.controller('sortController', function ($scope, $http) {
-    $scope.currentPage = 0;
-    $scope.pageSize = 5;
-    $scope.pages = [];
-    $scope.usuarios=[];
-    $scope.newUser = [];
-    $scope.clickedUser = {};
-    $scope.alertMassege = "";
- 
-    // $scope.sortName = 'id';
-    // $scope.sortReverse = false;
+var app = angular.module('generoApp', []);
+app.controller('generoController', function ($scope, $http) {
     var pathname = window.location.pathname;
-    console.log(pathname)
-    $scope.recupera = function () {
-        $http.get("/datos")
+    // console.log(pathname)
+    //paginación 
+    $scope.currentPage = 0;
+    $scope.pageSize = 10;
+    $scope.pages = [];
+    $scope.sortName = 'idgenero';
+    $scope.sortReverse = false;
+    $scope.buscar = "";
+
+    //entidad
+    $scope.datos = [];
+    $scope.new = {};
+    $scope.clicked = {};
+    $scope.alertMassege = "";
+
+    $scope.paginas = [10, 20, 50, 100];
+    $scope.sizePag = function () {
+        $scope.pageSize = $scope.pageSize;
+
+    };
+
+    $scope.get = function () {
+        $http.get(`${pathname}/data`)
             .success((data) => {
-                $scope.usuarios = data;
-                console.log(JSON.stringify(data))
+                $scope.datos = data;
+
             })
             .error((error) => {
                 console.log('Error: ' + error);
             })
             .then($scope.configPages = function () {
+                $scope.pages = [];
                 $scope.pages.length = 0;
-             
+                $scope.currentPage = 0;
                 var ini = $scope.currentPage - 4;
                 var fin = $scope.currentPage + 5;
                 if (ini < 1) {
                     ini = 1;
-                    if (Math.ceil($scope.usuarios.length / $scope.pageSize) > 10)
-                        fin = 10;
-                    else
-                        fin = Math.ceil($scope.usuarios.length / $scope.pageSize);
+                    if ($scope.buscar != "") {
+
+                        $scope.buscar2 = $scope.buscar;
+                        fin = Math.ceil($scope.filtered.length / $scope.pageSize);
+                        // console.log("--->"+fin)
+
+                    }
+                    else {
+                        fin = Math.ceil($scope.datos.length / $scope.pageSize);
+                        $scope.buscar2 = "";
+                        // console.log(fin)
+                    }
+
                 } else {
-                    if (ini >= Math.ceil($scope.usuarios.length / $scope.pageSize) - 10) {
-                        ini = Math.ceil($scope.usuarios.length / $scope.pageSize) - 10;
-                        fin = Math.ceil($scope.usuarios.length / $scope.pageSize);
+                    if (ini >= Math.ceil($scope.datos.length / $scope.pageSize) - 10) {
+                        ini = Math.ceil($scope.datos.length / $scope.pageSize) - 10;
+                        fin = Math.ceil($scope.alumno.length / $scope.pageSize);
                     }
                 }
                 if (ini < 1) ini = 1;
@@ -46,93 +66,82 @@ app.controller('sortController', function ($scope, $http) {
                     });
                 }
 
-                if ($scope.currentPage >= $scope.pages.length)
-                    $scope.currentPage = $scope.pages.length - 1;
             });
+        $scope.setPage = function (index) {
+            $scope.currentPage = index - 1;
+        };
     };
-    // $scope.recupera()
-
-    $scope.saveUser = function () {
-        console.log($scope.newUser)
-
-        $http.post('/insert', $scope.newUser)
+    $scope.save = function () {
+        $scope.new = {
+            genero :$scope.new.genero  || '',
+        };
+        // console.log( $scope.new)
+        $http.post(`${pathname}/insert`, $scope.new)
             .success((data) => {
                 
-                $scope.newUser = data;
-                console.log(data);
-                $scope.newUser = {};
+                $scope.new= data;
+                $scope.new= {};
                 $scope.alertMassege = "Nuevo Item Agregado!!";
-                $scope.recupera();
+                $scope.get();
             })
             .error((error) => {
                 console.log('Error: ' + error);
                 $scope.alertMassege = "ERROR!!";
             });
-
-        
+        $scope.alertMassege = "";    
     };
-    $scope.updateUser = function (){
-        $scope.newUser={
-            idgenero : $scope.clickedUser.idgenero,
-            genero : $scope.clickedUser.genero
-        }
-        console.log($scope.newUser)
-        $http.post('/update', $scope.newUser)
+    $scope.update= function () {
+        
+        $scope.clicked={
+            id:$scope.clicked.idgenero,
+            genero :$scope.clicked.genero  || '',
+
+        };
+        // console.log($scope.clicked);
+        $http.post(`${pathname}/update`,  $scope.clicked)
             .success((data) => {
                 
-                $scope.newUser = data;
-                console.log(data);
-                $scope.newUser = {};
+                $scope.newItem = data;
+                // console.log(data);
+                $scope.new = {};
                 $scope.alertMassege = "Item Actualizado!!";
-                $scope.recupera();
+                $scope.get();
             })
             .error((error) => {
                 console.log('Error: ' + error);
                 $scope.alertMassege = "ERROR!!";
             });
-       
+        $scope.alertMassege = "";   
+
     };
-    
-    $scope.deleteUser = function () {
+    $scope.delete = function () {
 
+        $scope.clicked={
+            id:$scope.clicked.idgenero
+        };
 
-        $scope.newUser={
-            eliminar:$scope.clickedUser.idgenero
-        }
-
-        console.log($scope.newUser)
+        // console.log($scope.clicked)
         
-        $http.post('/delete' , $scope.newUser)
+        $http.post(`${pathname}/delete` , $scope.clicked)
             .success((data) => {
                 $scope.todoData = data;
-                console.log(data);
-               
-                $scope.newUser = {};
+                $scope.clicked = {};
                 $scope.alertMassege = "Item Borrado !!";
-                $scope.recupera();
+                $scope.get();
             })
             .error((data) => {
                 console.log('Error: ' + data);
                 $scope.alertMassege = "Error!!";
             });
+            $scope.alertMassege = "";
     };
 
-    $scope.selectUser = function (usuario) {
-        console.log(usuario);
-        $scope.clickedUser = usuario;
+    $scope.select = function (Item) {
+        // console.log(Item);
+        $scope.clicked = Item;
 
     };
 
-
-    $scope.paginas = [5, 10, 15, 20, 50,];
-    $scope.informa = function () {
-        $scope.pageSize = $scope.pageSize;
-
-    }
-
-    $scope.setPage = function (index) {
-        $scope.currentPage = index - 1;
-    };
 
 })
 app.filter('startFromGrid', function () {
@@ -142,10 +151,4 @@ app.filter('startFromGrid', function () {
         return input.slice(start);
     }
 });
-    // .filter('startFromGrid', function () {
-    //     return function (input, start) {
-    //         start = +start;
-    //         return input.slice(start);
-    //     }
-    // });
-
+   

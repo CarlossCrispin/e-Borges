@@ -7,150 +7,155 @@ module.exports = {
 	*         CONSULTAS PARA LA VISTA Departamento  
 	*-----------------------------------------------*/
     getDepartamento: function (req, res, next) {
+        return res.render('departamento/departamento', {
+            isAuthenticated: req.isAuthenticated(),
+            user: req.user,
+           
+        });
 
-        const results = [];
-        const results2 = [];
-  
-        // cliente de Postgres del grupo de conexiones
+    },
+    dataDepartamento : function(req,res,next){
+        var results = [];
+        var results2 = [];
+        var datos = [];
+
         pg.connect(connectionString, function(err, client, done)  {
-            // Handle connection errors
+     
             if (err) {
                 done();
                 console.log(err);
                 return res.status(500).json({ success: false, data: err });
             }
             // SQL Query > Select Data
-            const query = client.query(`SELECT *
-            FROM "Tesis".departamento a
-       `);
+            var select= client.query(`SELECT d.iddepartamento, d.departamento, d.idespecialidad,
+                e.especialidad
+                FROM "Tesis".departamento d
+                left join "Tesis".especialidad e on d.idespecialidad=e.idespecialidad`);
             // const query = client.query(`SELECT a.iddepartamento, a.departamento,
             // c.especialidad
             // FROM "Tesis".departamento a
             // inner join "Tesis".especialidad c on a.idespecialidad=c.idespecialidad`);
-            const query2 = client.query(`SELECT * from "Tesis".especialidad`);
-            // Stream results back one row at a time
+            const select2 = client.query(`SELECT * from "Tesis".especialidad`);
+    
+            var query = select;
             query.on('row', (row) => {
                 results.push(row);
             });
-            query2.on('row', (row) => {
+            
+            var query = select2;
+            query.on('row', (row) => {
                 results2.push(row);
             });
-            // After all data is returned, close connection and return results
+            
             query.on('end', () => {
                 done();
                 console.log("se cerro base de datos")
-                console.log(JSON.stringify(results))
-                
-            });
-            query2.on('end', () => {
-                done();
-                console.log("se cerro base de datos\n------------->\n\n\n")
-                console.log(JSON.stringify(results2))
-                return res.render('departamento/departamento', {
-                    isAuthenticated: req.isAuthenticated(),
-                    user: req.user,
-                    items: results,
-                    items2: results2,
-                    Insert:req.flash('Insert'),
-                    Delete:req.flash('Delete'),
-                    Edit:req.flash('Edit')
-                });;
+                // console.log(JSON.stringify(results2))
+                datos=[{
+                    departamentos:results,
+                    especialidad:results2
+                }]
+                return res.json(datos);
             });
             
         });    
 
     },
-    postDepartamento : function(req,res,next){
-        var opc = req.body.opc;
+    insertDepartamento:function(req,res,next){
+
+        var results = [];
         var departamento = req.body.departamento;
         var especialidad = req.body.especialidad;
-        var eliminar=req.body.eliminar;
-        var editar =req.body.editar;
-        console.log(`-------DATOS------\n${opc}\n${departamento}\n${eliminar}
-        \n${editar}\n${especialidad}\n---------------------`)
-        if(opc ==='1'){
 
-            pg.connect(connectionString, function(err, client, done)  {
-                // Handle connection errors
-                if (err) {
-                    done();
-                    console.log(err);
-                    return res.status(500).json({ success: false, data: err });
-                }
-                // SQL Query > Select Data
-                
-                const query = client.query(`INSERT INTO "Tesis".departamento(
-                    id, departamento, idespecialidad)
-                    VALUES (nextval (\'hibernate_sequence\'), '${departamento}','${especialidad}')`);
-                // Stream results back one row at a time
-                query.on('row', (row) => {
-                    results.push(row);
-                });
-                // After all data is returned, close connection and return results
-                query.on('end', () => {
-                    done();
-                    console.log("se cerro base de datos")
-                    // console.log(results)
-                    req.flash('Insert', 'Se ha registrado correctamente');
-                    return res.redirect('/departamento/departamento');
-                });
-                
-            });    
-        }
-        if(opc ==='2'){
+        // console.log(`-------DATOS------\n${departamento}\n${especialidad}\n---------------------`)
 
-            pg.connect(connectionString, function(err, client, done)  {
-                // Handle connection errors
-                if (err) {
-                    done();
-                    console.log(err);
-                    return res.status(500).json({ success: false, data: err });
-                }
-                // SQL Query > Select Data
-                const query = client.query(`DELETE FROM "Tesis".departamento
-                WHERE id=${eliminar}`);
-                // Stream results back one row at a time
-                query.on('row', (row) => {
-                    results.push(row);
-                });
-                // After all data is returned, close connection and return results
-                query.on('end', () => {
-                    done();
-                    console.log("se cerro base de datos")
-                    // console.log(results)
-                    req.flash('Delete', 'Se ha eliminado correctamente');
-                    return res.redirect('/departamento/departamento');
-                });
-                
-            });    
-        }
-        if(opc ==='3'){
+        pg.connect(connectionString, function(err, client, done)  {
+            
+            if (err) {
+                done();
+                console.log(err);
+                return res.status(500).json({ success: false, data: err });
+            }
+        
+            
+            const query = client.query(`INSERT INTO "Tesis".departamento(
+                departamento, idespecialidad)
+                VALUES ( '${departamento}','${especialidad}')`);
+        
+            query.on('row', (row) => {
+                results.push(row);
+            });
 
-            pg.connect(connectionString, function(err, client, done)  {
-                // Handle connection errors
-                if (err) {
-                    done();
-                    console.log(err);
-                    return res.status(500).json({ success: false, data: err });
-                }
-                // SQL Query > Select Data
-                const query = client.query(`UPDATE "Tesis".departamento SET
+            query.on('end', () => {
+                done();
+                console.log("se cerro base de datos");
+              
+                // return res.redirect('/departamento/departamento');
+                return res.json(results);
+            });
+            
+        });
+    },
+    updateDepartamento : function(req,res,next){
+        var results = [];
+        var id = req.body.id;
+        var departamento = req.body.departamento;
+        var especialidad = req.body.idespecialidad;
+        // console.log(`-------DATOS------\n${departamento}\n${especialidad}\n${id}---------------------`)
+
+        pg.connect(connectionString, function(err, client, done)  {
+           
+            if (err) {
+                done();
+                console.log(err);
+                return res.status(500).json({ success: false, data: err });
+            }
+           
+            const query = client.query(`UPDATE "Tesis".departamento SET
                 departamento='${departamento}', idespecialidad=${especialidad}
-                WHERE id=${editar}`);
-                // Stream results back one row at a time
-                query.on('row', (row) => {
-                    results.push(row);
-                });
-                // After all data is returned, close connection and return results
-                query.on('end', () => {
-                    done();
-                    console.log("se cerro base de datos")
-                    // console.log(results)
-                    req.flash('Edit', 'Se ha editado correctamente');
-                    return res.redirect('/departamento/departamento');
-                });
+                WHERE iddepartamento=${id}`);
+          
+            query.on('row', (row) => {
+                results.push(row);
+            });
+        
+            query.on('end', () => {
+                done();
+                console.log("se cerro base de datos")
                 
-            });    
-        }
+                // return res.redirect('/departamento/departamento');
+                return res.json(results);
+            });
+            
+        });  
+
+    },
+    deleteDepartamento: function(req,res,next){
+        var results = [];
+        var id = req.body.id;
+        // console.log(`-------DATOS------\n${id}\n---------------------`)
+        pg.connect(connectionString, function(err, client, done)  {
+            
+            if (err) {
+                done();
+                console.log(err);
+                return res.status(500).json({ success: false, data: err });
+            }
+            
+            const query = client.query(`DELETE FROM "Tesis".departamento
+            WHERE iddepartamento=${id}`);
+           
+            query.on('row', (row) => {
+                results.push(row);
+            });
+    
+            query.on('end', () => {
+                done();
+                console.log("se cerro base de datos")
+              
+                return res.redirect('/departamento/departamento');
+            });
+            
+        });    
     }
 }

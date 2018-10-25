@@ -10,9 +10,7 @@ link(rel='stylesheet', href='/stylesheets/detalle.css')
                     //- .texto-encima Texto
                     .centrado 
                         div(class='col-md-4 col-md-offset-0') 
-                            h2#TituloS.text-center
-                    
-
+                            h1 {{clicked.grado}} 
                 figcaption
                     .container
                         #accordion2.accordion
@@ -21,22 +19,31 @@ link(rel='stylesheet', href='/stylesheets/detalle.css')
                                 .accordion-heading
                                     a.accordion-toggle(data-toggle='collapse', data-parent='#accordion2', href='#collapseOne')
                                         span.i.fas.fa-user-graduate
-                                        | Grado      
+                                        | Grado       
                                 #collapseOne.accordion-body.collapse.in
                                     .accordion-inner
-                                        div(class='col-md-12 col-md-offset-0')   
-                                            .col-md-5              
-                                                p#generoS
-                                            
-                            
-                            
+                                        p {{clicked.grado}}             
                             .accordion-heading
                                 a.accordion-toggle.button.btn.btn-danger(type='submit', data-dismiss='modal')
                                     span.i.fas.fa-times
                                     |  Cerrar
                             
                     
+  
                                 
+
+                                        
+                
+
+                        
+                    
+                                
+
+                                        
+                
+
+                        
+                                                        
 
                                         
                 

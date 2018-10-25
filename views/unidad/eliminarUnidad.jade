@@ -1,23 +1,30 @@
-#delete.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
-    .modal-dialog.modal-dialog-centered(role='document')
+
+#delete.modal.fade(role='dialog')
+    .modal-dialog
+        // Modal content
         .modal-content
-            .modal-header(Style="color:red")
-                h5#exampleModalLongTitle.modal-title Eliminar Unidad
-                    button.close(type='button', data-dismiss='modal', aria-label='Close')
-                        span(aria-hidden='true') ×
+            .modal-header(style='padding:40px 50px;')
+                button.close(type='button', data-dismiss='modal') ×
+                h4
+                span.i.fa.fa-trash-alt
+                |  Borrar Unidad
             .modal-body
-                h2.text-center Confirmar Eliminar Unidad
-                form(action='/unidad/unidad'  method='post' autocomplete='off')
-                    .form-group
-                        input#opc.form-control(required type='text' name='opc' value='2' ,style="display:none")
-                        
-                        input#eliminar(type="text",name='eliminar',style="display:none")
-                    
-                    button.btn.btn-success.btn-default.btn-block(type='submit' name="registro")
-                        span.i.fas.fa-check
-                        |  Si
+                .panel.panel-default
+                    .panel-heading
+                        h3.panel-title Unidad
                     br
+                    h3.text-center| ¿Estás seguro de borrar 
+                        span(style='color:red') {{clicked.nombre}}
+                        | ?
                     
-                    buutton.btn.btn-info.btn-danger.pull-right(data-dismiss='modal' )
-                        span.i.fas.fa-times
-                        |   NO
+                    .panel-footer.text-right
+                        hr
+                        button.btn.btn-success(type='button', ng-click='delete(clicked.nombre)', data-dismiss='modal' )
+                            span.i.fas.fa-check
+                            |  Si
+                        
+                        button.btn.btn-danger(data-dismiss='modal')
+                            span.i.fas.fa-times
+                            |  Cerrar
+                                    
+    

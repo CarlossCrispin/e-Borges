@@ -1,65 +1,106 @@
-link(rel='stylesheet', href='/stylesheets/detalle.css')
-                        
-#consultar.modal.fade( role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
+#consultar.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
     .modal-dialog(role='document')
-        .modal-content
-            figure.snip1336
-                .contenedor
-                    img(src='http://eitmedia.mx/media/k2/items/cache/d7ef0b021f0753c7a876ceb95a8308cb_XL.jpg')
+        .modal-content.text-center
+            .row
+                .col-md-12
+                    .cover
+                        .c-overlay
+                            button.close(type='button', data-dismiss='modal', aria-label='Close', style='position:absolute; color:#fff; top: 10px; right:10px;')
+                                span(aria-hidden='true') ×
+                            br
+                            h3.h3 {{clicked.titulo}}
+                  
+                    .detail
                         
-                    //- .texto-encima Texto
-                    .centrado 
-                        //- div(class='col-md-4 col-md-offset-0') 
-                        h2 {{clickedTesis.titulo}} 
+                        img.rounded-circle.mx-auto.mb-3(ng-src='http://sinac2.cs.cinvestav.mx/Manual/images/user.png', alt='Photo', height='100', width='100', style='margin-top:-50px;')
+                        br
+                        hr.light
+                        dl.row
+                            dt.col-md-4.text-right Resumen :
+                            dd.col-md-8.text-left {{clicked.resumen}}
+                        hr
+                        dl.row
+                            dt.col-md-4.text-right Alumno :
+                            dd.col-md-8.text-left {{clicked.alumno}}
+                            
+                            dt.col-md-4.text-right Grado :
+                            dd.col-md-8.text-left {{clicked.grado}}
+                            
+                            dt.col-md-4.text-right Departamento :
+                            dd.col-md-8.text-left {{clicked.departamento}}
+                            
+                            dt.col-md-4.text-right Director :
+                            dd.col-md-8.text-left {{clicked.director}}
+                            
+                            dt.col-md-4.text-right Codirector(es) :
+                            dd.col-md-8.text-left {{clicked.codirector1}}
+                            dt.col-md-4.text-right
+                            dd.col-md-8.text-left {{clicked.codirector2}}
+                            dt.col-md-4.text-right
+                            dd.col-md-8.text-left {{clicked.codirector3}}
+                            dt.col-md-4.text-right
+                            dd.col-md-8.text-left {{clicked.codirector4}}
+                            
+                            //- dt.col-md-4.text-right Fecha :
+                            //- dd.col-md-8.text-left 
+                            //-     {{clicked.mes}} {{clicked.'año'}} 
+                      
+                            
+//- link(rel='stylesheet', href='/stylesheets/detalle.css')
+                        
+//- #consultar.modal.fade( role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
+//-     .modal-dialog(role='document')
+//-         .modal-content
+//-             figure.snip1336
+//-                 .contenedor
+//-                     img(src='http://eitmedia.mx/media/k2/items/cache/d7ef0b021f0753c7a876ceb95a8308cb_XL.jpg')
+                        
+//-                     //- .texto-encima Texto
+//-                     .centrado 
+//-                         //- div(class='col-md-4 col-md-offset-0') 
+//-                         h2 {{clicked.titulo}} 
 
-                figcaption
-                    .container
-                        #accordion2.accordion
-                            .accordion-group
+//-                 figcaption
+//-                     .container
+//-                         #accordion2.accordion
+//-                             .accordion-group
                               
-                                .accordion-heading
-                                    a.accordion-toggle(data-toggle='collapse', data-parent='#accordion2', href='#collapseOne')
-                                        span.i.fas.fa-user
-                                        | Alumno   
-                                #collapseOne.accordion-body.collapse.in
-                                    .accordion-inner
-                                        p {{clickedTesis.alumno}}           
+//-                                 .accordion-heading
+//-                                     a.accordion-toggle(data-toggle='collapse', data-parent='#accordion2', href='#collapseOne')
+//-                                         span.i.fas.fa-user
+//-                                         | Alumno   
+//-                                 #collapseOne.accordion-body.collapse.in
+//-                                     .accordion-inner
+//-                                         p {{clicked.alumno}}           
                             
                             
-                                .accordion-heading
-                                    a.accordion-toggle(data-toggle='collapse', data-parent='#accordion3', href='#collapse2')
-                                        span.i.fas.fa-user-graduate
-                                        | Grado    
-                                #collapse2.accordion-body.collapse.in
-                                    .accordion-inner
-                                        p {{clickedPersona.grado}}
+//-                                 .accordion-heading
+//-                                     a.accordion-toggle(data-toggle='collapse', data-parent='#accordion3', href='#collapse2')
+//-                                         span.i.fas.fa-user-graduate
+//-                                         | Grado    
+//-                                 #collapse2.accordion-body.collapse.in
+//-                                     .accordion-inner
+//-                                         p {{clicked.grado}}
                             
-                                .accordion-heading
-                                    a.accordion-toggle(data-toggle='collapse', data-parent='#accordion4', href='#collapse3')
-                                        span.i.fas.fa-transgender-alt
-                                        | Genero    
-                                #collapse3.accordion-body.collapse.in
-                                    .accordion-inner
-                                        p {{clickedPersona.genero}}
+//-                                 .accordion-heading
+//-                                     a.accordion-toggle(data-toggle='collapse', data-parent='#accordion4', href='#collapse3')
+//-                                         span.i.fas.fa-transgender-alt
+//-                                         | Genero    
+//-                                 #collapse3.accordion-body.collapse.in
+//-                                     .accordion-inner
+//-                                         p {{clicked.genero}}
 
-                                .accordion-heading
-                                    a.accordion-toggle(data-toggle='collapse', data-parent='#accordion5', href='#collapse4')
-                                        span.i.fas.fa-vector-square
-                                        | Departamento   
-                                #collapse4.accordion-body.collapse.in
-                                    .accordion-inner
-                                        p {{clickedPersona.departamento}}
+//-                                 .accordion-heading
+//-                                     a.accordion-toggle(data-toggle='collapse', data-parent='#accordion5', href='#collapse4')
+//-                                         span.i.fas.fa-vector-square
+//-                                         | Departamento   
+//-                                 #collapse4.accordion-body.collapse.in
+//-                                     .accordion-inner
+//-                                         p {{clicked.departamento}}
                             
                             
-                            .accordion-heading
-                                a.accordion-toggle.button.btn.btn-danger(type='submit', data-dismiss='modal')
-                                    span.i.fas.fa-times
-                                    |  Cerrar
-                            
-                    
-                                
-
-                                        
-                
-
-                        
+//-                             .accordion-heading
+//-                                 a.accordion-toggle.button.btn.btn-danger(type='submit', data-dismiss='modal')
+//-                                     span.i.fas.fa-times
+//-                                     |  Cerrar
+                       
