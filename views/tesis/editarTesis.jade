@@ -17,33 +17,23 @@
                     form.form-horizontal(name='myFormEdit', novalidate='')
                         //- {{clicked}}
                         .form-group
-                            .col-md-1
-                            .alert.alert-success.col-md-10
-            
-                                label.col-md-6.control-label(for='file')
-                                    h3#alumno.Mayus(name='alumno' )= "Nombre : "+ user.nombre+ " "+user.apellido+" "
-                                label.col-md-6.control-label(for='file')
-                                    h3=" Matricula : "+ user.matricula
-                                input(type="text",ng-model="clicked.idalumno",ng-init="clicked.idalumno = #{user.id}", style="display:none")
-                           
-                        
-                            //- label.col-md-3.control-label Alumno :
-                            //- .col-md-8.inputGroupContainer
-                            //-     .input-group
-                            //-         span.input-group-addon
-                            //-             span.i.fas.fa-user
-                            //-         .inputGroupContainer
-                            //-             //- select.btn.btn-default.col-md-12(name="alumno", ng-model='clicked.alumno',
-                            //-             //-     ng-options="x.nombre as clicked.alumno === x.nombre for x in alumnos",required=''  )
-                            //-             //- select.btn.btn-default.col-md-12(name="alumno", ng-model='clicked.alumno',
-                            //-             //-     ng-options="x.nombre as clicked.alumno === x.nombre for x in alumnos",required=''  )
+                            label.col-md-3.control-label Alumno :
+                            .col-md-8.inputGroupContainer
+                                .input-group
+                                    span.input-group-addon
+                                        span.i.fas.fa-user
+                                    .inputGroupContainer
+                                        //- select.btn.btn-default.col-md-12(name="alumno", ng-model='clicked.alumno',
+                                        //-     ng-options="x.nombre as clicked.alumno === x.nombre for x in alumnos",required=''  )
+                                        //- select.btn.btn-default.col-md-12(name="alumno", ng-model='clicked.alumno',
+                                        //-     ng-options="x.nombre as clicked.alumno === x.nombre for x in alumnos",required=''  )
                                        
-                            //-             select.btn.btn-default.col-md-12(name="alumno", ng-model='clicked.idalumno',        
-                            //-                  ng-options="x.idalumno as x.nombre for x in  alumnos ",required='' )
-                            //-                 option(style='display:none', value='') elige alumno ....    
-                            //-     span.input-group-text(style='color:red', ng-show='myFormEdit.alumno.$invalid && myFormEdit.alumno.$touched' )
-                            //-         span(ng-show='myFormEdit.alumno.$error.required')     
-                            //-             | ingresa alumno.
+                                        select.btn.btn-default.col-md-12(name="alumno", ng-model='clicked.idalumno',        
+                                             ng-options="x.idalumno as x.nombre for x in  alumnos ",required='' )
+                                            option(style='display:none', value='') elige alumno ....    
+                                span.input-group-text(style='color:red', ng-show='myFormEdit.alumno.$invalid && myFormEdit.alumno.$touched' )
+                                    span(ng-show='myFormEdit.alumno.$error.required')     
+                                        | ingresa alumno.
                         .form-group
                             label.col-md-3.control-label Título:
                             .col-md-8.inputGroupContainer

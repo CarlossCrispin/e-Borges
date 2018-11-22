@@ -92,9 +92,13 @@ module.exports = function (passport) {
 						// console.log(password + '-------------' + user.idalumno);
 						if (password == user.idalumno) {
 							// console.log('si entra')
+						// 	var str = "Hello World!";
+						// var res = str.toLowerCase();
 							return done(null, {
 								id: user.idalumno,
-								nombre: user.nombre,
+								nombre: user.nombre+" "+ user.nombre2+" "+ user.nombre3,
+								apellido: user.apellido+" "+ user.apellido2+" "+ user.apellido3,
+								matricula:user.matricula,
 								rol: 'alumno'
 							});
 						}

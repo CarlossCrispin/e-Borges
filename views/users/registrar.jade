@@ -20,19 +20,18 @@ link(rel='stylesheet', href='/stylesheets/check.css')
                                 //- {{new}}
                                 
                                 .form-group
-                                    label.col-md-3.control-label Alumno :
-                                    .col-md-8.inputGroupContainer
-                                        .input-group
-                                            span.input-group-addon
-                                                span.i.fas.fa-user
-                                            .inputGroupContainer
-                                                
-                                                select.btn.btn-default.col-md-12(name="alumno", ng-model='new.alumno', ng-init="alumnos" ng-options='x.nombre for x in alumnos',required='' )
-                                                    option(style='display:none', value='') elige alumno ....    
-                                        span.input-group-text(style='color:red', ng-show='myFormReg.alumno.$invalid && myFormReg.alumno.$touched' )
-                                            span(ng-show='myFormReg.alumno.$error.required')     
-                                                | ingresa alumno.
-                                
+                                    .col-md-1
+                                    .alert.alert-success.col-md-10
+                    
+                                        //- span(style='float:right') Matricula : {{vm.account.lastName}} 
+                                        //- | Nombre  : {{vm.account.firstName}}
+                                        //- -var alumno1 =user.id; 
+                                        //- h3=alumno1
+                                        label.col-md-6.control-label(for='file')
+                                            h3#alumno.Mayus(name='alumno' )= "Nombre : "+ user.nombre+ " "+user.apellido+" "
+                                        label.col-md-6.control-label(for='file')
+                                            h3=" Matricula : "+ user.matricula
+                                        input(type="text",ng-model="new.idalumno",ng-init="new.idalumno = #{user.id}", style="display:none")
                                 .form-group
                                     label.col-md-3.control-label Título:
                                     .col-md-8.inputGroupContainer
@@ -67,7 +66,7 @@ link(rel='stylesheet', href='/stylesheets/check.css')
                                             .inputGroupContainer
                                                 select.btn.btn-default(name="grado", ng-model='new.grado', ng-init="grados",required='' )
                                                     option(style='display:none', value='') elige grado ....    
-                                                    option( ng-repeat='x  in grados', value='{{x.idgrado}}', ng-if='x.idgrado==1 || x.idgrado==2') {{x.grado}}
+                                                    option( ng-repeat='x  in grados', value='{{x.idgrado}}', ng-if='x.idgrado==1 || x.idgrado==2 ') {{x.grado}}
                                         span.input-group-text(style='color:red', ng-show='myFormReg.grado.$touched' )
                                             span(ng-show='myFormReg.grado.$error.required')     
                                                 | ingresa grado.   
@@ -172,6 +171,8 @@ link(rel='stylesheet', href='/stylesheets/check.css')
                                                     span.i.fa.fa-plus
                                                 button.btn.btn-danger(ng-show='!codirector3', ng-click="codirector2 = false ;new.codirector2=''") 
                                                     span.i.fa.fa-minus 
+                                            
+
                                         span.input-group-text(style='color:red', ng-show='myFormReg.codirector2.$invalid && myFormReg.codirector2.$touched' )
                                             span(ng-show='myFormReg.codirector2.$error.required')     
                                                 | ingresa codirector 2. 
@@ -218,7 +219,7 @@ link(rel='stylesheet', href='/stylesheets/check.css')
                             //-     span.i.fas.fa-check
                             //-     | prueba
                             
-                            button.btn.btn-success(type='submit', ng-click='save()',data-dismiss="modal"
+                            button.btn.btn-success(type='button', ng-click='save();',data-dismiss='modal',
                                 ng-disabled=`myFormReg.alumno.$invalid  || myFormReg.apellido.$invalid || myFormReg.titulo.$invalid
                                     || myFormReg.resumen.$invalid ||  myFormReg.grado.$invalid 
                                     || myFormReg.unidad.$invalid || myFormReg.mes.$invalid || myFormReg.anio.$invalid 

@@ -1,8 +1,4 @@
 
-// var pg = require("pg")
-// const connection = require('.././database/config');
-// var client = new pg.Client(connection);
-// client.connect();
 var pg = require("pg")
 const connection = require('.././database/config');
 const connectionString = process.env.DATABASE_URL || connection;
@@ -88,7 +84,14 @@ module.exports = {
     data: function (req, res, next) {
         var results = [];
         var results2 = [];
-        // var datos=[];
+        var results3 = [];
+        var results4 = [];
+        var results5 = [];
+        var results6 = [];
+        var results7 = [];
+        var results8 = [];
+        var results9 = [];
+        var datos=[];
         console.log(results)
         var id = req.user.id
         var rol = req.user.rol
@@ -110,6 +113,18 @@ module.exports = {
             var select3 = client.query(`SELECT * FROM "Tesis".vtesis where iddirector=${id} OR idcodirector1=${id} OR idcodirector2=${id}
                 OR idcodirector3=${id} OR idcodirector4=${id}`);
             var select4 = client.query(`SELECT * FROM "Tesis".alumno`);
+            var select5 = client.query(`SELECT * FROM "Tesis".grado`);
+            var select6 = client.query(`SELECT * FROM "Tesis".departamento`);
+            var select7 = client.query(`SELECT * FROM "Tesis".unidad`);
+            var select8 = client.query(`SELECT a.idpersona, 
+                (a.nombre || ' '||  a.nombre2 || ' '|| a.nombre3 || ' '|| a.apellido || ' '|| a.apellido2 || ' '|| a.apellido3) as nombre, 
+                a.idgrado, a.idgenero, 
+                a.iddepartamento, c.departamento,
+                a.esexterno, a.institucion, a.puesto
+                FROM "Tesis".persona a
+                left join "Tesis".departamento c on a.iddepartamento=c.iddepartamento
+                ORDER BY idpersona`);
+            var select9 = client.query(`SELECT * FROM "Tesis".genero`);
             if(rol === 'Administrador')  
                 var query = select
             if (rol === 'alumno') 
@@ -124,7 +139,27 @@ module.exports = {
            
             var query = select4
             query.on('row', (row) => {
-                results2.push(row);
+                results4.push(row);
+            });
+            var query = select5
+            query.on('row', (row) => {
+                results5.push(row);
+            });
+            var query = select6
+            query.on('row', (row) => {
+                results6.push(row);
+            });
+            var query = select7
+            query.on('row', (row) => {
+                results7.push(row);
+            });
+            var query = select8
+            query.on('row', (row) => {
+                results8.push(row);
+            });
+            var query = select9
+            query.on('row', (row) => {
+                results9.push(row);
             });
            
             query.on('end', () => {
@@ -132,17 +167,261 @@ module.exports = {
                 console.log("se cerro base de datos")
                 // console.log(JSON.stringify(results))
                 // console.log(results)
-                // datos=[{
-                //     tesis=results,
-                //     alumno=results2
-                // }]
-                return res.json(results);
+                datos=[{
+                    tesis:results,
+                    alumno:results4,
+                    grado:results5,
+                    departamento:results6,
+                    unidad:results7,
+                    persona:results8,
+                    genero:results9,
+                    isAuthenticated: req.isAuthenticated(),
+                    user: req.user
+                }]
+                return res.json(datos);
             });
 
 
         });
     },
+    insert : function(req,res,next){
+        console.log(`-------entrayaaaaaaaaaaaaaaaaaaaaaaa----------------`);
+        var results=[];
+        var results2=[];
+        var alumno=  req.body.alumno;
+        var titulo =req.body.titulo;
+        var resumen = req.body.resumen;
+        var grado = req.body.grado;
+        var departamento =  req.body.departamneto;
+        var unidad = req.body.unidad;
+        var mes =  req.body.mes;
+        var anio =  req.body.anio;
+        var director =  req.body.director;
+ 
+        var codirector = req.body.codirector === "" ? inv1 = null : inv1 = req.body.codirector
+        var codirector2 = req.body.codirector2 === "" ? inv2 = null : inv2 = req.body.codirector2
+        var codirector3 = req.body.codirector3 === "" ? inv3 = null : inv3 = req.body.codirector3
+        var codirector4 = req.body.codirector4 === "" ? inv4 = null : inv4 = req.body.codirector4
+        console.log(`-------DATOS------\n${alumno}\n${titulo}\n${resumen}
+        \n${grado}\n${departamento}\n${unidad}\n${mes}\n${anio}\n${director}\n${inv1}\n${inv2}\n${inv3}\n${inv4}\n-----------------`)
 
+
+
+        pg.connect(connectionString, function (err, client, done) {
+      
+            if (err) {
+                done();
+                console.log(err);
+                return res.status(500).json({ success: false, data: err });
+            }
+            
+            
+            var select = client.query(`INSERT INTO "Tesis".tesis(
+                mes, anio, idalumno, titulo, idgrado, resumen, iddepartamento, idunidad, "fechapublicación")
+               VALUES (${mes},${anio},${alumno}, '${titulo}', ${grado}, '${resumen}', ${departamento}, ${unidad}, null)`);
+
+            var select2 = client.query(`INSERT INTO "Tesis".tesispersona(
+                idtesis, iddirector, idcodirector1, idcodirector2, idcodirector3, idcodirector4)
+                VALUES ((SELECT MAX(idtesis) FROM "Tesis".tesis),${director},${inv1},${inv2},${inv3},${inv4} )`);
+    
+           
+            var query=select;
+            query.on('row', (row) => {
+                results.push(row);
+            });
+            var query=select2;
+            query.on('row', (row) => {
+                results2.push(row);
+            });
+            
+            query.on('end', () => {
+                done();
+                console.log("se cerro base de datos")
+                // console.log(results)
+                // req.flash('Insert', 'Se ha registrado correctamente');
+                // return res.redirect('/tesis/tesis');
+                return res.json(results);
+            });
+
+        });
+
+    },
+    add :function (req, res, next) {
+        const results = [];
+        const results2 = [];
+        var datos=[];
+        var nombre = req.body.nombre;
+        var apellido = req.body.apellido;
+        var editar = req.body.editar;
+        var nom2 = req.body.nombre2 === undefined ? nombre2 = '' : nombre2 = req.body.nombre2
+        var nom3 = req.body.nombre3 === undefined ? nombre3 = '' : nombre3 = req.body.nombre3
+        var ape2 = req.body.apellido2 === undefined ? apellido2 = '' : apellido2 = req.body.apellido2
+        var ape3 = req.body.apellido3 === undefined ? apellido3 = '' : apellido3 = req.body.apellido3
+        var grado = req.body.grado;
+        var genero = req.body.genero;
+        var departamento = req.body.departamento;
+        var externo = req.body.esexterno;
+        var insti = req.body.institucion === undefined ? institucion = null : institucion = req.body.institucion
+        var pue = req.body.puesto === undefined ? puesto = null : puesto = req.body.puesto
+
+  
+
+        console.log(`-------DATOS------\n${nombre}\n${nombre2}\n${nombre3}\n${apellido}
+        \n${apellido2}\n${apellido3}\n${grado}\n${genero}\n${departamento}\n${externo}\n${institucion}\n${puesto}
+        \n----------------------------------`)
+        pg.connect(connectionString, function (err, client, done) {
+            // Handle connection errors
+            if (err) {
+                done();
+                console.log(err);
+                return res.status(500).json({ success: false, data: err });
+            }
+            // SQL Query > Select Data
+
+            var select = client.query(`INSERT INTO "Tesis".persona(
+                nombre, nombre2, nombre3, apellido, apellido2, apellido3,
+                idgrado, idgenero, iddepartamento, esexterno, institucion, puesto)
+                VALUES ('${nombre}', '${nombre2}', '${nombre3}','${apellido}', '${apellido2}','${apellido3}',
+                ${grado},${genero}, ${departamento}, ${externo},'${institucion}','${puesto}') RETURNING idpersona `);
+
+            var select2 = client.query(`SELECT a.idpersona, 
+                (a.nombre || ' '||  a.nombre2 || ' '|| a.nombre3 || ' '|| a.apellido || ' '|| a.apellido2 || ' '|| a.apellido3) as nombre, 
+                a.idgrado, a.idgenero, 
+                a.iddepartamento, c.departamento,
+                a.esexterno, a.institucion, a.puesto
+                FROM "Tesis".persona a
+                left join "Tesis".departamento c on a.iddepartamento=c.iddepartamento
+                ORDER BY idpersona`);  
+            // Stream results back one row at a time
+            var query=select
+            query.on('row', (row) => {
+                results.push(row);
+            });
+            var query=select2
+            query.on('row', (row) => {
+                results2.push(row);
+            });
+            
+            // After all data is returned, close connection and return results
+            query.on('end', () => {
+                done();
+                console.log("se cerro base de datos")
+                console.log(results)
+                // req.flash('Insert', 'Se ha registrado correctamente');
+                // return res.redirect('/persona/persona');
+                
+                return res.json(results);
+            });
+
+        });
+
+    },
+
+    update : function(req,res,next){
+        console.log(`-------entra  22222222222222----------------`);
+        var results=[];
+        var results2=[];
+        var id=  req.body.id;
+        var alumno=  req.body.alumno;
+        var titulo =req.body.titulo;
+        var resumen = req.body.resumen;
+        var grado = req.body.grado;
+        var departamento =  req.body.departamneto;
+        var unidad = req.body.unidad;
+        var mes =  req.body.mes;
+        var anio =  req.body.anio;
+        var director =  req.body.director;
+ 
+        var codirector = req.body.codirector === "" ? inv1 = null : inv1 = req.body.codirector
+        var codirector2 = req.body.codirector2 === "" ? inv2 = null : inv2 = req.body.codirector2
+        var codirector3 = req.body.codirector3 === "" ? inv3 = null : inv3 = req.body.codirector3
+        var codirector4 = req.body.codirector4 === "" ? inv4 = null : inv4 = req.body.codirector4
+        console.log(`-------DATOS------\n${id}\n${alumno}\n${titulo}\n${resumen}
+        \n${grado}\n${departamento}\n${unidad}\n${mes}\n${anio}\n${director}\n${inv1}\n${inv2}\n${inv3}\n${inv4}\n-----------------`)
+
+
+
+        pg.connect(connectionString, function (err, client, done) {
+      
+            if (err) {
+                done();
+                console.log(err);
+                return res.status(500).json({ success: false, data: err });
+            }
+            
+            
+            var select = client.query(`UPDATE "Tesis".tesis
+                SET mes=${mes}, anio=${anio}, idalumno=${alumno}, titulo='${titulo}', idgrado=${grado}, resumen='${resumen}', 
+                iddepartamento=${departamento}, idunidad=${unidad}
+                WHERE idtesis=${id}`);
+                
+            var select2 = client.query(`UPDATE "Tesis".tesispersona
+                SET  iddirector=${director}, idcodirector1=${inv1}, idcodirector2=${inv2}, idcodirector3=${inv3}, idcodirector4=${inv4}
+                WHERE idtesis=${id}`);
+
+            
+    
+           
+            var query=select;
+            query.on('row', (row) => {
+                results.push(row);
+            });
+            var query=select2;
+            query.on('row', (row) => {
+                results2.push(row);
+            });
+            
+            query.on('end', () => {
+                done();
+                console.log("se cerro base de datos")
+                // console.log(results)
+                // req.flash('Insert', 'Se ha registrado correctamente');
+                // return res.redirect('/tesis/tesis');
+                return res.json(results);
+            });
+
+        });
+
+    },
+    delete: function (req, res, next) {
+        const results = [];
+        
+        var id = req.body.id;
+        var idp = req.body.idp;
+        console.log(`-------DATOS------\n${id}\n${idp}
+        \n--------------------------------`)
+        pg.connect(connectionString, function (err, client, done) {
+
+            if (err) {
+                done();
+                console.log(err);
+                return res.status(500).json({ success: false, data: err });
+            }
+            
+            var select = client.query(`DELETE FROM "Tesis".tesispersona  WHERE idtesispersona=${id}`);
+            var select2 = client.query(`DELETE FROM "Tesis".tesis  WHERE idtesis=${id}`);
+            
+            var query = select
+            query.on('row', (row) => {
+                results.push(row);
+            });
+            var query = select2
+            query.on('row', (row) => {
+                results.push(row);
+            });
+            // After all data is returned, close connection and return results
+            query.on('end', () => {
+                done();
+                console.log("se cerro base de datos")
+                // console.log(results)
+                req.flash('Delete', 'Se ha eliminado correctamente');
+                return res.json(results);
+                // return res.redirect('/persona/persona');
+            });
+
+        });
+
+    },
     postUserPanel: function (req, res, next) {
 
         var bot = req.body.valor1

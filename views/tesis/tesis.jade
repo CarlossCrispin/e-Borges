@@ -18,15 +18,19 @@ block content
                         .panel-heading
                             h1.inverse.title.text-center Tesis
                             hr
-                     div(ng-show="datos.length == 0")
+                    div(ng-show="datos.length == 0 && personas.length == 0")
                         .jumbotron.jumbotron-fluid
                             .container
-                                h1.display-4 Fluid jumbotron
-                                p.lead
-                                | This is a modified jumbotron that occupies the entire horizontal space of its parent.
+                                h1.display-4 Cargando ...
+                                
+                                //- h2.display-4 Cargando ...
+                                //- p.lead
+                                //- | Cargando ...
 
                                 include ../loader
-                    .panel.panel-default(ng-show="datos.length != 0")  
+                                
+
+                    .panel.panel-default(ng-show="datos.length != 0 && personas.length != 0")  
                         
                         .panel-heading
                             br
@@ -73,15 +77,15 @@ block content
                                     table.table.table-striped.table-bordered(ng-init='configPages(); ')
                                         tr.text-center
                                             
-                                            th 
-                                                a( ng-click="sortName = 'idtesis'; sortReverse = !sortReverse")
-                                                    | ID
-                                                    span.fa.fa-caret-down(ng-show='!sortReverse')
-                                                    span.fa.fa-caret-up(ng-show='sortReverse')
+                                            //- th 
+                                            //-     a( ng-click="sortName = 'idtesis'; sortReverse = !sortReverse")
+                                            //-         | ID
+                                            //-         span.fa.fa-caret-down(ng-show='!sortReverse')
+                                            //-         span.fa.fa-caret-up(ng-show='sortReverse')
                                          
                                             th 
                                                 a( ng-click="sortName = 'id'; sortReverse = !sortReverse")
-                                                    | tesis
+                                                    | Tesis
                                                     span.fa.fa-caret-down(ng-show='!sortReverse')
                                                     span.fa.fa-caret-up(ng-show='sortReverse')
                                             th Resumen
@@ -94,7 +98,7 @@ block content
                                         tbody
                                             tr(ng-repeat='item in filtered = (datos| filter:buscar2)  |orderBy:sortName:sortReverse| startFromGrid: currentPage * pageSize | limitTo: pageSize', ,='', ng-click='seleccionarUsuario(idalumno)')
                                                 
-                                                td {{item.idtesis}}
+                                                //- td {{item.idtesis}}
                                                 td {{item.titulo}}
                                                 td {{item.resumen}}
                                                 td {{item.alumno}}
@@ -147,8 +151,8 @@ block content
 
 
                 //- Modales
-                    include editartesis
-                    include eliminartesis 
+                include editartesis
+                include eliminartesis 
                 include consultartesis
                       
                                 

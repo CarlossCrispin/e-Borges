@@ -109,12 +109,30 @@ app.controller('panelController', function ($scope, $http) {
         $scope.generos = [];
         $scope.departamentos= [];
         $scope.grado= [];
+        $scope.genero= [];
         $scope.new = {};
+        $scope.return= {};
+        $scope.new2 = {};
+        $scope.new.codirector ='';
+        $scope.new.codirector2 ='';
+        $scope.new.codirector3='';
+        $scope.new.codirector4 ='';
+        // $scope.new.esexterno =0;
+        $scope.clicked3={}
+       
         $scope.clicked = {};
         $scope.alertMassege = "";
-        $scope.new.esexterno=0;
-        $scope.clicked.esexterno=0;
+        $scope.alertMassege2 = "";
+        
+        // $scope.clicked.esexterno=0;
+        
+        $scope.new.mes = (new Date()).getMonth()+1
+   
+        $scope.new.anio = (new Date()).getFullYear()
     
+        $scope.fecha=new Date();
+
+
         $scope.paginas = [10, 20, 50, 100];
         $scope.sizePag = function () {
             $scope.pageSize = $scope.pageSize;
@@ -122,13 +140,18 @@ app.controller('panelController', function ($scope, $http) {
         };
     
         $scope.get = function () {
+            $scope.datos.length =99;
             $http.get(`${pathname}/data`)
                 .success((data) => {
-                    $scope.datos = data
-                    // $scope.datos = data[0].personas;
-                    // $scope.generos = data[0].generos;
-                    // $scope.departamentos = data[0].departamentos;
-                    // $scope.grados = data[0].grados;
+                    // $scope.datos = data
+                $scope.datos = data[0].tesis;
+                $scope.alumnos = data[0].alumno;
+                $scope.grados = data[0].grado;
+                $scope.departamentos = data[0].departamento;
+                $scope.unidad = data[0].unidad;
+                $scope.personas= data[0].persona;
+                $scope.generos= data[0].genero;
+                $scope.user= data[0].user
                     
                     // console.log(data);
     
@@ -174,23 +197,39 @@ app.controller('panelController', function ($scope, $http) {
             $scope.setPage = function (index) {
                 $scope.currentPage = index - 1;
             };
+            $scope.new= {};
+            $scope.new.codirector ='';
+            $scope.new.codirector2 ='';
+            $scope.new.codirector3='';
+            $scope.new.codirector4 ='';
+            $scope.new.mes = (new Date()).getMonth()+1
+            $scope.new.anio = (new Date()).getFullYear()
+            $scope.new.esexterno;
         };
         $scope.save = function () {
             $scope.new = {
-                nombre: $scope.new.nombre ||'',
-                nombre2: $scope.new.nombre2 ||'',
-                nombre3: $scope.new.nombre3 ||'',
-                apellido: $scope.new.apellido ||'',
-                apellido2: $scope.new.apellido2 ||'',
-                apellido3: $scope.new.apellido3 ||'',
-                grado: $scope.new.grado.idgrado,
-                genero: $scope.new.genero.idgenero,
-                departamento: $scope.new.departamento.iddepartamento,
-                esexterno: $scope.new.esexterno,
-                institucion: $scope.new.institucion ||'',
-                puesto: $scope.new.puesto ||''
+                alumno: $scope.user.id,
+                titulo: $scope.new.titulo ||'',
+                resumen: $scope.new.resumen ||'',
+                grado: $scope.new.grado||'',
+                departamneto: $scope.new.departamento.iddepartamento||'',
+                unidad: $scope.new.unidad||'',
+                mes: $scope.new.mes||'',
+                anio: $scope.new.anio||'',
+                // director:$scope.new.director.idpersona,
+                // codirector:$scope.new.codirector.idpersona,
+                // codirector2:$scope.new.codirector2.idpersona,
+                // codirector3:$scope.new.codirector3.idpersona,
+                // codirector4:$scope.new.codirector4.idpersona,
+                director:$scope.new.director.idpersona === undefined || '' ?  null  : $scope.new.director.idpersona,
+                codirector:$scope.new.codirector.idpersona === undefined ||'' ?  null : $scope.new.codirector.idpersona,
+                codirector2:$scope.new.codirector2.idpersona === undefined ||'' ?  null : $scope.new.codirector2.idpersona,
+                codirector3:$scope.new.codirector3.idpersona === undefined ||'' ?  null  : $scope.new.codirector3.idpersona,
+                codirector4:$scope.new.codirector4.idpersona === undefined ||'' ?  null  : $scope.new.codirector4.idpersona,
+              
             };
             // console.log( $scope.new)
+            // $scope.new= {};
             $http.post(`${pathname}/insert`, $scope.new)
                 .success((data) => {
                     
@@ -198,6 +237,9 @@ app.controller('panelController', function ($scope, $http) {
                     $scope.new= {};
                     $scope.alertMassege = "Nuevo Item Agregado!!";
                     $scope.get();
+                    $scope.new.mes = (new Date()).getMonth()+1
+   
+                    $scope.new.anio = (new Date()).getFullYear()
                 })
                 .error((error) => {
                     console.log('Error: ' + error);
@@ -205,22 +247,65 @@ app.controller('panelController', function ($scope, $http) {
                 });
             $scope.alertMassege = "";    
         };
+        $scope.add = function () {
+            $scope.new2 = {
+                nombre: $scope.new2.nombre ||'',
+                nombre2: $scope.new2.nombre2 ||'',
+                nombre3: $scope.new2.nombre3 ||'',
+                apellido: $scope.new2.apellido ||'',
+                apellido2: $scope.new2.apellido2 ||'',
+                apellido3: $scope.new2.apellido3 ||'',
+                grado: $scope.new2.grado.idgrado,
+                genero: $scope.new2.genero.idgenero,
+                departamento: $scope.new2.departamento.iddepartamento,
+                esexterno: $scope.new.esexterno,
+                institucion: $scope.new2.institucion ||'',
+                puesto: $scope.new2.puesto ||''
+            };
+            console.log($scope.new2);
+            // $scope.new.codirector="sientroooooooo"
+            // $scope.new2={}
+            $http.post(`${pathname}/add`, $scope.new2)
+                .success((data) => {
+                    console.log(JSON.stringify(data));
+                    
+                    // $scope.personas= data[0].persona;
+                    $scope.return= data;
+                    $scope.new.codirector=JSON.stringify(data.idpersona);
+                    $scope.clicked =data.idpersona
+                    $scope.clicked2 =data.idpersona
+                    $scope.clicked3.idpersona =data.idpersona;
+                  
+                    $scope.new2= {};
+                    $scope.alertMassege2 = "Codirector Externo Agregado!!";
+                    $scope.get();
+                   
+                })
+                .error((error) => {
+                    console.log('Error: ' + error);
+                    $scope.alertMassege2 = "ERROR!!";
+                });
+            $scope.alertMassege2 = "";
+
+
+        }
         $scope.update= function () {
             
             $scope.clicked={
-                id:$scope.clicked.idpersona,
-                nombre: $scope.clicked.nombre ||'',
-                nombre2: $scope.clicked.nombre2 ||'',
-                nombre3: $scope.clicked.nombre3 ||'',
-                apellido: $scope.clicked.apellido ||'',
-                apellido2: $scope.clicked.apellido2 ||'',
-                apellido3: $scope.clicked.apellido3 ||'',
-                grado: $scope.clicked.idgrado,
-                genero: $scope.clicked.idgenero,
-                departamento: $scope.clicked.iddepartamento,
-                esexterno: $scope.clicked.esexterno || 0,
-                institucion: $scope.clicked.institucion ||'',
-                puesto: $scope.clicked.puesto ||''
+                id: $scope.clicked.idtesis,
+                alumno: $scope.clicked.idalumno ||'',
+                titulo: $scope.clicked.titulo ||'',
+                resumen: $scope.clicked.resumen ||'',
+                grado: $scope.clicked.idgrado||'',
+                departamneto: $scope.clicked.iddepartamento||'',
+                unidad: $scope.clicked.idunidad||'',
+                mes: $scope.clicked.mes||'',
+                anio: $scope.clicked.anio||'',
+                director:$scope.clicked.iddirector === undefined || '' ?  null : $scope.clicked.iddirector,
+                codirector:$scope.clicked.idcodirector1 === undefined ||'' ?  null  : $scope.clicked.idcodirector1,
+                codirector2:$scope.clicked.idcodirector2 === undefined ||'' ?  null  : $scope.clicked.idcodirector2,
+                codirector3:$scope.clicked.idcodirector3 === undefined ||'' ?  null  : $scope.clicked.idcodirector3,
+                codirector4:$scope.clicked.idcodirector4 === undefined ||'' ?  null : $scope.clicked.idcodirector4
     
             };
             // console.log($scope.clicked);
@@ -241,9 +326,10 @@ app.controller('panelController', function ($scope, $http) {
     
         };
         $scope.delete = function () {
-    
+
             $scope.clicked={
-                id:$scope.clicked.idpersona
+                id:$scope.clicked.idtesis,
+                idp:$scope.clicked.idtesispersona
             };
     
             // console.log($scope.clicked)
@@ -251,9 +337,10 @@ app.controller('panelController', function ($scope, $http) {
             $http.post(`${pathname}/delete` , $scope.clicked)
                 .success((data) => {
                     $scope.todoData = data;
+                    console.log( $scope.todoData)
                     $scope.clicked = {};
-                    $scope.alertMassege = "Item Borrado !!";
                     $scope.get();
+                    $scope.alertMassege = "Item Borrado !!";
                 })
                 .error((data) => {
                     console.log('Error: ' + data);
@@ -261,7 +348,6 @@ app.controller('panelController', function ($scope, $http) {
                 });
                 $scope.alertMassege = "";
         };
-    
         $scope.select = function (Item) {
             // console.log(Item);
             $scope.clicked = Item;
@@ -270,6 +356,7 @@ app.controller('panelController', function ($scope, $http) {
     
     
     })
+    
     app.filter('startFromGrid', function () {
         return function (input, start) {
             if (!input || !input.length) { return; }

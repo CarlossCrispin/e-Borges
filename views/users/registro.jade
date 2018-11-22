@@ -1,0 +1,308 @@
+.list-group.animated.zoomIn
+    a.list-group-item.active.main-color-bg.obj-trans(href='')
+        
+        button.close(type='button',data-toggle='pill', href='#pills-home', role='tab', aria-controls='pills-home',
+                    aria-selected='true',ng-click='lista = true; tabla=false; registro= false') ×
+        span.i.fa.fa-pencil-alt
+        |  Registrar Tesis
+    form.form-horizontal(name='myFormReg', novalidate='',autocomplete="off")
+                
+        .panel.panel-default
+            .panel-heading
+                h3.panel-title Ingresa ...
+            br
+            .panel-body
+                
+                    //- {{new}}
+                
+                .form-group
+                    .col-md-1
+                    .alert.alert-success.col-md-10
+
+                        //- span(style='float:right') Matricula : {{vm.account.lastName}} 
+                        //- | Nombre  : {{vm.account.firstName}}
+                        //- -var alumno1 =user.id; 
+                        //- h3=alumno1
+                        label.col-md-6.control-label(for='file')
+                            h3#alumno.Mayus(name='alumno' )= "Nombre : "+ user.nombre+ " "+user.apellido+" "
+                        label.col-md-6.control-label(for='file')
+                            h3=" Matricula : "+ user.matricula
+                        //- input(type="text",ng-model="new.idalumno = user.id" )
+                .form-group
+                    label.col-md-3.control-label Título:
+                    .col-md-8.inputGroupContainer
+                        .input-group
+                            span.input-group-addon
+                                span.i.fa.fa-text-width
+                            .inputGroupContainer
+                            textarea.form-control(rows='2', cols='30' name="titulo", type='text', placeholder='Título', ng-model='new.titulo', required, ng-maxlength="100")
+                            //- input.form-control(name="titulo", type='text', placeholder='Título', ng-model='new.titulo', required, ng-maxlength="50")
+                        span(style='color:red', ng-show='myFormReg.titulo.$invalid && myFormReg.titulo.$touched')
+                            span(ng-show='myFormReg.titulo.$error.required') ingresa título.
+                            span(ng-show='myFormReg.titulo.$error.maxlength') Muy largo.
+                
+                .form-group
+                    label.col-md-3.control-label Resumen:
+                    .col-md-8.inputGroupContainer
+                        .input-group
+                            span.input-group-addon
+                                span.i.fa.fa-list
+                            .inputGroupContainer
+                            textarea.form-control(rows='3', cols='30' name="resumen", type='text', placeholder='resumen', ng-model='new.resumen', required, ng-maxlength="300")
+                        span(style='color:red', ng-show='myFormReg.resumen.$invalid && myFormReg.resumen.$touched')
+                            span(ng-show='myFormReg.resumen.$error.required') ingresa resumen.
+                            span(ng-show='myFormReg.resumen.$error.maxlength') Muy largo.
+                
+                .form-group
+                    label.col-md-3.control-label Grado :
+                    .col-md-8.inputGroupContainer
+                        .input-group
+                            span.input-group-addon
+                                span.i.fas.fa-user-graduate
+                            .inputGroupContainer
+                                select.btn.btn-default(name="grado", ng-model='new.grado', ng-init="grados",required='' )
+                                    option(style='display:none', value='') elige grado ....    
+                                    option( ng-repeat='x  in grados', value='{{x.idgrado}}', ng-if='x.idgrado==1 || x.idgrado==2 ') {{x.grado}}
+                        span.input-group-text(style='color:red', ng-show='myFormReg.grado.$touched' )
+                            span(ng-show='myFormReg.grado.$error.required')     
+                                | ingresa grado.   
+                .form-group
+                    label.col-md-3.control-label Departamento:
+                    .col-md-8.inputGroupContainer
+                        .input-group
+                            spanspan.input-group-addon
+                                span.i.fas.fa-vector-square
+                            .inputGroupContainer
+                                select.btn.btn-default.col-md-12(name="departamento", ng-model='new.departamento', ng-options=' x.departamento  for x in departamentos',required='' )
+                                    option(style='display:none', value='') elige departamento ....    
+                                
+                        span.input-group-text(style='color:red', ng-show='myFormReg.departamento.$invalid && myFormReg.departamento.$touched' )
+                            span(ng-show='myFormReg.departamento.$error.required')     
+                                | ingresa departamento.   
+                .form-group
+                    label.col-md-3.control-label Unidad :
+                    .col-md-8.inputGroupContainer
+                        .input-group
+                            span.input-group-addon
+                                span.i.fas.fa-university
+                            .inputGroupContainer
+                                select.btn.btn-default.col-md-8(name="unidad", ng-model='new.unidad',required='' )
+                                    option(style='display:none', value='') elige unidad ....    
+                                    option( ng-repeat='x  in unidad', value="{{x.idunidad}}") {{x.nombre}}
+                            
+                        span.input-group-text(style='color:red', ng-show='myFormReg.alumno.$invalid && myFormReg.unidad.$touched' )
+                            span(ng-show='myFormReg.unidad.$error.required')     
+                                | ingresa unidad.   
+                .form-group
+                    label.col-md-3.control-label Mes :
+                    .col-md-8.inputGroupContainer
+                        .input-group
+                            spanspan.input-group-addon
+                                span.i.fas.fa-calendar
+                            //-    a {{new.mes | date:"MMM"}}
+                            input.form-control(name="mes", type='text', placeholder='Mes', ng-model='new.mes ', required, ng-maxlength="50")
+                        span(style='color:red', ng-show='myFormReg.mes.$invalid && myFormReg.mes.$touched')
+                            span(ng-show='myFormReg.mes.$error.required') ingresa mes.
+                            span(ng-show='myFormReg.mes.$error.maxlength') Muy largo.
+                .form-group
+                    label.col-md-3.control-label Año :
+                    .col-md-8.inputGroupContainer
+                        .input-group
+                            spanspan.input-group-addon
+                                span.i.fas.fa-calendar-alt
+                            input.form-control(name="anio", type='text', placeholder='Año', ng-model='new.anio  ', required, ng-maxlength="50")
+                        span(style='color:red', ng-show='myFormReg.anio.$invalid && myFormReg.anio.$touched')
+                            span(ng-show='myFormReg.anio.$error.required') ingresa año.
+                            span(ng-show='myFormReg.anio.$error.maxlength') Muy largo.
+
+                .form-group
+                    label.col-md-3.control-label Director :
+                    inputGroupContainer.col-md-8
+                        .input-group
+                            span.input-group-addon
+                                span.i.fas.fa-user-graduate
+                            
+                            select.btn.btn-default.col-md-12(name="director", ng-model='new.director',required=''
+                                ng-options=' x.nombre group by x.departamento   for x in personas  |filter: new.departamento.departamento',
+                                ng-disabled="myFormReg.departamento.$invalid ")
+                            span.input-group-btn
+                                button.btn.btn-md.btn-primary(ng-show='!codirector && !externo && !codirectorr', ng-click='externo = true',ng-disabled="myFormReg.director.$invalid ")
+                                    span.i.fa.fa-plus   
+                        span.input-group-text(style='color:red', ng-show='myFormReg.director.$invalid && myFormReg.director.$touched' )
+                            span(ng-show='myFormReg.director.$error.required')     
+                                | ingresa director.   
+                        span.input-group-text(style='color:red', ng-show='myFormReg.departamento.$invalid ' )
+                            span(ng-show='myFormReg.departamento.$error.required')     
+                                | ingresa departamento para habilitar.
+
+
+                .form-group(ng-show="externo")
+                    label.col-md-3.control-label ¿Codirector es externo?
+                    .col-md-8.inputGroupContainer
+                        .input-group
+                            span.input-group-addon
+                                span.i.fa.fa-external-link-alt
+                            span.input-group-addon
+                            label.btn.btn-info
+                                input(type='radio', name='options',ng-model='new.esexterno',
+                                ng-click="noex=true;siex=false;codirector=true;externo=false;new.institucion='';new.puesto='' ", ng-value="0",required) 
+                                |  No  
+                            span.input-group-addon
+                            label.btn.btn-info
+                                input(type='radio', name='options',ng-model='new.esexterno'
+                                ng-click='noex=false;siex=true;codirector=true;externo=false;',ng-value="1",required) 
+                                |  Si 
+                            span.input-group-btn
+                            button.btn.btn-danger(ng-show='!codirector2', ng-click="codirector = false ;new.codirector=''; externo=false; codirectorr=false;new.esexterno=''") 
+                                    span.i.fa.fa-times 
+                        span.input-group-text(style='color:red', ng-show='myFormReg.options.$invalid' )
+                            span(ng-show='myFormReg.options.$error.required')     
+                                | ingresa ¿es externo?.     
+                .form-group(ng-show="codirector")
+                    .col-md-1
+                    .alert.alert-warning.fade.in.myAlert.col-md-10(ng-if='alertMassege2')
+                        a.close(href='#', data-dismiss='alert', ng-click='clickedAlert()') ×
+                        h4 {{alertMassege2}}
+                .form-group(ng-show="codirector")  
+                    label.col-md-3.control-label Codirector :
+                    inputGroupContainer.col-md-8( ng-show="noex")
+                        .input-group
+                            span.input-group-addon
+                                span.i.fas.fa-user-graduate
+                                //- {{new2}}
+                            select.btn.btn-default.col-md-12(name="codirector", ng-model='new.codirector',
+                                ng-options="x.nombre group by x.departamento disable when x === new.director for x in personas ",required='',)
+                            input(type="text", ng-model='new.codirector.idpersona' )
+                            label{{new.codirector}}
+                            label{{new.codirector.idpersona}}
+                            label{{clicked}}
+                            select.btn.btn-default.col-md-12(name="codirector", ng-model='new.codirector.idpersona',
+                                        ng-options="x.idpersona as x.nombre  for x in personas ",required='' )
+                            select.btn.btn-default.col-md-12(name="codirector", ng-model='clicked2.idpersona',
+                                        ng-options="x.idpersona as x.nombre group by x.departamento disable when x.idpersona === clicked.iddirector for x in personas ",required='' )
+                            select.btn.btn-default.col-md-12(name="codirector", ng-model='clicked3.idpersona',
+                                        ng-options="x.idpersona as x.nombre group by x.departamento disable when x.idpersona === clicked.iddirector for x in personas ",required='' )
+                            select.btn.btn-default.col-md-12(name="codirector", ng-model='clicked.idpersona',
+                                        ng-options="x.idpersona as x.nombre group by x.departamento disable when x.idpersona === clicked.iddirector for x in personas ",required='' )
+                            span.input-group-btn
+                                button.btn.btn-primary(ng-show='!codirector2', ng-click='codirector2= true',ng-disabled="myFormReg.codirector.$invalid ") 
+                                    span.i.fa.fa-plus
+                                button.btn.btn-danger(ng-show='!codirector2', ng-click="codirector = false ;new.codirector=''; externo=false; codirectorr=false;new.esexterno=''") 
+                                    span.i.fa.fa-minus 
+                        
+                            
+                        //-    {"idpersona":2,"nombre":"JOSÉPH-NATHAN ","idgrado":1,"idgenero":2,"iddepartamento":31,"departamento":"QUÍMICA ","esexterno":null,"institucion":"","puesto":""}
+                        //-    {"idpersona":6526,"nombre":"dafaf","nombre2":"","nombre3":"","apellido":"dfdsfs","apellido2":"","apellido3":"","idgrado":2,"idgenero":1,"iddepartamento":4,"esexterno":1,"institucion":"ddaf","puesto":"adffdda"}
+                       
+                        span.input-group-text(style='color:red', ng-show='myFormReg.codirector.$invalid || myFormReg.codirector.$touched' )
+                            span(ng-show='myFormReg.codirector.$error.required')     
+                                | ingresa codirector.    
+                        
+                           
+                .form-group(ng-show="siex")
+                    include externo
+                .form-group(ng-show="codirector2")
+                    label.col-md-3.control-label Codirector 2 :
+                    inputGroupContainer.col-md-8
+                        .input-group
+                            span.input-group-addon
+                                span.i.fas.fa-user-graduate
+                            select.btn.btn-default.col-md-12(name="codirector2", ng-model='new.codirector2',
+                                ng-options="x.nombre group by x.departamento disable when x === new.director || x === new.codirector for x in personas",required='' )
+                        
+                            span.input-group-btn
+                                button.btn.btn-primary(ng-show='!codirector3', ng-click='codirector3= true',ng-disabled="myFormReg.codirector2.$invalid ") 
+                                    span.i.fa.fa-plus
+                                button.btn.btn-danger(ng-show='!codirector3', ng-click="codirector2 = false ;new.codirector2=''") 
+                                    span.i.fa.fa-minus 
+                        span.input-group-text(style='color:red', ng-show='myFormReg.codirector2.$invalid && myFormReg.codirector2.$touched' )
+                            span(ng-show='myFormReg.codirector2.$error.required')     
+                                | ingresa codirector 2. 
+                
+                .form-group(ng-show="codirector3")
+                    label.col-md-3.control-label Codirector 3 :
+                    inputGroupContainer.col-md-8
+                        .input-group
+                            span.input-group-addon
+                                span.i.fas.fa-user-graduate
+                            select.btn.btn-default.col-md-12(name="codirector3", ng-model='new.codirector3',
+                                ng-options="x.nombre group by x.departamento disable when x === new.director || x === new.codirector || x === new.codirector2  for x in personas",required='' )
+                        
+                            span.input-group-btn
+                                button.btn.btn-primary(ng-show='!codirector4', ng-click='codirector4= true',ng-disabled="myFormReg.codirector3.$invalid ") 
+                                    span.i.fa.fa-plus
+                                button.btn.btn-danger(ng-show='!codirector4', ng-click="codirector3 = false ;new.codirector3=''") 
+                                    span.i.fa.fa-minus 
+                        span.input-group-text(style='color:red', ng-show='myFormReg.codirector3.$invalid && myFormReg.codirector3.$touched' )
+                            span(ng-show='myFormReg.codirector3.$error.required')     
+                                | ingresa codirector 3. 
+                
+                .form-group(ng-show="codirector4")
+                    label.col-md-3.control-label Codirector 4 :
+                    inputGroupContainer.col-md-8
+                        .input-group
+                            span.input-group-addon
+                                span.i.fas.fa-user-graduate
+                            select.btn.btn-default.col-md-12(name="codirector4", ng-model='new.codirector4',
+                                ng-options="x.nombre group by x.departamento  disable when x === new.director || x === new.codirector || x === new.codirector2 || x === new.codirector3  for x in personas",required='' )
+                            span.input-group-btn
+                                button.btn.btn-danger( ng-click="codirector4 = false ;new.codirector4=''") 
+                                    span.i.fa.fa-minus 
+                        span.input-group-text(style='color:red', ng-show='myFormReg.codirector4.$invalid && myFormReg.codirector4.$touched' )
+                            span(ng-show='myFormReg.codirector4.$error.required')     
+                                | ingresa codirector 4. 
+            .panel-footer.text-right
+                hr
+                //- button.btn.btn-success(type='submit',)
+                //-     span.i.fas.fa-check
+                //-     | prueba
+                
+                button.btn.btn-success(type='submit', ng-click='save(); new={}; registro =false; lista=true; btnsel =true;btnsel2 =false; btnsel =true;btnsel2 =false; btnsel =true;btnsel2 =false',
+                    ng-disabled=`myFormReg.alumno.$invalid  || myFormReg.apellido.$invalid || myFormReg.titulo.$invalid
+                        || myFormReg.resumen.$invalid ||  myFormReg.grado.$invalid 
+                        || myFormReg.unidad.$invalid || myFormReg.mes.$invalid || myFormReg.anio.$invalid 
+                        || myFormReg.director.$invalid `  ng-show="!codirector")
+                    
+                    span.i.fas.fa-check
+                    |  Registrar
+                
+                button.btn.btn-success(type='button', ng-click='save(); new={}; registro =false; lista=true; btnsel =true;btnsel2 =false; btnsel =true;btnsel2 =false; btnsel =true;btnsel2 =false',data-dismiss='modal',
+                    ng-disabled=`myFormReg.alumno.$invalid  || myFormReg.apellido.$invalid || myFormReg.titulo.$invalid
+                        || myFormReg.resumen.$invalid ||  myFormReg.grado.$invalid 
+                        || myFormReg.unidad.$invalid || myFormReg.mes.$invalid || myFormReg.anio.$invalid 
+                        || myFormReg.director.$invalid || myFormReg.codirector.$invalid `  ng-show="codirector && !codirector2 ")
+            
+                    span.i.fas.fa-check
+                    |  Registrar 22
+                
+                //- button.btn.btn-success(type='button', ng-click='save(); new={}; registro =false; lista=true; btnsel =true;btnsel2 =false; btnsel =true;btnsel2 =false; btnsel =true;btnsel2 =false',data-dismiss='modal',
+                //-     ng-disabled=`myFormReg.alumno.$invalid  || myFormReg.apellido.$invalid || myFormReg.titulo.$invalid
+                //-         || myFormReg.resumen.$invalid ||  myFormReg.grado.$invalid 
+                //-         || myFormReg.unidad.$invalid || myFormReg.mes.$invalid || myFormReg.anio.$invalid 
+                //-         || myFormReg.director.$invalid || myFormReg.codirector.$invalid  || myFormReg.codirector2.$invalid `  
+                //-         ng-show="codirector2 && !codirector3 ")
+            
+                //-     span.i.fas.fa-check
+                //-     |  Registrar
+                
+                //- button.btn.btn-success(type='button', ng-click='save(); new={}; registro =false; lista=true; btnsel =true;btnsel2 =false; btnsel =true;btnsel2 =false; btnsel =true;btnsel2 =false',data-dismiss='modal',
+                //-     ng-disabled=`myFormReg.alumno.$invalid  || myFormReg.apellido.$invalid || myFormReg.titulo.$invalid
+                //-         || myFormReg.resumen.$invalid ||  myFormReg.grado.$invalid 
+                //-         || myFormReg.unidad.$invalid || myFormReg.mes.$invalid || myFormReg.anio.$invalid 
+                //-         || myFormReg.director.$invalid || myFormReg.codirector.$invalid  || myFormReg.codirector2.$invalid 
+                //-         || myFormReg.codirector3.$invalid `  
+                //-         ng-show="codirector3 && !codirector4 ")
+            
+                //-     span.i.fas.fa-check
+                //-     |  Registrar
+                
+                //- button.btn.btn-success(type='button', ng-click='save(); new={}; registro =false; lista=true; btnsel =true;btnsel2 =false',data-dismiss='modal',
+                //-     ng-disabled=`myFormReg.alumno.$invalid  || myFormReg.apellido.$invalid || myFormReg.titulo.$invalid
+                //-         || myFormReg.resumen.$invalid ||  myFormReg.grado.$invalid 
+                //-         || myFormReg.unidad.$invalid || myFormReg.mes.$invalid || myFormReg.anio.$invalid 
+                //-         || myFormReg.director.$invalid || myFormReg.codirector.$invalid  || myFormReg.codirector2.$invalid 
+                //-         || myFormReg.codirector3.$invalid || myFormReg.codirector4.$invalid `  
+                //-         ng-show="codirector4 ")
+            
+                //-     span.i.fas.fa-check
+                //-     |  Registrar

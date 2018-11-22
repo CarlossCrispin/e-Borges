@@ -1,78 +1,98 @@
 //- script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+//- link(rel='stylesheet prefetch', href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css')
 
 
 extends ../templates/default
 
 block content
+
+
+    .container
+   
     div(ng-app='panelApp', ng-Cloak)
         div(ng-controller='panelController') 
-            div(ng-init='get()')  
+            div(ng-init='get()') 
+                //- {{user}} 
                 br
                 br
                 br
                 br
                 .container
-                    div
-                        .panel.panel-default
-                            .panel-heading
-                            
-                                //- h1.inverse.title.text-center='Bienvenido    ' + user.nombre
-                                //- h1.inverse.title.text-center='Rol ' + user.rol
-                                hr
                     // Breadcrumb
+                    //- {{datos.length}}
                     section#breadcrumb
         
                         ol.breadcrumb
                             li.active Borges
                             li.active Status Tesis
-                              
-                    .panel.panel-default
+                            //- li.active {{datos.length}}
+                            hr
+                    div(ng-show="datos.length == 99")
+                        .jumbotron.jumbotron-fluid
+                            .container
+                                h1.display-4 Cargando ...
+                                
+                                //- h2.display-4 Cargando ...
+                                //- p.lead
+                                //- | Cargando ...
+
+                                include ../loader          
+                    .panel.panel-default(ng-show="datos.length != 99") 
                         .panel-heading
                             br
                             .form-group.well
                                 .input-group.col-md-12
                                 
-                                    .col-md-4
-                                        button.btn.btn-info.btn-md(type='button', data-toggle='modal', 
-                                            data-target='#registrar') Registrar Tesis
-                                        //- include registrartesis
                                     .col-md-2
+                                        if isAuthenticated
+                                            -if (user.rol=== "alumno" )
+                                                //- {{datos.length}}
+                                                //- h3 este
+                                                //- -if (user.rol=== "alumno" || user.rol=== "Administrador" )
+                                              
+                                                button.btn.btn-info.btn-md.nav-link(type='button',
+                                                    data-toggle='pill', href='#registro', role='tab', aria-controls='pills-profile', 
+                                                  aria-selected='false' ng-click="registro = true; lista=false; tabla=false" 
+                                                ng-disabled="datos.length >=2") 
+                                                    span.i.fa.fa-pencil-alt
+                                                    |   Registrar Tesis
+                                        //-         button.btn.btn-info.btn-md(type='button', data-toggle='modal', 
+                                        //-             data-target='#registrar' ng-disabled="datos.length >=2") Registrar Tesis
+                                        //- include registrar
+                                    .col-md-3
                                         .input-group
                                             .input-group-addon 
                                                 label.control-label mostrar 
                                             .inputGroupContainer
                                                 select.btn.btn-default(ng-model='pageSize', ng-init="paginas[0]" ng-options='x for x in paginas ',  ng-change='sizePag();configPages();')
                                                     //- option(value='') --Elige opcion--    
-                                    .col-md-2
-                                        ul#pills-tab.nav.nav-pills.mb-3(role='tablist')
-                                            li.nav-item
-                                                a#pills-home-tab.nav-link.active(data-toggle='pill', href='#pills-home', role='tab', aria-controls='pills-home', aria-selected='true') Home
-                                            li.nav-item
-                                                a#pills-profile-tab.nav-link(data-toggle='pill', href='#pills-profile', role='tab', aria-controls='pills-profile', aria-selected='false') Profile
-                                            li.nav-item
-                                                a#pills-contact-tab.nav-link(data-toggle='pill', href='#pills-contact', role='tab', aria-controls='pills-contact', aria-selected='false') Contact
-                                        #pills-tabContent.tab-content
-                                            #pills-home.tab-pane.fade.show.active(role='tabpanel', aria-labelledby='pills-home-tab') aaaaaaaaaa
-                                            #pills-profile.tab-pane.fade(role='tabpanel', aria-labelledby='pills-profile-tab') bbbbbbbbbbbb
-                                            #pills-contact.tab-pane.fade(role='tabpanel', aria-labelledby='pills-contact-tab') cccccccccccccc
-
+                                    .col-md-3(ng-init="btnsel = true;")
+                                        
                                         ul#pills-tab.nav.nav-pills.ml-2.mt-3(role='tablist')
-                                            li.nav-item
-                                                a#pills-home-tab.nav-link.active(class="nav-link active",data-toggle='pill', href='#pills-home', role='tab', aria-controls='pills-home',
+                                            
+                                            li.nav-item(ng-show="btnsel")
+                                                a#pills-home-tab.btn-info.nav-link.active(data-toggle='pill', href='#pills-home', role='tab', aria-controls='pills-home',
                                                  aria-selected='true',ng-click='lista = true; tabla=false',data-tooltip='Lista', ng-cheked='true')
                                                     i.fa.fa-th-list
+                                          
+
+                                            li.nav-item(ng-show="btnsel2")
+                                                a#pills-home-tab.nav-link(data-toggle='pill', href='#pills-home', role='tab', aria-controls='pills-home',
+                                                 aria-selected='true',ng-click='lista = true; tabla=false; registro= false',data-tooltip='Lista', ng-cheked='true')
+                                                    i.fa.fa-th-list
                                             li.nav-item
-                                                a#pills-profile-tab.nav-link(data-toggle='pill', href='#pills-profile', role='tab', aria-controls='pills-profile', 
-                                                aria-selected='false',ng-click='tabla = true; lista=false',data-tooltip='Tabla')
+                                                a#pills-profile-tab.nav-link.disabled(data-toggle='pill', href='#pills-profile', role='tab', aria-controls='pills-profile', 
+                                                aria-selected='false',ng-click='tabla = true; lista=false; btnsel =false; btnsel2=true ; registro= false',data-tooltip='Tabla')
                                                     i.fa.fa-th-large
+                                            
+                                            //- -if (user.rol=== "alumno" )
+                                            //-     li.nav-item(ng-show="datos.length <2")
+                                            //-         a#pills-profile-tab.nav-link(data-toggle='pill', href='#pills-profile', role='tab', aria-controls='pills-profile', 
+                                            //-         aria-selected='false',ng-click='registro= true; lista=false; tabla=false; btnsel =false; btnsel2=true '
+                                            //-         ,data-tooltip='Registrar Tesis')
+                                            //-             span.i.fa.fa-pencil-alt
+                                                    //- |   Registrar Tesis
 
-
-                                        a.action.btn.btn-sm.btn-info(data-toggle='pill', href='#pills-profile', role='tab',
-                                             aria-controls='Lista', aria-selected='false',ng-click='lista = true; tabla=false',data-tooltip='Lista')
-                                            i.fa.fa-th-large
-                                        a.action.btn.btn-sm.btn-info( data-toggle='pill', href='#pills-home', role='tab',
-                                            aria-controls='Tabla', aria-selected='true',ng-click='tabla = true; lista=false',data-tooltip='Tabla')
-                                            i.fa.fa-th-list 
                                                
                                     .col-md-4
                                         form.form-horizontal(name='myFormSeacrh', novalidate='')
@@ -81,88 +101,147 @@ block content
                                                     span.fas.fa-search-plus
                                                     //- |    Buscar
                                                 input.form-control(type='text', name='buscar',ng-model='buscar', placeholder='Buscar...',required, ng-change="buscar2 = '';get();configPages();sizePag()")
-                
+                        .panel-body 
+                            .alert.alert-warning.fade.in.myAlert(ng-if='alertMassege')
+                                a.close(href='#', data-dismiss='alert', ng-click='clickedAlert()') ×
+                                h4 {{alertMassege}}
+                            
                                 
                 
                 // main section
-                section#main
+                section#main(ng-show="datos.length != 99") 
+                
                     .container
                         .row
                             .col-md-3
                                 .list-group.animated.zoomIn
-                                    a.list-group-item.active.main-color-bg.obj-trans(href='#')
-                                        span.glyphicon.glyphicon-cog
-                                        |  Dashboard
+                                    a.list-group-item.active.main-color-bg.obj-trans(href='')
+                                        span.i.fa.fa-area-chart
+                                        |  Perfil
                                         
-                                    a.list-group-item(href='/')
-                                        span.badge 14
-                                        span.glyphicon.glyphicon-list-alt
-                                        |  Pages
-                                    a.list-group-item(href='/')
-                                        span.badge 26
-                                        span.glyphicon.glyphicon-pencil
-                                        |  Posts
-                                    a.list-group-item(href='/')
-                                        span.badge 54
-                                        span.glyphicon.glyphicon-user
-                                        |  Users
+                                    a.list-group-item
+                                        //- span.badge {{filtered.length}}  
+                                        span.i.fa.fa-user
+                                        span.text-center='  Bienvenido    ' + user.nombre
+                                    a.list-group-item
+                                        span.badge {{fecha | date:'dd/MM/yyyy' }}
+                                        span.i.fa.fa-calendar-alt
+                                        |  Fecha
+                                    //- a.list-group-item(href='/')
+                           
+                                        
+                                    a.list-group-item(ng-show="!buscar")
+                                        span.badge {{datos.length}}   
+                                        span.i.fa.fa-book
+                                        |  Total de Tesis
+                                        
+                                    a.list-group-item(ng-show="buscar")
+                                        span.badge {{filtered.length}}   
+                                        span.i.fa.fa-book
+                                        span  Lista filtrada de tesis que contienen
+                                            span(style='color:green') {{buscar}}
+                                
+                                    if isAuthenticated
+                                        -if (user.rol=== "Administrador")
+                                            ul.list-group-item
+                                                li.dropdown-max
+                                                    input(type='checkbox')
+                                                    a(href='#', data-toggle='dropdown')
+                                                        span.i.fa.fachess-board
+                                                        |  Entidades
+                                                    ul.dropdown-max-menu
+                                                        li
+                                                            a(href='../acta/acta') Acta     X   
+                                                        li
+                                                            a(href='../actaPersona/actaPersona') Acta Persona    X 
+                                                        li
+                                                            a(href='../alumno/alumno') Alumno             
+                                                        li
+                                                            a(href='../departamento/departamento') Departamento      
+                                                        li
+                                                            a(href='../especialidad/especialidad') Especialidad      
+                                                        li
+                                                            a(href='../genero/genero') Genero       
+                                                        li
+                                                            a(href='../grado/grado') Grado      
+                                                        li
+                                                            a(href='../persona/persona') Persona   
+                                                        li
+                                                            a(href='../tesis/tesis') Tesis    
+                                                        li
+                                                            a(href='../unidad/unidad') Unidad     
+                                                        li
+                                                            a(href='../usuario/usuario') Usuario 
+                                    
+        
+
+                                  
+
                                 .well.animated.zoomIn
-                                    h1.inverse Disk Space Used
+                                    h5.inverse Tiempo 
                                         .progress
                                             .progress-bar(role='progressbar', aria-valuenow='60', aria-valuemin='0', aria-valuemax='100', style='width: 60%;')
-                                            span.sr-only 60% Complete
-                                    h1.inverse Bandwidth Used
+                                                span.sr-only 
+                                                | 60% Completado
+                                    h5.inverse Restante
                                         .progress
                                             .progress-bar(role='progressbar', aria-valuenow='40', aria-valuemin='0', aria-valuemax='100', style='width: 40%;')
-                                            span.sr-only 40% Complete
+                                                span.sr-only 
+                                                | 40% faltante
 
                             
+                            .col-md-9(ng-show='registro')
+                                include registro
+
                             .col-md-9(ng-init='lista = true')
-                                .panel.panel-default.animated.zoomIn(ng-show='lista')
-                                    .panel-heading.main-color-bg
-                                        h3.panel-title Website Overview
-                                    .panel-body
-                                        #card-view.row
-                                            .col-md-4.col-sm-5.col-5.mb-4(ng-repeat='item in filtered = (datos| filter:buscar2)  |orderBy:sortName:sortReverse| startFromGrid: currentPage * pageSize | limitTo: pageSize', ,='', ng-click='seleccionarUsuario(idalumno)')
-                                                
-                                                .panel.panel-default
-                                                    .panel-heading
-                                                        .panel-tilte {{item.grado}}
-                                                    .panel-body
-                                                        
+                                //- .panel.panel-default.animated.zoomIn(ng-show='lista')
+                                //-     .panel-heading.main-color-bg
+                                //-         h3.panel-title lista Tesis
+                                //-     .panel-body
+                                .list-group.animated.zoomIn(ng-show='lista',id="pills-tabContent")
+                                    a.list-group-item.active.main-color-bg.obj-trans(href='')
+                                        span.i.fa.fa-list-ul
+                                        |  lista Tesis
+                                    br
+                                    #card-view.row
+                                        .col-md-4.col-sm-5.col-5.mb-4(ng-repeat='item in filtered = (datos| filter:buscar2)  |orderBy:sortName:sortReverse| startFromGrid: currentPage * pageSize | limitTo: pageSize', ,='', ng-click='seleccionarUsuario(idalumno)')
+                                            
+                                            .panel.panel-default
+                                                .panel-heading
+                                                    .panel-tilte {{item.grado}}
+                                                .panel-body
+                                                    
 
-                                                        .card.text-center
-                                                            img.rounded-circle.mt-3.mx-auto.d-block(ng-src='http://sinac2.cs.cinvestav.mx/Manual/images/user.png', alt='Card image cap', height='100', width='100')
-                                                        .card-body
-                                                            h5.card-title {{item.titulo}} 
-                                                            hr
+                                                    .card.text-center
+                                                        img.rounded-circle.mt-3.mx-auto.d-block(ng-src='http://sinac2.cs.cinvestav.mx/Manual/images/user.png', alt='Card image cap', height='100', width='100')
+                                                    .card-body
+                                                        h5.card-title {{item.titulo}} 
+                                                        hr
+                                                        -if (user.rol=== "alumno" ) 
+                                                            h5 Director: {{item.director}}
+                                                        -if (user.rol=== "persona" ) 
                                                             h5 Alumno : {{item.alumno}}
-                                                    .panel-footer.text-right
-                                                        a.action.btn.btn-sm.btn-warning(type='button', data-toggle='modal',title='Editar',
-                                                            data-target='#editar',data-tooltip='Editar',ng-click='select(item)',)
-                                                                i.fa.fa-edit 
-                                                                
-                                                        
-                                                           
-                                                        a.action.btn.btn-sm.btn-danger(type='button', data-toggle='modal', data-target='#delete',
-                                                            data-tooltip='Eliminar', ng-click='select(item)') 
-                                                                i.fa.fa-trash
+                                                .panel-footer.text-right
+                                                    a.action.btn.btn-sm.btn-warning(type='button', data-toggle='modal',title='Editar',
+                                                        data-target='#editar',data-tooltip='Editar',ng-click='select(item)',)
+                                                            i.fa.fa-edit 
                                                             
+                                                    
                                                         
+                                                    a.action.btn.btn-sm.btn-danger(type='button', data-toggle='modal', data-target='#delete',
+                                                        data-tooltip='Eliminar', ng-click='select(item)') 
+                                                            i.fa.fa-trash
                                                         
-                                                        a.action.btn.btn-sm.btn-info( data-toggle='modal', data-target='#consultar',data-tooltip='Consultar',
-                                                            ng-click='select(item)')
-                                                             i.fa.fa-eye 
+                                                    
+                                                    
+                                                    a.action.btn.btn-sm.btn-info( data-toggle='modal', data-target='#consultar',data-tooltip='Consultar',
+                                                        ng-click='select(item)')
+                                                            i.fa.fa-eye 
 
-                                                        //- a.action.btn.btn-sm.btn-info(href='', data-toggle='modal', data-target='#viewModal', ng-click='viewDetails(employee.name)')
-                                                        //-     i.fa.fa-eye
-                                                        //- a.action.btn.btn-sm.btn-warning(href='', data-toggle='modal', data-target='#editModal', ng-click='fetchDetails(employee.name)')
-                                                        //-     i.fa.fa-edit
-                                                        //- a.action.btn.btn-sm.btn-danger(href='', ng-click='delEmployee(employee.name)')
-                                                        //-     i.fa.fa-trash
 
-                                    .panel-footer
-  
+                                    //- .panel-footer
+                                    //- a.list-group-item.pull-right
+                                    a.list-group-item(ng-show="pages.length >=11")   
                                         .input-group(ng-show="pages.length >=11")                    
                                             .inputGroupContainer
                                                 h5 Estas en la Pagína No. 
@@ -181,10 +260,10 @@ block content
                                                 button.btn.btn-default(type='button', ng-disabled='currentPage == page.no - 1', ng-click='setPage(page.no)', ng-repeat='page in pages ') {{page.no}}
                                                 button.btn.btn-default(type='button', ng-disabled='currentPage >= filtered.length/pageSize - 1', ,='', ng-click='currentPage = currentPage + 1') »
                 
-                                        
+                                //- .list-group.animated.zoomIn(ng-show='tabla')        
                                 .panel.panel-default.animated.zoomIn(ng-show='tabla')
                                     // Default panel contents
-                                    .panel-heading.main-color-bg Latest Users
+                                    .panel-heading.main-color-bg Tabla Tesis
                                     .panel-body
                                         // Table                                        
                                         .div(style="overflow-x:auto; " )
@@ -194,9 +273,28 @@ block content
                                                         
                                                         th 
                                                             a( ng-click="sortName = 'iddepartamento'; sortReverse = !sortReverse")
-                                                                | Index
+                                                                | Título
                                                                 span.fa.fa-caret-down(ng-show='!sortReverse')
                                                                 span.fa.fa-caret-up(ng-show='sortReverse')
+                                                        th 
+                                                            a( ng-click="sortName = 'iddepartamento'; sortReverse = !sortReverse")
+                                                                | Resumen
+                                                                span.fa.fa-caret-down(ng-show='!sortReverse')
+                                                                span.fa.fa-caret-up(ng-show='sortReverse')
+                                                        -if (user.rol=== "alumno" ) 
+                                                            th
+                                                                a( ng-click="sortName = 'departamento'; sortReverse = !sortReverse")
+                                                                    | Director
+                                                                    span.fa.fa-caret-down(ng-show='!sortReverse')
+                                                                    span.fa.fa-caret-up(ng-show='sortReverse')
+                                                        
+                                                        -if (user.rol=== "persona" ) 
+                                                            th
+                                                                a( ng-click="sortName = 'departamento'; sortReverse = !sortReverse")
+                                                                    | Alumno
+                                                                    span.fa.fa-caret-down(ng-show='!sortReverse')
+                                                                    span.fa.fa-caret-up(ng-show='sortReverse')
+                                                        
                                                         th 
                                                             a( ng-click="sortName = 'departamento'; sortReverse = !sortReverse")
                                                                 | Departamento
@@ -204,7 +302,7 @@ block content
                                                                 span.fa.fa-caret-up(ng-show='sortReverse')
                                                         
                                                         
-                                                        th Especialidad
+                                                        //- th Especialidad
                                                 
                                                     
                                                         th Editar
@@ -213,31 +311,38 @@ block content
                                                     tbody
                                                         tr(ng-repeat='item in filtered = (datos| filter:buscar2)  |orderBy:sortName:sortReverse| startFromGrid: currentPage * pageSize | limitTo: pageSize', ,='', ng-click='seleccionarUsuario(idalumno)')
                                                             //- td {{$index+1}}
-                                                            td {{item.iddepartamento}}
+                                                            td {{item.titulo}}
+                                                            td {{item.resumen}}
+                                                            -if (user.rol=== "alumno" ) 
+                                                                td
+                                                                    {{item.director}}
+                                                            -if (user.rol=== "persona" ) 
+                                                                td
+                                                                    {{item.alumno}}
                                                             td {{item.departamento}}
-                                                            td {{item.especialidad}}
+                                                        
                                                         
                                                             
                                                             td
                                                                 
-                                                                a.action.btn.btn-sm.btn-primary(type='button', data-toggle='modal',title='Editar',
-                                                                    data-target='#editar',data-tooltip='Editar',ng-click='selectDepartamento(item)',)
+                                                                a.action.btn.btn-sm.btn-warning(type='button', data-toggle='modal',title='Editar',
+                                                                    data-target='#editar',data-tooltip='Editar',ng-click='select(item)',)
                                                                     i.fa.fa-edit 
                                                                 
                                                         
                                                             td
                                                                 //- button.btn.btn-danger(data-toggle='modal', data-target='#deleteModal', ng-click='selectItem(user)') Delete
                                                                 a.action.btn.btn-sm.btn-danger(type='button', data-toggle='modal', data-target='#delete',
-                                                                    data-tooltip='Eliminar', ng-click='selectDepartamento(item)') 
+                                                                    data-tooltip='Eliminar', ng-click='select(item)') 
                                                                         i.fa.fa-trash
                                                             
                                                             td  
                                                                 
                                                                 a.action.btn.btn-sm.btn-info( data-toggle='modal', data-target='#consultar',data-tooltip='Consultar',
-                                                                    ng-click='selectDepartamento(item)')
+                                                                    ng-click='select(item)')
                                                                     i.fa.fa-eye 
 
-                                    .panel-footer
+                                    .panel-footer(ng-show="pages.length >=11")   
   
                                         .input-group(ng-show="pages.length >=11")                    
                                             .inputGroupContainer
@@ -264,41 +369,18 @@ block content
                                                                 //- -if (user.rol=== "investigador")
                                                                 //-     include director
 
-                                                        
-                                                        //- .page-header
-                                                        //-     .container
-                                                        //-         .row
-                                                        //-             .col-md-6
-                                                        //-                 .panel.panel-default
-                                                        //-                     .panel-heading
-                                                        //-                         h1 entro
-                                                        //-             .col-md-6
-                                                        //-                 .panel.panel-default
-                                                        //-                     .panel-heading
-                                                        //-                         h1.inverse entro
-                                                        
-                                                        //-         .row
-                                                        //-             .col-sm-8
-                                                        //-                 .panel.panel-default
-                                                        //-                     .panel-heading
-                                                        //-                         h1 entro2
-                                                                                
-                                                        //-                                     // /.content-box
-                                                        //-             .col-sm-4
-                                                        //-                 .panel.panel-default
-                                                        //-                     .panel-heading
-                                                        //-                         h1 entro3
-                                                            //- div(style='border-top: solid 1px #eee; padding-top: 1em;')
-                                                            //- .container
-                                                            //-     .row
-                                                            //-         .col-sm-12.text-center
-                                                            //-             p.text-muted
-                                                            //-             | ImgPloadr.io | © Copyright 2015;
-                                                            //-             | All Rights Reserved
-                                                            //-             p.text-center
-                                                            //-             i.fa.fa-twitter-square.fa-2x.text-primary
-                                                            //-             i.fa.fa-facebook-square.fa-2x.text-primary
-                                                            script(src='http://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js')  
                     include consultar
+                    include editar
+                    include eliminar
 
     script(type='text/javascript', src='/javascripts/panel.js')    
+
+
+
+
+
+
+
+
+
+    

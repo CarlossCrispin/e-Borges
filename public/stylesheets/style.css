@@ -1,9 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Lato:300);
 
-#fondotabla{
-    background-color: #44525a
-}
-   
+ 
     
 [data-tooltip] {
   position: relative;
@@ -123,4 +120,6 @@ select.ng-valid{
   /* background-color: #ff0000 */
 }
 
- 
+ .Mayus{
+   text-transform: uppercase;
+ }

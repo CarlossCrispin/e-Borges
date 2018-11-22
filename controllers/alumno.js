@@ -9,8 +9,7 @@ module.exports = {
     getAlumno: function (req, res, next) {
         return res.render('alumno/alumno', {
             isAuthenticated: req.isAuthenticated(),
-            Delete:req.flash('Delete'),
-            Edit:req.flash('Edit')
+            user: req.user
         });
 
     },
