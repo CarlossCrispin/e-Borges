@@ -13,7 +13,7 @@
             br
             .panel-body
                 
-                    //- {{new}}
+                    {{new}}
                 
                 .form-group
                     .col-md-1
@@ -170,20 +170,15 @@
                             span.input-group-addon
                                 span.i.fas.fa-user-graduate
                                 //- {{new2}}
-                            select.btn.btn-default.col-md-12(name="codirector", ng-model='new.codirector',
-                                ng-options="x.nombre group by x.departamento disable when x === new.director for x in personas ",required='',)
-                            input(type="text", ng-model='new.codirector.idpersona' )
-                            label{{new.codirector}}
-                            label{{new.codirector.idpersona}}
-                            label{{clicked}}
                             select.btn.btn-default.col-md-12(name="codirector", ng-model='new.codirector.idpersona',
-                                        ng-options="x.idpersona as x.nombre  for x in personas ",required='' )
-                            select.btn.btn-default.col-md-12(name="codirector", ng-model='clicked2.idpersona',
-                                        ng-options="x.idpersona as x.nombre group by x.departamento disable when x.idpersona === clicked.iddirector for x in personas ",required='' )
-                            select.btn.btn-default.col-md-12(name="codirector", ng-model='clicked3.idpersona',
-                                        ng-options="x.idpersona as x.nombre group by x.departamento disable when x.idpersona === clicked.iddirector for x in personas ",required='' )
-                            select.btn.btn-default.col-md-12(name="codirector", ng-model='clicked.idpersona',
-                                        ng-options="x.idpersona as x.nombre group by x.departamento disable when x.idpersona === clicked.iddirector for x in personas ",required='' )
+                                ng-options="x.idpersona as x.nombre group by x.departamento disable when x.idpersona === clicked.iddirector for x in personas ",required='',)
+                            //- input(type="text", ng-model='new.codirector.idpersona' )
+                            //- label{{new.codirector}}
+                            //- label{{new.codirector.idpersona}}
+                            
+                            //- select.btn.btn-default.col-md-12(name="codirector", ng-model='clicked3.idpersona',
+                            //-             ng-options="x.idpersona as x.nombre group by x.departamento disable when x.idpersona === clicked.iddirector for x in personas ",required='' )
+                           
                             span.input-group-btn
                                 button.btn.btn-primary(ng-show='!codirector2', ng-click='codirector2= true',ng-disabled="myFormReg.codirector.$invalid ") 
                                     span.i.fa.fa-plus
@@ -266,14 +261,14 @@
                     span.i.fas.fa-check
                     |  Registrar
                 
-                button.btn.btn-success(type='button', ng-click='save(); new={}; registro =false; lista=true; btnsel =true;btnsel2 =false; btnsel =true;btnsel2 =false; btnsel =true;btnsel2 =false',data-dismiss='modal',
-                    ng-disabled=`myFormReg.alumno.$invalid  || myFormReg.apellido.$invalid || myFormReg.titulo.$invalid
-                        || myFormReg.resumen.$invalid ||  myFormReg.grado.$invalid 
-                        || myFormReg.unidad.$invalid || myFormReg.mes.$invalid || myFormReg.anio.$invalid 
-                        || myFormReg.director.$invalid || myFormReg.codirector.$invalid `  ng-show="codirector && !codirector2 ")
+                //- button.btn.btn-success(type='button', ng-click='save(); new={}; registro =false; lista=true; btnsel =true;btnsel2 =false; btnsel =true;btnsel2 =false; btnsel =true;btnsel2 =false',data-dismiss='modal',
+                //-     ng-disabled=`myFormReg.alumno.$invalid  || myFormReg.apellido.$invalid || myFormReg.titulo.$invalid
+                //-         || myFormReg.resumen.$invalid ||  myFormReg.grado.$invalid 
+                //-         || myFormReg.unidad.$invalid || myFormReg.mes.$invalid || myFormReg.anio.$invalid 
+                //-         || myFormReg.director.$invalid || myFormReg.codirector.$invalid `  ng-show="codirector && !codirector2 ")
             
-                    span.i.fas.fa-check
-                    |  Registrar 22
+                //-     span.i.fas.fa-check
+                //-     |  Registrar
                 
                 //- button.btn.btn-success(type='button', ng-click='save(); new={}; registro =false; lista=true; btnsel =true;btnsel2 =false; btnsel =true;btnsel2 =false; btnsel =true;btnsel2 =false',data-dismiss='modal',
                 //-     ng-disabled=`myFormReg.alumno.$invalid  || myFormReg.apellido.$invalid || myFormReg.titulo.$invalid

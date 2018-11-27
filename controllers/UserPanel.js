@@ -110,6 +110,7 @@ module.exports = {
             // SQL Query > Select Data
             var select = client.query(`SELECT * FROM "Tesis".vtesis`);
             var select2 = client.query(`SELECT * FROM "Tesis".vtesis where idalumno=${id}`);
+            var select10 = client.query(`SELECT * FROM "Tesis".vtesis where acepto=1`);
             var select3 = client.query(`SELECT * FROM "Tesis".vtesis where iddirector=${id} OR idcodirector1=${id} OR idcodirector2=${id}
                 OR idcodirector3=${id} OR idcodirector4=${id}`);
             var select4 = client.query(`SELECT * FROM "Tesis".alumno`);
@@ -131,7 +132,8 @@ module.exports = {
                 var query = select2
             if (rol === 'persona') 
                 var query = select3
-
+            if(rol ===  "Control Escolar")  
+                var query = select10
 
             query.on('row', (row) => {
                 results.push(row);
@@ -153,10 +155,10 @@ module.exports = {
             query.on('row', (row) => {
                 results7.push(row);
             });
-            var query = select8
-            query.on('row', (row) => {
-                results8.push(row);
-            });
+            // var query = select8
+            // query.on('row', (row) => {
+            //     results8.push(row);
+            // });
             var query = select9
             query.on('row', (row) => {
                 results9.push(row);
@@ -173,12 +175,47 @@ module.exports = {
                     grado:results5,
                     departamento:results6,
                     unidad:results7,
-                    persona:results8,
+                    // persona:results8,
                     genero:results9,
                     isAuthenticated: req.isAuthenticated(),
                     user: req.user
                 }]
                 return res.json(datos);
+            });
+
+
+        });
+    },
+    persona : function(req,res,next){
+        console.log("entra a persona-----------------------------------")
+        var results=[];
+        pg.connect(connectionString, function (err, client, done) {
+            // Handle connection errors
+            if (err) {
+                done();
+                console.log(err);
+                return res.status(500).json({ success: false, data: err });
+            }
+            var select = client.query(`SELECT a.idpersona, 
+            (a.nombre || ' '||  a.nombre2 || ' '|| a.nombre3 || ' '|| a.apellido || ' '|| a.apellido2 || ' '|| a.apellido3) as nombre, 
+            a.idgrado, a.idgenero, 
+            a.iddepartamento, c.departamento,
+            a.esexterno, a.institucion, a.puesto
+            FROM "Tesis".persona a
+            left join "Tesis".departamento c on a.iddepartamento=c.iddepartamento
+            ORDER BY idpersona`);
+            var query = select
+            query.on('row', (row) => {
+                results.push(row);
+            });
+            query.on('end', () => {
+                done();
+                console.log("se cerro base de datos")
+                // console.log(JSON.stringify(results))
+                // console.log(results)
+                
+                return res.json(results);
+                // return res.json(datos);
             });
 
 
@@ -315,6 +352,43 @@ module.exports = {
 
         });
 
+    },
+    aceptar :function (req, res, next) {
+        console.log("entre aceptar")
+        var results=[];
+        var id=  req.body.id;
+        var aceptar = 1;
+        console.log("entre aceptar")
+        console.log(`-------DATOS------\n${id}\n${aceptar}\n-----------------`)
+        pg.connect(connectionString, function (err, client, done) {
+      
+            if (err) {
+                done();
+                console.log(err);
+                return res.status(500).json({ success: false, data: err });
+            }
+            
+            
+            var select = client.query(`UPDATE "Tesis".tesis
+                SET acepto=${aceptar} 
+                WHERE idtesis=${id}`);
+            
+            var query=select;
+            query.on('row', (row) => {
+                results.push(row);
+            });
+          
+            
+            query.on('end', () => {
+                done();
+                console.log("se cerro base de datos")
+                // console.log(results)
+                // req.flash('Insert', 'Se ha registrado correctamente');
+                // return res.redirect('/tesis/tesis');
+                return res.json(results);
+            });
+
+        });
     },
 
     update : function(req,res,next){

@@ -20,10 +20,12 @@ router.get('/auth/logout', AuthMiddleware.isLogged , controllers.UserController.
 router.get('/users/panel', AuthMiddleware.isLogged , controllers.UserPanel.getUserPanel);
 router.post('/users/panel', AuthMiddleware.isLogged ,controllers.UserPanel.postUserPanel);
 router.get('/users/panel/data', AuthMiddleware.isLogged ,controllers.UserPanel.data);
+router.get('/users/panel/persona', AuthMiddleware.isLogged ,controllers.UserPanel.persona);
 router.post('/users/panel/insert', AuthMiddleware.isLogged ,controllers.UserPanel.insert);
 router.post('/users/panel/delete', AuthMiddleware.isLogged ,controllers.UserPanel.delete);
 router.post('/users/panel/update', AuthMiddleware.isLogged ,controllers.UserPanel.update);
 router.post('/users/panel/add', AuthMiddleware.isLogged ,controllers.UserPanel.add);
+router.post('/users/panel/aceptar', AuthMiddleware.isLogged ,controllers.UserPanel.aceptar);
 // router.get('/users/status', AuthMiddleware.isLogged , controllers.UserController.getStatus);
 router.get('/users/registrarTesis', AuthMiddleware.isLogged , controllers.UserController.getRegistrarTesis);
 router.get('/users/investigador', AuthMiddleware.isLogged , controllers.UserController.getInvestigador);

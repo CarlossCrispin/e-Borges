@@ -1,0 +1,46 @@
+.panel.panel-default
+    .panel-heading
+        .panel-tilte {{item.grado}}
+    .panel-body
+        
+
+        .card.text-center
+            img.rounded-circle.mt-3.mx-auto.d-block(ng-src='http://sinac2.cs.cinvestav.mx/Manual/images/user.png', alt='Card image cap', height='100', width='100')
+        .card-body
+            h5.card-title {{item.titulo}} 
+            hr
+            h5 Resumen : {{item.resumen}}
+            -if (user.rol=== "alumno" ) 
+                h5 Director: {{item.director}}
+            -if (user.rol=== "persona" ) 
+                h5 Alumno : {{item.alumno}}
+            -if (user.rol=== "Administrador" ) 
+                h5 Director: {{item.director}}
+                h5 Alumno : {{item.alumno}}
+    .panel-footer.text-right
+        -if (user.rol=== "alumno" ||user.rol=== "Administrador" ) 
+            a.action.btn.btn-sm.btn-warning(type='button', data-toggle='modal',title='Editar',
+                data-target='#editar',data-tooltip='Editar',ng-click='select(item)',)
+                    i.fa.fa-edit 
+                
+        
+        -if (user.rol=== "alumno" ||user.rol=== "Administrador" )   
+            a.action.btn.btn-sm.btn-danger(type='button', data-toggle='modal', data-target='#delete',
+                data-tooltip='Eliminar', ng-click='select(item)') 
+                    i.fa.fa-trash
+            
+        
+    
+        a.action.btn.btn-sm.btn-info( data-toggle='modal', data-target='#consultar',data-tooltip='Consultar',
+            ng-click='select(item)')
+                i.fa.fa-eye
+                    
+        -if (user.rol=== "persona")
+            a.action.btn.btn-sm.btn-success( data-toggle='modal', data-target='#aceptar',data-tooltip='Aceptar',
+                ng-click='select(item)')
+                    //- i.fas.fa-vote-yea
+                    i.fas.fa-check
+        -if (user.rol=== "persona")
+            a.action.btn.btn-sm.btn-danger( data-toggle='modal',data-tooltip='Rechazar',
+                ng-click='rechazar')
+                    i.fa.fa-times

@@ -11,7 +11,8 @@ block content
    
     div(ng-app='panelApp', ng-Cloak)
         div(ng-controller='panelController') 
-            div(ng-init='get()') 
+            div(ng-init='get() ;persona();lista = true') 
+                //- label {{personas.length}}
                 //- {{user}} 
                 br
                 br
@@ -27,7 +28,7 @@ block content
                             li.active Status Tesis
                             //- li.active {{datos.length}}
                             hr
-                    div(ng-show="datos.length == 99")
+                    div(ng-show="datos.length == 99999 || personas.length ==0 ")
                         .jumbotron.jumbotron-fluid
                             .container
                                 h1.display-4 Cargando ...
@@ -37,7 +38,7 @@ block content
                                 //- | Cargando ...
 
                                 include ../loader          
-                    .panel.panel-default(ng-show="datos.length != 99") 
+                    .panel.panel-default(ng-show="datos.length != 99999 ") 
                         .panel-heading
                             br
                             .form-group.well
@@ -109,7 +110,7 @@ block content
                                 
                 
                 // main section
-                section#main(ng-show="datos.length != 99") 
+                section#main(ng-show="datos.length != 99999 ") 
                 
                     .container
                         .row
@@ -175,8 +176,63 @@ block content
                                     
         
 
-                                  
+                                -if (user.rol=== "persona")  
+                                    .list-group.animated.zoomIn
+                                        a.list-group-item.active.main-color-bg.obj-trans(href='')
+                                            span.i.fa.fa-area-chart
+                                            |  Tesis aceptadas
+                                            
+                                        .div(style="overflow-x:auto; " )
+                                            .table-responsive
+                                                table.table.table.table.table-striped.table-dark.table-bordered(ng-init='configPages(); ')
+                                                    tr.text-center
+                                                        
+                                                        th 
+                                                            a( ng-click="sortName = 'iddepartamento'; sortReverse = !sortReverse")
+                                                                | Título
+                                                                span.fa.fa-caret-down(ng-show='!sortReverse')
+                                                                span.fa.fa-caret-up(ng-show='sortReverse')
+                                                    
+                                                        
+                                                        th Detalles
+                                                    
+                                                    tbody
+                                                        tr(ng-repeat='item in filtered = (datos| filter:buscar2)  |orderBy:sortName:sortReverse| startFromGrid: currentPage * pageSize | limitTo: pageSize', ,='',
+                                                            ng-click='seleccionarUsuario(idalumno)', ng-if ='item.acepto == 1')
+                                                            //- td {{$index+1}}
+                
+                                                            
+                                                            td {{item.titulo}}
+                                                            //- td {{item.acepto}}
+                                                            
+                                                        
+                                                            td  
+                                                                
+                                                                a.action.btn.btn-sm.btn-info( data-toggle='modal', data-target='#consultar',data-tooltip='Consultar',
+                                                                    ng-click='select(item)')
+                                                                    i.fa.fa-eye 
+                                                        
 
+                                    a.list-group-item.active.main-color-bg.obj-trans(ng-show="pages.length >=11")   
+  
+                                        .input-group(ng-show="pages.length >=11")                    
+                                            .inputGroupContainer
+                                                h5 Estas en la Pagína No. 
+                                                    span(style='color:green')  {{currentPage+1}}
+            
+                                            .btn-group
+                                                button.btn.btn-default(type='button', ng-disabled='currentPage == 0', ng-click='currentPage = currentPage - 1') «
+                                                button.btn.btn-default(type='button', ng-disabled='currentPage == page.no - 1', ng-click='setPage(page.no)', ng-repeat='page in pages | limitTo:5') {{page.no}} 
+                                                input-group-addon
+                                                    span .....
+                                                    button.btn.btn-default(type='button', ng-disabled='currentPage == page.no - 1', ng-click='setPage(page.no)', ng-repeat='page in pages | limitTo:5:pages.length-5') {{page.no}} 
+                                                    button.btn.btn-default(type='button', ng-disabled='currentPage >= filtered.length/pageSize - 1', ,='', ng-click='currentPage = currentPage + 1 ') »
+                                        .input-group(ng-show="pages.length <= 10")    
+                                            .btn-group
+                                                button.btn.btn-default(type='button', ng-disabled='currentPage == 0', ng-click='currentPage = currentPage - 1') «
+                                                button.btn.btn-default(type='button', ng-disabled='currentPage == page.no - 1', ng-click='setPage(page.no)', ng-repeat='page in pages ') {{page.no}}
+                                                button.btn.btn-default(type='button', ng-disabled='currentPage >= filtered.length/pageSize - 1', ,='', ng-click='currentPage = currentPage + 1') »
+                
                                 .well.animated.zoomIn
                                     h5.inverse Tiempo 
                                         .progress
@@ -193,7 +249,7 @@ block content
                             .col-md-9(ng-show='registro')
                                 include registro
 
-                            .col-md-9(ng-init='lista = true')
+                            .col-md-9()
                                 //- .panel.panel-default.animated.zoomIn(ng-show='lista')
                                 //-     .panel-heading.main-color-bg
                                 //-         h3.panel-title lista Tesis
@@ -204,39 +260,23 @@ block content
                                         |  lista Tesis
                                     br
                                     #card-view.row
-                                        .col-md-4.col-sm-5.col-5.mb-4(ng-repeat='item in filtered = (datos| filter:buscar2)  |orderBy:sortName:sortReverse| startFromGrid: currentPage * pageSize | limitTo: pageSize', ,='', ng-click='seleccionarUsuario(idalumno)')
+                                        -if (user.rol=== "persona")  
+                                            .col-md-4.col-sm-5.col-5.mb-4(ng-repeat='item in filtered = (datos| filter:buscar2)  |orderBy:sortName:sortReverse| startFromGrid: currentPage * pageSize | limitTo: pageSize', ,='',
+                                                ng-click='seleccionarUsuario(idalumno)', ng-if ='item.acepto != 1 || item.acepto != 2  ')
+                                                include list
+                                        -if (user.rol=== "alumno")  
+                                            .col-md-4.col-sm-5.col-5.mb-4(ng-repeat='item in filtered = (datos| filter:buscar2)  |orderBy:sortName:sortReverse| startFromGrid: currentPage * pageSize | limitTo: pageSize', ,='',
+                                                ng-click='seleccionarUsuario(idalumno)')
+                                                include list
+                                        -if (user.rol=== "Administrador")  
+                                            .col-md-4.col-sm-5.col-5.mb-4(ng-repeat='item in filtered = (datos| filter:buscar2)  |orderBy:sortName:sortReverse| startFromGrid: currentPage * pageSize | limitTo: pageSize', ,='',
+                                                ng-click='seleccionarUsuario(idalumno)')
+                                                include list
+                                        -if (user.rol=== "Control Escolar")  
+                                            .col-md-4.col-sm-5.col-5.mb-4(ng-repeat='item in filtered = (datos| filter:buscar2)  |orderBy:sortName:sortReverse| startFromGrid: currentPage * pageSize | limitTo: pageSize', ,='',
+                                                ng-click='seleccionarUsuario(idalumno)')
                                             
-                                            .panel.panel-default
-                                                .panel-heading
-                                                    .panel-tilte {{item.grado}}
-                                                .panel-body
-                                                    
-
-                                                    .card.text-center
-                                                        img.rounded-circle.mt-3.mx-auto.d-block(ng-src='http://sinac2.cs.cinvestav.mx/Manual/images/user.png', alt='Card image cap', height='100', width='100')
-                                                    .card-body
-                                                        h5.card-title {{item.titulo}} 
-                                                        hr
-                                                        -if (user.rol=== "alumno" ) 
-                                                            h5 Director: {{item.director}}
-                                                        -if (user.rol=== "persona" ) 
-                                                            h5 Alumno : {{item.alumno}}
-                                                .panel-footer.text-right
-                                                    a.action.btn.btn-sm.btn-warning(type='button', data-toggle='modal',title='Editar',
-                                                        data-target='#editar',data-tooltip='Editar',ng-click='select(item)',)
-                                                            i.fa.fa-edit 
-                                                            
-                                                    
-                                                        
-                                                    a.action.btn.btn-sm.btn-danger(type='button', data-toggle='modal', data-target='#delete',
-                                                        data-tooltip='Eliminar', ng-click='select(item)') 
-                                                            i.fa.fa-trash
-                                                        
-                                                    
-                                                    
-                                                    a.action.btn.btn-sm.btn-info( data-toggle='modal', data-target='#consultar',data-tooltip='Consultar',
-                                                        ng-click='select(item)')
-                                                            i.fa.fa-eye 
+                                                include list
 
 
                                     //- .panel-footer
@@ -304,43 +344,37 @@ block content
                                                         
                                                         //- th Especialidad
                                                 
-                                                    
-                                                        th Editar
-                                                        th Borrar
+                                                        -if (user.rol=== "alumno" ) 
+                                                            th Editar
+                                                        -if (user.rol=== "alumno" ) 
+                                                            th Borrar
+                                                        
                                                         th Detalles
+                                                        -if (user.rol=== "persona")
+                                                            th Aceptar
+                                                        -if (user.rol=== "persona")
+                                                            th Rechazar
                                                     tbody
-                                                        tr(ng-repeat='item in filtered = (datos| filter:buscar2)  |orderBy:sortName:sortReverse| startFromGrid: currentPage * pageSize | limitTo: pageSize', ,='', ng-click='seleccionarUsuario(idalumno)')
+                                                        //- tr(ng-repeat='item in filtered = (datos| filter:buscar2)  |orderBy:sortName:sortReverse| startFromGrid: currentPage * pageSize | limitTo: pageSize', ,='',
+                                                        //-     ng-click='seleccionarUsuario(idalumno)',ng-if="aceptar === ''")
                                                             //- td {{$index+1}}
-                                                            td {{item.titulo}}
-                                                            td {{item.resumen}}
-                                                            -if (user.rol=== "alumno" ) 
-                                                                td
-                                                                    {{item.director}}
-                                                            -if (user.rol=== "persona" ) 
-                                                                td
-                                                                    {{item.alumno}}
-                                                            td {{item.departamento}}
-                                                        
-                                                        
-                                                            
-                                                            td
-                                                                
-                                                                a.action.btn.btn-sm.btn-warning(type='button', data-toggle='modal',title='Editar',
-                                                                    data-target='#editar',data-tooltip='Editar',ng-click='select(item)',)
-                                                                    i.fa.fa-edit 
-                                                                
-                                                        
-                                                            td
-                                                                //- button.btn.btn-danger(data-toggle='modal', data-target='#deleteModal', ng-click='selectItem(user)') Delete
-                                                                a.action.btn.btn-sm.btn-danger(type='button', data-toggle='modal', data-target='#delete',
-                                                                    data-tooltip='Eliminar', ng-click='select(item)') 
-                                                                        i.fa.fa-trash
-                                                            
-                                                            td  
-                                                                
-                                                                a.action.btn.btn-sm.btn-info( data-toggle='modal', data-target='#consultar',data-tooltip='Consultar',
-                                                                    ng-click='select(item)')
-                                                                    i.fa.fa-eye 
+                                                        -if (user.rol=== "persona")  
+                                                            tr(ng-repeat='item in filtered = (datos| filter:buscar2)  |orderBy:sortName:sortReverse| startFromGrid: currentPage * pageSize | limitTo: pageSize', ,='',
+                                                            ng-click='seleccionarUsuario(idalumno)', ng-if ='item.acepto != 1 || item.acepto != 2  ')
+                                                                include tab
+                                                        -if (user.rol=== "alumno")  
+                                                            tr(ng-repeat='item in filtered = (datos| filter:buscar2)  |orderBy:sortName:sortReverse| startFromGrid: currentPage * pageSize | limitTo: pageSize', ,='',
+                                                            ng-click='seleccionarUsuario(idalumno)')
+                                                                include tab
+                                                        -if (user.rol=== "Administrador")  
+                                                            tr(ng-repeat='item in filtered = (datos| filter:buscar2)  |orderBy:sortName:sortReverse| startFromGrid: currentPage * pageSize | limitTo: pageSize', ,='',
+                                                            ng-click='seleccionarUsuario(idalumno)')
+                                                                include tab
+                                                        -if (user.rol=== "Control Escolar")  
+                                                            tr(ng-repeat='item in filtered = (datos| filter:buscar2)  |orderBy:sortName:sortReverse| startFromGrid: currentPage * pageSize | limitTo: pageSize', ,='',
+                                                            ng-click='seleccionarUsuario(idalumno)')
+
+                                                               include tab
 
                                     .panel-footer(ng-show="pages.length >=11")   
   
@@ -372,6 +406,7 @@ block content
                     include consultar
                     include editar
                     include eliminar
+                    include aceptar
 
     script(type='text/javascript', src='/javascripts/panel.js')    
 

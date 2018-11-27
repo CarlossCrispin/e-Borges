@@ -1,0 +1,32 @@
+
+#aceptar.modal.fade(role='dialog')
+    .modal-dialog
+        // Modal content
+        .modal-content
+            .modal-header(style='padding:40px 50px;')
+                button.close(type='button', data-dismiss='modal') ×
+                h4
+                span.i.fa.fa-trash-alt
+                |  Aceptar Tesis
+                //- {{clicked.idtesis}}
+                //- {{clicked.idtesispersona}}
+            .modal-body
+                .panel.panel-default
+                    .panel-heading
+                        h3.panel-title Tesis
+                    br
+                    h3.text-center| ¿Estás seguro de aceptar
+                        span(style='color:red') {{clicked.titulo}}
+                        | ?
+                    
+                    .panel-footer.text-right
+                        hr
+                        button.btn.btn-success(type='button', ng-click='aceptar(clicked)', data-dismiss='modal' )
+                            span.i.fas.fa-check
+                            |  Si
+                        
+                        button.btn.btn-danger(data-dismiss='modal')
+                            span.i.fas.fa-times
+                            |  Cerrar
+                                    
+    

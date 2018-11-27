@@ -1,0 +1,40 @@
+ td {{item.titulo}}
+td {{item.resumen}}
+-if (user.rol=== "alumno" ) 
+    td
+        {{item.director}}
+-if (user.rol=== "persona" ) 
+    td
+        {{item.alumno}}
+td {{item.departamento}}
+
+
+-if (user.rol=== "alumno" ) 
+    td
+        
+        a.action.btn.btn-sm.btn-warning(type='button', data-toggle='modal',title='Editar',
+            data-target='#editar',data-tooltip='Editar',ng-click='select(item)',)
+            i.fa.fa-edit 
+    
+-if (user.rol=== "alumno" ) 
+    td
+        //- button.btn.btn-danger(data-toggle='modal', data-target='#deleteModal', ng-click='selectItem(user)') Delete
+        a.action.btn.btn-sm.btn-danger(type='button', data-toggle='modal', data-target='#delete',
+            data-tooltip='Eliminar', ng-click='select(item)') 
+                i.fa.fa-trash
+
+td  
+    
+    a.action.btn.btn-sm.btn-info( data-toggle='modal', data-target='#consultar',data-tooltip='Consultar',
+        ng-click='select(item)')
+        i.fa.fa-eye 
+-if (user.rol=== "persona")
+    td
+        a.action.btn.btn-sm.btn-success( data-toggle='modal', data-target='#aceptar',data-tooltip='Aceptar',
+            ng-click='select(item)')
+                i.fas.fa-vote-yea
+-if (user.rol=== "persona")
+    td
+        a.action.btn.btn-sm.btn-danger( data-toggle='modal',data-tooltip='Rechazar',
+            ng-click='rechazar()')
+                i.fa.fa-times
