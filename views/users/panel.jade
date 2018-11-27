@@ -28,7 +28,7 @@ block content
                             li.active Status Tesis
                             //- li.active {{datos.length}}
                             hr
-                    div(ng-show="datos.length == 99999 || personas.length ==0 ")
+                    div(ng-show="datos.length == 99999 || personas.length ==99999 ")
                         .jumbotron.jumbotron-fluid
                             .container
                                 h1.display-4 Cargando ...
@@ -352,7 +352,7 @@ block content
                                                         th Detalles
                                                         -if (user.rol=== "persona")
                                                             th Aceptar
-                                                        -if (user.rol=== "persona")
+                                                        //- -if (user.rol=== "persona")
                                                             th Rechazar
                                                     tbody
                                                         //- tr(ng-repeat='item in filtered = (datos| filter:buscar2)  |orderBy:sortName:sortReverse| startFromGrid: currentPage * pageSize | limitTo: pageSize', ,='',
@@ -407,6 +407,7 @@ block content
                     include editar
                     include eliminar
                     include aceptar
+                    include acta
 
     script(type='text/javascript', src='/javascripts/panel.js')    
 

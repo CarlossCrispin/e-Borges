@@ -93,7 +93,7 @@ app.controller('usuarioController', function ($scope, $http) {
             .success((data) => {
                 
                 $scope.new= data;
-                // $scope.new= {};
+                $scope.new= {};
                 $scope.alertMassege = "Nuevo Item Agregado!!";
                 $scope.get();
             })

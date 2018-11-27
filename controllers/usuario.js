@@ -132,7 +132,8 @@ module.exports = {
                 console.log("se cerro base de datos")
                 // console.log(results)
                 req.flash('Insert', 'Se ha registrado correctamente');
-                return res.redirect('/persona/persona');
+                // return res.redirect('/persona/persona');
+                return res.json(results);
             });
 
         });

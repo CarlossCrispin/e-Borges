@@ -1,0 +1,43 @@
+#acta.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
+    .modal-dialog(role='document')
+        .modal-content.text-center
+            .row
+                .col-md-12
+                    .cover
+                        .c-overlay
+                            button.close(type='button', data-dismiss='modal', aria-label='Close', style='position:absolute; color:#fff; top: 10px; right:10px;')
+                                span(aria-hidden='true') ×
+                            br
+                            h3.h3 {{clicked.titulo}}
+                  
+                    .detail
+                        
+                        img.rounded-circle.mx-auto.mb-3(ng-src='http://sinac2.cs.cinvestav.mx/Manual/images/user.png', alt='Photo', height='100', width='100', style='margin-top:-50px;')
+                        br
+                        hr.light
+                        dl.row
+                            dt.col-md-4.text-right Resumen :
+                            dd.col-md-8.text-left {{clicked.resumen}}
+                        hr
+                        dl.row
+                            dt.col-md-4.text-right Alumno :
+                            dd.col-md-8.text-left {{clicked.alumno}}
+                            
+                            dt.col-md-4.text-right Grado :
+                            dd.col-md-8.text-left {{clicked.grado}}
+                            
+                            dt.col-md-4.text-right Departamento :
+                            dd.col-md-8.text-left {{clicked.departamento}}
+                            
+                            dt.col-md-4.text-right Director :
+                            dd.col-md-8.text-left {{clicked.director}}
+                            
+                            dt.col-md-4.text-right Codirector(es) :
+                            dd.col-md-8.text-left {{clicked.codirector1}}
+                            dt.col-md-4.text-right
+                            dd.col-md-8.text-left {{clicked.codirector2}}
+                            dt.col-md-4.text-right
+                            dd.col-md-8.text-left {{clicked.codirector3}}
+                            dt.col-md-4.text-right
+                            dd.col-md-8.text-left {{clicked.codirector4}}
+                            

@@ -122,8 +122,8 @@
                             span.input-group-addon
                                 span.i.fas.fa-user-graduate
                             
-                            select.btn.btn-default.col-md-12(name="director", ng-model='new.director',required=''
-                                ng-options=' x.nombre group by x.departamento   for x in personas  |filter: new.departamento.departamento',
+                            select.btn.btn-default.col-md-12(name="director", ng-model='new.director.idpersona',required=''
+                                ng-options='x.idpersona as x.nombre group by x.departamento   for x in personas  |filter: new.departamento.departamento',       
                                 ng-disabled="myFormReg.departamento.$invalid ")
                             span.input-group-btn
                                 button.btn.btn-md.btn-primary(ng-show='!codirector && !externo && !codirectorr', ng-click='externo = true',ng-disabled="myFormReg.director.$invalid ")

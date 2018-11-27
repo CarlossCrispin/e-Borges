@@ -160,7 +160,7 @@ app.controller('panelController', function ($scope, $http) {
                     
                     $scope.new= data;
                     $scope.new= {};
-                    $scope.alertMassege = "Nuevo Item Agregado!!";
+                    $scope.alertMassege = "Nueva tesis Agregada!!";
                     $scope.get();
                     $scope.new.mes = (new Date()).getMonth()+1
    
@@ -211,18 +211,19 @@ app.controller('panelController', function ($scope, $http) {
             console.log($scope.new2);
             // $scope.new.codirector="sientroooooooo"
             // $scope.new2={}
-            $scope.personas.length =0;
+            // $scope.personas.length =0;
+            $scope.personas.length =99999;
             $http.post(`${pathname}/add`, $scope.new2)
                 .success((data) => {
                     console.log(JSON.stringify(data[0]));
                     
                     // $scope.personas= data[0].persona;
-                    $scope.return= data;
+                    // $scope.return= data;
                     // $scope.new.director;
                     $scope.new.codirector.idpersona=data[0].idpersona;
                     $scope.new.codirector=data[0];
                     $scope.clicked3.idpersona =data[0].idpersona;
-                  
+                    // $scope.new.director.idpersona
                     $scope.new2= {};
                     $scope.alertMassege2 = "Codirector Externo Agregado!!";
                     $scope.persona();
@@ -251,7 +252,7 @@ app.controller('panelController', function ($scope, $http) {
             $http.post(`${pathname}/aceptar`,  $scope.clicked)
                 .success((data) => {
                     
-                    $scope.newItem = data;
+                    $scope.newtesis = data;
                     // console.log(data);
                     $scope.new = {};
                     $scope.alertMassege = "Acepto ser Director de Tesis";
@@ -287,10 +288,10 @@ app.controller('panelController', function ($scope, $http) {
             $http.post(`${pathname}/update`,  $scope.clicked)
                 .success((data) => {
                     
-                    $scope.newItem = data;
+                    $scope.newtesis = data;
                     // console.log(data);
                     $scope.new = {};
-                    $scope.alertMassege = "Item Actualizado!!";
+                    $scope.alertMassege = "Tesis Actualizada!!";
                     $scope.get();
                 })
                 .error((error) => {
@@ -315,7 +316,7 @@ app.controller('panelController', function ($scope, $http) {
                     console.log( $scope.todoData)
                     $scope.clicked = {};
                     $scope.get();
-                    $scope.alertMassege = "Item Borrado !!";
+                    $scope.alertMassege = "Tesis Borrada !!";
                 })
                 .error((data) => {
                     console.log('Error: ' + data);
@@ -323,9 +324,9 @@ app.controller('panelController', function ($scope, $http) {
                 });
                 $scope.alertMassege = "";
         };
-        $scope.select = function (Item) {
-            // console.log(Item);
-            $scope.clicked = Item;
+        $scope.select = function (tesis) {
+            // console.log(tesis);
+            $scope.clicked = tesis;
     
         };
     
