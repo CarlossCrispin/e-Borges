@@ -46,7 +46,7 @@
                     i.fa.fa-times
         -if (user.rol=== "Control Escolar")
             a.action.btn.btn-sm.btn-success( data-toggle='modal', data-target='#acta',data-tooltip='generar Acta',
-                ng-click='select(item)')
+                ng-click='select(item);setFolio()')
                     //- i.fas.fa-vote-yea
                     //- i.fas.fa-check-circle
                     i.fab.fa-connectdevelop

@@ -48,6 +48,32 @@ app.controller('panelController', function ($scope, $http) {
             $scope.pageSize = $scope.pageSize;
     
         };
+
+        //acta
+        $scope.newActa = {};
+        $scope.newActa.folio = "";
+        $scope.num=2
+        
+        
+        // var dictionary = "abcdefghijklmnopqertuvwxyz123456789";
+        var dictionary = "ABCDEF123456789";
+        $scope.setFolio= function () {
+            $scope.newActa.folio = "";
+            $scope.num +=1;
+            // Creando un FOLIO de 6 caracteres
+            // tomados al azar DE LA VARIABLE DICTIONARY
+            for(var i = 0; i < 6; i++){
+                $scope.newActa.folio  += dictionary.charAt(
+                    Math.floor(Math.random() * dictionary.length));
+            }
+            $scope.newActa.libro= "AJ23-5"+$scope.num;
+    
+            // console.log($scope.newActa.folio)
+        }
+    
+        $scope.anio = (new Date()).getFullYear()+1
+        $scope.mes = (new Date()).getMonth()
+        $scope.newActa.fecha = new Date()
     
         $scope.get = function () {
             $scope.datos.length =99999;
@@ -203,17 +229,18 @@ app.controller('panelController', function ($scope, $http) {
                 apellido3: $scope.new2.apellido3 ||'',
                 grado: $scope.new2.grado.idgrado,
                 genero: $scope.new2.genero.idgenero,
-                departamento: $scope.new2.departamento.iddepartamento,
-                esexterno: $scope.new.esexterno,
+                departamento: $scope.new2.departamento.iddepartamento  ,
+                esexterno: $scope.new.esexterno || $scope.newActa.esexterno,
                 institucion: $scope.new2.institucion ||'',
                 puesto: $scope.new2.puesto ||''
             };
             console.log($scope.new2);
+            console.log(JSON.stringify($scope.new2))
             // $scope.new.codirector="sientroooooooo"
             // $scope.new2={}
             // $scope.personas.length =0;
             $scope.personas.length =99999;
-            $scope.personas.length =99999 
+            // $scope.personas.length =99999 
             $http.post(`${pathname}/add`, $scope.new2)
                 .success((data) => {
                     console.log(JSON.stringify(data[0]));
@@ -223,10 +250,13 @@ app.controller('panelController', function ($scope, $http) {
                     // $scope.new.director;
                     $scope.new.codirector.idpersona=data[0].idpersona;
                     $scope.new.codirector=data[0];
+                    $scope.newActa.sinodal2.idpersona=data[0].idpersona;
+                    $scope.newActa.sinodal2.idpersona=data[0];
+                    // newActa.sinodal.idpersona
                     // $scope.clicked3.idpersona =data[0].idpersona;
                     // $scope.new.director.idpersona
                     $scope.new2= {};
-                    $scope.alertMassege2 = "Codirector Externo Agregado!!";
+                    $scope.alertMassege2 = "Externo Agregado!!";
                     $scope.persona();
                    
                 })

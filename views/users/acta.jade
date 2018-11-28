@@ -1,43 +1,189 @@
-#acta.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
-    .modal-dialog(role='document')
-        .modal-content.text-center
-            .row
-                .col-md-12
-                    .cover
-                        .c-overlay
-                            button.close(type='button', data-dismiss='modal', aria-label='Close', style='position:absolute; color:#fff; top: 10px; right:10px;')
-                                span(aria-hidden='true') ×
-                            br
-                            h3.h3 {{clicked.titulo}}
-                  
-                    .detail
+
+#acta.modal.fade(role='dialog')
+    .modal-dialog.modal-lg
+
+        // Modal content
+        .modal-content
+            .modal-header(style='padding:40px 50px;')
+                
+                button.close(type='button', data-dismiss='modal') ×
+                h4
+                span.i.fa.fa-pencil-alt
+                |  Registrar Acta
+            .modal-body
+                .panel.panel-default
+                    .panel-heading
+                        h3.panel-title Acta
+                    br
+                
+                    form.form-horizontal(name='myFormAct', novalidate='')
+                        //- {{newActa}}
+                        //- {{tesis}}
+                        //- .form-group
+                        //-     //- {{clicked}}
+                        //-     .col-md-1
+                        //-     .alert.alert-success.col-md-10
+
+                        //-         //- span(style='float:right') Matricula : {{vm.account.lastName}} 
+                        //-         //- | Nombre  : {{vm.account.firstName}}
+                        //-         //- -var alumno1 =user.id; 
+                        //-         //- h3=alumno1
+                        //-         label.col-md-10.control-label(for='file')
+                        //-             h3.Mayus(name='tesis' ) Tesis :   
+                        //-                 span {{clicked.titulo}}
+                        .form-group
+                            label.col-md-3.control-label Tesis
+                            .col-md-8.inputGroupContainer
+                                .input-group
+                                    .input-group-addon
+                                        span.i.fa.fa-book
+                                    .inputGroupContainer
+                                        //- select.btn.btn-default.col-md-8(name="tesis",ng-init="tesis" ,ng-model='newActa.tesis',ng-options='x.titulo for x in tesis',required )
+                                        select.btn.btn-default.col-md-12(name="tesis", ng-model='clicked.idtesis',required='',
+                                            ng-options='x.idtesis as x.titulo  for x in datos',disabled)  
+                                        span.input-group-text(style='color:red', ng-show='myFormAct.tesis.$invalid && myFormAct.tesis.$touched' )
+                                            span(ng-show='myFormAct.tesis.$error.required')     
+                                                | ingresa tesis.
+                                    
+                                       
+                                
+                        .form-group
+                            label.col-md-3.control-label Folio
+                            .col-md-8.inputGroupContainer
+                                .input-group
+                                    span.input-group-addon
+                                        span.i.fa.fa-file-signature
+                                    input.form-control(name='folio', placeholder='Folio', type='text', ng-model='newActa.folio', required, ng-maxlength="6" , disabled)
+                                       
+                                span(style='color:red', ng-show='myFormAct.folio.$invalid && myFormAct.folio.$touched')
+                                    span(ng-show='myFormAct.folio.$error.required') ingresa folio.
+                                    span(ng-show='myFormAct.folio.$error.maxlength') maximo 6.
+                        .form-group
+                            label.col-md-3.control-label Unidad
+                            .col-md-8.inputGroupContainer
+                                .input-group
+                                    .input-group-addon
+                                        span.i.fa.fa-book
+                                    .inputGroupContainer
+                                        select.btn.btn-default.col-md-8(name="unidad",ng-init="unidad" ,ng-model='clicked.idunidad',
+                                        ng-options='x.idunidad as x.nombre for x in unidad',required )
+                                            
+                                        span.input-group-text(style='color:red', ng-show='myFormAct.unidad.$invalid && myFormAct.unidad.$touched' )
+                                            span(ng-show='myFormAct.unidad.$error.required')     
+                                                | ingresa unidad.
+                        .form-group
+                            label.col-md-3.control-label Fecha
+                            .col-md-8.inputGroupContainer
+                                .input-group
+                                    span.input-group-addon
+                                        span.i.fa.fa-calendar-alt
+                                    input.form-control(type='date', name='fecha', ng-model='newActa.fecha', placeholder='yyyy-MM-dd', min='1996-01-01', max="{{anio}}-01-02", required)
+                                     
+                                span(style='color:red', ng-show='myFormAct.fecha.$invalid || myFormAct.fecha.$touched')
+                                    span(ng-show='myFormAct.fecha.$error.required') ingresa fecha.
+                                    span(ng-show='myFormAct.fecha.$error.max') error fecha no valida!.
+                                    span(ng-show='myFormAct.fecha.$error.date') fecha no valida!      
+                                                     
+                        .form-group
+                            label.col-md-3.control-label Libro
+                            .col-md-8.inputGroupContainer
+                                .input-group
+                                    span.input-group-addon
+                                        span.i.fa.fa-book
+                                    input.form-control(name='libro', placeholder='Libro', type='text', ng-model='newActa.libro', required, ng-maxlength="50" , 
+                                    )
+                                       
+                                span(style='color:red', ng-show='myFormAct.libro.$invalid && myFormAct.libro.$touched')
+                                    span(ng-show='myFormAct.libro.$error.required') ingresa libro.
+                                    span(ng-show='myFormAct.libro.$error.maxlength') maximo 6.
+                                          
                         
-                        img.rounded-circle.mx-auto.mb-3(ng-src='http://sinac2.cs.cinvestav.mx/Manual/images/user.png', alt='Photo', height='100', width='100', style='margin-top:-50px;')
-                        br
-                        hr.light
-                        dl.row
-                            dt.col-md-4.text-right Resumen :
-                            dd.col-md-8.text-left {{clicked.resumen}}
+                        .form-group
+                            label.col-md-3.control-label Sinodal :
+                            inputGroupContainer.col-md-8
+                                .input-group
+                                    span.input-group-addon
+                                        span.i.fas.fa-user-graduate
+                                    
+                                    select.btn.btn-default.col-md-12(name="sinodal", ng-model='newActa.sinodal.idpersona',required=''
+                                        ng-options='x.idpersona as x.nombre group by x.departamento   for x in personas')
+                                        option(style='display:none', value='') elige Sinodal ....  
+                                    span.input-group-btn
+                                        button.btn.btn-md.btn-primary(ng-show='!sinodal2 && !externo && !siex', ng-click='externo = true',ng-disabled="myFormAct.sinodal.$invalid ")
+                                            span.i.fa.fa-plus   
+                                span.input-group-text(style='color:red', ng-show='myFormAct.sinodal.$invalid && myFormAct.sinodal.$touched' )
+                                    span(ng-show='myFormAct.sinodal.$error.required')     
+                                        | ingresa sinodal.   
+
+                        .form-group(ng-show="externo")
+                            label.col-md-3.control-label ¿Sinodal es externo?
+                            .col-md-8.inputGroupContainer
+                                .input-group
+                                    span.input-group-addon
+                                        span.i.fa.fa-external-link-alt
+                                    span.input-group-addon
+                                    label.btn.btn-info
+                                        input(type='radio', name='options',ng-model='newActa.esexterno',
+                                        ng-click="noex=true;siex=false;sinodal2=true;externo=false;new.institucion='';new.puesto='';newActa.esexterno=''; ",
+                                        ng-value="0",required) 
+                                        |  No  
+                                    span.input-group-addon
+                                    label.btn.btn-info
+                                        input(type='radio', name='options',ng-model='newActa.esexterno'
+                                        ng-click='noex=false;siex=true;sinodal2=true;externo=false;',ng-value="1",required) 
+                                        |  Si 
+                                    span.input-group-btn
+                                    button.btn.btn-danger(ng-show='!sinodal2', ng-click="sinodal = false ;newActa.esexterno=''; externo=false; sinodalr=false;new.esexterno=''") 
+                                            span.i.fa.fa-times 
+                                span.input-group-text(style='color:red', ng-show='myFormAct.options.$invalid' )
+                                    span(ng-show='myFormAct.options.$error.required')     
+                                        | ingresa ¿es externo?.  
+                        .form-group(ng-show="sinodal2")
+                            .col-md-1
+                            .alert.alert-warning.fade.in.myAlert.col-md-10(ng-if='alertMassege2')
+                                a.close(href='#', data-dismiss='alert', ng-click='clickedAlert()') ×
+                                h4 {{alertMassege2}}
+                                
+                        .form-group(ng-show="sinodal2")  
+                            label.col-md-3.control-label Sinodal 2:
+                            inputGroupContainer.col-md-8( ng-show="noex")
+                                .input-group
+                                    span.input-group-addon
+                                        span.i.fas.fa-user-graduate
+                                    
+                                    select.btn.btn-default.col-md-12(name="sinodal2", ng-model='newActa.sinodal2.idpersona',
+                                        ng-options="x.idpersona as x.nombre group by x.departamento disable when x.idpersona === newActa.sinodal.idpersona for x in personas ",required='',)
+                                        option(style='display:none', value='') elige Sinodal 2 ....  
+                                    span.input-group-btn
+                                        button.btn.btn-primary(ng-show='!sinodal3', ng-click='sinodal3= true',ng-disabled="myFormAct.sinodal2.$invalid ") 
+                                            span.i.fa.fa-plus
+                                        button.btn.btn-danger(ng-show='!sinodal3', ng-click="sinodal2 = false ;newActa.sinodal2=''; externo=false; sinodalr=false;new.esexterno=''") 
+                                            span.i.fa.fa-minus 
+                                
+                                span.input-group-text(style='color:red', ng-show='myFormAct.sinodal2.$invalid || myFormAct.sinodal2.$touched' )
+                                    span(ng-show='myFormAct.sinodal2.$error.required')     
+                                        | ingresa sinodal.    
+                                        
+                        .form-group(ng-show="siex")
+                            include externo
+                    .panel-footer.text-right
                         hr
-                        dl.row
-                            dt.col-md-4.text-right Alumno :
-                            dd.col-md-8.text-left {{clicked.alumno}}
+                        button.btn.btn-success(type='button', ng-click='saveActa()',data-dismiss='modal', 
+                            ng-disabled=`myFormAct.tesis.$invalid || 
+                                myFormAct.folio.$invalid || myFormAct.fecha.$invalid  
+                                || myFormAct.libro.$invalid  || myFormAct.sinodal.$invalid` ng-show="!sinodal2")
+                            span.i.fas.fa-check
+                            |  Registrar
+                        button.btn.btn-success(type='button', ng-click='saveActa()',data-dismiss='modal', 
+                            ng-disabled=`myFormAct.tesis.$invalid || 
+                                myFormAct.folio.$invalid || myFormAct.fecha.$invalid  
+                                || myFormAct.libro.$invalid  || myFormAct.sinodal.$invalid || myFormAct.sinodal2.$invalid` ,
+                                ng-show="sinodal2 && !sinodal3 ")
+                            span.i.fas.fa-check
+                            |  Registrar
+                        button.btn.btn-danger(data-dismiss='modal' ,ng-click='getActa()')
+                            span.i.fas.fa-times
+                            |  Cerrar
                             
-                            dt.col-md-4.text-right Grado :
-                            dd.col-md-8.text-left {{clicked.grado}}
-                            
-                            dt.col-md-4.text-right Departamento :
-                            dd.col-md-8.text-left {{clicked.departamento}}
-                            
-                            dt.col-md-4.text-right Director :
-                            dd.col-md-8.text-left {{clicked.director}}
-                            
-                            dt.col-md-4.text-right Codirector(es) :
-                            dd.col-md-8.text-left {{clicked.codirector1}}
-                            dt.col-md-4.text-right
-                            dd.col-md-8.text-left {{clicked.codirector2}}
-                            dt.col-md-4.text-right
-                            dd.col-md-8.text-left {{clicked.codirector3}}
-                            dt.col-md-4.text-right
-                            dd.col-md-8.text-left {{clicked.codirector4}}
-                            
+                        
+

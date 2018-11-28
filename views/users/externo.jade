@@ -4,17 +4,17 @@
     //- hr
     .list-group.animated.zoomIn
         a.list-group-item.active.main-color-bg.obj-trans
-            button.close(type='button',ng-click='siex=false;codirector=false', style="color:red") ×
+            button.close(type='button',ng-click='siex=false;sinodal2=false;newActa', style="color:red") ×
             span.i.fa.fa-pencil-alt
             |  Ingresa datos ...
         
     .panel.panel-default
         .panel-heading
-            h3.panel-title Codirector Externo
+            h3.panel-title  Externo
         br
         .panel-body   
-            {{new2}}
-            form.form-horizontal(name='myFormExt', novalidate='',autocomplete="off")
+            //- {{new2}}
+            form.form-horizontal(name='myFormExt', novalidate='')
                         
                 .form-group
                     label.col-md-3.control-label Nombre 
@@ -32,7 +32,8 @@
                             span(ng-show='myFormExt.nombre.$error.maxlength') maximo 50.
                             span.errorMes {{errorMes}}
                             span.errorMes {{errorMess}}
-                 .form-group(ng-show='nombre2')
+
+                .form-group(ng-show='nombre2')
                     label.col-md-3.control-label Nombre 2
                     .col-md-8.inputGroupContainer
                         .input-group
@@ -186,9 +187,7 @@
             hr
         
             button.btn.btn-success(type='button', ng-click='add();noex=true;siex=false;select(new2)', 
-                ng-disabled=`myFormExt.nombre.$invalid ||  myFormExt.apellido.$invalid  ||
-                 myFormExt.genero.$invalid ||  myFormExt.departamento2.$invalid ||
-                 myFormExt.grado2.$invalid || myFormExt.puesto.$invalid || myFormExt.institucion.$invalid` )
+                ng-disabled=`myFormExt.nombre.$invalid ` )
             
                 span.i.fas.fa-check
                 |  Agregar 
