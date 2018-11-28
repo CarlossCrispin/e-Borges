@@ -75,16 +75,16 @@
                         .input-group
                             span.input-group-addon
                                 span.i.fa.fa-user
-                            input.form-control(name='apellido', placeholder='Apellido', type='text', ng-model='new2.apellido', required, ng-maxlength="50")
+                            input.form-control(name='apellidos', placeholder='Apellido', type='text', ng-model='new2.apellido', required, ng-maxlength="50")
                             span.input-group-btn
-                                button.btn.btn-primary(ng-show='!apellido2', ng-click='apellido2 = true', ng-disabled="myFormExt.apellido.$invalid")
+                                button.btn.btn-primary(ng-show='!apellido2', ng-click='apellido2 = true', ng-disabled="myFormExt.apellidos.$invalid")
                                     span.i.fa.fa-plus
                                 
 
 
-                        span(style='color:red', ng-show='myFormExt.apellido.$invalid && myFormExt.apellido.$touched')
-                            span(ng-show='myFormExt.apellido.$error.required') ingresa apellido.
-                            span(ng-show='myFormExt.apellido.$error.maxlength') maximo 50.
+                        span(style='color:red', ng-show='myFormExt.apellidos.$invalid && myFormExt.apellidos.$touched')
+                            span(ng-show='myFormExt.apellidos.$error.required') ingresa apellido.
+                            span(ng-show='myFormExt.apellidos.$error.maxlength') maximo 50.
                             span.errorMes {{errorMes}}
                             span.errorMes {{errorMess}}
                             

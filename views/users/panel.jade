@@ -28,7 +28,17 @@ block content
                             li.active Status Tesis
                             //- li.active {{datos.length}}
                             hr
-                    div(ng-show="datos.length == 99999 || personas.length ==99999 ")
+                    div(ng-show="datos.length == 99999 || personas.length == 99999 ")
+                        .jumbotron.jumbotron-fluid
+                            .container
+                                h1.display-4 Cargando ...
+                                
+                                //- h2.display-4 Cargando ...
+                                //- p.lead
+                                //- | Cargando ...
+
+                                include ../loader          
+                    div(ng-show="personas.length == 99999 ")
                         .jumbotron.jumbotron-fluid
                             .container
                                 h1.display-4 Cargando ...

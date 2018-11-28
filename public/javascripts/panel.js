@@ -213,6 +213,7 @@ app.controller('panelController', function ($scope, $http) {
             // $scope.new2={}
             // $scope.personas.length =0;
             $scope.personas.length =99999;
+            $scope.personas.length =99999 
             $http.post(`${pathname}/add`, $scope.new2)
                 .success((data) => {
                     console.log(JSON.stringify(data[0]));
@@ -222,7 +223,7 @@ app.controller('panelController', function ($scope, $http) {
                     // $scope.new.director;
                     $scope.new.codirector.idpersona=data[0].idpersona;
                     $scope.new.codirector=data[0];
-                    $scope.clicked3.idpersona =data[0].idpersona;
+                    // $scope.clicked3.idpersona =data[0].idpersona;
                     // $scope.new.director.idpersona
                     $scope.new2= {};
                     $scope.alertMassege2 = "Codirector Externo Agregado!!";
